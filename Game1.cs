@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -49,4 +50,5 @@ namespace BaseProject
             base.Draw(gameTime);
         }
     }
+    // test jordi branch
 }
