@@ -45,7 +45,7 @@ namespace BaseProject
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            // i changed this: Jordi
+            // Wolla werkt gewoon hoor
 
             base.Draw(gameTime);
         }
