@@ -27,9 +27,9 @@ namespace BaseProject
 
         }
 
-        protected void draw()
+        public void draw(SpriteBatch spriteBatch)
         {
-           
+            spriteBatch.Draw(texture,position,Color.White);
         }
 
 

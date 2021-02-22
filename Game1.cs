@@ -9,12 +9,16 @@ namespace BaseProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private GameObject jogonHead;
+        private Texture2D aTexture;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            
+            jogonHead = new GameObject(new Vector2(0,0),new Vector2(0,0), aTexture);
         }
 
         protected override void Initialize()
@@ -27,6 +31,7 @@ namespace BaseProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            aTexture = Content.Load<Texture2D>("JogonHead2");
 
             // TODO: use this.Content to load your game content here
         }
@@ -48,6 +53,8 @@ namespace BaseProject
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            jogonHead.draw(_spriteBatch);
         }
     }
     // test jordi branch
