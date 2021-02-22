@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
-{
+{ //hello
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -34,6 +34,7 @@ namespace BaseProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            //TEST
 
             // TODO: Add your update logic here
 
@@ -50,3 +51,6 @@ namespace BaseProject
         }
     }
 }
+
+
+//test
