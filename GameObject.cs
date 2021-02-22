@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace BaseProject
-{
     class GameObject
     {
         //Decleratie van variabelen
@@ -14,27 +12,29 @@ namespace BaseProject
         protected Vector2 velocity;
         protected Texture2D texture;
 
-        public GameObject(Vector2 position, Vector2 velocity, Texture2D texture)
+        public GameObject(Vector2 position, Vector2 velocity, string textureName)
         {
             this.position = position;
             this.velocity = velocity;
-            this.texture = texture;
+            texture = GameEnvironment.ContentManager.Load<Texture2D>(textureName);
         }
-        protected void update()
+        public void Update()
         {
             position.X += velocity.X;
             position.Y += velocity.Y;
 
         }
 
-        public void draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture,position,Color.White);
         }
 
+    public void Reset()
+    {
+    
+    //suck ma dick
+    }
 
     }
 
-
-
-}

@@ -18,7 +18,7 @@ namespace BaseProject
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             
-            jogonHead = new GameObject(new Vector2(0,0),new Vector2(0,0), aTexture);
+            
         }
 
         protected override void Initialize()
@@ -26,6 +26,7 @@ namespace BaseProject
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            jogonHead = new GameObject(new Vector2(0, 0), new Vector2(0, 0), "JogonHead");
         }
 
         protected override void LoadContent()
@@ -54,7 +55,7 @@ namespace BaseProject
 
             base.Draw(gameTime);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            jogonHead.draw(_spriteBatch);
+            jogonHead.Draw(_spriteBatch);
         }
     }
     // test jordi branch
