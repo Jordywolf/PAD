@@ -2,12 +2,18 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace BaseProject
-{ //hello
+{
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        public Vector2 position;
+        public Texture2D texture;
 
         public Game1()
         {
@@ -26,7 +32,7 @@ namespace BaseProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            texture = Content.Load<Texture2D>("PAD_Jg_pillar");
             // TODO: use this.Content to load your game content here
         }
 
@@ -45,8 +51,10 @@ namespace BaseProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(texture, position, Color.White);
+            _spriteBatch.End();
+            
             base.Draw(gameTime);
         }
     }
