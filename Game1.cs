@@ -26,7 +26,7 @@ namespace BaseProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            //texture = Content.Load<Texture2D>("Fountain");
             // TODO: use this.Content to load your game content here
         }
 
