@@ -15,9 +15,9 @@ namespace BaseProject
         protected Vector2 offset = new Vector2(10, 10);
         private float increase;
         public float delay;
-        public JogonPart(Vector2 position, Vector2 velocity, Texture2D texture,float delay) : base(position, velocity, texture) { this.delay = delay; }
+        public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float delay) : base(position, velocity, rotation, scale, texture) { this.delay = delay; }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             delay--;
             if (delay < 0)
@@ -28,7 +28,7 @@ namespace BaseProject
                 increase += 0.1f;
 
                 //base.angleOffset += MathF.Sin(increase) / 10;
-                base.Update();
+                base.Update(gameTime);
             }
         }
     }
