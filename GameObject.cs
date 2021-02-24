@@ -7,27 +7,32 @@ using Microsoft.Xna.Framework.Input;
 
     class GameObject
     {
-        //Decleratie van variabelen
+    //Decleratie van variabelen
+
         protected Vector2 position;
         protected Vector2 velocity;
         protected Texture2D texture;
+        protected float scale = 2.5f;
+        protected float angle = 0.0f;
+        protected float angleOffset = 0.0f;
 
-        public GameObject(Vector2 position, Vector2 velocity, string textureName)
+    public GameObject(Vector2 position, Vector2 velocity, Texture2D texture)
         {
             this.position = position;
             this.velocity = velocity;
-            texture = GameEnvironment.ContentManager.Load<Texture2D>(textureName);
+            this.texture = texture;
+            
         }
-        public void Update()
+        public virtual void Update()
         {
-            position.X += velocity.X;
-            position.Y += velocity.Y;
-
+        position += velocity;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch myspriteBatch)
         {
-            spriteBatch.Draw(texture,position,Color.White);
+        myspriteBatch.Begin(SpriteSortMode.Texture,null,null,null,null,null,Matrix.CreateScale(scale));
+        myspriteBatch.Draw(texture,position,null,Color.White,angle-MathF.PI/4+angleOffset,new Vector2(0,0),1.0f,SpriteEffects.None,0);
+        myspriteBatch.End();
         }
 
     public void Reset()
