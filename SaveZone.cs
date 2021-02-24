@@ -11,6 +11,7 @@ namespace BaseProject
     { 
         public Vector2 FountainPos;
         public Vector2 TreePos;
+        public Vector2 Ground;
         
 
         }

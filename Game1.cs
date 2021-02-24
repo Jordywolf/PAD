@@ -15,8 +15,8 @@ namespace BaseProject
         private JogonPart jogonHS;
 
         private int Segments = 4;
-        
 
+        public Texture2D FonteinTexture;
         public Texture2D jogonHeadTexture;
         public Texture2D jogonHSTexture;
         public Texture2D jogonBodyTexture;
@@ -52,6 +52,7 @@ namespace BaseProject
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
+            FonteinTexture = Content.Load<Texture2D>("Fontein");
 
             // TODO: use this.Content to load your game content here
         }
