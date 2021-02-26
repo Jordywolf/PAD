@@ -36,7 +36,7 @@ using Microsoft.Xna.Framework.Input;
             myspriteBatch.End();
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
     
         }
