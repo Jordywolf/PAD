@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Input;
 
         public GameObject(String objTexture)
         {
-            texture = GameEnvironment.ContentManager.Load<Texture2D>("PAD_Jg_pillar");
+            texture = GameEnvironment.ContentManager.Load<Texture2D>(objTexture);
             Reset();
         }
 
@@ -31,6 +31,6 @@ using Microsoft.Xna.Framework.Input;
         virtual public void Draw(SpriteBatch spriteBatch)
         {
                spriteBatch.Draw(texture, position, Color.White);
-    }
+        }
     }
 
