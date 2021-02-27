@@ -18,6 +18,7 @@
     <None Remove="Content\Test map\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Content\Zand.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
