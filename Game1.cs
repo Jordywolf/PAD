@@ -24,13 +24,15 @@ public class Game1 : Game
     public Texture2D WalltileCrnDR;
     public Texture2D WalltileL;
     public Texture2D WalltileR;
+    public Texture2D PillarTile;
 
-    public int width = 1080;
-    public int height = 720;
+    public int width = 64 * 20;
+    public int height = 64 * 10;
 
     public Vector2 playerPos;
 
     MapConstruction mapConstruction;
+
 
     public Game1()
     {
@@ -38,7 +40,7 @@ public class Game1 : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
-        mapConstruction = new MapConstruction();
+        //mapConstruction = new MapConstruction(PillarTile);
     }
 
     protected override void Initialize()
@@ -59,7 +61,9 @@ public class Game1 : Game
         WalltileCrnDR = Content.Load<Texture2D>("PAD_Jg_walltileCornerDR");
         WalltileL = Content.Load<Texture2D>("PAD_Jg_walltileL");
         WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
+        PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
 
+        mapConstruction = new MapConstruction(PillarTile);
     }
 
     protected override void Update(GameTime gameTime)
@@ -84,7 +88,10 @@ public class Game1 : Game
         //_spriteBatch.End();
 
         base.Draw(gameTime);
+
         mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, _spriteBatch, width, height);
-        mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0,0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
+        mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
+        mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
+
     }
 }
