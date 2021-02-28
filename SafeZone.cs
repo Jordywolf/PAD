@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class SafeZone : Game1
+   public class SafeZone : Game
     {
         public int height = 1080;
         public int width = 1920;
@@ -33,7 +33,7 @@ namespace BaseProject
 
             // TODO: use this.Content to load your game content here
         }
-        public void SafeZoneStone()
+        public   void SafeZoneStone()
         {
             for (int xSteenTile = 0; xSteenTile < width / SteenTile.Width * 3; xSteenTile++)
             {
@@ -53,7 +53,7 @@ namespace BaseProject
 
             }
         }
-        public void SafeZoneStoneVert()
+        public  void SafeZoneStoneVert()
         {
             for (int ySteenVert = 0; ySteenVert < height; ySteenVert++)
             {

@@ -10,7 +10,8 @@ namespace BaseProject
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private SpriteBatch spriteBatch;
+        private List<Sprite> _sprites;
         //private JogonPart jogonHead;
        // private JogonPart jogonHS;
         //private int Segments = 4;
@@ -52,7 +53,7 @@ namespace BaseProject
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             //jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
             //jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
             //jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
@@ -65,6 +66,55 @@ namespace BaseProject
             Rots = Content.Load<Texture2D>("Rots");
             Deur = Content.Load<Texture2D>("Deur");
             Player = Content.Load<Texture2D>("Player");
+            _sprites = new List<Sprite>()
+            {
+                new Player(Player)
+                {
+                    Input = new  Input()
+                    {
+                        Left = Keys.A,
+                        Right = Keys.D,
+                        Up = Keys.W,
+                        Down = Keys.S,
+                    },
+                    Position = new Vector2(100,100),
+                    color = Color.Blue,
+                    Speed = 5f,
+                },
+
+                new Player(Player)
+                {
+                    Input = new  Input()
+                    {
+                        Left = Keys.Left,
+                        Right = Keys.Right,
+                        Up = Keys.Up,
+                        Down = Keys.Down,
+                    },
+                    Position = new Vector2(100,100),
+                    color = Color.Red,
+                    Speed = 5f,
+                },
+                new Sprite(Rots){
+                Position = new Vector2(width/3,height/2.5f),
+                },
+                new Sprite(Deur)
+                {
+                    Position = new Vector2(width/2, height -100)
+                },
+                new Sprite(Boom)
+                {
+                    Position = new Vector2(width/4, height/1.5f)
+                },
+                new Sprite(Pilaar)
+                {
+                    Position = new Vector2(1590,200)
+                },
+                new Sprite(FonteinTexture)
+                {
+                    Position = new Vector2(200,75)
+                }
+            };
             
             // TODO: use this.Content to load your game content here
         }
@@ -76,15 +126,8 @@ namespace BaseProject
              
                    this.SteenPosition.X = SteenTile.Width * xSteenTile / 2;
                     this.SteenPosition.Y = SteenTile.Height *3;
-                    _spriteBatch.Begin();
-                   _spriteBatch.Draw(SteenTile, SteenPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
-                _spriteBatch.Draw(Deur, new Vector2(width / 2, height - Deur.Height), Color.White);
-                _spriteBatch.Draw(Rots, new Vector2(width / 3, height / 2.5f), null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-                _spriteBatch.Draw(Pilaar, new Vector2(1590, 200), null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-                _spriteBatch.Draw(FonteinTexture, new Vector2(200, 75), null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-                _spriteBatch.Draw(Player, PlayerPosition, null, Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
-                _spriteBatch.Draw(Boom, new Vector2(width / 4, height / 1.5f), null, Color.White, 0f, Vector2.Zero, 0.8f, SpriteEffects.None, 0f);
-                _spriteBatch.End();
+                   spriteBatch.Draw(SteenTile, SteenPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
+              
                 
             }
         }
@@ -94,9 +137,9 @@ namespace BaseProject
             {
               this.SteenVertPosition.Y = SteenVert.Height * ySteenVert /3;
                 this.SteenVertPosition.X = width / 2;
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(SteenVert, SteenVertPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
-            _spriteBatch.End();
+         
+            spriteBatch.Draw(SteenVert, SteenVertPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
+         
 
             }
         }
@@ -114,9 +157,9 @@ namespace BaseProject
 
                             this.position.X = ZandTile.Width * xZandTile;
                             this.position.Y = ZandTile.Height * yZandTile;
-                            _spriteBatch.Begin();
-                            _spriteBatch.Draw(ZandTile, position, Color.White);
-                        _spriteBatch.End();
+                         //   spriteBatch.Begin();
+                            spriteBatch.Draw(ZandTile, position, Color.White);
+                        //spriteBatch.End();
                     
                }
             }
@@ -125,6 +168,8 @@ namespace BaseProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            foreach (var sprite in _sprites)
+                sprite.Update(gameTime, _sprites);
             // TODO: Add your update logic here
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
                 this.PlayerPosition.X += 3;
@@ -146,18 +191,20 @@ namespace BaseProject
         protected override void Draw(GameTime gameTime)
         {
             
-            _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(0.2f));
+            spriteBatch.Begin();
+            SafeZone();
+            SafeZoneStoneVert();
+            SafeZoneStone();
             //foreach (JogonPart part in JogonDragon)
             _graphics.PreferredBackBufferWidth = width;
             _graphics.PreferredBackBufferHeight = height;
             _graphics.ApplyChanges();
+            foreach (var sprite in _sprites)
+                sprite.Draw(spriteBatch);
+            spriteBatch.End();
             
-            _spriteBatch.End();
             //part.Draw(_spriteBatch);
-            SafeZone();
-            SafeZoneStoneVert();
-            SafeZoneStone();
+
             
 
 
@@ -171,6 +218,7 @@ namespace BaseProject
             
 
         }
+    
     }
     // test jordi branch
 }
