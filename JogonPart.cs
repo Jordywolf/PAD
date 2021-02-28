@@ -9,27 +9,33 @@ namespace BaseProject
 {
     class JogonPart : GameObject
     {
-        protected Vector2 beginPosition;
-        float speed = (2 * MathF.PI) / 120;
-        float radius = 2f;
-        protected Vector2 offset = new Vector2(10, 10);
-        private float increase;
-        public float delay;
-        public JogonPart(Vector2 position, Vector2 velocity, Texture2D texture,float delay) : base(position, velocity, texture) { this.delay = delay; }
+
+        public Vector2 target;
+        public float _minDistanceBetweenSegments = 4;
+        protected float _followSpeed = 4;
+        public JogonPart Parent;
+        protected bool segment = true;
+        public JogonPart(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture){ _minDistanceBetweenSegments = followDist; }
 
         public override void Update()
         {
-            delay--;
-            if (delay < 0)
+            
+            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed)-MathF.PI/2;
+            if (segment)
             {
-                base.angle += speed;
-                velocity.X = MathF.Cos(base.angle) * radius;
-                velocity.Y = MathF.Sin(base.angle) * radius;
-                increase += 0.1f;
+                _followSpeed = Parent._followSpeed;
+                target = Parent.position - this.position;
+                    float dx = (Parent.position.X - this.position.X);
+                    float dy = (Parent.position.X - this.position.X);
+                    float dist = MathF.Sqrt(dx * dx + dy * dy);
+                    target.Normalize();
 
-                //base.angleOffset += MathF.Sin(increase) / 10;
-                base.Update();
+                if (dist > _minDistanceBetweenSegments)
+                {
+                    this.position += target * _followSpeed;
+                }
             }
+            base.Update();
         }
     }
 }

@@ -9,17 +9,22 @@ namespace BaseProject
 
     public class Game1 : Game
     {
+        public int width = 1920;
+        public int height = 1080;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private JogonPart jogonHead;
-        private JogonPart jogonHS;
+        private Jogonhead Jogon;
+        private JogonPart jogonBodyPart;
+        private JogonPart parentSegment;
 
-        private int Segments = 4;
+        private int Segments = 10;
         
 
         public Texture2D jogonHeadTexture;
         public Texture2D jogonHSTexture;
         public Texture2D jogonBodyTexture;
+
         List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
@@ -37,18 +42,23 @@ namespace BaseProject
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            jogonHead = new JogonPart(new Vector2(100, 50), new Vector2(0, 0), jogonHeadTexture,0);
-            jogonHS = new JogonPart(new Vector2(100, 50), new Vector2(0, 0), jogonHSTexture,1);
+            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), jogonHeadTexture,0);
+            parentSegment = Jogon;
             //JogonDragon.Add(jogonHead);
             for (int i = 0; i < Segments; i++)
             {
-                JogonDragon.Add(new JogonPart(new Vector2(100, 50), new Vector2(0, 0), jogonBodyTexture, i*10));
+                if (i == 0) { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), jogonBodyTexture, 0.1f); }
+                else { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), jogonBodyTexture, 5); }
+                jogonBodyPart.Parent = parentSegment;
+                Jogon.Body.Add(jogonBodyPart);
+                parentSegment = jogonBodyPart;
             }
+
         }
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);x
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
@@ -61,24 +71,27 @@ namespace BaseProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
+
             base.Update(gameTime);
             foreach (JogonPart part in JogonDragon)
             {
                 part.Update();
             }
-            jogonHS.Update();
-            jogonHead.Update();
+            Jogon.Update();
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            _graphics.PreferredBackBufferWidth = width;
+            _graphics.PreferredBackBufferHeight = height;
+            _graphics.ApplyChanges();
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
             foreach (JogonPart part in JogonDragon)
             {
                 part.Draw(_spriteBatch);
             }
-            jogonHS.Draw(_spriteBatch);
-            jogonHead.Draw(_spriteBatch);
+            Jogon.Draw(_spriteBatch);
 
 
             // TODO: Add your drawing code here
