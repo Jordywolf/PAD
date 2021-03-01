@@ -35,7 +35,7 @@ namespace BaseProject
 
         MapConstruction mapConstruction;
 
-        private int Segments = 5;
+        private int Segments = 15;
 
 
         public Texture2D jogonHeadTexture;
@@ -61,7 +61,6 @@ namespace BaseProject
             base.Initialize();
             Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), jogonHeadTexture, 0);
             parentSegment = Jogon;
-            //JogonDragon.Add(jogonHead);
             for (int i = 0; i < Segments; i++)
             {
                 if (i == 0) { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), jogonBodyTexture, 0.1f); }
