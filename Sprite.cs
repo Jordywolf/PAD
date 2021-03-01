@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BaseProject
 {
-   public class Sprite
+    public class Sprite
     {
         protected Texture2D _texture;
         public Vector2 Position;
@@ -14,7 +14,7 @@ namespace BaseProject
         public Color color = Color.White;
         public float Speed;
         public Input Input;
-        public Vector2 Direction = new Vector2(1,1);
+        public Vector2 Direction = new Vector2(1, 1);
 
         public Rectangle Rectangle
         {
@@ -31,9 +31,9 @@ namespace BaseProject
         { }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
+
             spriteBatch.Draw(_texture, Position, color);
-            
+
         }
         #region Collision 
         protected bool IsTouchingLeft(Sprite sprite)
@@ -42,7 +42,9 @@ namespace BaseProject
                 this.Rectangle.Left < sprite.Rectangle.Left &&
                 this.Rectangle.Bottom > sprite.Rectangle.Top &&
                 this.Rectangle.Top < sprite.Rectangle.Bottom;
-                this.Position.X  =+ Direction.X;
+            Game1.menuchoice = 8;
+            this.Position.X = +Direction.X;
+            
         }
         protected bool IsTouchingRight(Sprite sprite)
         {
@@ -50,7 +52,9 @@ namespace BaseProject
                 this.Rectangle.Right > sprite.Rectangle.Right &&
                 this.Rectangle.Bottom > sprite.Rectangle.Top &&
                 this.Rectangle.Top < sprite.Rectangle.Bottom;
+            Game1.menuchoice = 8;
             this.Position.X = -Direction.X;
+            
 
         }
         protected bool IsTouchingTop(Sprite sprite)
@@ -59,7 +63,9 @@ namespace BaseProject
                 this.Rectangle.Top < sprite.Rectangle.Top &&
                 this.Rectangle.Right > sprite.Rectangle.Left &&
                 this.Rectangle.Left < sprite.Rectangle.Right;
+            Game1.menuchoice = 8;
             this.Position.Y = +Direction.X;
+            
 
         }
         protected bool IsTouchingBottom(Sprite sprite)
@@ -68,9 +74,11 @@ namespace BaseProject
                 this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
                 this.Rectangle.Right > sprite.Rectangle.Left &&
                 this.Rectangle.Left < sprite.Rectangle.Right;
+            Game1.menuchoice = 8;
             this.Position.Y = -Direction.X;
+            
         }
-        
+
         #endregion
 
     }

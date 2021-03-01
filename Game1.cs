@@ -71,7 +71,7 @@ namespace BaseProject
        // private JogonPart jogonHS;
         //private int Segments = 4;
        
-        public Boolean KeyCollected = true;
+        public Boolean KeyCollected;
         public Vector2 SteenPosition,SteenVertPosition = new Vector2(0, 0);
         public Vector2 PlayerPosition = new Vector2(1920/2, 1080);
         public Vector2 RotsPosition = new Vector2(1920 / 3, 1080/ 2.5f);
@@ -475,7 +475,7 @@ Matrix.CreateScale(0.45f));
             if (menuchoice == 7)
             {
                 spriteBatch.Begin();        
-
+                
                 safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
                 safeZone.SafeZoneStone(SteenTile, spriteBatch);
                 safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
