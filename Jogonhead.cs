@@ -18,16 +18,33 @@ namespace BaseProject
         private float chargeTime = 0.05f;
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
-        private bool charcing = false;
+        private bool charging = false;
 
         public List<JogonPart> Body = new List<JogonPart>();
-        public Jogonhead(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture, followDist)
+        public List<Fireball> fireballs = new List<Fireball>();
+        public Texture2D fireBallTexture;
+        bool keyPressed;
+        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture) : base(position, velocity, rotation, scale, texture, followDist)
         {
             segment = false;
+            this.fireBallTexture = fireballTexture;
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
+            if (keyPressed == false)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    keyPressed = true;
+                    Fireball();
+                }
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                keyPressed = false;
+            }
+
             chargingdelay--;
             Mousepos = Mouse.GetState().Position;
             mainTarget = new Vector2(Mousepos.X / 2, Mousepos.Y / 2);
@@ -45,9 +62,9 @@ namespace BaseProject
             }
             foreach (JogonPart bodypart in Body)
             {
-                bodypart.Update();
+                bodypart.Update(gameTime);
             }
-            base.Update();
+            base.Update(gameTime);
             if (chargingdelay <= 0)
             {
                 Charge();
@@ -56,36 +73,41 @@ namespace BaseProject
 
         public void Charge()
         {
-            if (charcing)
+            if (charging)
             {
                 if (chargeInc <= MathF.PI * 2 + chargeOffset)
                 {
                     chargeInc += chargeTime;
                     _followSpeed += (-MathF.Cos(chargeInc)) * (chargeTime * 9.5f);
                 }
-                else { chargeInc = chargeOffset; chargingdelay = 300; chargeTime = 0.05f; _followSpeed = 4; charcing = false; }
+                else { chargeInc = chargeOffset; chargingdelay = 300; chargeTime = 0.05f; _followSpeed = 4; charging = false; }
             }
             else
             {
                 _followSpeed = 10;
-                charcing = true;
+                charging = true;
             }
         }
 
         public void Fireball()
         {
-
-
+            //fireball zooi
+            fireballs.Add(new Fireball(position, Vector2.Zero, 0, 1, fireBallTexture));
+            for (int i = 0; i < fireballs.Count; i++)
+            {
+                if (fireballs[i].IsObjectOffScreen(fireballs[i]))
+                {
+                    fireballs.RemoveAt(i);
+                }
+            }
         }
         public override void Draw(SpriteBatch myspriteBatch)
         {
-
             foreach (JogonPart bodypart in Body)
             {
                 bodypart.Draw(myspriteBatch);
             }
             base.Draw(myspriteBatch);
-
         }
     }
 }

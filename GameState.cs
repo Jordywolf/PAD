@@ -24,7 +24,7 @@ class GameState
     public virtual void Update(GameTime gameTime)
     {
         foreach (GameObject gameObject in gameObjectList)
-            gameObject.Update();
+            gameObject.Update(gameTime);
     }
 
     public virtual void Draw(SpriteBatch spriteBatch)
