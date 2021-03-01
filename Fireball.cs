@@ -42,9 +42,9 @@ namespace BaseProject
         public bool IsObjectOffScreen(GameObject gameObject)
         {
             if (gameObject.position.X + gameObject.texture.Width < 0 || 
-                /*gameObject.position.X - gameObject.texture.Width > game.width ||*/
-                gameObject.position.Y + gameObject.texture.Height < 0 /* ||
-                gameObject.position.Y - gameObject.texture.Height > game.height*/)   
+                gameObject.position.X - gameObject.texture.Width > game.width ||
+                gameObject.position.Y + gameObject.texture.Height < 0 ||
+                gameObject.position.Y - gameObject.texture.Height > game.height)   
             {
                 return true;
             }
