@@ -135,10 +135,10 @@ namespace BaseProject
                 {
                     Input = new  Input()
                     {
-                        Left = Keys.A,
-                        Right = Keys.D,
-                        Up = Keys.W,
-                        Down = Keys.S,
+                        Left = Keys.Left,
+                        Right = Keys.Right,
+                        Up = Keys.Up,
+                        Down = Keys.Down,
                     },
                     Position = PlayerPosition,
                     color = Color.Blue,
