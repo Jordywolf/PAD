@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class Fireball : GameObject 
+    class Fireball : GameObject //fireball class
     {
         private Game1 game = new Game1();
         Vector2 SpawnPosition;

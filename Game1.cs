@@ -106,6 +106,10 @@ namespace BaseProject
             {
                 part.Update();
             }
+            foreach (Fireball fireball in fireballs)
+            {
+                fireball.Update(gameTime);
+            }
             Jogon.Update();
         }
 
@@ -116,8 +120,16 @@ namespace BaseProject
             _graphics.ApplyChanges();
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-
+            foreach (Fireball fireball in fireballs)
+            {
+                fireball.Draw(_spriteBatch);
+            }
+            foreach (JogonPart part in JogonDragon)
+            {
+                //part.Draw(_spriteBatch);
+            }
+            //jogonHS.Draw(_spriteBatch);
+            jogonHead.Draw(_spriteBatch);
 
             // TODO: Add your drawing code here
 
