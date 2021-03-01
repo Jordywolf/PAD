@@ -373,6 +373,11 @@ Matrix.CreateScale(0.45f));
 
             if (menuchoice == 7)
             {
+
+            }
+
+            if (menuchoice == 8)
+            {
                 mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, _spriteBatch, width, height);
                 mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
                 mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
