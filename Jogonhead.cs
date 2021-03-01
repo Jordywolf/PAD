@@ -20,21 +20,19 @@ namespace BaseProject
         private float chargeInc = chargeOffset;
         private bool charcing = false;
 
-        private Game1 game1 = new Game1();
-        public List<Fireball> fireballs = new List<Fireball>();
         public List<JogonPart> Body = new List<JogonPart>();
-        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist) : base(position, velocity, rotation, scale, texture, followDist)
+        public Jogonhead(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture, followDist)
         {
             segment = false;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update()
         {
             chargingdelay--;
             Mousepos = Mouse.GetState().Position;
             mainTarget = new Vector2(Mousepos.X / 2, Mousepos.Y / 2);
 
-            angle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed) - MathF.PI / 2;
+            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed) - MathF.PI / 2;
             target = mainTarget - this.position;
             float dx = (mainTarget.X - this.position.X);
             float dy = (mainTarget.Y - this.position.Y);
@@ -47,9 +45,9 @@ namespace BaseProject
             }
             foreach (JogonPart bodypart in Body)
             {
-                bodypart.Update(gameTime);
+                bodypart.Update();
             }
-            base.Update(gameTime);
+            base.Update();
             if (chargingdelay <= 0)
             {
                 Charge();
@@ -72,19 +70,12 @@ namespace BaseProject
                 _followSpeed = 10;
                 charcing = true;
             }
-        } 
+        }
 
-        void ShootFireBall()
+        public void Fireball()
         {
-            fireballs.Add(new Fireball(position, Vector2.Zero, 0, 1, game1.fireBallTexture));
-            for (int i = 0; i < fireballs.Count; i++)
-            {
-                if (fireballs[i].IsObjectOffScreen(fireballs[i]))
-                {
-                    fireballs.RemoveAt(i);
-                }
-            }
-            return;
+
+
         }
         public override void Draw(SpriteBatch myspriteBatch)
         {
