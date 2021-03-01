@@ -60,7 +60,7 @@ namespace BaseProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
-            jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
+            jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
 
             // TODO: use this.Content to load your game content here
