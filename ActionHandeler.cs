@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class ActionHandeler
+    class ActionHandeler // action handler class
     {
         int actionId = 1;
         ActionJump Jump = new ActionJump();

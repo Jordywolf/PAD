@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BaseProject
 {
-    class ActionJump
+    class ActionJump // jump action
     {
         float playerVelocityY;
         float PLAYERJUMPVELOCITY = 20;
