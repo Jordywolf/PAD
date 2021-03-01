@@ -10,9 +10,6 @@ namespace BaseProject
 
     public class Game1 : Game
     {
-        public int width = 1920;
-        public int height = 1080;
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Jogonhead Jogon;
@@ -38,15 +35,6 @@ namespace BaseProject
 
         MapConstruction mapConstruction;
 
-
-        public Game1()
-        {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-
-            //mapConstruction = new MapConstruction(PillarTile);
-        }
         private int Segments = 5;
 
 
@@ -128,20 +116,22 @@ namespace BaseProject
             _graphics.ApplyChanges();
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
+
+            // TODO: Add your drawing code here
+
+            base.Draw(gameTime);
+
+            mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, _spriteBatch, width, height);
+            mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
+            mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
+
             foreach (JogonPart part in JogonDragon)
             {
                 part.Draw(_spriteBatch);
             }
             Jogon.Draw(_spriteBatch);
-
-
-            // TODO: Add your drawing code here
-
-        base.Draw(gameTime);
-
-        mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, _spriteBatch, width, height);
-        mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
-        mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
-
+        }
     }
 }
