@@ -91,7 +91,7 @@ namespace BaseProject
                 },
 
                 new Sprite(Rots){
-                Position = new Vector2(width/3,height/2.5f),
+                Position = RotsPosition,
                 },
                 new Sprite(Deur)
                 {
