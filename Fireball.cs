@@ -13,7 +13,6 @@ namespace BaseProject
         Vector2 TargetPosition;
         private float Timer;
         private float Speed = 300;
-        private bool alive;
         public Fireball(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture) : base(position, velocity, rotation, scale, texture)
         {
             Reset();
@@ -22,33 +21,33 @@ namespace BaseProject
         override public void Reset()
         {
             Timer = 0;
-            alive = true;
             SpawnPosition = position;
-            TargetPosition = new Vector2(50, 32); // hier komt de target te staat wss dus de player
-            angle = (float)Math.Atan2(TargetPosition.Y, TargetPosition.X);
+            TargetPosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y); // hier komt de target te staat wss dus de player
+            angle = (float)Math.Atan2(TargetPosition.Y - SpawnPosition.Y, TargetPosition.X - SpawnPosition.X);
         }
 
         override public void Update(GameTime gameTime)
         {
-            if (alive)
-            {
-                Vector2 LerpTarget = SpawnPosition + TargetPosition;
-                float distance = Vector2.Distance(SpawnPosition, LerpTarget);
-                Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                position = Vector2.Lerp(SpawnPosition, LerpTarget, Timer * Speed / distance);
-            }
-            else
-            {
-                position = new Vector2(-100, -100);
-            }
+            float distance = Vector2.Distance(SpawnPosition, TargetPosition);
+            Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            position = Vector2.Lerp(SpawnPosition, TargetPosition, Timer * Speed / distance);
         }
 
         public override void Draw(SpriteBatch myspriteBatch)
         {
-            if (alive)
+            base.Draw(myspriteBatch);
+        }
+
+        public bool IsObjectOffScreen(GameObject gameObject)
+        {
+            if (gameObject.position.X + gameObject.texture.Width < 0 || 
+                /*gameObject.position.X - gameObject.texture.Width > || TODO: ScreenWidth*/
+                gameObject.position.Y + gameObject.texture.Height < 0 /* ||
+                gameObject.position.Y - gameObject.texture.Height > TODO: ScreenHeigth*/)   
             {
-                base.Draw(myspriteBatch);
+                return true;
             }
+            else return false;
         }
     }
 }

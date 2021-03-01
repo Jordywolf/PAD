@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
         public Vector2 position;
         protected Vector2 velocity;
-        protected Texture2D texture;
+        public Texture2D texture;
         protected float scale;
         protected float angle;
         protected float angleOffset = 0.0f;

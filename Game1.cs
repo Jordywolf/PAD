@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 namespace BaseProject
@@ -9,11 +10,12 @@ namespace BaseProject
 
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        public GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private ActionHandeler ActionHandeler = new ActionHandeler();
         private JogonPart jogonHead;
         private JogonPart jogonHS;
-        private Fireball fireball;
+        private List<Fireball> fireballs = new List<Fireball>();
 
         private int Segments = 4;
         
@@ -39,7 +41,6 @@ namespace BaseProject
             base.Initialize();
             jogonHead = new JogonPart(new Vector2(100, 50), new Vector2(0, 0), 0, 2, jogonHeadTexture,0);
             jogonHS = new JogonPart(new Vector2(100, 50), new Vector2(0, 0), 0, 2, jogonHSTexture,1);
-            fireball = new Fireball(jogonHead.position, Vector2.Zero, 0, 1, fireBallTexture);
 
             JogonDragon.Add(jogonHead);
             for (int i = 0; i < Segments; i++)
@@ -60,6 +61,7 @@ namespace BaseProject
 
         protected override void Update(GameTime gameTime)
         {
+            ActionHandeler.Update();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
@@ -70,25 +72,43 @@ namespace BaseProject
             }
             //jogonHS.Update();
             jogonHead.Update(gameTime);
-            fireball.Update(gameTime);
+            foreach (Fireball fireball in fireballs)
+            {
+                fireball.Update(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            foreach (Fireball fireball in fireballs)
+            {
+                fireball.Draw(_spriteBatch);
+            }
             foreach (JogonPart part in JogonDragon)
             {
                 //part.Draw(_spriteBatch);
             }
             //jogonHS.Draw(_spriteBatch);
             jogonHead.Draw(_spriteBatch);
-            fireball.Draw(_spriteBatch);
-
 
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
 
+        }
+
+        void ShootFireBall()
+        {
+            fireballs.Add(new Fireball(jogonHead.position, Vector2.Zero, 0, 1, fireBallTexture));
+            for (int i = 0; i < fireballs.Count; i++)
+            {
+                if (fireballs[i].IsObjectOffScreen(fireballs[i]))
+                {
+                    fireballs.RemoveAt(i);
+                }
+            }
+            return;
         }
     }
 }
