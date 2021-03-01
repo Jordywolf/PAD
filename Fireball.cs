@@ -9,6 +9,7 @@ namespace BaseProject
 {
     class Fireball : GameObject 
     {
+        private Game1 game = new Game1();
         Vector2 SpawnPosition;
         Vector2 TargetPosition;
         private float Timer;
@@ -41,9 +42,9 @@ namespace BaseProject
         public bool IsObjectOffScreen(GameObject gameObject)
         {
             if (gameObject.position.X + gameObject.texture.Width < 0 || 
-                /*gameObject.position.X - gameObject.texture.Width > || TODO: ScreenWidth*/
+                /*gameObject.position.X - gameObject.texture.Width > game.width ||*/
                 gameObject.position.Y + gameObject.texture.Height < 0 /* ||
-                gameObject.position.Y - gameObject.texture.Height > TODO: ScreenHeigth*/)   
+                gameObject.position.Y - gameObject.texture.Height > game.height*/)   
             {
                 return true;
             }
