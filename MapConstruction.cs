@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Input;
 
 public class MapConstruction
 {
-    public int maxPillarsY = 2;
-    public int maxPillarsX = 2;
+    public int maxPillarsY = 3;
+    public int maxPillarsX = 3;
     public int maxPillars;
     private Texture2D aTexture;
 
