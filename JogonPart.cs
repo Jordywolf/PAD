@@ -9,7 +9,6 @@ namespace BaseProject
 {
     class JogonPart : GameObject
     {
-
         public Vector2 target;
         public float _minDistanceBetweenSegments = 4;
         protected float _followSpeed = 4;

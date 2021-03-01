@@ -23,6 +23,7 @@ namespace BaseProject
         public List<JogonPart> Body = new List<JogonPart>();
         public List<Fireball> fireballs = new List<Fireball>();
         public Texture2D fireBallTexture;
+        bool keyPressed;
         public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture) : base(position, velocity, rotation, scale, texture, followDist)
         {
             segment = false;
@@ -31,6 +32,19 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
+            if (keyPressed == false)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    keyPressed = true;
+                    Fireball();
+                }
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                keyPressed = false;
+            }
+
             chargingdelay--;
             Mousepos = Mouse.GetState().Position;
             mainTarget = new Vector2(Mousepos.X / 2, Mousepos.Y / 2);
@@ -86,17 +100,14 @@ namespace BaseProject
                     fireballs.RemoveAt(i);
                 }
             }
-            return;
         }
         public override void Draw(SpriteBatch myspriteBatch)
         {
-
             foreach (JogonPart bodypart in Body)
             {
                 bodypart.Draw(myspriteBatch);
             }
             base.Draw(myspriteBatch);
-
         }
     }
 }

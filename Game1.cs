@@ -7,7 +7,6 @@ using System.Text;
 
 namespace BaseProject
 {
-
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -51,8 +50,6 @@ namespace BaseProject
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-
         }
 
         protected override void Initialize()
@@ -87,7 +84,7 @@ namespace BaseProject
             WalltileL = Content.Load<Texture2D>("PAD_Jg_walltileL");
             WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
             PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
-            fireBallTexture = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
+            fireBallTexture = Content.Load<Texture2D>("Fireball");
 
             mapConstruction = new MapConstruction(PillarTile);
         }
@@ -102,11 +99,11 @@ namespace BaseProject
             {
                 part.Update(gameTime);
             }
+            Jogon.Update(gameTime);
             foreach (Fireball fireball in Jogon.fireballs)
             {
                 fireball.Update(gameTime);
             }
-            Jogon.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -123,15 +120,15 @@ namespace BaseProject
             mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
             mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
 
+            foreach (Fireball fireball in Jogon.fireballs)
+            {
+                fireball.Draw(_spriteBatch);
+            }
             foreach (JogonPart part in JogonDragon)
             {
                 part.Draw(_spriteBatch);
             }
             Jogon.Draw(_spriteBatch);
-            foreach (Fireball fireball in Jogon.fireballs)
-            {
-                fireball.Draw(_spriteBatch);
-            }
         }
     }
 }

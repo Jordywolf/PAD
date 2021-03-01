@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.Input;
 class GameObject
 {
     //Decleratie van variabelen
-    protected GameObject parent;
     public Vector2 position;
     protected Vector2 velocity;
     public Texture2D texture;
