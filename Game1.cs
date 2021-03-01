@@ -100,6 +100,7 @@ namespace BaseProject
 
         void ShootFireBall()
         {
+            //fireball zooi
             fireballs.Add(new Fireball(jogonHead.position, Vector2.Zero, 0, 1, fireBallTexture));
             for (int i = 0; i < fireballs.Count; i++)
             {
