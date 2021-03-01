@@ -5,6 +5,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
 class GameObject
 {
     //Decleratie van variabelen
@@ -41,6 +45,5 @@ class GameObject
 
         //suck ma dick
     }
-
 }
 
