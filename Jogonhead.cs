@@ -15,9 +15,10 @@ namespace BaseProject
         private Vector2 acceliartion = new Vector2(0.02f, 0.05f);
         private float chargingdelay = 300;
 
-        private float chargeTime = 0.1f;
+        private float chargeTime = 0.05f;
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
+        private bool charcing = false;
 
         public List<JogonPart> Body = new List<JogonPart>();
         public Jogonhead(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture, followDist)
@@ -55,14 +56,27 @@ namespace BaseProject
 
         public void Charge()
         {
-            if (chargeInc <= MathF.PI*2 + chargeOffset)
+            if (charcing)
             {
-                chargeInc += chargeTime;
-                _followSpeed += (-MathF.Cos(chargeInc))*(chargeTime*3.8f);
+                if (chargeInc <= MathF.PI * 2 + chargeOffset)
+                {
+                    chargeInc += chargeTime;
+                    _followSpeed += (-MathF.Cos(chargeInc)) * (chargeTime * 9.5f);
+                }
+                else { chargeInc = chargeOffset; chargingdelay = 300; chargeTime = 0.05f; _followSpeed = 4; charcing = false; }
             }
-            else { chargeInc = chargeOffset; chargingdelay = 300; chargeTime = 0.1f; }
+            else
+            {
+                _followSpeed = 10;
+                charcing = true;
+            }
         }
 
+        public void Fireball()
+        {
+
+
+        }
         public override void Draw(SpriteBatch myspriteBatch)
         {
 

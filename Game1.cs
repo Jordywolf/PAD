@@ -18,7 +18,7 @@ namespace BaseProject
         private JogonPart jogonBodyPart;
         private JogonPart parentSegment;
 
-        private int Segments = 10;
+        private int Segments = 5;
         
 
         public Texture2D jogonHeadTexture;

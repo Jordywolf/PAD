@@ -15,6 +15,7 @@ namespace BaseProject
         protected float _followSpeed = 4;
         public JogonPart Parent;
         protected bool segment = true;
+
         public JogonPart(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture){ _minDistanceBetweenSegments = followDist; }
 
         public override void Update()
