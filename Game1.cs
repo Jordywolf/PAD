@@ -70,8 +70,7 @@ namespace BaseProject
         //private JogonPart jogonHead;
        // private JogonPart jogonHS;
         //private int Segments = 4;
-        public int height = 1080;
-        public int width = 1920;
+       
         public Boolean KeyCollected = true;
         public Vector2 SteenPosition,SteenVertPosition = new Vector2(0, 0);
         public Vector2 PlayerPosition = new Vector2(1920/2, 1080);
@@ -239,19 +238,7 @@ namespace BaseProject
         protected override void Draw(GameTime gameTime)
         {
             
-            spriteBatch.Begin();
-            //foreach (JogonPart part in JogonDragon)
-            _graphics.PreferredBackBufferWidth = width;
-            _graphics.PreferredBackBufferHeight = height;
-            _graphics.ApplyChanges();
-            safeZone.SafeZone( ZandTile,  Sleutel, spriteBatch);
-            safeZone.SafeZoneStone(SteenTile, spriteBatch);
-            safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-            safeZone.NextLevel1();
-            foreach (var sprite in _sprites)
-                sprite.Draw(spriteBatch);
-            
-            spriteBatch.End();
+           
             
             //part.Draw(_spriteBatch);
 
@@ -487,6 +474,16 @@ Matrix.CreateScale(0.45f));
 
             if (menuchoice == 7)
             {
+                spriteBatch.Begin();        
+
+                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
+                safeZone.SafeZoneStone(SteenTile, spriteBatch);
+                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
+                safeZone.NextLevel1();
+                foreach (var sprite in _sprites)
+                    sprite.Draw(spriteBatch);
+
+                spriteBatch.End();
 
             }
 
