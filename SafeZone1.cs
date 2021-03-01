@@ -14,7 +14,6 @@ namespace BaseProject
         //private List<Sprite> _sprites;
         public int height = 1080;
         public int width = 1920;
-        public Boolean GameState3;
         public Boolean KeyCollected = true;
         public Vector2 SteenPosition,SteenVertPosition = new Vector2(0, 0);
         public Vector2 PlayerPosition = new Vector2(1920/2, 1080);
@@ -26,11 +25,10 @@ namespace BaseProject
         
         public  void NextLevel1()
         {
-            if (PlayerPosition.Y > DoorPosition.Y && KeyCollected == true && Keyboard.GetState().IsKeyDown(Keys.Space))
+           if ( Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.menuchoice == 7)
             {
-                //Volgende gamestate
-                Console.WriteLine(PlayerPosition);
-                Exit();
+                Game1.menuchoice = 8;
+                
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
             {
