@@ -48,7 +48,7 @@ namespace BaseProject
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);x
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
