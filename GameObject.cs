@@ -5,6 +5,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
 class GameObject
 {
     //Decleratie van variabelen
@@ -12,7 +16,7 @@ class GameObject
     public Vector2 position;
     protected Vector2 velocity;
     protected Texture2D texture;
-    protected float scale = 2.5f;
+    protected float scale = 1.5f;
     protected float angle = 0.0f;
     protected float angleOffset = 0.0f;
     protected float totalangle = 0.0f;
@@ -41,6 +45,5 @@ class GameObject
 
         //suck ma dick
     }
-
 }
 
