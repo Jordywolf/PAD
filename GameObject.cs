@@ -11,36 +11,34 @@ class GameObject
     protected GameObject parent;
     public Vector2 position;
     protected Vector2 velocity;
-    protected Texture2D texture;
-    protected float scale = 2.5f;
-    protected float angle = 0.0f;
+    public Texture2D texture;
+    protected float scale;
+    protected float angle;
     protected float angleOffset = 0.0f;
-    protected float totalangle = 0.0f;
 
-    public GameObject(Vector2 position, Vector2 velocity, Texture2D texture)
+    public GameObject(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture)
     {
         this.position = position;
         this.velocity = velocity;
+        this.angle = rotation;
+        this.scale = scale;
         this.texture = texture;
-
     }
-    public virtual void Update()
+    public virtual void Update(GameTime gameTime)
     {
-        position += velocity;      
+        position += velocity;
     }
 
     public virtual void Draw(SpriteBatch myspriteBatch)
     {
-        myspriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateScale(scale));
-        myspriteBatch.Draw(texture, position, null, Color.White, totalangle, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
+        myspriteBatch.Begin(SpriteSortMode.Texture,null,null,null,null,null,Matrix.CreateScale(scale));
+        myspriteBatch.Draw(texture,position,null,Color.White,angle,new Vector2(0,0),scale,SpriteEffects.None,0);
         myspriteBatch.End();
     }
 
-    public void Reset()
+    public virtual void Reset()
     {
-
-        //suck ma dick
+    
     }
-
 }
 
