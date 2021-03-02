@@ -11,10 +11,10 @@ namespace BaseProject
     {
         
 
-        public Player(Texture2D texture)
+        public Player(Texture2D texture, Vector2 position)
             : base(texture)
         {
-
+            this.Position = position;
         }
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {

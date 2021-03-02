@@ -12,9 +12,8 @@ namespace BaseProject
         private Point Mousepos;
         private Vector2 mainTarget;
         public static float speed = 0.1f;
-        private Vector2 acceliartion = new Vector2(0.02f, 0.05f);
         private float chargingdelay = 300;
-
+        private Sprite aTarget;
         private float chargeTime = 0.05f;
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
@@ -24,10 +23,11 @@ namespace BaseProject
         public List<Fireball> fireballs = new List<Fireball>();
         public Texture2D fireBallTexture;
         bool keyPressed;
-        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture) : base(position, velocity, rotation, scale, texture, followDist)
+        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Sprite target) : base(position, velocity, rotation, scale, texture, followDist)
         {
             segment = false;
             this.fireBallTexture = fireballTexture;
+            this.aTarget = target;
         }
 
         public override void Update(GameTime gameTime)
@@ -46,19 +46,29 @@ namespace BaseProject
             }
 
             chargingdelay--;
-            Mousepos = Mouse.GetState().Position;
-            mainTarget = new Vector2(Mousepos.X / 2, Mousepos.Y / 2);
-
-            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed) - MathF.PI / 2;
+            mainTarget = aTarget.Position;
+            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed);
             target = mainTarget - this.position;
-            float dx = (mainTarget.X - this.position.X);
-            float dy = (mainTarget.Y - this.position.Y);
+            float dx = (this.position.X - mainTarget.X);
+            float dy = (this.position.Y - mainTarget.Y);
             float dist = MathF.Sqrt(dx * dx + dy * dy);
             target.Normalize();
 
             if (dist > _minDistanceBetweenSegments)
             {
+                if (reached)
+                {
+                    _followSpeed = 4f;
+                }
+                reached = false;
                 this.position += target * _followSpeed;
+
+            }
+            else
+            {
+
+                _followSpeed = 0.1f;
+                reached = true;
             }
             foreach (JogonPart bodypart in Body)
             {

@@ -66,6 +66,7 @@ namespace BaseProject
 
 
         private SpriteBatch spriteBatch;
+        private Player player;
         private List<Sprite> _sprites;
         //private JogonPart jogonHead;
        // private JogonPart jogonHS;
@@ -101,7 +102,7 @@ namespace BaseProject
         protected override void Initialize()
         {
             base.Initialize();
-            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 0, fireBallTexture);
+            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture,player);
             parentSegment = Jogon;
             for (int i = 0; i < Segments; i++)
             {
@@ -129,21 +130,21 @@ namespace BaseProject
             Deur = Content.Load<Texture2D>("Deur");
             Player = Content.Load<Texture2D>("Player");
             Sleutel = Content.Load<Texture2D>("Sleutel");
+            player = new Player(Player, PlayerPosition)
+            {
+                Input = new Input()
+                {
+                    Left = Keys.Left,
+                    Right = Keys.Right,
+                    Up = Keys.Up,
+                    Down = Keys.Down,
+                },
+                Position = PlayerPosition,
+                color = Color.Blue,
+                Speed = 15f,
+            };
             _sprites = new List<Sprite>()
             {
-                new Player(Player)
-                {
-                    Input = new  Input()
-                    {
-                        Left = Keys.Left,
-                        Right = Keys.Right,
-                        Up = Keys.Up,
-                        Down = Keys.Down,
-                    },
-                    Position = PlayerPosition,
-                    color = Color.Blue,
-                    Speed = 5f,
-                },
 
                 new Sprite(Rots){
                 Position = RotsPosition,
@@ -211,28 +212,35 @@ namespace BaseProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
+
+            if (menuchoice == 7 || menuchoice == 8)
+            {
+                foreach (var sprite in _sprites)
+                    sprite.Update(gameTime, _sprites);
+                player.Update(gameTime, _sprites);
+            }
  
             // TODO: Add your update logic here
-                base.Update(gameTime);
-            //foreach (JogonPart part in JogonDragon)
-            {
-                //part.Update();
-            }
-           // jogonHS.Update();
-           // jogonHead.Update();
 
             base.Update(gameTime);
-            foreach (JogonPart part in JogonDragon)
+            if (menuchoice == 8)
             {
-                part.Update(gameTime);
+                foreach (JogonPart part in JogonDragon)
+                {
+                    part.Update(gameTime);
+                }
+                Jogon.Update(gameTime);
+                if (Jogon.reached)
+                {
+                    Jogon.position = new Vector2(100, 4000);
+                    menuchoice = 2;
+                }
+                foreach (Fireball fireball in Jogon.fireballs)
+                {
+                    fireball.Update(gameTime);
+                }
             }
-            Jogon.Update(gameTime);
-            foreach (Fireball fireball in Jogon.fireballs)
-            {
-                fireball.Update(gameTime);
-            }
+
         }
 
         protected override void Draw(GameTime gameTime)
@@ -480,10 +488,11 @@ Matrix.CreateScale(0.45f));
                 safeZone.SafeZoneStone(SteenTile, spriteBatch);
                 safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
                 safeZone.NextLevel1();
+                spriteBatch.End();
                 foreach (var sprite in _sprites)
                     sprite.Draw(spriteBatch);
+                player.Draw(spriteBatch);
 
-                spriteBatch.End();
 
             }
 
@@ -493,6 +502,7 @@ Matrix.CreateScale(0.45f));
                 mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
                 mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
 
+                
                 foreach (Fireball fireball in Jogon.fireballs)
                 {
                     fireball.Draw(_spriteBatch);
@@ -501,6 +511,7 @@ Matrix.CreateScale(0.45f));
                 {
                     part.Draw(_spriteBatch);
                 }
+                player.Draw(spriteBatch);
                 Jogon.Draw(_spriteBatch);
 
             }

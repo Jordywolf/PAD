@@ -14,6 +14,7 @@ namespace BaseProject
         protected float _followSpeed = 4;
         public JogonPart Parent;
         protected bool segment = true;
+        public bool reached = false;
 
         public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist) : base(position, velocity, rotation, scale, texture){ _minDistanceBetweenSegments = followDist; }
 
@@ -32,8 +33,21 @@ namespace BaseProject
 
                 if (dist > _minDistanceBetweenSegments)
                 {
+                    if(reached)
+                    {
+                        _followSpeed = 4f;
+                    }
+                    reached = false;
                     this.position += target * _followSpeed;
+                    
                 }
+                else
+                {
+
+                        _followSpeed = 0.1f;
+                    reached = true;
+                }
+
             }
             base.Update(gameTime);
         }

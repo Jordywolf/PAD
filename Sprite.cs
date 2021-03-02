@@ -31,8 +31,9 @@ namespace BaseProject
         { }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Begin();
             spriteBatch.Draw(_texture, Position, color);
+            spriteBatch.End();
 
         }
         #region Collision 

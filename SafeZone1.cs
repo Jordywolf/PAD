@@ -78,7 +78,7 @@ namespace BaseProject
 
                     this.position.X = ZandTile.Width * xZandTile;
                     this.position.Y = ZandTile.Height * yZandTile;
-                   
+                    
                     spriteBatch.Draw(ZandTile, position, Color.White);
                     if (KeyCollected == true)
                     {
