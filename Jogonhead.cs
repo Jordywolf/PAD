@@ -12,42 +12,69 @@ namespace BaseProject
         private Point Mousepos;
         private Vector2 mainTarget;
         public static float speed = 0.1f;
-        private Vector2 acceliartion = new Vector2(0.02f, 0.05f);
         private float chargingdelay = 300;
-
+        private Sprite aTarget;
         private float chargeTime = 0.05f;
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
-        private bool charcing = false;
+        private bool charging = false;
 
         public List<JogonPart> Body = new List<JogonPart>();
-        public Jogonhead(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture, followDist)
+        public List<Fireball> fireballs = new List<Fireball>();
+        public Texture2D fireBallTexture;
+        bool keyPressed;
+        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Sprite target) : base(position, velocity, rotation, scale, texture, followDist)
         {
             segment = false;
+            this.fireBallTexture = fireballTexture;
+            this.aTarget = target;
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
-            chargingdelay--;
-            Mousepos = Mouse.GetState().Position;
-            mainTarget = new Vector2(Mousepos.X / 2, Mousepos.Y / 2);
+            if (keyPressed == false)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    keyPressed = true;
+                    Fireball();
+                }
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Space))
+            {
+                keyPressed = false;
+            }
 
-            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed) - MathF.PI / 2;
+            chargingdelay--;
+            mainTarget = aTarget.Position;
+            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed);
             target = mainTarget - this.position;
-            float dx = (mainTarget.X - this.position.X);
-            float dy = (mainTarget.Y - this.position.Y);
+            float dx = (this.position.X - mainTarget.X);
+            float dy = (this.position.Y - mainTarget.Y);
             float dist = MathF.Sqrt(dx * dx + dy * dy);
             target.Normalize();
 
             if (dist > _minDistanceBetweenSegments)
             {
+                if (reached)
+                {
+                    _followSpeed = 4f;
+                }
+                reached = false;
                 this.position += target * _followSpeed;
+
+            }
+            else
+            {
+
+                _followSpeed = 0.1f;
+                reached = true;
             }
             foreach (JogonPart bodypart in Body)
             {
-                bodypart.Update();
+                bodypart.Update(gameTime);
             }
-            base.Update();
+            base.Update(gameTime);
             if (chargingdelay <= 0)
             {
                 Charge();
@@ -56,36 +83,41 @@ namespace BaseProject
 
         public void Charge()
         {
-            if (charcing)
+            if (charging)
             {
                 if (chargeInc <= MathF.PI * 2 + chargeOffset)
                 {
                     chargeInc += chargeTime;
                     _followSpeed += (-MathF.Cos(chargeInc)) * (chargeTime * 9.5f);
                 }
-                else { chargeInc = chargeOffset; chargingdelay = 300; chargeTime = 0.05f; _followSpeed = 4; charcing = false; }
+                else { chargeInc = chargeOffset; chargingdelay = 300; chargeTime = 0.05f; _followSpeed = 4; charging = false; }
             }
             else
             {
                 _followSpeed = 10;
-                charcing = true;
+                charging = true;
             }
         }
 
         public void Fireball()
         {
-
-
+            //fireball zooi
+            fireballs.Add(new Fireball(position, Vector2.Zero, 0, 1, fireBallTexture));
+            for (int i = 0; i < fireballs.Count; i++)
+            {
+                if (fireballs[i].IsObjectOffScreen(fireballs[i]))
+                {
+                    fireballs.RemoveAt(i);
+                }
+            }
         }
         public override void Draw(SpriteBatch myspriteBatch)
         {
-
             foreach (JogonPart bodypart in Body)
             {
                 bodypart.Draw(myspriteBatch);
             }
             base.Draw(myspriteBatch);
-
         }
     }
 }

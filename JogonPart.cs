@@ -9,16 +9,16 @@ namespace BaseProject
 {
     class JogonPart : GameObject
     {
-
         public Vector2 target;
         public float _minDistanceBetweenSegments = 4;
         protected float _followSpeed = 4;
         public JogonPart Parent;
         protected bool segment = true;
+        public bool reached = false;
 
-        public JogonPart(Vector2 position, Vector2 velocity, Texture2D texture, float followDist) : base(position, velocity, texture){ _minDistanceBetweenSegments = followDist; }
+        public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist) : base(position, velocity, rotation, scale, texture){ _minDistanceBetweenSegments = followDist; }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             
             totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed)-MathF.PI/2;
@@ -33,10 +33,23 @@ namespace BaseProject
 
                 if (dist > _minDistanceBetweenSegments)
                 {
+                    if(reached)
+                    {
+                        _followSpeed = 4f;
+                    }
+                    reached = false;
                     this.position += target * _followSpeed;
+                    
                 }
+                else
+                {
+
+                        _followSpeed = 0.1f;
+                    reached = true;
+                }
+
             }
-            base.Update();
+            base.Update(gameTime);
         }
     }
 }
