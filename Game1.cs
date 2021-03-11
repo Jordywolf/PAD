@@ -79,9 +79,11 @@ namespace BaseProject
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
-        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
+        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel,TileSz2;
        
         SafeZone1 safeZone = new SafeZone1();
+        SafeZone2 safeZone2 = new SafeZone2();
+
         
         
         //public Texture2D jogonHeadTexture;
@@ -130,6 +132,7 @@ namespace BaseProject
             Deur = Content.Load<Texture2D>("Deur");
             Player = Content.Load<Texture2D>("Player");
             Sleutel = Content.Load<Texture2D>("Sleutel");
+            TileSz2 = Content.Load<Texture2D>("TileSz2");
             player = new Player(Player, PlayerPosition)
             {
                 Input = new Input()
@@ -482,16 +485,17 @@ Matrix.CreateScale(0.45f));
 
             if (menuchoice == 7)
             {
-                spriteBatch.Begin();        
-                
-                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-                safeZone.SafeZoneStone(SteenTile, spriteBatch);
-                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-                safeZone.NextLevel1();
+                spriteBatch.Begin();
+                safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
+                safeZone2.MovingPlatForm(TileSz2, spriteBatch);
+               // safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
+                //safeZone.SafeZoneStone(SteenTile, spriteBatch);
+               // safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
+                //safeZone.NextLevel1();
                 spriteBatch.End();
-                foreach (var sprite in _sprites)
-                    sprite.Draw(spriteBatch);
-                player.Draw(spriteBatch);
+                //foreach (var sprite in _sprites)
+                   // sprite.Draw(spriteBatch);
+                //player.Draw(spriteBatch);
 
 
             }

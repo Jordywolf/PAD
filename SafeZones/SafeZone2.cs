@@ -39,12 +39,13 @@ namespace BaseProject
         }
         public void SafeZonePlatForm(Texture2D TileSz2, SpriteBatch spriteBatch)
         {
-            for (int xSteenTile = 0; xSteenTile < width / TileSz2.Width * 3; xSteenTile++)
+            for (int xTileSz2 = 0; xTileSz2 < width / TileSz2.Width * 3; xTileSz2++)
             {
 
 
-                this.TileSz2.X = TileSz2.Width * xSteenTile / 2;
+                this.TileSz2.X = TileSz2.Width * xTileSz2 / 4;
                 this.TileSz2.Y = TileSz2.Height * 3;
+                //this.TileSz2.Y = TileSz2.Height * 3;
 
                 spriteBatch.Draw(TileSz2, this.TileSz2, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
 
@@ -53,31 +54,44 @@ namespace BaseProject
         }
         
 
-        public void SafeZone(Texture2D ZandTile, Texture2D Sleutel, SpriteBatch spriteBatch)
+        public void SafeZone(Texture2D TileSz2, Texture2D Sleutel, SpriteBatch spriteBatch)
         {
 
             //GraphicsDevice.Clear(Color.BlueViolet);
-            for (int xZandTile = 0; xZandTile < width / ZandTile.Width + 25; xZandTile++)
+            for (int xTileSz2 = 0; xTileSz2 < width / TileSz2.Width + 25; xTileSz2++)
             {
-                for (int yZandTile = 0; yZandTile < height / ZandTile.Height + 20; yZandTile++)
+                for (int yTileSz2 = 0; yTileSz2 < height / TileSz2.Height + 20; yTileSz2++)
                 {
 
 
 
 
-                    this.position.X = ZandTile.Width * xZandTile;
-                    this.position.Y = ZandTile.Height * yZandTile;
+                    this.position.X = TileSz2.Width * xTileSz2;
+                    this.position.Y = TileSz2.Height * yTileSz2;
 
-                    spriteBatch.Draw(ZandTile, position, Color.White);
-                    if (KeyCollected == true)
-                    {
-                        spriteBatch.Draw(Sleutel, new Vector2(1590, 200), Color.White);
-                    }
+                    spriteBatch.Draw(TileSz2, this.TileSz2, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
 
 
 
                 }
             }
+        }
+        public void MovingPlatForm(Texture2D TileSz2, SpriteBatch spriteBatch)
+        {
+            for (int yTileSz2 = 0; yTileSz2 < height ; yTileSz2++)
+            {
+                this.SteenVertPosition.Y = TileSz2.Height / 3;
+                this.SteenVertPosition.X = TileSz2.Width * 2;
+
+                spriteBatch.Draw(TileSz2, SteenVertPosition, null, Color.White, 0f, Vector2.Zero, 0.3f, SpriteEffects.None, 0f);
+
+
+            }
+        }
+        private void MovePlatForm()
+        {
+            
+             
         }
     }
 
