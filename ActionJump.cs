@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BaseProject
 {
-    class ActionJump // jump action
+    public class ActionJump : Game1
     {
         float playerVelocityY;
         float PLAYERJUMPVELOCITY = 20;
         float PLAYERZWAARTEKRACHT = 1.2f;
+        Vector2 jumpLocation;
         bool playerOnGround;
 
         public void Jump()
@@ -16,20 +20,24 @@ namespace BaseProject
             if (playerOnGround == true)
             {
                 playerVelocityY = PLAYERJUMPVELOCITY;
+                jumpLocation = player.Position;
                 playerOnGround = false;
             }
         }
 
         public void Update()
         {
-/*            playerY -= playerVelocityY;
-            playerVelocityY -= PLAYERZWAARTEKRACHT;
-
-            if (playerY > horizonY - PLAYERHEIGHT + GROUNDLEVEL)
+            if (playerOnGround == false)
             {
-                playerY = horizonY - PLAYERHEIGHT + GROUNDLEVEL;
-                playerOnGround = true;
-            }*/
+                player.Position.Y -= playerVelocityY;
+                playerVelocityY -= PLAYERZWAARTEKRACHT;
+
+                if (player.Position.Y > jumpLocation.Y)
+                {
+                    player.Position.Y = jumpLocation.Y;
+                    playerOnGround = true;
+                }
+            }
         }
     }
 }
