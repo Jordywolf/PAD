@@ -32,6 +32,8 @@ namespace BaseProject
         GameStates.NewGameState newGameState;
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
+        GameStates.SafeZoneState safeZoneState;
+        GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public int width = 64 * 20;
@@ -39,7 +41,7 @@ namespace BaseProject
 
         public Vector2 playerPos;
 
-        MapConstruction mapConstruction;
+        //MapConstruction mapConstruction;
 
         private int Segments = 15;
 
@@ -76,25 +78,25 @@ namespace BaseProject
         public static Player player;
         public static List<Sprite> _sprites;
         //private JogonPart jogonHead;
-       // private JogonPart jogonHS;
+        // private JogonPart jogonHS;
         //private int Segments = 4;
-       
+
         public Boolean KeyCollected;
-        public Vector2 SteenPosition,SteenVertPosition = new Vector2(0, 0);
-        public Vector2 PlayerPosition = new Vector2(1920/2, 1080);
-        public Vector2 RotsPosition = new Vector2(1920 / 3, 1080/ 2.5f);
+        public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
+        public Vector2 PlayerPosition = new Vector2(1920 / 2, 1080);
+        public Vector2 RotsPosition = new Vector2(1920 / 3, 1080 / 2.5f);
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
-       
-        SafeZone1 safeZone = new SafeZone1();
-        
-        
+
+        //SafeZone1 safeZone = new SafeZone1();
+
+
         //public Texture2D jogonHeadTexture;
         //public Texture2D jogonHSTexture;
         //public Texture2D jogonBodyTexture;
-       // List<JogonPart> JogonDragon = new List<JogonPart>();
+        // List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
         public Game1()
@@ -102,14 +104,14 @@ namespace BaseProject
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            
-            
+
+
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture,player);
+            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player);
             parentSegment = Jogon;
             for (int i = 0; i < Segments; i++)
             {
@@ -150,6 +152,8 @@ namespace BaseProject
                 color = Color.Blue,
                 Speed = 15f,
             };
+
+
             _sprites = new List<Sprite>()
             {
 
@@ -173,7 +177,7 @@ namespace BaseProject
                     Position = new Vector2(200,75)
                 }
             };
-            
+
             // TODO: use this.Content to load your game content here
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
@@ -211,8 +215,9 @@ namespace BaseProject
             startframe = -100;
 
 
-            mapConstruction = new MapConstruction(PillarTile);
-             menuStartSelectedState = new GameStates.MenuStartSelectedState();
+            //mapConstruction = new MapConstruction(PillarTile);
+
+            menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameEnvironment.gameStateList.Add(menuStartSelectedState);
             GameEnvironment.SwitchTo(0);
 
@@ -231,9 +236,11 @@ namespace BaseProject
             backState = new GameStates.BackState();
             GameEnvironment.gameStateList.Add(backState);
 
-           // jogonSafeZoneState = new GameStates.JogonSafeZoneState();
-           // GameEnvironment.gameStateList.Add(jogonSafeZoneState);
-           // GameEnvironment.SwitchTo(0);
+            safeZoneState = new GameStates.SafeZoneState();
+            GameEnvironment.gameStateList.Add(safeZoneState);
+
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile);
+            GameEnvironment.gameStateList.Add(safeZoneState);
         }
 
 
@@ -248,7 +255,7 @@ namespace BaseProject
                     sprite.Update(gameTime, _sprites);
                 player.Update(gameTime, _sprites);
             }
- 
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -274,12 +281,12 @@ namespace BaseProject
 
         protected override void Draw(GameTime gameTime)
         {
-            
-           
-            
+
+
+
             //part.Draw(_spriteBatch);
 
-            
+
 
 
             //jogonHS.Draw(_spriteBatch);
@@ -336,7 +343,7 @@ namespace BaseProject
             // TODO: Add your drawing code here
             if (menuchoice == 1)
             {
-               menuStartSelectedState.Draw(_spriteBatch, texture, texture3, texture4, font);
+                menuStartSelectedState.Draw(_spriteBatch, texture, texture3, texture4, font);
             }
 
             if (menuchoice == 2)
@@ -366,42 +373,13 @@ namespace BaseProject
 
             if (menuchoice == 7)
             {
-              //  jogonSafeZoneState.Draw(_spriteBatch, ZandTile, Sleutel, SteenTile, SteenVert);
-                spriteBatch.Begin();
-
-                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-                safeZone.SafeZoneStone(SteenTile, spriteBatch);
-                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-                safeZone.NextLevel1();
-                spriteBatch.End();
-                foreach (var sprite in _sprites)
-                    sprite.Draw(spriteBatch);
-                player.Draw(spriteBatch);
-                
+                safeZoneState.SafzoneConstruction(_spriteBatch, player, _sprites, ZandTile, Sleutel, SteenTile, SteenVert);
             }
 
             if (menuchoice == 8)
             {
-                mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, _spriteBatch, width, height);
-                mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
-                mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
-
-                
-                foreach (Fireball fireball in Jogon.fireballs)
-                {
-                    fireball.Draw(_spriteBatch);
-                }
-                foreach (JogonPart part in JogonDragon)
-                {
-                    part.Draw(_spriteBatch);
-                }
-                player.Draw(spriteBatch);
-                Jogon.Draw(_spriteBatch);
-
+                jogonLevelPlayingState.JogonLevelConstruction(_spriteBatch, player, Jogon, JogonDragon, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile);
             }
-
-
-
         }
     }
 }
