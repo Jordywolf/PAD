@@ -218,23 +218,18 @@ namespace BaseProject
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
             GameEnvironment.gameStateList.Add(menuCreditsSelectedState);
-            GameEnvironment.SwitchTo(0);
 
             menuCreditsState = new GameStates.MenuCreditsState();
             GameEnvironment.gameStateList.Add(menuCreditsState);
-            GameEnvironment.SwitchTo(0);
 
             newGameState = new GameStates.NewGameState();
             GameEnvironment.gameStateList.Add(newGameState);
-            GameEnvironment.SwitchTo(0);
 
             continueState = new GameStates.ContinueState();
             GameEnvironment.gameStateList.Add(continueState);
-            GameEnvironment.SwitchTo(0);
 
             backState = new GameStates.BackState();
             GameEnvironment.gameStateList.Add(backState);
-            GameEnvironment.SwitchTo(0);
 
            // jogonSafeZoneState = new GameStates.JogonSafeZoneState();
            // GameEnvironment.gameStateList.Add(jogonSafeZoneState);
