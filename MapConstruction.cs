@@ -85,23 +85,34 @@ public class MapConstruction
             for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
             {
 
-                pillarPosition.X = ((width / (maxPillarsX + 1)) * (iPillarsX )) - (pillarTile.Width / 2);
+                pillarPosition.X = ((width / (maxPillarsX + 1)) * (iPillarsX)) - (pillarTile.Width / 2);
                 pillarPosition.Y = ((height / (maxPillarsY + 1)) * (iPillarsY)) - (pillarTile.Height / 2);
 
-                pillars[iPillarsX*iPillarsY].Draw(spriteBatch, pillarPosition);
+                pillars[iPillarsX * iPillarsY].Draw(spriteBatch, pillarPosition);
             }
         }
     }
 
-    public bool Collision(Vector2 PlayerPos, int PlayerAdj, int BorderT, int BroderD, int BorderL, int BorderR)
+    public void Collision(Vector2 PlayerPos, int PlayerAdj, int BorderT, int BroderD, int BorderL, int BorderR)
     {
-        if (PlayerPos.Y - PlayerAdj <= BorderT || PlayerPos.Y + PlayerAdj >= BroderD || PlayerPos.X - PlayerAdj <= BorderL || PlayerPos.X + PlayerAdj >= BorderR)
+        if (PlayerPos.Y - PlayerAdj <= BorderT)
         {
-            return true;
+            PlayerPos.Y = PlayerAdj + BorderT;
         }
-        else
+
+        if (PlayerPos.Y + PlayerAdj >= BroderD)
         {
-            return false;
+            PlayerPos.Y = BroderD - PlayerAdj;
+        }
+
+        if (PlayerPos.X - PlayerAdj <= BorderL)
+        {
+            PlayerPos.X = BorderL + PlayerAdj;
+        }
+
+        if (PlayerPos.X + PlayerAdj >= BorderR)
+        {
+            PlayerPos.X = BorderR - PlayerAdj;
         }
     }
 

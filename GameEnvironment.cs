@@ -16,7 +16,7 @@ class GameEnvironment : Game
     protected static Point screen;
     protected static Random random;
 
-    static protected List<GameState> gameStateList;
+    static public List<GameState> gameStateList = new List<GameState>();
     static protected GameState currentGameState;
 
     public static KeyboardState KeyboardState

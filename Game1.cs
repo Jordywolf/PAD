@@ -26,13 +26,22 @@ namespace BaseProject
         public Texture2D WalltileL;
         public Texture2D WalltileR;
         public Texture2D PillarTile;
+        GameStates.MenuStartSelectedState menuStartSelectedState;
+        GameStates.MenuCreditsSelectedState menuCreditsSelectedState;
+        GameStates.MenuCreditsState menuCreditsState;
+        GameStates.NewGameState newGameState;
+        GameStates.ContinueState continueState;
+        GameStates.BackState backState;
+        GameStates.SafeZoneState safeZoneState;
+        GameStates.JogonLevelPlayingState jogonLevelPlayingState;
+        //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public int width = 64 * 20;
         public int height = 64 * 10;
 
         public Vector2 playerPos;
 
-        MapConstruction mapConstruction;
+        //MapConstruction mapConstruction;
 
         private int Segments = 15;
 
@@ -66,28 +75,28 @@ namespace BaseProject
 
 
         private SpriteBatch spriteBatch;
-        private Player player;
-        private List<Sprite> _sprites;
+        public static Player player;
+        public static List<Sprite> _sprites;
         //private JogonPart jogonHead;
-       // private JogonPart jogonHS;
+        // private JogonPart jogonHS;
         //private int Segments = 4;
-       
+
         public Boolean KeyCollected;
-        public Vector2 SteenPosition,SteenVertPosition = new Vector2(0, 0);
-        public Vector2 PlayerPosition = new Vector2(1920/2, 1080);
-        public Vector2 RotsPosition = new Vector2(1920 / 3, 1080/ 2.5f);
+        public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
+        public Vector2 PlayerPosition = new Vector2(1920 / 2, 1080);
+        public Vector2 RotsPosition = new Vector2(1920 / 3, 1080 / 2.5f);
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
-       
-        SafeZone1 safeZone = new SafeZone1();
-        
-        
+
+        //SafeZone1 safeZone = new SafeZone1();
+
+
         //public Texture2D jogonHeadTexture;
         //public Texture2D jogonHSTexture;
         //public Texture2D jogonBodyTexture;
-       // List<JogonPart> JogonDragon = new List<JogonPart>();
+        // List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
         public Game1()
@@ -95,14 +104,14 @@ namespace BaseProject
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            
-            
+
+
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture,player);
+            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player);
             parentSegment = Jogon;
             for (int i = 0; i < Segments; i++)
             {
@@ -143,6 +152,8 @@ namespace BaseProject
                 color = Color.Blue,
                 Speed = 15f,
             };
+
+
             _sprites = new List<Sprite>()
             {
 
@@ -166,7 +177,7 @@ namespace BaseProject
                     Position = new Vector2(200,75)
                 }
             };
-            
+
             // TODO: use this.Content to load your game content here
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
@@ -204,7 +215,32 @@ namespace BaseProject
             startframe = -100;
 
 
-            mapConstruction = new MapConstruction(PillarTile);
+            //mapConstruction = new MapConstruction(PillarTile);
+
+            menuStartSelectedState = new GameStates.MenuStartSelectedState();
+            GameEnvironment.gameStateList.Add(menuStartSelectedState);
+            GameEnvironment.SwitchTo(0);
+
+            menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
+            GameEnvironment.gameStateList.Add(menuCreditsSelectedState);
+
+            menuCreditsState = new GameStates.MenuCreditsState();
+            GameEnvironment.gameStateList.Add(menuCreditsState);
+
+            newGameState = new GameStates.NewGameState();
+            GameEnvironment.gameStateList.Add(newGameState);
+
+            continueState = new GameStates.ContinueState();
+            GameEnvironment.gameStateList.Add(continueState);
+
+            backState = new GameStates.BackState();
+            GameEnvironment.gameStateList.Add(backState);
+
+            safeZoneState = new GameStates.SafeZoneState();
+            GameEnvironment.gameStateList.Add(safeZoneState);
+
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile);
+            GameEnvironment.gameStateList.Add(safeZoneState);
         }
 
 
@@ -219,7 +255,7 @@ namespace BaseProject
                     sprite.Update(gameTime, _sprites);
                 player.Update(gameTime, _sprites);
             }
- 
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -245,12 +281,12 @@ namespace BaseProject
 
         protected override void Draw(GameTime gameTime)
         {
-            
-           
-            
+
+
+
             //part.Draw(_spriteBatch);
 
-            
+
 
 
             //jogonHS.Draw(_spriteBatch);
@@ -305,219 +341,45 @@ namespace BaseProject
 
 
             // TODO: Add your drawing code here
-
             if (menuchoice == 1)
             {
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(1.3f));
-                _spriteBatch.Draw(texture, new Vector2(0, -50), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.7f));
-                _spriteBatch.Draw(texture4, new Vector2(200, 100), Color.White);
-                _spriteBatch.Draw(texture3, new Vector2(200, 150), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(0.45f));
-                _spriteBatch.DrawString(font, "Press", new Vector2(0, 1000), Color.Beige);
-                _spriteBatch.DrawString(font, "Arrow Keys", new Vector2(0, 1050), Color.Beige);
-                _spriteBatch.DrawString(font, "Press", new Vector2(0, 1150), Color.Beige);
-                _spriteBatch.DrawString(font, "Space", new Vector2(0, 1200), Color.Beige);
-                _spriteBatch.End();
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Up) && framecount > startframe + 10)
-
-                {
-                    menuchoice = 1;
-
-
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Down) && framecount > startframe + 10)
-                {
-                    menuchoice = 2;
-
-                }
+                menuStartSelectedState.Draw(_spriteBatch, texture, texture3, texture4, font);
             }
 
             if (menuchoice == 2)
             {
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(1.3f));
-                _spriteBatch.Draw(texture, new Vector2(0, -50), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.7f));
-                _spriteBatch.Draw(texture2, new Vector2(200, 100), Color.White);
-                _spriteBatch.Draw(texture5, new Vector2(200, 150), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(0.45f));
-                _spriteBatch.DrawString(font, "Press", new Vector2(0, 1000), Color.Beige);
-                _spriteBatch.DrawString(font, "Arrow Keys", new Vector2(0, 1050), Color.Beige);
-                _spriteBatch.DrawString(font, "Press", new Vector2(0, 1150), Color.Beige);
-                _spriteBatch.DrawString(font, "Space", new Vector2(0, 1200), Color.Beige);
-                _spriteBatch.End();
-
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up) && framecount > startframe + 10)
-
-                {
-                    menuchoice = 1;
-
-
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Down) && framecount > startframe + 10)
-                {
-                    menuchoice = 2;
-
-                }
+                menuCreditsSelectedState.Draw(_spriteBatch, texture, texture2, texture5, font);
             }
 
             if (menuchoice == 3)
             {
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(1.8f));
-                _spriteBatch.Draw(texture6, new Vector2(0, 0), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.7f));
-                _spriteBatch.Draw(texture8, new Vector2(350, 180), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(0.6f));
-
-                _spriteBatch.DrawString(font, "Nick Baptist", new Vector2(100, 100), Color.Beige);
-                _spriteBatch.DrawString(font, "Nidal Toufik", new Vector2(100, 400), Color.Beige);
-                _spriteBatch.DrawString(font, "Jordy Wolf", new Vector2(100, 700), Color.Beige);
-                _spriteBatch.DrawString(font, "Jort Keppel", new Vector2(1000, 100), Color.Beige);
-                _spriteBatch.DrawString(font, "Olivier Molenaar", new Vector2(1000, 400), Color.Beige);
-                _spriteBatch.DrawString(font, "Jordi van der Lem", new Vector2(1000, 700), Color.Beige);
-
-                _spriteBatch.End();
+                menuCreditsState.Draw(_spriteBatch, texture6, texture8, font);
             }
 
             if (menuchoice == 4)
             {
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.1f));
-                _spriteBatch.Draw(texture9, new Vector2(0, -50), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.7f));
-                _spriteBatch.Draw(texture11, new Vector2(200, 50), Color.White);
-                _spriteBatch.Draw(texture12, new Vector2(200, 100), Color.White);
-                _spriteBatch.Draw(texture7, new Vector2(350, 180), Color.White);
-                _spriteBatch.End();
-
-
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Down) && framecount > startframe + 10)
-                {
-                    menuchoice = 5;
-                    framecount = startframe;
-                }
+                newGameState.Draw(_spriteBatch, texture9, texture11, texture12, texture7);
             }
 
             if (menuchoice == 5)
             {
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.1f));
-                _spriteBatch.Draw(texture9, new Vector2(0, -50), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.7f));
-                _spriteBatch.Draw(texture10, new Vector2(200, 50), Color.White);
-                _spriteBatch.Draw(texture13, new Vector2(200, 100), Color.White);
-                _spriteBatch.Draw(texture7, new Vector2(350, 180), Color.White);
-                _spriteBatch.End();
-
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up) && framecount > startframe + 10)
-
-                {
-                    menuchoice = 4;
-                    framecount = startframe;
-
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Down) && framecount > startframe + 10)
-                {
-                    menuchoice = 6;
-                    framecount = startframe;
-                }
+                continueState.Draw(_spriteBatch, texture9, texture10, texture13, texture7);
             }
 
             if (menuchoice == 6)
             {
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.1f));
-                _spriteBatch.Draw(texture9, new Vector2(0, -50), Color.White);
-                _spriteBatch.End();
-
-                _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-    Matrix.CreateScale(2.7f));
-                _spriteBatch.Draw(texture10, new Vector2(200, 50), Color.White);
-                _spriteBatch.Draw(texture12, new Vector2(200, 100), Color.White);
-                _spriteBatch.Draw(texture8, new Vector2(350, 180), Color.White);
-                _spriteBatch.End();
-
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up) && framecount > startframe + 10)
-
-                {
-                    menuchoice = 5;
-                    framecount = startframe;
-
-                }
-
-
+                backState.Draw(_spriteBatch, texture9, texture10, texture12, texture8);
             }
 
             if (menuchoice == 7)
             {
-                spriteBatch.Begin();        
-                
-                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-                safeZone.SafeZoneStone(SteenTile, spriteBatch);
-                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-                safeZone.NextLevel1();
-                spriteBatch.End();
-                foreach (var sprite in _sprites)
-                    sprite.Draw(spriteBatch);
-                player.Draw(spriteBatch);
-
-
+                safeZoneState.SafzoneConstruction(_spriteBatch, player, _sprites, ZandTile, Sleutel, SteenTile, SteenVert);
             }
 
             if (menuchoice == 8)
             {
-                mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, _spriteBatch, width, height);
-                mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(height / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(width / Floortile.Width) - 1) * Floortile.Width, 0), _spriteBatch, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
-                mapConstruction.PillarSetup(_spriteBatch, PillarTile, width, height, new Vector2(0, 0));
-
-                
-                foreach (Fireball fireball in Jogon.fireballs)
-                {
-                    fireball.Draw(_spriteBatch);
-                }
-                foreach (JogonPart part in JogonDragon)
-                {
-                    part.Draw(_spriteBatch);
-                }
-                player.Draw(spriteBatch);
-                Jogon.Draw(_spriteBatch);
-
+                jogonLevelPlayingState.JogonLevelConstruction(_spriteBatch, player, Jogon, JogonDragon, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile);
             }
-
-
-
         }
     }
 }
