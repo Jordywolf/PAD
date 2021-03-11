@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -27,7 +27,7 @@ namespace BaseProject
         {
            if ( Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.menuchoice == 7)
             {
-                Game1.menuchoice = 8;
+                Game1.menuchoice = 9;
                 
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
@@ -92,4 +92,4 @@ namespace BaseProject
         }
     }
 
-}*/
+}
