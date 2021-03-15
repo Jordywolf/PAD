@@ -9,33 +9,37 @@ namespace BaseProject
 {
     class Jogonhead : JogonPart
     {
-        private Point Mousepos;
-        private Vector2 mainTarget;
-        public static float speed = 0.1f;
         private float chargingdelay = 300;
-        private Sprite aTarget;
         private float chargeTime = 0.05f;
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
         private bool charging = false;
+        private float targetSpeed = 1;
+        private float targetTime = 0;
+        private float targetRadius = 20;
+        private Vector2 origin = new Vector2(200, 200);
+
 
         public List<JogonPart> Body = new List<JogonPart>();
         public List<Fireball> fireballs = new List<Fireball>();
         public Texture2D fireBallTexture;
         bool keyPressed;
-        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Sprite target) : base(position, velocity, rotation, scale, texture, followDist)
+        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Sprite target, JogonPart parent) : base(position, velocity, rotation, scale, texture, followDist, parent)
         {
             segment = false;
             this.fireBallTexture = fireballTexture;
-            this.aTarget = target;
+            this.target = new Vector2(200, 200);
         }
 
         public override void Update(GameTime gameTime)
         {
+            targetTime++;
+            this.target = new Vector2((float)Math.Cos(targetTime * targetSpeed) * targetRadius + origin.X, (float)Math.Sin(targetTime * targetSpeed) * targetRadius + origin.Y);
             if (keyPressed == false)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
+                    target += new Vector2(100, 10);
                     keyPressed = true;
                     Fireball();
                 }
@@ -45,39 +49,19 @@ namespace BaseProject
                 keyPressed = false;
             }
 
+            //turning
+
             chargingdelay--;
-            mainTarget = aTarget.Position;
-            totalangle = MathF.Atan2(target.Y * _followSpeed, target.X * _followSpeed);
-            target = mainTarget - this.position;
-            float dx = (this.position.X - mainTarget.X);
-            float dy = (this.position.Y - mainTarget.Y);
-            float dist = MathF.Sqrt(dx * dx + dy * dy);
-            target.Normalize();
 
-            if (dist > _minDistanceBetweenSegments)
-            {
-                if (reached)
-                {
-                    _followSpeed = 4f;
-                }
-                reached = false;
-                this.position += target * _followSpeed;
-
-            }
-            else
-            {
-
-                _followSpeed = 0.1f;
-                reached = true;
-            }
             foreach (JogonPart bodypart in Body)
             {
                 bodypart.Update(gameTime);
             }
             base.Update(gameTime);
+
             if (chargingdelay <= 0)
             {
-                Charge();
+                //Charge();
             }
         }
 
@@ -119,5 +103,7 @@ namespace BaseProject
             }
             base.Draw(myspriteBatch);
         }
+
+
     }
 }
