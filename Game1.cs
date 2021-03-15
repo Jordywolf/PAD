@@ -11,9 +11,6 @@ namespace BaseProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Jogonhead Jogon;
-        private JogonPart jogonBodyPart;
-        private JogonPart parentSegment;
 
         public Texture2D PillarV2_Torch;
         public Texture2D Floortile;
@@ -43,7 +40,7 @@ namespace BaseProject
 
         //MapConstruction mapConstruction;
 
-        private int Segments = 15;
+        //private int Segments = 15;
 
 
         public Texture2D jogonHeadTexture;
@@ -51,7 +48,7 @@ namespace BaseProject
         public Texture2D jogonBodyTexture;
         public Texture2D fireBallTexture;
 
-        List<JogonPart> JogonDragon = new List<JogonPart>();
+        //List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
         public Texture2D texture;
@@ -111,7 +108,7 @@ namespace BaseProject
         protected override void Initialize()
         {
             base.Initialize();
-            Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player);
+            /*Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player);
             parentSegment = Jogon;
             for (int i = 0; i < Segments; i++)
             {
@@ -120,7 +117,7 @@ namespace BaseProject
                 jogonBodyPart.Parent = parentSegment;
                 Jogon.Body.Add(jogonBodyPart);
                 parentSegment = jogonBodyPart;
-            }
+            }*/
         }
 
         protected override void LoadContent()
@@ -239,7 +236,7 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, player);
             GameEnvironment.gameStateList.Add(safeZoneState);
         }
 
@@ -259,7 +256,7 @@ namespace BaseProject
             // TODO: Add your update logic here
 
             base.Update(gameTime);
-            if (menuchoice == 8)
+            /*if (menuchoice == 8)
             {
                 foreach (JogonPart part in JogonDragon)
                 {
@@ -275,7 +272,7 @@ namespace BaseProject
                 {
                     fireball.Update(gameTime);
                 }
-            }
+            }*/
 
         }
 
@@ -378,7 +375,7 @@ namespace BaseProject
 
             if (menuchoice == 8)
             {
-                jogonLevelPlayingState.JogonLevelConstruction(_spriteBatch, player, Jogon, JogonDragon, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile);
+                jogonLevelPlayingState.JogonLevelConstruction(gameTime ,_spriteBatch, player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
             }
         }
     }

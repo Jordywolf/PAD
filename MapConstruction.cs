@@ -13,6 +13,8 @@ public class MapConstruction
     public int maxPillars;
     private Texture2D aTexture;
 
+    public bool check;
+
     List<Pillar> pillars = new List<Pillar>();
 
     public MapConstruction(Texture2D pilTexture)
@@ -93,28 +95,46 @@ public class MapConstruction
         }
     }
 
-    public void Collision(Vector2 PlayerPos, int PlayerAdj, int BorderT, int BroderD, int BorderL, int BorderR)
+    public void PillarCollision(Vector2 objPos, Texture2D objTexture)
     {
-        if (PlayerPos.Y - PlayerAdj <= BorderT)
+        foreach (Pillar pillar in pillars)
         {
-            PlayerPos.Y = PlayerAdj + BorderT;
-        }
-
-        if (PlayerPos.Y + PlayerAdj >= BroderD)
-        {
-            PlayerPos.Y = BroderD - PlayerAdj;
-        }
-
-        if (PlayerPos.X - PlayerAdj <= BorderL)
-        {
-            PlayerPos.X = BorderL + PlayerAdj;
-        }
-
-        if (PlayerPos.X + PlayerAdj >= BorderR)
-        {
-            PlayerPos.X = BorderR - PlayerAdj;
+            pillar.Collision(objPos, objTexture);
         }
     }
 
+    public void Collision(Vector2 objPos, Texture2D objTexture, int BorderT, int BroderD, int BorderL, int BorderR)
+    {
+        if (objPos.Y - objTexture.Height/2 <= BorderT)
+        {
+            objPos.Y = objTexture.Height / 2 + BorderT;
+            GameEnvironment.SwitchTo(0);
+            check = true;
+        }
+
+        if (objPos.Y + objTexture.Height / 2 >= BroderD)
+        {
+            objPos.Y = BroderD - objTexture.Height / 2;
+            GameEnvironment.SwitchTo(0);
+            check = true;
+
+        }
+
+        if (objPos.X - objTexture.Width / 2 <= BorderL)
+        {
+            objPos.X = BorderL + objTexture.Width / 2;
+            GameEnvironment.SwitchTo(0);
+            check = true;
+
+        }
+
+        if (objPos.X + objTexture.Width / 2 >= BorderR)
+        {
+            objPos.X = BorderR - objTexture.Width / 2;
+            GameEnvironment.SwitchTo(0);
+            check = true;
+
+        }
+    }
 }
 

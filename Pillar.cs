@@ -20,24 +20,13 @@ class Pillar
 
     public void Collision(Vector2 playerPosition, Texture2D playerTexture)
     {
-        if (playerPosition.X >= position.X - myTexture.Width/2)
+        if (MathF.Abs(playerPosition.X - position.X) <= myTexture.Width / 2 + playerTexture.Width / 2)
         {
-            playerPosition.X = position.X - myTexture.Width/2;
+            playerPosition.X = position.X - (myTexture.Width / 2 + playerTexture.Width / 2);
         }
-
-        if (playerPosition.X <= position.X + myTexture.Width / 2)
+        if (MathF.Abs(playerPosition.Y - position.Y) <= myTexture.Height / 2 + playerTexture.Height / 2)
         {
-            playerPosition.X = position.X + myTexture.Width / 2;
-        }
-
-        if (playerPosition.Y >= position.Y - myTexture.Height / 2)
-        {
-            playerPosition.Y = position.Y - myTexture.Height / 2;
-        }
-
-        if (playerPosition.Y >= position.Y - myTexture.Height / 2)
-        {
-            playerPosition.Y = position.Y - myTexture.Height / 2;
+            playerPosition.Y = position.Y - (myTexture.Height / 2 + playerTexture.Height / 2);
         }
     }
 
