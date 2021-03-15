@@ -7,20 +7,20 @@ using System.Text;
 
 namespace BaseProject
 {
-    public class ActionJump : Game1
+    public class ActionJump
     {
         float playerVelocityY;
-        float PLAYERJUMPVELOCITY = 20;
-        float PLAYERZWAARTEKRACHT = 1.2f;
-        Vector2 jumpLocation;
-        bool playerOnGround;
+        float playerJumpVelocity = 20;
+        float playerZwaartekracht = 1.2f;
+        public static Vector2 jumpLocation;
+        public static bool playerOnGround = false;
 
         public void Jump()
         { 
             if (playerOnGround == true)
             {
-                playerVelocityY = PLAYERJUMPVELOCITY;
-                jumpLocation = player.Position;
+                playerVelocityY = playerJumpVelocity;
+                jumpLocation = Game1.player.Position;
                 playerOnGround = false;
             }
         }
@@ -29,14 +29,18 @@ namespace BaseProject
         {
             if (playerOnGround == false)
             {
-                player.Position.Y -= playerVelocityY;
-                playerVelocityY -= PLAYERZWAARTEKRACHT;
+                Game1.player.Position.Y -= playerVelocityY;
+                playerVelocityY -= playerZwaartekracht;
 
-                if (player.Position.Y > jumpLocation.Y)
+                if (Game1.player.Position.Y > jumpLocation.Y)
                 {
-                    player.Position.Y = jumpLocation.Y;
+                    Game1.player.Position.Y = jumpLocation.Y;
                     playerOnGround = true;
                 }
+            }
+            else
+            {
+                jumpLocation = Game1.player.Position;
             }
         }
     }
