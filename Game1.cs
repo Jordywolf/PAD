@@ -79,7 +79,7 @@ namespace BaseProject
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
-        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel,TileSz2;
+        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel,TileSz2,TileSz3;
        
         SafeZone1 safeZone = new SafeZone1();
         SafeZone2 safeZone2 = new SafeZone2();
@@ -133,6 +133,7 @@ namespace BaseProject
             Player = Content.Load<Texture2D>("Player");
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
+            TileSz3 = Content.Load<Texture2D>("TileSz3");
             player = new Player(Player, PlayerPosition)
             {
                 Input = new Input()
@@ -263,7 +264,7 @@ namespace BaseProject
             _graphics.PreferredBackBufferHeight = height;
             _graphics.ApplyChanges();
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             base.Draw(gameTime);
 
@@ -486,9 +487,10 @@ Matrix.CreateScale(0.45f));
             if (menuchoice == 7)
             {
                 spriteBatch.Begin();
-                safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
-                safeZone2.MovingPlatForm(TileSz2, spriteBatch);
-               // safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
+                safeZone2.MovingPlatForm(TileSz3, spriteBatch);
+                safeZone2.SafeZone(TileSz2, spriteBatch);
+              //  safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
+                //safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
                 //safeZone.SafeZoneStone(SteenTile, spriteBatch);
                // safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
                 //safeZone.NextLevel1();

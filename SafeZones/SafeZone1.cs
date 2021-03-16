@@ -21,7 +21,7 @@ namespace BaseProject
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
-        //public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
+        
         
         public  void NextLevel1()
         {
