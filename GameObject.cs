@@ -32,9 +32,9 @@ class GameObject
 
     public virtual void Draw(SpriteBatch myspriteBatch)
     {
-        myspriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateScale(scale));
-        myspriteBatch.Draw(texture, position, null, Color.White, totalangle, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
-        myspriteBatch.End();
+        //myspriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, Matrix.CreateScale(1));
+        myspriteBatch.Draw(texture, position, null, Color.White, totalangle, new Vector2(0, 0), scale, SpriteEffects.None, 0);
+        //myspriteBatch.End();
     }
 
     public virtual void Reset()

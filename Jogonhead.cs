@@ -14,10 +14,10 @@ namespace BaseProject
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
         private bool charging = false;
-        private float targetSpeed = 1;
+        private float targetSpeed = 0.01f;
         private float targetTime = 0;
-        private float targetRadius = 20;
-        private Vector2 origin = new Vector2(200, 200);
+        private float targetRadius = 200;
+        public Vector2 origin = new Vector2(1280, 320);
 
 
         public List<JogonPart> Body = new List<JogonPart>();
@@ -28,7 +28,7 @@ namespace BaseProject
         {
             segment = false;
             this.fireBallTexture = fireballTexture;
-            this.target = new Vector2(200, 200);
+            this.target = new Vector2(1280, 320);
         }
 
         public override void Update(GameTime gameTime)

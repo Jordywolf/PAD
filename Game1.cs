@@ -7,10 +7,10 @@ using System.Text;
 
 namespace BaseProject
 {
-    public class Game1 : Game
+    class Game1 : GameEnvironment
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        //private GraphicsDeviceManager _graphics;
+        //private SpriteBatch _spriteBatch;
 
         public Texture2D PillarV2_Torch;
         public Texture2D Floortile;
@@ -33,8 +33,8 @@ namespace BaseProject
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
-        public int width = 64 * 20;
-        public int height = 64 * 10;
+        public int width = 1280;
+        public int height = 640;
 
         public Vector2 playerPos;
 
@@ -71,7 +71,7 @@ namespace BaseProject
 
 
 
-        private SpriteBatch spriteBatch;
+        //private SpriteBatch spriteBatch;
         public static Player player;
         public static List<Sprite> _sprites;
         //private JogonPart jogonHead;
@@ -96,13 +96,20 @@ namespace BaseProject
         // List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
-        public Game1()
+        public Game1() : base()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            //_graphics = new GraphicsDeviceManager(this);
+            //Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            screen.X = width;
+            screen.Y = height;
 
+            //graphics.PreferredBackBufferWidth = width;
+            //graphics.PreferredBackBufferHeight = height;
+            //graphics.ApplyChanges();
+
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
         }
 
         protected override void Initialize()
@@ -122,7 +129,9 @@ namespace BaseProject
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            ApplyResolutionSettings();
+            base.LoadContent();
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
             //jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
             //jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
             //jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
@@ -176,7 +185,7 @@ namespace BaseProject
             };
 
             // TODO: use this.Content to load your game content here
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
@@ -237,7 +246,7 @@ namespace BaseProject
             GameEnvironment.gameStateList.Add(safeZoneState);
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, player);
-            GameEnvironment.gameStateList.Add(safeZoneState);
+            GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
         }
 
 
@@ -289,11 +298,6 @@ namespace BaseProject
             //jogonHS.Draw(_spriteBatch);
             //jogonHead.Draw(_spriteBatch);
 
-            _graphics.PreferredBackBufferWidth = width;
-            _graphics.PreferredBackBufferHeight = height;
-            _graphics.ApplyChanges();
-
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             base.Draw(gameTime);
 
@@ -340,42 +344,43 @@ namespace BaseProject
             // TODO: Add your drawing code here
             if (menuchoice == 1)
             {
-                menuStartSelectedState.Draw(_spriteBatch, texture, texture3, texture4, font);
+                menuStartSelectedState.Draw(spriteBatch, texture, texture3, texture4, font);
             }
 
             if (menuchoice == 2)
             {
-                menuCreditsSelectedState.Draw(_spriteBatch, texture, texture2, texture5, font);
+                menuCreditsSelectedState.Draw(spriteBatch, texture, texture2, texture5, font);
             }
 
             if (menuchoice == 3)
             {
-                menuCreditsState.Draw(_spriteBatch, texture6, texture8, font);
+                menuCreditsState.Draw(spriteBatch, texture6, texture8, font);
             }
 
             if (menuchoice == 4)
             {
-                newGameState.Draw(_spriteBatch, texture9, texture11, texture12, texture7);
+                newGameState.Draw(spriteBatch, texture9, texture11, texture12, texture7);
             }
 
             if (menuchoice == 5)
             {
-                continueState.Draw(_spriteBatch, texture9, texture10, texture13, texture7);
+                continueState.Draw(spriteBatch, texture9, texture10, texture13, texture7);
             }
 
             if (menuchoice == 6)
             {
-                backState.Draw(_spriteBatch, texture9, texture10, texture12, texture8);
+                backState.Draw(spriteBatch, texture9, texture10, texture12, texture8);
             }
 
             if (menuchoice == 7)
             {
-                safeZoneState.SafzoneConstruction(_spriteBatch, player, _sprites, ZandTile, Sleutel, SteenTile, SteenVert);
+                safeZoneState.SafzoneConstruction(spriteBatch, player, _sprites, ZandTile, Sleutel, SteenTile, SteenVert);
             }
 
             if (menuchoice == 8)
             {
-                jogonLevelPlayingState.JogonLevelConstruction(gameTime ,_spriteBatch, player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
+                jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
+                //jogonLevelPlayingState.Draw(_spriteBatch);
             }
         }
     }

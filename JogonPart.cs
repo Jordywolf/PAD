@@ -11,12 +11,13 @@ namespace BaseProject
     {
         public Vector2 target;
         public float _minDistanceBetweenSegments = 4;
-        protected float _followSpeed = 70;
+        public float _followSpeed = 70;
         protected float _followRange = 1f;
         public JogonPart Parent;
         protected bool segment = true;
         public bool reached = false;
         protected int Movingstate = 0;
+        public Vector2 moveDir;
 
         public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, JogonPart Parent) : base(position, velocity, rotation, scale, texture) { _minDistanceBetweenSegments = followDist; }
 
@@ -29,7 +30,7 @@ namespace BaseProject
             }
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Vector2 moveDir = target - this.position;
+            moveDir = target - this.position;
             moveDir.Normalize();
             totalangle = MathF.Atan2(target.Y - this.position.Y, target.X - this.position.X) - MathF.PI / 2;
 
@@ -55,6 +56,11 @@ namespace BaseProject
             float dx = V2.X - V1.X;
             float dy = V2.Y - V2.Y;
             return MathF.Sqrt((dx * dx) + (dy * dy)) < range;
+        }
+
+        public override void Draw(SpriteBatch myspriteBatch)
+        {
+            base.Draw(myspriteBatch);
         }
     }
 }

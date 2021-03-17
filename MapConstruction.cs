@@ -8,14 +8,34 @@ using Microsoft.Xna.Framework.Input;
 
 public class MapConstruction
 {
-    public int maxPillarsY = 3;
-    public int maxPillarsX = 3;
+    public int maxPillarsY = 2;
+    public int maxPillarsX = 2;
     public int maxPillars;
     private Texture2D aTexture;
+    private Texture2D floorTexture;
+    private Vector2 floorPosition;
+    public Vector2 pillarPosition;
+    public Texture2D pillarTile;
+
+    public Vector2 wallPositionT;
+    public Vector2 wallPositionD;
+    public Vector2 wallPositionL;
+    public Vector2 wallPositionR;
+    public Texture2D WalltileStr;
+    public Texture2D WalltileStrD;
+    public Texture2D WalltileL;
+    public Texture2D WalltileR;
+    public Texture2D WalltileCrnL;
+    public Texture2D WalltileCrnR;
+    public Texture2D WalltileCrnDL;
+    public Texture2D WalltileCrnDR;
+
+    private int width;
+    private int height;
 
     public bool check;
 
-    List<Pillar> pillars = new List<Pillar>();
+    public List<Pillar> pillars = new List<Pillar>();
 
     public MapConstruction(Texture2D pilTexture)
     {
@@ -30,8 +50,59 @@ public class MapConstruction
         }
     }
 
-    public void FloorConstruction(Vector2 floorPosition, Texture2D floorTexture, SpriteBatch spriteBatch, int width, int height)
+    public void FloorConstruction(Vector2 floorPosition, Texture2D floorTexture, int width, int height)
     {
+        this.floorTexture = floorTexture;
+        this.floorPosition = floorPosition;
+
+        this.width = width;
+        this.height = height;
+    }
+
+    public void WallConstruction(Vector2 wallPositionT, Vector2 wallPositionD, Vector2 wallPositionL, 
+        Vector2 wallPositionR, int width, int height, Texture2D WalltileStr, 
+        Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, 
+        Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR)
+    {
+        this.wallPositionT = wallPositionT;
+        this.wallPositionD = wallPositionD;
+        this.wallPositionL = wallPositionL;
+        this.wallPositionR = wallPositionR;
+        this.WalltileStr = WalltileStr;
+        this.WalltileStrD = WalltileStrD;
+        this.WalltileL = WalltileL;
+        this.WalltileR = WalltileR;
+        this.WalltileCrnL = WalltileCrnL;
+        this.WalltileCrnR = WalltileCrnR;
+        this.WalltileCrnDL = WalltileCrnDL;
+        this.WalltileCrnDR = WalltileCrnDR;
+    }
+
+    public void PillarSetup(Texture2D pillarTile, int width, int height, Vector2 pillarPosition)
+    {
+        this.pillarTile = pillarTile;
+        this.pillarPosition = pillarPosition;
+
+        this.width = width;
+        this.height = height;
+
+    }
+
+    public bool Collision(Vector2 objPos, Rectangle objRectangle)
+    {
+        return (objPos.Y <= objRectangle.Height || objPos.Y + objRectangle.Height >= height
+            || objPos.X <= objRectangle.Width || objPos.X + objRectangle.Width >= width);
+    }
+
+    public bool Collision(Vector2 objPos, Texture2D objTexture)
+    {
+        return (objPos.Y <= objTexture.Height || objPos.Y + objTexture.Height >= height
+            || objPos.X <= objTexture.Width || objPos.X + objTexture.Width >= width);
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        //to build the floor
         for (int xMapTile = 0; xMapTile < width / floorTexture.Width; xMapTile++)
         {
             for (int yMapTile = 0; yMapTile < height / floorTexture.Height; yMapTile++)
@@ -39,15 +110,25 @@ public class MapConstruction
                 floorPosition.X = floorTexture.Width * xMapTile;
                 floorPosition.Y = floorTexture.Height * yMapTile;
 
-                spriteBatch.Begin();
+                //spriteBatch.Begin();
                 spriteBatch.Draw(floorTexture, floorPosition, Color.White);
-                spriteBatch.End();
+                //spriteBatch.End();
             }
         }
-    }
 
-    public void WallConstruction(Vector2 wallPositionT, Vector2 wallPositionD, Vector2 wallPositionL, Vector2 wallPositionR, SpriteBatch spriteBatch, int width, int height, Texture2D WalltileStr, Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR)
-    {
+        //to build the pillars
+        for (int iPillarsX = 1; iPillarsX <= maxPillarsX; iPillarsX++)
+        {
+            for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
+            {
+
+                pillarPosition.X = ((width / (maxPillarsX + 1)) * (iPillarsX)) - (pillarTile.Width / 2);
+                pillarPosition.Y = ((height / (maxPillarsY + 1)) * (iPillarsY)) - (pillarTile.Height / 2);
+
+                pillars[iPillarsX * iPillarsY].Draw(spriteBatch, pillarPosition);
+            }
+        }
+
         for (int iWalltile = 0; iWalltile < width / WalltileStr.Width; iWalltile++)
         {
             wallPositionT.X = WalltileStr.Width * iWalltile;
@@ -56,7 +137,7 @@ public class MapConstruction
             wallPositionL.Y = WalltileL.Height * iWalltile;
             wallPositionR.Y = WalltileR.Height * iWalltile;
 
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
             if (iWalltile <= 0)
             {
                 spriteBatch.Draw(WalltileCrnL, wallPositionT, Color.White);
@@ -76,64 +157,7 @@ public class MapConstruction
                 spriteBatch.Draw(WalltileR, wallPositionR, Color.White);
                 spriteBatch.Draw(WalltileL, wallPositionL, Color.White);
             }
-            spriteBatch.End();
-        }
-    }
-
-    public void PillarSetup(SpriteBatch spriteBatch, Texture2D pillarTile, int width, int height, Vector2 pillarPosition)
-    {
-        for (int iPillarsX = 1; iPillarsX <= maxPillarsX; iPillarsX++)
-        {
-            for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
-            {
-
-                pillarPosition.X = ((width / (maxPillarsX + 1)) * (iPillarsX)) - (pillarTile.Width / 2);
-                pillarPosition.Y = ((height / (maxPillarsY + 1)) * (iPillarsY)) - (pillarTile.Height / 2);
-
-                pillars[iPillarsX * iPillarsY].Draw(spriteBatch, pillarPosition);
-            }
-        }
-    }
-
-    public void PillarCollision(Vector2 objPos, Texture2D objTexture)
-    {
-        foreach (Pillar pillar in pillars)
-        {
-            pillar.Collision(objPos, objTexture);
-        }
-    }
-
-    public void Collision(Vector2 objPos, Texture2D objTexture, int BorderT, int BroderD, int BorderL, int BorderR)
-    {
-        if (objPos.Y - objTexture.Height/2 <= BorderT)
-        {
-            objPos.Y = objTexture.Height / 2 + BorderT;
-            GameEnvironment.SwitchTo(0);
-            check = true;
-        }
-
-        if (objPos.Y + objTexture.Height / 2 >= BroderD)
-        {
-            objPos.Y = BroderD - objTexture.Height / 2;
-            GameEnvironment.SwitchTo(0);
-            check = true;
-
-        }
-
-        if (objPos.X - objTexture.Width / 2 <= BorderL)
-        {
-            objPos.X = BorderL + objTexture.Width / 2;
-            GameEnvironment.SwitchTo(0);
-            check = true;
-
-        }
-
-        if (objPos.X + objTexture.Width / 2 >= BorderR)
-        {
-            objPos.X = BorderR - objTexture.Width / 2;
-            GameEnvironment.SwitchTo(0);
-            check = true;
-
+            //spriteBatch.End();
         }
     }
 }
