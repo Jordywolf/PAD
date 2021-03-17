@@ -69,7 +69,9 @@ namespace BaseProject
         public static int framecount;
         public static int startframe;
 
-
+        public Texture2D HBedgeTexture;
+        public Texture2D HBmiddleTexture;
+        public Texture2D HBhealthTexture;
 
         //private SpriteBatch spriteBatch;
         public static Player player;
@@ -215,6 +217,9 @@ namespace BaseProject
             texture12 = Content.Load<Texture2D>("MenuContinue");
             texture13 = Content.Load<Texture2D>("MenuContinueSelected");
             font = Content.Load<SpriteFont>("Credit");
+            HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
+            HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
+            HBedgeTexture = Content.Load<Texture2D>("healthBarEnd");
 
             menuchoice = 1;
             framecount = 0;
@@ -245,7 +250,7 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, player);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, HBmiddleTexture, HBhealthTexture, HBedgeTexture, player);
             GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
         }
 

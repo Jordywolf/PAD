@@ -15,6 +15,7 @@ namespace BaseProject.GameStates
         private Jogonhead Jogon;
         private JogonPart jogonBodyPart;
         private JogonPart parentSegment;
+        public HealthBar bossHealthBar;
         private bool WallCollided;
         private bool PillarCollided;
         private int levelHeight, levelWidth;
@@ -26,10 +27,12 @@ namespace BaseProject.GameStates
         List<JogonPart> JogonDragon = new List<JogonPart>();
         private int Segments = 15;
 
-        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Player player) : base()
+        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeTexture, Player player) : base()
         {
             mapConstruction = new MapConstruction(aPillarTile);
             this.player = player;
+
+            bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeTexture, HBmiddleTexture, HBhealthTexture);
 
             Jogon = new Jogonhead(new Vector2(100, 100), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, null, null);
             parentSegment = Jogon;
@@ -58,6 +61,7 @@ namespace BaseProject.GameStates
             if (mapConstruction.Collision(Jogon.position, Jogon.texture) && !WallCollided)
             {
                 Jogon.origin = new Vector2(rnd.Next(1280), rnd.Next(640));
+                bossHealthBar.MaxHealthLength -= 20;
                 WallCollided = true;
             }
             else
@@ -100,6 +104,11 @@ namespace BaseProject.GameStates
             {
                 fireball.Update(gameTime);
             }
+
+            if (bossHealthBar.MaxHealthLength <= 0)
+            {
+                Game1.menuchoice = 7;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -118,6 +127,8 @@ namespace BaseProject.GameStates
             }
             //player.Draw(spriteBatch);
             Jogon.Draw(spriteBatch);
+
+            bossHealthBar.Draw(spriteBatch);
         }
     }
 }
