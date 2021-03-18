@@ -486,14 +486,11 @@ Matrix.CreateScale(0.45f));
 
             if (menuchoice == 7)
             {
-                spriteBatch.Begin();
-                safeZone2.MovingPlatForm(TileSz3, spriteBatch);
-                safeZone2.SafeZone(TileSz2, spriteBatch);
-              //  safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
-                //safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-                //safeZone.SafeZoneStone(SteenTile, spriteBatch);
-               // safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-                //safeZone.NextLevel1();
+                
+                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
+                safeZone.SafeZoneStone(SteenTile, spriteBatch);
+                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
+                safeZone.NextLevel1();
                 spriteBatch.End();
                 //foreach (var sprite in _sprites)
                    // sprite.Draw(spriteBatch);
