@@ -31,8 +31,6 @@ namespace BaseProject
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
             {
-
-
                 KeyCollected = false;
             }
         }
@@ -40,14 +38,10 @@ namespace BaseProject
         {
             for (int xSteenTile = 0; xSteenTile < width / SteenTile.Width * 3; xSteenTile++)
             {
-
-
                 this.SteenPosition.X = SteenTile.Width * xSteenTile / 2;
                 this.SteenPosition.Y = SteenTile.Height * 3;
 
                 spriteBatch.Draw(SteenTile, SteenPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
-
-
             }
         }
         public void SafeZoneStoneVert(Texture2D SteenVert, SpriteBatch spriteBatch)
@@ -58,23 +52,16 @@ namespace BaseProject
                 this.SteenVertPosition.X = width / 2;
 
                 spriteBatch.Draw(SteenVert, SteenVertPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
-
-
             }
         }
 
         public void SafeZone(Texture2D ZandTile, Texture2D Sleutel, SpriteBatch spriteBatch)
         {
-
             //GraphicsDevice.Clear(Color.BlueViolet);
             for (int xZandTile = 0; xZandTile < width / ZandTile.Width + 25; xZandTile++)
             {
                 for (int yZandTile = 0; yZandTile < height / ZandTile.Height + 20; yZandTile++)
                 {
-
-
-
-
                     this.position.X = ZandTile.Width * xZandTile;
                     this.position.Y = ZandTile.Height * yZandTile;
 
@@ -83,9 +70,6 @@ namespace BaseProject
                     {
                         spriteBatch.Draw(Sleutel, new Vector2(1590, 200), Color.White);
                     }
-
-
-
                 }
             }
         }
