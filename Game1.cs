@@ -9,7 +9,7 @@ namespace BaseProject
 {
     class Game1 : GameEnvironment
     {
-        //private GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager _graphics;
         //private SpriteBatch _spriteBatch;
 
         public Texture2D PillarV2_Torch;
@@ -85,11 +85,10 @@ namespace BaseProject
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
-        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
+        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel,TileSz2,TileSz3;
 
-        //SafeZone1 safeZone = new SafeZone1();
-
-
+        SafeZone1 safeZone = new SafeZone1();
+        SafeZone2 safeZone2 = new SafeZone2();
         //public Texture2D jogonHeadTexture;
         //public Texture2D jogonHSTexture;
         //public Texture2D jogonBodyTexture;
@@ -145,6 +144,8 @@ namespace BaseProject
             Deur = Content.Load<Texture2D>("Deur");
             Player = Content.Load<Texture2D>("Player");
             Sleutel = Content.Load<Texture2D>("Sleutel");
+            TileSz2 = Content.Load<Texture2D>("TileSz2");
+            TileSz3 = Content.Load<Texture2D>("TileSz3");
             player = new Player(Player, PlayerPosition)
             {
                 Input = new Input()
@@ -287,17 +288,11 @@ namespace BaseProject
 
         protected override void Draw(GameTime gameTime)
         {
+            _graphics.PreferredBackBufferWidth = width;
+            _graphics.PreferredBackBufferHeight = height;
+            _graphics.ApplyChanges();
 
-
-
-            //part.Draw(_spriteBatch);
-
-
-
-
-            //jogonHS.Draw(_spriteBatch);
-            //jogonHead.Draw(_spriteBatch);
-
+            GraphicsDevice.Clear(Color.Black);
 
             base.Draw(gameTime);
 
@@ -374,7 +369,15 @@ namespace BaseProject
 
             if (menuchoice == 7)
             {
-                safeZoneState.SafzoneConstruction(spriteBatch, player, _sprites, ZandTile, Sleutel, SteenTile, SteenVert);
+                spriteBatch.Begin();
+                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
+                safeZone.SafeZoneStone(SteenTile, spriteBatch);
+                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
+                safeZone.NextLevel1();
+                spriteBatch.End();
+                foreach (var sprite in _sprites)
+                    sprite.Draw(spriteBatch);
+                player.Draw(spriteBatch);
             }
 
             if (menuchoice == 8)
