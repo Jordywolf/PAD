@@ -10,17 +10,17 @@ namespace BaseProject
         
         //private SpriteBatch spriteBatch;
         //private List<Sprite> _sprites;
-        public int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-        public int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        public float Speed = 10000f;
+        public int height = 1080;
+        public int width = 1920;
+        public int Velocity = 1;
         public Boolean KeyCollected = true;
         public Vector2 TileSz2Pos,SteenVertPosition = new Vector2(0, 0);
         public Vector2 TileSz3Pos = new Vector2(400, 400);
         public Vector2 PlayerPosition = new Vector2(1920 / 2, 1080);
-        public Vector2 RotsPosition = new Vector2(1920 / 3.5f, 1080 / 5f);
+        public Vector2 RotsPosition = new Vector2(1920 / 3, 1080 / 2.5f);
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
-        public Vector2 DoorPosition = new Vector2(1920 / 3,0);
+        public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         //public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
 
         public void NextLevel2()
@@ -54,7 +54,7 @@ namespace BaseProject
         }
         
 
-        public void SafeZone(Texture2D TileSz2, Texture2D Deur, SpriteBatch spriteBatch)
+        public void SafeZone(Texture2D TileSz2, SpriteBatch spriteBatch)
         {
 
             //GraphicsDevice.Clear(Color.BlueViolet);
@@ -71,49 +71,37 @@ namespace BaseProject
 
                     //spriteBatch.Draw(TileSz2, this.TileSz2Pos, null, Color.White, 0f, Vector2.Zero, 0.99f, SpriteEffects.None, 0f);
                     spriteBatch.Draw(TileSz2, TileSz2Pos, Color.White);
-                    spriteBatch.Draw(Deur, DoorPosition, Color.White);
+
 
                 }
             }
         }
-        public void MovingPlatForm(Texture2D TileSz3, Texture2D FonteinTexture , SpriteBatch spriteBatch)
+        public void MovingPlatForm(Texture2D TileSz3, SpriteBatch spriteBatch)
         {
             for (int xTileSz3 = 0; xTileSz3 < 5; xTileSz3++)
             {
                 for (int yTileSz3 = 0; yTileSz3 < 4  ; yTileSz3++)
                 {
-                    this.TileSz3Pos.Y = TileSz3.Height * yTileSz3 + 200; 
+                    this.TileSz3Pos.Y = TileSz3.Height * yTileSz3 + 80;
                     this.TileSz3Pos.X = TileSz3.Height * xTileSz3 + 500;
-                   Speed++;
-                    
+                    if (yTileSz3 < 4 && TileSz3Pos.Y < height)
+                    {
+                        this.TileSz3Pos.Y --;
 
-
-                    spriteBatch.Draw(TileSz3,TileSz3Pos, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                        spriteBatch.Draw(FonteinTexture, RotsPosition, null, Color.White, 0f, Vector2.Zero, 0.3f, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(TileSz3, this.TileSz3Pos, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                         //spriteBatch.Draw(TileSz3, TileSz3Pos, Color.White);
-                    
+                    }
 
                 }
-            
             }
-
         }
-
-
-        public void NextLevel1()
-        {
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.menuchoice == 10)
-            {
-                Game1.menuchoice = 11;
-
-            }
             
-        }
+        
         private void MovePlatForm()
         {
-
+            
+             
         }
-
     }
 
 }
