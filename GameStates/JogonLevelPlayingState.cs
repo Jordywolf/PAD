@@ -21,6 +21,7 @@ namespace BaseProject.GameStates
         private int levelHeight, levelWidth;
         private Player player;
         private Vector2 pillarPositionCollision;
+        private int deathTimer;
 
         Random rnd = new Random();
 
@@ -107,7 +108,15 @@ namespace BaseProject.GameStates
 
             if (bossHealthBar.MaxHealthLength <= 0)
             {
-                Game1.menuchoice = 7;
+                if (deathTimer >= 500)
+                {
+                    Game1.menuchoice = 7;
+                }
+                else
+                {
+                    deathTimer++;
+                    Jogon.origin = new Vector2(rnd.Next(1280), rnd.Next(640));
+                }
             }
         }
 
