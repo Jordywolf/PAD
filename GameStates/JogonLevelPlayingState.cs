@@ -110,7 +110,7 @@ namespace BaseProject.GameStates
             {
                 if (deathTimer >= 500)
                 {
-                    Game1.menuchoice = 7;
+                    Game1.menuchoice = 9;
                 }
                 else
                 {

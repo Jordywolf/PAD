@@ -30,6 +30,7 @@ namespace BaseProject
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
         GameStates.SafeZoneState safeZoneState;
+        GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
@@ -38,32 +39,24 @@ namespace BaseProject
 
         public Vector2 playerPos;
 
-        //MapConstruction mapConstruction;
-
-        //private int Segments = 15;
-
-
         public Texture2D jogonHeadTexture;
         public Texture2D jogonHSTexture;
         public Texture2D jogonBodyTexture;
         public Texture2D fireBallTexture;
 
-        //List<JogonPart> JogonDragon = new List<JogonPart>();
-
-
-        public Texture2D texture;
-        public Texture2D texture2;
-        public Texture2D texture3;
-        public Texture2D texture4;
-        public Texture2D texture5;
-        public Texture2D texture6;
-        public Texture2D texture7;
-        public Texture2D texture8;
-        public Texture2D texture9;
-        public Texture2D texture10;
-        public Texture2D texture11;
-        public Texture2D texture12;
-        public Texture2D texture13;
+        public Texture2D HomeScreen;
+        public Texture2D MenuStartGame;
+        public Texture2D MenuCredits;
+        public Texture2D MenuStartGameSelected;
+        public Texture2D MenuCreditsSelected;
+        public Texture2D CreditScreen;
+        public Texture2D MenuBack;
+        public Texture2D MenuBackSelected;
+        public Texture2D SecondStart;
+        public Texture2D MenuNewGame;
+        public Texture2D MenuNewGameSelected;
+        public Texture2D MenuContinue;
+        public Texture2D MenuContinueSelected;
         public SpriteFont font;
         public static int menuchoice;
         public static int framecount;
@@ -74,12 +67,8 @@ namespace BaseProject
         public Texture2D HBmiddleTexture;
         public Texture2D HBhealthTexture;
 
-        //private SpriteBatch spriteBatch;
         public static Player player;
         public static List<Sprite> _sprites;
-        //private JogonPart jogonHead;
-        // private JogonPart jogonHS;
-        //private int Segments = 4;
 
         public Boolean KeyCollected;
         public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
@@ -88,55 +77,31 @@ namespace BaseProject
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
-        public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel,TileSz2,TileSz3;
+        public static Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel, TileSz2, TileSz3;
+        public static Texture2D PlayerShadow;
+
+        private ActionHandeler actionHandeler;
 
         SafeZone1 safeZone = new SafeZone1();
         SafeZone2 safeZone2 = new SafeZone2();
-        //public Texture2D jogonHeadTexture;
-        //public Texture2D jogonHSTexture;
-        //public Texture2D jogonBodyTexture;
-        // List<JogonPart> JogonDragon = new List<JogonPart>();
-
 
         public Game1() : base()
         {
-            //_graphics = new GraphicsDeviceManager(this);
-            //Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
             screen.X = width;
             screen.Y = height;
-
-            //graphics.PreferredBackBufferWidth = width;
-            //graphics.PreferredBackBufferHeight = height;
-            //graphics.ApplyChanges();
-
-            //GraphicsDevice.Clear(Color.CornflowerBlue);
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-            /*Jogon = new Jogonhead(new Vector2(50, 400), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player);
-            parentSegment = Jogon;
-            for (int i = 0; i < Segments; i++)
-            {
-                if (i == 0) { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), 0, 1.5f, jogonBodyTexture, 0.1f); }
-                else { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), 0, 1.5f, jogonBodyTexture, 5); }
-                jogonBodyPart.Parent = parentSegment;
-                Jogon.Body.Add(jogonBodyPart);
-                parentSegment = jogonBodyPart;
-            }*/
         }
 
         protected override void LoadContent()
         {
             ApplyResolutionSettings();
             base.LoadContent();
-            //spriteBatch = new SpriteBatch(GraphicsDevice);
-            //jogonBodyTexture = Content.Load<Texture2D>("jogon_BodySegment");
-            //jogonHeadTexture = Content.Load<Texture2D>("JogonHead2");
-            //jogonHSTexture = Content.Load<Texture2D>("Jogon_HeadSegment");
             Pilaar = Content.Load<Texture2D>("Pilaar");
             FonteinTexture = Content.Load<Texture2D>("Fontein");
             ZandTile = Content.Load<Texture2D>("ZandTile");
@@ -146,9 +111,11 @@ namespace BaseProject
             Rots = Content.Load<Texture2D>("Rots");
             Deur = Content.Load<Texture2D>("Deur");
             Player = Content.Load<Texture2D>("Player");
+            PlayerShadow = content.Load<Texture2D>("PlayerShadow");
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
             TileSz3 = Content.Load<Texture2D>("TileSz3");
+            actionHandeler = new ActionHandeler();
             player = new Player(Player, PlayerPosition)
             {
                 Input = new Input()
@@ -162,7 +129,6 @@ namespace BaseProject
                 color = Color.Blue,
                 Speed = 15f,
             };
-
 
             _sprites = new List<Sprite>()
             {
@@ -188,8 +154,6 @@ namespace BaseProject
                 }
             };
 
-            // TODO: use this.Content to load your game content here
-            //spriteBatch = new SpriteBatch(GraphicsDevice);
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
@@ -205,31 +169,29 @@ namespace BaseProject
             WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
             PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
             fireBallTexture = Content.Load<Texture2D>("Fireball");
-            texture = Content.Load<Texture2D>("HomeScreen");
-            texture2 = Content.Load<Texture2D>("MenuStartGame");
-            texture3 = Content.Load<Texture2D>("MenuCredits");
-            texture4 = Content.Load<Texture2D>("MenuStartGameSelected");
-            texture5 = Content.Load<Texture2D>("MenuCreditsSelected");
-            texture6 = Content.Load<Texture2D>("CreditScreen");
-            texture7 = Content.Load<Texture2D>("MenuBack");
-            texture8 = Content.Load<Texture2D>("MenuBackSelected");
-            texture9 = Content.Load<Texture2D>("SecondStart");
-            texture10 = Content.Load<Texture2D>("MenuNewGame");
-            texture11 = Content.Load<Texture2D>("MenuNewGameSelected");
-            texture12 = Content.Load<Texture2D>("MenuContinue");
-            texture13 = Content.Load<Texture2D>("MenuContinueSelected");
-            font = Content.Load<SpriteFont>("Credit");
+            HomeScreen = Content.Load<Texture2D>("HomeScreen");
+            MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
+            MenuCredits = Content.Load<Texture2D>("MenuCredits");
+            MenuStartGameSelected = Content.Load<Texture2D>("MenuStartGameSelected");
+            MenuCreditsSelected = Content.Load<Texture2D>("MenuCreditsSelected");
+            CreditScreen = Content.Load<Texture2D>("CreditScreen");
+            MenuBack = Content.Load<Texture2D>("MenuBack");
+            MenuBackSelected = Content.Load<Texture2D>("MenuBackSelected");
+            SecondStart = Content.Load<Texture2D>("SecondStart");
+            MenuNewGame = Content.Load<Texture2D>("MenuNewGame");
+            MenuNewGameSelected = Content.Load<Texture2D>("MenuNewGameSelected");
+            MenuContinue = Content.Load<Texture2D>("MenuContinue");
+            MenuContinueSelected = Content.Load<Texture2D>("MenuContinueSelected");
             HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
             HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
             HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
 
+            font = Content.Load<SpriteFont>("Credit");
+
             menuchoice = 1;
             framecount = 0;
             startframe = -100;
-
-
-            //mapConstruction = new MapConstruction(PillarTile);
 
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameEnvironment.gameStateList.Add(menuStartSelectedState);
@@ -255,6 +217,9 @@ namespace BaseProject
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, player);
             GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
+
+            safeZoneState2 = new GameStates.SafeZoneState();
+            GameEnvironment.gameStateList.Add(safeZoneState2);
         }
 
 
@@ -268,49 +233,22 @@ namespace BaseProject
                 foreach (var sprite in _sprites)
                     sprite.Update(gameTime, _sprites);
                 player.Update(gameTime, _sprites);
+                actionHandeler.Update();
             }
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
-            /*if (menuchoice == 8)
-            {
-                foreach (JogonPart part in JogonDragon)
-                {
-                    part.Update(gameTime);
-                }
-                Jogon.Update(gameTime);
-                if (Jogon.reached)
-                {
-                    Jogon.position = new Vector2(100, 4000);
-                    menuchoice = 2;
-                }
-                foreach (Fireball fireball in Jogon.fireballs)
-                {
-                    fireball.Update(gameTime);
-                }
-            }*/
-
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            _graphics.PreferredBackBufferWidth = width;
-            _graphics.PreferredBackBufferHeight = height;
-            _graphics.ApplyChanges();
-
             GraphicsDevice.Clear(Color.Black);
 
             base.Draw(gameTime);
-
 
             KeyboardState state = Keyboard.GetState();
             Keyboard.GetState();
 
             framecount++;
-
-
-
 
             if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
@@ -342,36 +280,34 @@ namespace BaseProject
                 framecount = startframe;
             }
 
-
-            // TODO: Add your drawing code here
             if (menuchoice == 1)
             {
-                menuStartSelectedState.Draw(spriteBatch, texture, texture3, texture4, font);
+                menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
             }
 
             if (menuchoice == 2)
             {
-                menuCreditsSelectedState.Draw(spriteBatch, texture, texture2, texture5, font);
+                menuCreditsSelectedState.Draw(spriteBatch, HomeScreen, MenuStartGame, MenuCreditsSelected, font);
             }
 
             if (menuchoice == 3)
             {
-                menuCreditsState.Draw(spriteBatch, texture6, texture8, font);
+                menuCreditsState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
             }
 
             if (menuchoice == 4)
             {
-                newGameState.Draw(spriteBatch, texture9, texture11, texture12, texture7);
+                newGameState.Draw(spriteBatch, SecondStart, MenuNewGameSelected, MenuContinue, MenuBack);
             }
 
             if (menuchoice == 5)
             {
-                continueState.Draw(spriteBatch, texture9, texture10, texture13, texture7);
+                continueState.Draw(spriteBatch, SecondStart, MenuNewGame, MenuContinueSelected, MenuBack);
             }
 
             if (menuchoice == 6)
             {
-                backState.Draw(spriteBatch, texture9, texture10, texture12, texture8);
+                backState.Draw(spriteBatch, SecondStart, MenuNewGame, MenuContinue, MenuBackSelected);
             }
 
             if (menuchoice == 7)
@@ -390,7 +326,13 @@ namespace BaseProject
             if (menuchoice == 8)
             {
                 jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
-                //jogonLevelPlayingState.Draw(_spriteBatch);
+            }
+
+            if (menuchoice == 9)
+            {
+                safeZone2.SafeZone(TileSz2, spriteBatch);
+                safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
+                safeZone2.MovingPlatForm(TileSz3, spriteBatch);
             }
         }
     }

@@ -183,6 +183,18 @@
 /processorParam:TextureFormat=Color
 /build:healthBarEndL.png
 
+#begin healthBarEndL.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:healthBarEndL.png
+
 #begin healthBarMiddle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1239,6 +1251,18 @@
 /processorParam:TextureFormat=Color
 /build:Player.png
 
+#begin PlayerShadow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PlayerShadow.png
+
 #begin Rots.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1358,6 +1382,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SteenVert.png
+
+#begin TileSz2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TileSz2.png
+
+#begin TileSz3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TileSz3.png
 
 #begin Zand.png
 /importer:TextureImporter

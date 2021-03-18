@@ -7,7 +7,6 @@ namespace BaseProject
 {
     class SafeZone2 : Game
     {
-        
         //private SpriteBatch spriteBatch;
         //private List<Sprite> _sprites;
         public int height = 1080;
@@ -21,19 +20,15 @@ namespace BaseProject
         public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
-        //public Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel;
 
         public void NextLevel2()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.menuchoice == 7)
             {
                 Game1.menuchoice = 8;
-
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
             {
-
-
                 KeyCollected = false;
             }
         }
@@ -41,38 +36,24 @@ namespace BaseProject
         {
             for (int xTileSz2 = 0; xTileSz2 < width / TileSz2.Width * 3; xTileSz2++)
             {
-
-
                 this.TileSz2Pos.X = TileSz2.Width * xTileSz2 / 4;
                 this.TileSz2Pos.Y = TileSz2.Height * 3;
-                //this.TileSz2.Y = TileSz2.Height * 3;
 
                 spriteBatch.Draw(TileSz2, TileSz2Pos, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
-
-
             }
         }
         
 
         public void SafeZone(Texture2D TileSz2, SpriteBatch spriteBatch)
         {
-
-            //GraphicsDevice.Clear(Color.BlueViolet);
             for (int xTileSz2 = 0; xTileSz2 < width  / TileSz2.Width ; xTileSz2++)
             {
                 for (int yTileSz2 = 0; yTileSz2 < height / TileSz2.Height +20; yTileSz2++)
                 {
-
-
-
-
                     this.TileSz2Pos.X = TileSz2.Width * xTileSz2;
                     this.TileSz2Pos.Y = TileSz2.Height * yTileSz2 * 7.8f ;
-
-                    //spriteBatch.Draw(TileSz2, this.TileSz2Pos, null, Color.White, 0f, Vector2.Zero, 0.99f, SpriteEffects.None, 0f);
+                    
                     spriteBatch.Draw(TileSz2, TileSz2Pos, Color.White);
-
-
                 }
             }
         }
@@ -95,13 +76,5 @@ namespace BaseProject
                 }
             }
         }
-            
-        
-        private void MovePlatForm()
-        {
-            
-             
-        }
     }
-
 }

@@ -53,15 +53,46 @@ namespace BaseProject
         private void Move()
         {
             if (Keyboard.GetState().IsKeyDown(Input.Left))
+            {
                 Velocity.X = -Speed;
+                if (ActionJump.playerOnGround == false)
+                {
+                    ActionJump.jumpLocation.X -= Speed;
+                }
+            }
             else if (Keyboard.GetState().IsKeyDown(Input.Right))
+            {
                 Velocity.X = Speed;
+                if (ActionJump.playerOnGround == false)
+                {
+                    ActionJump.jumpLocation.X += Speed;
+                }
+            }
 
             if (Keyboard.GetState().IsKeyDown(Input.Up))
+            {
                 Velocity.Y = -Speed;
+                if (ActionJump.playerOnGround == false)
+                {
+                    ActionJump.jumpLocation.Y -= Speed;
+                }
+            }
             else if (Keyboard.GetState().IsKeyDown(Input.Down))
+            {
                 Velocity.Y = Speed;
+                if (ActionJump.playerOnGround == false)
+                {
+                    ActionJump.jumpLocation.Y += Speed;
+                }
+            }
         }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            spriteBatch.Begin();
+            spriteBatch.Draw(Game1.PlayerShadow, new Vector2(ActionJump.jumpLocation.X + _texture.Width / 2 - Game1.PlayerShadow.Width / 2, ActionJump.jumpLocation.Y + _texture.Height - Game1.PlayerShadow.Height / 2), new Color(color, 100));
+            spriteBatch.End();
+        }
     }
 }
