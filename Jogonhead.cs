@@ -61,7 +61,7 @@ namespace BaseProject
 
             if (chargingdelay <= 0)
             {
-                //Charge();
+                Charge();
             }
         }
 
