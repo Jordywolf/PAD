@@ -487,8 +487,8 @@ Matrix.CreateScale(0.45f));
             if (menuchoice == 7)
             {
                 spriteBatch.Begin();
-                safeZone2.MovingPlatForm(TileSz3, spriteBatch);
-                safeZone2.SafeZone(TileSz2, spriteBatch);
+                safeZone2.MovingPlatForm(TileSz3, FonteinTexture, spriteBatch);
+                safeZone2.SafeZone(TileSz2, Deur, spriteBatch);
               //  safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
                 //safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
                 //safeZone.SafeZoneStone(SteenTile, spriteBatch);
