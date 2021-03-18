@@ -7,16 +7,17 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class ActionHandeler // action handler class
+    public class ActionHandeler // action handler class
     {
         int actionId = 1;
-        ActionJump Jump = new ActionJump();
+        public ActionJump Jump = new ActionJump();
         bool keyPressed;
 
         public void Update()
         {
             if (actionId == 1) // actions die maar 1 keer moeten gebeuren als je op spatie drukt
             {
+                Jump.Update();
                 if (keyPressed == false)
                 {
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Space))
