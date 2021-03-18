@@ -486,15 +486,15 @@ Matrix.CreateScale(0.45f));
 
             if (menuchoice == 7)
             {
-                
+                spriteBatch.Begin();
                 safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
                 safeZone.SafeZoneStone(SteenTile, spriteBatch);
                 safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
                 safeZone.NextLevel1();
                 spriteBatch.End();
-                //foreach (var sprite in _sprites)
-                   // sprite.Draw(spriteBatch);
-                //player.Draw(spriteBatch);
+                foreach (var sprite in _sprites)
+                    sprite.Draw(spriteBatch);
+                player.Draw(spriteBatch);
 
 
             }
