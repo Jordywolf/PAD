@@ -27,12 +27,12 @@ namespace BaseProject.GameStates
         List<JogonPart> JogonDragon = new List<JogonPart>();
         private int Segments = 15;
 
-        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeTexture, Player player) : base()
+        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Player player) : base()
         {
             mapConstruction = new MapConstruction(aPillarTile);
             this.player = player;
 
-            bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeTexture, HBmiddleTexture, HBhealthTexture);
+            bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
 
             Jogon = new Jogonhead(new Vector2(100, 100), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, null, null);
             parentSegment = Jogon;

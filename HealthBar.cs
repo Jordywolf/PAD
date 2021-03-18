@@ -10,17 +10,19 @@ namespace BaseProject
     class HealthBar : GameObject
     {
         public Vector2 HBposition;
-        public Texture2D HBbeginTexture;
+        public Texture2D HBbeginRTexture;
+        public Texture2D HBbeginLTexture;
         public Texture2D HBmiddleTexture;
         public Texture2D HBhealthTexture;
 
         public int MaxHealthLength = 100;
         public int MaxBarLength;
 
-        public HealthBar(Vector2 position, Texture2D HBbeginTexture, Texture2D HBmiddleTexture, Texture2D HBhealthTexture) : base(position, new Vector2(0, 0), 0.0f, 1, HBbeginTexture)
+        public HealthBar(Vector2 position, Texture2D HBbeginRTexture, Texture2D HBbeginLTexture, Texture2D HBmiddleTexture, Texture2D HBhealthTexture) : base(position, new Vector2(0, 0), 0.0f, 1, HBbeginRTexture)
         {
             this.HBposition = position;
-            this.HBbeginTexture = HBbeginTexture;
+            this.HBbeginRTexture = HBbeginRTexture;
+            this.HBbeginLTexture = HBbeginLTexture;
             this.HBmiddleTexture = HBmiddleTexture;
             this.HBhealthTexture = HBhealthTexture;
             MaxBarLength = MaxHealthLength;
@@ -42,11 +44,11 @@ namespace BaseProject
                 if (iBar <= 0)
                 {
 
-                    myspriteBatch.Draw(HBbeginTexture, new Vector2(HBposition.X + HBbeginTexture.Width, HBposition.Y + HBbeginTexture.Height), null, Color.White, MathF.PI, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                    myspriteBatch.Draw(HBbeginLTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
                 }
                 else if (iBar >= MaxBarLength-1)
                 {
-                    myspriteBatch.Draw(HBbeginTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                    myspriteBatch.Draw(HBbeginRTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
                 }
                 else
                 {
