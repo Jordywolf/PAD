@@ -27,6 +27,7 @@ namespace BaseProject
             {
                 target = Parent.position;
                 _followSpeed = Parent._followSpeed - 0.1f;
+                _followRange = 10;
             }
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
