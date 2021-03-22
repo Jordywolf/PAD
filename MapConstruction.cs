@@ -107,6 +107,14 @@ public class MapConstruction
         Pconstruct = true;
     }
 
+    public void PlayerCollision(Vector2 playerPos, Texture2D playerTextue)
+    {
+        if (playerPos.Y <= playerTextue.Height) { playerPos.Y = playerTextue.Height; }
+        if (playerPos.Y + playerTextue.Height >= height) { playerPos.Y = height - playerTextue.Height; }
+        if (playerPos.X <= playerTextue.Width) { playerPos.X = playerTextue.Width; }
+        if (playerPos.X + playerTextue.Width >= width) { playerPos.X = width - playerTextue.Width; }
+    }
+
     public bool Collision(Vector2 objPos, Rectangle objRectangle)
     {
         return (objPos.Y <= objRectangle.Height || objPos.Y + objRectangle.Height >= height

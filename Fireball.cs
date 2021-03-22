@@ -13,8 +13,13 @@ namespace BaseProject
         Vector2 TargetPosition;
         private float Timer;
         private float Speed = 300;
-        public Fireball(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture) : base(position, velocity, rotation, scale, texture)
+
+        Player player;
+
+        public Fireball(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, Player player) : base(position, velocity, rotation, scale, texture)
         {
+            this.player = player;
+
             Reset();
         }
 
@@ -22,7 +27,7 @@ namespace BaseProject
         {
             Timer = 0;
             SpawnPosition = position;
-            TargetPosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y); // hier komt de target te staat wss dus de player
+            TargetPosition = this.player.Position; // hier komt de target te staat wss dus de player
             totalangle = (float)Math.Atan2(TargetPosition.Y - SpawnPosition.Y, TargetPosition.X - SpawnPosition.X);
         }
 

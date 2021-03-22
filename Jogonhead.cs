@@ -22,13 +22,19 @@ namespace BaseProject
         private Vector2 fireballOffset = new Vector2(20, 10);
         private SoundEffect chargeSound;
 
+        private int fireTimer;
+        private int fireTimerMax = 30;
 
         public List<JogonPart> Body = new List<JogonPart>();
         public List<Fireball> fireballs = new List<Fireball>();
         public Texture2D fireBallTexture;
         bool keyPressed;
-        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Sprite target, JogonPart parent, SoundEffect aSound) : base(position, velocity, rotation, scale, texture, followDist, parent)
+
+        Player player;
+
+        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Player target, JogonPart parent, SoundEffect aSound) : base(position, velocity, rotation, scale, texture, followDist, parent)
         {
+            this.player = target;
             segment = false;
             this.fireBallTexture = fireballTexture;
             this.target = new Vector2(1280, 320);
@@ -40,14 +46,12 @@ namespace BaseProject
         {
             targetTime++;
             this.target = new Vector2((float)Math.Cos(targetTime * targetSpeed) * targetRadius + origin.X, (float)Math.Sin(targetTime * targetSpeed) * targetRadius + origin.Y);
-            if (keyPressed == false)
+            if (fireTimer >= fireTimerMax)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                {
-                    keyPressed = true;
-                    Fireball();
-                }
-            }
+                Fireball();
+                fireTimer = 0;
+            } else { fireTimer++; }
+
             if (Keyboard.GetState().IsKeyUp(Keys.Space))
             {
                 keyPressed = false;
@@ -81,7 +85,7 @@ namespace BaseProject
                 if (chargeInc <= MathF.PI * 2 + chargeOffset)
                 {
                     chargeInc += chargeTime;
-                    _followSpeed += (-MathF.Cos(chargeInc)) * (chargeTime * 15f) ;
+                    _followSpeed += (-MathF.Cos(chargeInc)) * (chargeTime * 15f);
                 }
                 else { chargeInc = chargeOffset; chargingdelay = 2000; chargeTime = 0.1f; _followSpeed = 50; charging = false; }
             }
@@ -97,7 +101,7 @@ namespace BaseProject
             fireballOffset = -new Vector2(-this.texture.Width / 2, this.texture.Height / 2);
             fireballOffset.Normalize();
             //fireball zooi
-            fireballs.Add(new Fireball(this.position + fireballOffset , Vector2.Zero, 0, 1, fireBallTexture));
+            fireballs.Add(new Fireball(this.position + fireballOffset, Vector2.Zero, 0, 1, fireBallTexture, player));
             for (int i = 0; i < fireballs.Count; i++)
             {
                 if (fireballs[i].IsObjectOffScreen(fireballs[i]))
