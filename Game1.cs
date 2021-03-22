@@ -84,6 +84,7 @@ namespace BaseProject
 
         public static Player player;
         public static List<Sprite> _sprites;
+        public static List<Sprite> noSprite;
 
         public Boolean KeyCollected;
         public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
@@ -260,11 +261,16 @@ namespace BaseProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (menuchoice == 7 || menuchoice == 8)
+            if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)
-                    sprite.Update(gameTime, _sprites);
+                sprite.Update(gameTime, _sprites);
                 player.Update(gameTime, _sprites);
+                actionHandeler.Update();
+            }
+            if (menuchoice == 8)
+            {
+                player.Update(gameTime, noSprite);
                 actionHandeler.Update();
             }
 
