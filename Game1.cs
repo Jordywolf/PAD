@@ -127,7 +127,7 @@ namespace BaseProject
             Rots = Content.Load<Texture2D>("Rots");
             Deur = Content.Load<Texture2D>("Deur");
             //player
-            Player = Content.Load<Texture2D>("Player");
+            Player = Content.Load<Texture2D>("De_Rakker");
             PlayerShadow = content.Load<Texture2D>("PlayerShadow");
             //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
@@ -186,8 +186,9 @@ namespace BaseProject
                     Down = Keys.Down,
                 },
                 Position = PlayerPosition,
-                color = Color.Blue,
+                color = Color.White,
                 Speed = 15f,
+                
             };
 
             _sprites = new List<Sprite>()
@@ -314,6 +315,7 @@ namespace BaseProject
                 MenuBMI.Stop();
                 menuchoice = 7;
                 framecount = startframe;
+                
             }
 
             if (menuchoice == 1)
@@ -362,6 +364,9 @@ namespace BaseProject
             if (menuchoice == 8)
             {
                 jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
+                player.Draw(spriteBatch);
+
+
             }
 
             if (menuchoice == 9)
