@@ -28,6 +28,7 @@ namespace BaseProject
             {
                 Game1.menuchoice = 8;
                 GameEnvironment.SwitchTo(7);
+
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
             {
