@@ -62,7 +62,7 @@ namespace BaseProject.GameStates
             if (mapConstruction.Collision(Jogon.position, Jogon.texture) && !WallCollided)
             {
                 Jogon.origin = new Vector2(rnd.Next(1280), rnd.Next(640));
-                bossHealthBar.MaxHealthLength -= 20;
+                bossHealthBar.MaxHealthLength -= 0.2f;
                 WallCollided = true;
             }
             else
