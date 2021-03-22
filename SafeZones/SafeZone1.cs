@@ -11,7 +11,7 @@ namespace BaseProject
     {
         //private SpriteBatch spriteBatch;
         //private List<Sprite> _sprites;
-        public int height = 1080;
+        public int height = 400;
         public int width = 1920;
         public Boolean KeyCollected = true;
         public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
@@ -36,10 +36,10 @@ namespace BaseProject
         }
         public void SafeZoneStone(Texture2D SteenTile, SpriteBatch spriteBatch)
         {
-            for (int xSteenTile = 0; xSteenTile < width / SteenTile.Width * 3; xSteenTile++)
+            for (int xSteenTile = 0; xSteenTile < width / SteenTile.Width * 2; xSteenTile++)
             {
                 this.SteenPosition.X = SteenTile.Width * xSteenTile / 2;
-                this.SteenPosition.Y = SteenTile.Height * 3;
+                this.SteenPosition.Y = SteenTile.Height * 2;
 
                 spriteBatch.Draw(SteenTile, SteenPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
             }
@@ -48,8 +48,8 @@ namespace BaseProject
         {
             for (int ySteenVert = 0; ySteenVert < height; ySteenVert++)
             {
-                this.SteenVertPosition.Y = SteenVert.Height * ySteenVert / 3;
-                this.SteenVertPosition.X = width / 2;
+                this.SteenVertPosition.Y = SteenVert.Height * ySteenVert / 2;
+                this.SteenVertPosition.X = width / 3;
 
                 spriteBatch.Draw(SteenVert, SteenVertPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
             }
@@ -68,7 +68,7 @@ namespace BaseProject
                     spriteBatch.Draw(ZandTile, position, Color.White);
                     if (KeyCollected == true)
                     {
-                        spriteBatch.Draw(Sleutel, new Vector2(1590, 200), Color.White);
+                        spriteBatch.Draw(Sleutel, new Vector2(990, 200), Color.White);
                     }
                 }
             }

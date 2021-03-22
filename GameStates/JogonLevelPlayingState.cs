@@ -110,6 +110,7 @@ namespace BaseProject.GameStates
             {
                 if (deathTimer >= 500)
                 {
+                    GameEnvironment.SwitchTo(8);
                     Game1.menuchoice = 9;
                 }
                 else

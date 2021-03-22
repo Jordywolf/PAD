@@ -43,7 +43,7 @@ namespace BaseProject
                 this.Rectangle.Left < sprite.Rectangle.Left &&
                 this.Rectangle.Bottom > sprite.Rectangle.Top &&
                 this.Rectangle.Top < sprite.Rectangle.Bottom;
-            Game1.menuchoice = 8;
+            Game1.menuchoice = 7;
             this.Position.X = +Direction.X;
             
         }
@@ -53,7 +53,7 @@ namespace BaseProject
                 this.Rectangle.Right > sprite.Rectangle.Right &&
                 this.Rectangle.Bottom > sprite.Rectangle.Top &&
                 this.Rectangle.Top < sprite.Rectangle.Bottom;
-            Game1.menuchoice = 8;
+            Game1.menuchoice = 7;
             this.Position.X = -Direction.X;
             
 
@@ -64,7 +64,7 @@ namespace BaseProject
                 this.Rectangle.Top < sprite.Rectangle.Top &&
                 this.Rectangle.Right > sprite.Rectangle.Left &&
                 this.Rectangle.Left < sprite.Rectangle.Right;
-            Game1.menuchoice = 8;
+            Game1.menuchoice = 7;
             this.Position.Y = +Direction.X;
             
 
@@ -75,7 +75,7 @@ namespace BaseProject
                 this.Rectangle.Bottom > sprite.Rectangle.Bottom &&
                 this.Rectangle.Right > sprite.Rectangle.Left &&
                 this.Rectangle.Left < sprite.Rectangle.Right;
-            Game1.menuchoice = 8;
+            Game1.menuchoice = 7;
             this.Position.Y = -Direction.X;
             
         }
