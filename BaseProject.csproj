@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -10,6 +10,15 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Content\obj\**" />
+    <Compile Remove="Content\Test map\**" />
+    <EmbeddedResource Remove="Content\obj\**" />
+    <EmbeddedResource Remove="Content\Test map\**" />
+    <None Remove="Content\obj\**" />
+    <None Remove="Content\Test map\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Content\Zand.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

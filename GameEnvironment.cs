@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 class GameEnvironment : Game
 {
-    protected GraphicsDeviceManager graphics;
-    protected SpriteBatch spriteBatch;
+    public GraphicsDeviceManager graphics;
+    public SpriteBatch spriteBatch;
     static protected ContentManager content;
     protected static Point screen;
     protected static Random random;
 
-    static protected List<GameState> gameStateList;
+    static public List<GameState> gameStateList = new List<GameState>();
     static protected GameState currentGameState;
 
     public static KeyboardState KeyboardState
