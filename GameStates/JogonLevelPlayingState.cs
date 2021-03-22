@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace BaseProject.GameStates
 {
@@ -22,20 +23,25 @@ namespace BaseProject.GameStates
         private Player player;
         private Vector2 pillarPositionCollision;
         private int deathTimer;
+        private SoundEffectInstance fightSound;
 
         Random rnd = new Random();
 
         List<JogonPart> JogonDragon = new List<JogonPart>();
         private int Segments = 15;
 
-        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Player player) : base()
+        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, SoundEffect aSound, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Player player, SoundEffect fightSound) : base()
         {
             mapConstruction = new MapConstruction(aPillarTile);
             this.player = player;
+            this.fightSound = fightSound.CreateInstance();
+            
+
+
 
             bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
 
-            Jogon = new Jogonhead(new Vector2(100, 100), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, null, null);
+            Jogon = new Jogonhead(new Vector2(100, 100), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, null, null, aSound);
             parentSegment = Jogon;
             for (int i = 0; i < Segments; i++)
             {
@@ -57,6 +63,11 @@ namespace BaseProject.GameStates
         }
         public override void Update(GameTime gameTime)
         {
+            if (!fightSound.IsLooped)
+            {
+                fightSound.IsLooped = true;
+                fightSound.Play();
+            }
             base.Update(gameTime);
 
             if (mapConstruction.Collision(Jogon.position, Jogon.texture) && !WallCollided)
@@ -68,7 +79,6 @@ namespace BaseProject.GameStates
             else
             {
                 WallCollided = false;
-                Jogon._followSpeed = 100;
             }
 
             for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)

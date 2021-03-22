@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,6 +41,7 @@ namespace BaseProject
 
         public Vector2 playerPos;
 
+        //Textures
         public Texture2D jogonHeadTexture;
         public Texture2D jogonHSTexture;
         public Texture2D jogonBodyTexture;
@@ -61,6 +64,13 @@ namespace BaseProject
         public static int menuchoice;
         public static int framecount;
         public static int startframe;
+
+        // Sounds
+        public SoundEffect jogonSound;
+        public SoundEffect jogonFightSound;
+        public SoundEffect MenuBM;
+        public SoundEffect ButtonSound;
+        public SoundEffectInstance MenuBMI;
 
         public Texture2D HBedgeLTexture;
         public Texture2D HBedgeRTexture;
@@ -102,6 +112,7 @@ namespace BaseProject
         {
             ApplyResolutionSettings();
             base.LoadContent();
+            //Safezone 1
             Pilaar = Content.Load<Texture2D>("Pilaar");
             FonteinTexture = Content.Load<Texture2D>("Fontein");
             ZandTile = Content.Load<Texture2D>("ZandTile");
@@ -110,11 +121,55 @@ namespace BaseProject
             Boom = Content.Load<Texture2D>("Boom");
             Rots = Content.Load<Texture2D>("Rots");
             Deur = Content.Load<Texture2D>("Deur");
+            //player
             Player = Content.Load<Texture2D>("Player");
             PlayerShadow = content.Load<Texture2D>("PlayerShadow");
+            //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
             TileSz3 = Content.Load<Texture2D>("TileSz3");
+            //Jogon
+            jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
+            jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
+            jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
+            jogonSound = content.Load<SoundEffect>("JogonRoar");
+            jogonFightSound = content.Load<SoundEffect>("JogonBattelMusic");
+            //JogonLevel
+            PillarV2_Torch = Content.Load<Texture2D>("PAD_Jg_PillarV2_Torch");
+            Floortile = Content.Load<Texture2D>("PAD_Jg_Floortile1");
+            WalltileStr = Content.Load<Texture2D>("PAD_Jg_walltileStraight");
+            WalltileCrnL = Content.Load<Texture2D>("PAD_Jg_walltileCornerL");
+            WalltileCrnR = Content.Load<Texture2D>("PAD_Jg_walltileCornerR");
+            WalltileStrD = Content.Load<Texture2D>("PAD_Jg_walltileStraightD");
+            WalltileCrnDL = Content.Load<Texture2D>("PAD_Jg_walltileCornerDL");
+            WalltileCrnDR = Content.Load<Texture2D>("PAD_Jg_walltileCornerDR");
+            WalltileL = Content.Load<Texture2D>("PAD_Jg_walltileL");
+            WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
+            PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
+            fireBallTexture = Content.Load<Texture2D>("Fireball");
+            //Home en menus
+            HomeScreen = Content.Load<Texture2D>("HomeScreen");
+            MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
+            MenuCredits = Content.Load<Texture2D>("MenuCredits");
+            MenuStartGameSelected = Content.Load<Texture2D>("MenuStartGameSelected");
+            MenuCreditsSelected = Content.Load<Texture2D>("MenuCreditsSelected");
+            CreditScreen = Content.Load<Texture2D>("CreditScreen");
+            MenuBack = Content.Load<Texture2D>("MenuBack");
+            MenuBackSelected = Content.Load<Texture2D>("MenuBackSelected");
+            SecondStart = Content.Load<Texture2D>("SecondStart");
+            MenuNewGame = Content.Load<Texture2D>("MenuNewGame");
+            MenuNewGameSelected = Content.Load<Texture2D>("MenuNewGameSelected");
+            MenuContinue = Content.Load<Texture2D>("MenuContinue");
+            MenuContinueSelected = Content.Load<Texture2D>("MenuContinueSelected");
+            HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
+            HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
+            HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
+            HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
+            MenuBM = content.Load<SoundEffect>("BeginBM");
+            MenuBMI = MenuBM.CreateInstance();
+            ButtonSound = content.Load<SoundEffect>("ButtonClick");
+
+            font = Content.Load<SpriteFont>("Credit");
             actionHandeler = new ActionHandeler();
             player = new Player(Player, PlayerPosition)
             {
@@ -154,40 +209,7 @@ namespace BaseProject
                 }
             };
 
-            jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
-            jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
-            jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
-            PillarV2_Torch = Content.Load<Texture2D>("PAD_Jg_PillarV2_Torch");
-            Floortile = Content.Load<Texture2D>("PAD_Jg_Floortile1");
-            WalltileStr = Content.Load<Texture2D>("PAD_Jg_walltileStraight");
-            WalltileCrnL = Content.Load<Texture2D>("PAD_Jg_walltileCornerL");
-            WalltileCrnR = Content.Load<Texture2D>("PAD_Jg_walltileCornerR");
-            WalltileStrD = Content.Load<Texture2D>("PAD_Jg_walltileStraightD");
-            WalltileCrnDL = Content.Load<Texture2D>("PAD_Jg_walltileCornerDL");
-            WalltileCrnDR = Content.Load<Texture2D>("PAD_Jg_walltileCornerDR");
-            WalltileL = Content.Load<Texture2D>("PAD_Jg_walltileL");
-            WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
-            PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
-            fireBallTexture = Content.Load<Texture2D>("Fireball");
-            HomeScreen = Content.Load<Texture2D>("HomeScreen");
-            MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
-            MenuCredits = Content.Load<Texture2D>("MenuCredits");
-            MenuStartGameSelected = Content.Load<Texture2D>("MenuStartGameSelected");
-            MenuCreditsSelected = Content.Load<Texture2D>("MenuCreditsSelected");
-            CreditScreen = Content.Load<Texture2D>("CreditScreen");
-            MenuBack = Content.Load<Texture2D>("MenuBack");
-            MenuBackSelected = Content.Load<Texture2D>("MenuBackSelected");
-            SecondStart = Content.Load<Texture2D>("SecondStart");
-            MenuNewGame = Content.Load<Texture2D>("MenuNewGame");
-            MenuNewGameSelected = Content.Load<Texture2D>("MenuNewGameSelected");
-            MenuContinue = Content.Load<Texture2D>("MenuContinue");
-            MenuContinueSelected = Content.Load<Texture2D>("MenuContinueSelected");
-            HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
-            HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
-            HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
-            HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
-
-            font = Content.Load<SpriteFont>("Credit");
+            MenuBMI.Play();
 
             menuchoice = 1;
             framecount = 0;
@@ -215,7 +237,7 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, player);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture,jogonSound , HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, player, jogonFightSound);
             GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
 
             safeZoneState2 = new GameStates.SafeZoneState();
@@ -252,18 +274,21 @@ namespace BaseProject
 
             if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
+                ButtonSound.Play();
                 menuchoice = 3;
                 framecount = startframe;
             }
 
             if (menuchoice == 1 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
+                ButtonSound.Play();
                 menuchoice = 4;
                 framecount = startframe;
             }
 
             if (menuchoice == 3 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
             {
+                ButtonSound.Play();
                 menuchoice = 2;
                 framecount = startframe;
             }
@@ -276,6 +301,8 @@ namespace BaseProject
 
             if (menuchoice == 4 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
             {
+                ButtonSound.Play();
+                MenuBMI.Stop();
                 menuchoice = 7;
                 framecount = startframe;
             }
