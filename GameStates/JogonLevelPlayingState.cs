@@ -16,6 +16,8 @@ namespace BaseProject.GameStates
         private JogonPart jogonBodyPart;
         private JogonPart parentSegment;
         public HealthBar bossHealthBar;
+        private Decoy playerTest;
+
         private bool WallCollided;
         private bool PillarCollided;
         private int levelHeight, levelWidth;
@@ -28,10 +30,11 @@ namespace BaseProject.GameStates
         List<JogonPart> JogonDragon = new List<JogonPart>();
         private int Segments = 15;
 
-        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Player player) : base()
+        public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, Texture2D HBmiddleTexture ,Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture) : base()
         {
+            playerTest = new Decoy(playerTexture);
+
             mapConstruction = new MapConstruction(aPillarTile);
-            this.player = player;
 
             bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
 
@@ -51,18 +54,22 @@ namespace BaseProject.GameStates
         {
             levelHeight = height;
             levelWidth = width;
-            mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, levelWidth, levelHeight);
-            mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(levelHeight / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(levelWidth / Floortile.Width) - 1) * Floortile.Width, 0), levelWidth, levelHeight, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR);
-            mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision);
+            mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, levelWidth, levelHeight, Color.White);
+            mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(levelHeight / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(levelWidth / Floortile.Width) - 1) * Floortile.Width, 0), levelWidth, levelHeight, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, Color.White);
+            mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
         }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            playerTest.update();
+
+            Jogon.origin = playerTest.position;
 
             if (mapConstruction.Collision(Jogon.position, Jogon.texture) && !WallCollided)
             {
                 Jogon.origin = new Vector2(rnd.Next(1280), rnd.Next(640));
-                bossHealthBar.MaxHealthLength -= 20;
+                bossHealthBar.MaxHealthLength -= 100;
                 WallCollided = true;
             }
             else
@@ -110,7 +117,8 @@ namespace BaseProject.GameStates
             {
                 if (deathTimer >= 500)
                 {
-                    Game1.menuchoice = 9;
+                    GameEnvironment.SwitchTo(9);
+                    Game1.menuchoice = 10;
                 }
                 else
                 {
@@ -138,6 +146,7 @@ namespace BaseProject.GameStates
             Jogon.Draw(spriteBatch);
 
             bossHealthBar.Draw(spriteBatch);
+            playerTest.Draw(spriteBatch);
         }
     }
 }

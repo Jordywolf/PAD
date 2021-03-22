@@ -32,6 +32,7 @@ namespace BaseProject
         GameStates.SafeZoneState safeZoneState;
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
+        GameStates.SelinLevelPlayingState selinLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public int width = 1280;
@@ -66,6 +67,10 @@ namespace BaseProject
         public Texture2D HBedgeRTexture;
         public Texture2D HBmiddleTexture;
         public Texture2D HBhealthTexture;
+
+        public Texture2D Sn_grassTexture;
+        public Texture2D Sn_stoneTexture;
+        public Texture2D Sn_obstacleTexture;
 
         public static Player player;
         public static List<Sprite> _sprites;
@@ -186,6 +191,10 @@ namespace BaseProject
             HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
             HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
+            Sn_grassTexture = Content.Load<Texture2D>("PAD_Jg_Floortile1");
+            Sn_stoneTexture = Content.Load<Texture2D>("PAD_Sn_stone");
+            Sn_obstacleTexture = Content.Load<Texture2D>("PAD_Sn_obstacle");
+
 
             font = Content.Load<SpriteFont>("Credit");
 
@@ -215,11 +224,14 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, player);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player);
             GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
 
             safeZoneState2 = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState2);
+
+            selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
+            GameEnvironment.gameStateList.Add(selinLevelPlayingState);
         }
 
 
@@ -330,9 +342,18 @@ namespace BaseProject
 
             if (menuchoice == 9)
             {
+                spriteBatch.Begin();
                 safeZone2.SafeZone(TileSz2, spriteBatch);
                 safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
                 safeZone2.MovingPlatForm(TileSz3, spriteBatch);
+                spriteBatch.End();
+            }
+
+            if (menuchoice == 10)
+            {
+                spriteBatch.Begin();
+                selinLevelPlayingState.Draw(spriteBatch);
+                spriteBatch.End();
             }
         }
     }

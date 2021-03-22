@@ -34,7 +34,7 @@ namespace BaseProject
             {
                 HBposition.X = 640 - (MaxHealthLength * HBhealthTexture.Width / 2) + HBmiddleTexture.Width * iLength;
 
-                myspriteBatch.Draw(HBhealthTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                myspriteBatch.Draw(HBhealthTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
             }
 
             for (int iBar = 0; iBar < MaxBarLength; iBar++)
@@ -44,15 +44,15 @@ namespace BaseProject
                 if (iBar <= 0)
                 {
 
-                    myspriteBatch.Draw(HBbeginLTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                    myspriteBatch.Draw(HBbeginLTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
                 }
                 else if (iBar >= MaxBarLength-1)
                 {
-                    myspriteBatch.Draw(HBbeginRTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                    myspriteBatch.Draw(HBbeginRTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
                 }
                 else
                 {
-                    myspriteBatch.Draw(HBmiddleTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
+                    myspriteBatch.Draw(HBmiddleTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
                 }
             }
         }

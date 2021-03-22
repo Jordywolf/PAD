@@ -8,7 +8,9 @@ using Microsoft.Xna.Framework.Input;
 public class Pillar
 {
     public Vector2 position;
-    private Texture2D myTexture;
+    public Texture2D myTexture;
+
+    public int Pillartimer;
 
     public Pillar(Vector2 pillarPosition, Texture2D pillarTexture)
     {
@@ -28,9 +30,14 @@ public class Pillar
             && playerPosition.Y + playerRectangle.Height > pillarPosition.Y && playerPosition.Y < pillarPosition.Y + myTexture.Height);
     }
 
-    public void Draw(SpriteBatch spriteBatch, Vector2 pillarPosition)
+    public void Update()
     {
-        spriteBatch.Draw(myTexture, pillarPosition, Color.White);
+
+    }
+
+    public void Draw(SpriteBatch spriteBatch, Vector2 pillarPosition, Color color)
+    {
+        spriteBatch.Draw(myTexture, pillarPosition, color);
     }
 }
 
