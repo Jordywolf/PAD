@@ -71,7 +71,9 @@ namespace BaseProject
         public SoundEffect jogonFightSound;
         public SoundEffect MenuBM;
         public SoundEffect ButtonSound;
+        public SoundEffect SafeZoneMusic;
         public SoundEffectInstance MenuBMI;
+        public SoundEffectInstance SafeZoneMoezic;
 
         public Texture2D HBedgeLTexture;
         public Texture2D HBedgeRTexture;
@@ -173,7 +175,10 @@ namespace BaseProject
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
             MenuBM = content.Load<SoundEffect>("BeginBM");
             MenuBMI = MenuBM.CreateInstance();
+        
             ButtonSound = content.Load<SoundEffect>("ButtonClick");
+            SafeZoneMusic = Content.Load<SoundEffect>("MenuBackgroundSong");
+            SafeZoneMoezic = SafeZoneMusic.CreateInstance();
 
             font = Content.Load<SpriteFont>("Credit");
             actionHandeler = new ActionHandeler();
@@ -324,12 +329,15 @@ namespace BaseProject
                 MenuBMI.Stop();
                 menuchoice = 7;
                 framecount = startframe;
-                
+                SafeZoneMoezic.Play();
+
             }
 
             if (menuchoice == 1)
             {
                 menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
+                
+                
             }
 
             if (menuchoice == 2)
@@ -374,7 +382,7 @@ namespace BaseProject
             {
                 jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
                 player.Draw(spriteBatch);
-
+                SafeZoneMoezic.Stop();
 
             }
 
