@@ -192,6 +192,7 @@ namespace BaseProject
                 
             };
 
+            noSprite = new List<Sprite>();
             _sprites = new List<Sprite>()
             {
 
@@ -270,6 +271,8 @@ namespace BaseProject
             }
             if (menuchoice == 8)
             {
+                foreach (var sprite in noSprite)
+                sprite.Update(gameTime, noSprite);
                 player.Update(gameTime, noSprite);
                 actionHandeler.Update();
             }
