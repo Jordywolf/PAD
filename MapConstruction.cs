@@ -30,6 +30,14 @@ public class MapConstruction
     public Texture2D WalltileCrnDL;
     public Texture2D WalltileCrnDR;
 
+    private bool Wconstruct;
+    private bool Pconstruct;
+    private bool Fconstruct;
+
+    private Color Wcolor;
+    private Color Pcolor;
+    private Color Fcolor;
+
     private int width;
     private int height;
 
@@ -50,19 +58,23 @@ public class MapConstruction
         }
     }
 
-    public void FloorConstruction(Vector2 floorPosition, Texture2D floorTexture, int width, int height)
+    public void FloorConstruction(Vector2 floorPosition, Texture2D floorTexture, int width, int height, Color color)
     {
         this.floorTexture = floorTexture;
         this.floorPosition = floorPosition;
 
         this.width = width;
         this.height = height;
+
+        Fcolor = color;
+
+        Fconstruct = true;
     }
 
     public void WallConstruction(Vector2 wallPositionT, Vector2 wallPositionD, Vector2 wallPositionL, 
         Vector2 wallPositionR, int width, int height, Texture2D WalltileStr, 
         Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, 
-        Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR)
+        Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR, Color color)
     {
         this.wallPositionT = wallPositionT;
         this.wallPositionD = wallPositionD;
@@ -76,9 +88,13 @@ public class MapConstruction
         this.WalltileCrnR = WalltileCrnR;
         this.WalltileCrnDL = WalltileCrnDL;
         this.WalltileCrnDR = WalltileCrnDR;
+
+        Wcolor = color;
+
+        Wconstruct = true;
     }
 
-    public void PillarSetup(Texture2D pillarTile, int width, int height, Vector2 pillarPosition)
+    public void PillarSetup(Texture2D pillarTile, int width, int height, Vector2 pillarPosition, Color color)
     {
         this.pillarTile = pillarTile;
         this.pillarPosition = pillarPosition;
@@ -86,6 +102,17 @@ public class MapConstruction
         this.width = width;
         this.height = height;
 
+        Pcolor = color;
+
+        Pconstruct = true;
+    }
+
+    public void PlayerCollision(Vector2 playerPos, Texture2D playerTextue)
+    {
+        if (playerPos.Y <= playerTextue.Height) { playerPos.Y = playerTextue.Height; }
+        if (playerPos.Y + playerTextue.Height >= height) { playerPos.Y = height - playerTextue.Height; }
+        if (playerPos.X <= playerTextue.Width) { playerPos.X = playerTextue.Width; }
+        if (playerPos.X + playerTextue.Width >= width) { playerPos.X = width - playerTextue.Width; }
     }
 
     public bool Collision(Vector2 objPos, Rectangle objRectangle)
@@ -100,9 +127,8 @@ public class MapConstruction
             || objPos.X <= objTexture.Width || objPos.X + objTexture.Width >= width);
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void DrawFloor(SpriteBatch spriteBatch)
     {
-        //to build the floor
         for (int xMapTile = 0; xMapTile < width / floorTexture.Width; xMapTile++)
         {
             for (int yMapTile = 0; yMapTile < height / floorTexture.Height; yMapTile++)
@@ -111,12 +137,14 @@ public class MapConstruction
                 floorPosition.Y = floorTexture.Height * yMapTile;
 
                 //spriteBatch.Begin();
-                spriteBatch.Draw(floorTexture, floorPosition, Color.White);
+                spriteBatch.Draw(floorTexture, floorPosition, Fcolor);
                 //spriteBatch.End();
             }
         }
+    }
 
-        //to build the pillars
+    public void DrawPillars(SpriteBatch spriteBatch)
+    {
         for (int iPillarsX = 1; iPillarsX <= maxPillarsX; iPillarsX++)
         {
             for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
@@ -125,10 +153,13 @@ public class MapConstruction
                 pillarPosition.X = ((width / (maxPillarsX + 1)) * (iPillarsX)) - (pillarTile.Width / 2);
                 pillarPosition.Y = ((height / (maxPillarsY + 1)) * (iPillarsY)) - (pillarTile.Height / 2);
 
-                pillars[iPillarsX * iPillarsY].Draw(spriteBatch, pillarPosition);
+                pillars[iPillarsX * iPillarsY].Draw(spriteBatch, pillarPosition, Pcolor);
             }
         }
+    }
 
+    public void DrawWalls(SpriteBatch spriteBatch)
+    {
         for (int iWalltile = 0; iWalltile < width / WalltileStr.Width; iWalltile++)
         {
             wallPositionT.X = WalltileStr.Width * iWalltile;
@@ -140,25 +171,32 @@ public class MapConstruction
             //spriteBatch.Begin();
             if (iWalltile <= 0)
             {
-                spriteBatch.Draw(WalltileCrnL, wallPositionT, Color.White);
-                spriteBatch.Draw(WalltileCrnDL, wallPositionD, Color.White);
+                spriteBatch.Draw(WalltileCrnL, wallPositionT, Wcolor);
+                spriteBatch.Draw(WalltileCrnDL, wallPositionD, Wcolor);
             }
 
             else if (iWalltile >= (width / WalltileStr.Width) - 1)
             {
-                spriteBatch.Draw(WalltileCrnR, wallPositionT, Color.White);
-                spriteBatch.Draw(WalltileCrnDR, wallPositionD, Color.White);
+                spriteBatch.Draw(WalltileCrnR, wallPositionT, Wcolor);
+                spriteBatch.Draw(WalltileCrnDR, wallPositionD, Wcolor);
             }
 
             else
             {
-                spriteBatch.Draw(WalltileStr, wallPositionT, Color.White);
-                spriteBatch.Draw(WalltileStrD, wallPositionD, Color.White);
-                spriteBatch.Draw(WalltileR, wallPositionR, Color.White);
-                spriteBatch.Draw(WalltileL, wallPositionL, Color.White);
+                spriteBatch.Draw(WalltileStr, wallPositionT, Wcolor);
+                spriteBatch.Draw(WalltileStrD, wallPositionD, Wcolor);
+                spriteBatch.Draw(WalltileR, wallPositionR, Wcolor);
+                spriteBatch.Draw(WalltileL, wallPositionL, Wcolor);
             }
             //spriteBatch.End();
         }
+    }
+
+    public void Draw(SpriteBatch spriteBatch)
+    {
+        if (Fconstruct) { DrawFloor(spriteBatch); }
+        if (Pconstruct) { DrawPillars(spriteBatch); }
+        if (Wconstruct) { DrawWalls(spriteBatch); }
     }
 }
 

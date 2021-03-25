@@ -25,7 +25,8 @@ namespace BaseProject
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.menuchoice == 7)
             {
-                Game1.menuchoice = 8;
+                GameEnvironment.SwitchTo(9);
+                Game1.menuchoice = 10;
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
             {

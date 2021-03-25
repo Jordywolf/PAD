@@ -15,8 +15,8 @@ namespace BaseProject
         public Texture2D HBmiddleTexture;
         public Texture2D HBhealthTexture;
 
-        public int MaxHealthLength = 100;
-        public int MaxBarLength;
+        public float MaxHealthLength = 1;
+        public float MaxBarLength;
 
         public HealthBar(Vector2 position, Texture2D HBbeginRTexture, Texture2D HBbeginLTexture, Texture2D HBmiddleTexture, Texture2D HBhealthTexture) : base(position, new Vector2(0, 0), 0.0f, 1, HBbeginRTexture)
         {
@@ -30,33 +30,12 @@ namespace BaseProject
 
         public override void Draw(SpriteBatch myspriteBatch)
         {
-            for (int iLength = 0; iLength < MaxHealthLength; iLength++)
-            {
-                HBposition.X = 640 - (MaxHealthLength * HBhealthTexture.Width / 2) + HBmiddleTexture.Width * iLength;
-
-                myspriteBatch.Draw(HBhealthTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-            }
-
-            for (int iBar = 0; iBar < MaxBarLength; iBar++)
-            {
-                HBposition.X = 640 - (MaxBarLength * HBhealthTexture.Width / 2) + HBmiddleTexture.Width * iBar;
-
-                if (iBar <= 0)
-                {
-
-                    myspriteBatch.Draw(HBbeginLTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-                }
-                else if (iBar >= MaxBarLength-1)
-                {
-                    myspriteBatch.Draw(HBbeginRTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-                }
-                else
-                {
-                    myspriteBatch.Draw(HBmiddleTexture, HBposition, null, Color.White, 0f, Vector2.Zero, 4, SpriteEffects.None, 0f);
-                }
-            }
+            float healthbarWidth = 20;
+            myspriteBatch.Draw(HBhealthTexture, new Vector2(GameEnvironment.Screen.X / 2 - HBhealthTexture.Width * ((healthbarWidth + 1) / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2((healthbarWidth + 1) * MaxHealthLength, 1), SpriteEffects.None, 0f);
+            myspriteBatch.Draw(HBbeginLTexture, new Vector2(GameEnvironment.Screen.X / 2 - HBhealthTexture.Width * (healthbarWidth / 2) - HBbeginLTexture.Width, 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+            myspriteBatch.Draw(HBbeginRTexture, new Vector2(GameEnvironment.Screen.X / 2 + HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+            myspriteBatch.Draw(HBmiddleTexture, new Vector2(GameEnvironment.Screen.X / 2 - HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2(healthbarWidth, 1), SpriteEffects.None, 0f);
         }
-
     }
 }
 

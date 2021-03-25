@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +34,7 @@ namespace BaseProject
         GameStates.SafeZoneState safeZoneState;
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
+        GameStates.SelinLevelPlayingState selinLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public int width = 1280;
@@ -39,6 +42,7 @@ namespace BaseProject
 
         public Vector2 playerPos;
 
+        //Textures
         public Texture2D jogonHeadTexture;
         public Texture2D jogonHSTexture;
         public Texture2D jogonBodyTexture;
@@ -62,13 +66,27 @@ namespace BaseProject
         public static int framecount;
         public static int startframe;
 
+        // Sounds
+        public SoundEffect jogonSound;
+        public SoundEffect jogonFightSound;
+        public SoundEffect MenuBM;
+        public SoundEffect ButtonSound;
+        public SoundEffect SafeZoneMusic;
+        public SoundEffectInstance MenuBMI;
+        public SoundEffectInstance SafeZoneMoezic;
+
         public Texture2D HBedgeLTexture;
         public Texture2D HBedgeRTexture;
         public Texture2D HBmiddleTexture;
         public Texture2D HBhealthTexture;
 
+        public Texture2D Sn_grassTexture;
+        public Texture2D Sn_stoneTexture;
+        public Texture2D Sn_obstacleTexture;
+
         public static Player player;
         public static List<Sprite> _sprites;
+        public static List<Sprite> noSprite;
 
         public Boolean KeyCollected;
         public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
@@ -102,6 +120,7 @@ namespace BaseProject
         {
             ApplyResolutionSettings();
             base.LoadContent();
+            //Safezone 1
             Pilaar = Content.Load<Texture2D>("Pilaar");
             FonteinTexture = Content.Load<Texture2D>("Fontein");
             ZandTile = Content.Load<Texture2D>("ZandTile");
@@ -110,11 +129,58 @@ namespace BaseProject
             Boom = Content.Load<Texture2D>("Boom");
             Rots = Content.Load<Texture2D>("Rots");
             Deur = Content.Load<Texture2D>("Deur");
-            Player = Content.Load<Texture2D>("Player");
+            //player
+            Player = Content.Load<Texture2D>("De_Rakker");
             PlayerShadow = content.Load<Texture2D>("PlayerShadow");
+            //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
             TileSz3 = Content.Load<Texture2D>("TileSz3");
+            //Jogon
+            jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
+            jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
+            jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
+            jogonSound = content.Load<SoundEffect>("JogonRoar");
+            jogonFightSound = content.Load<SoundEffect>("JogonBattelMusic");
+            //JogonLevel
+            PillarV2_Torch = Content.Load<Texture2D>("PAD_Jg_PillarV2_Torch");
+            Floortile = Content.Load<Texture2D>("PAD_Jg_Floortile1");
+            WalltileStr = Content.Load<Texture2D>("PAD_Jg_walltileStraight");
+            WalltileCrnL = Content.Load<Texture2D>("PAD_Jg_walltileCornerL");
+            WalltileCrnR = Content.Load<Texture2D>("PAD_Jg_walltileCornerR");
+            WalltileStrD = Content.Load<Texture2D>("PAD_Jg_walltileStraightD");
+            WalltileCrnDL = Content.Load<Texture2D>("PAD_Jg_walltileCornerDL");
+            WalltileCrnDR = Content.Load<Texture2D>("PAD_Jg_walltileCornerDR");
+            WalltileL = Content.Load<Texture2D>("PAD_Jg_walltileL");
+            WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
+            PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
+            fireBallTexture = Content.Load<Texture2D>("Fireball");
+            //Home en menus
+            HomeScreen = Content.Load<Texture2D>("HomeScreen");
+            MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
+            MenuCredits = Content.Load<Texture2D>("MenuCredits");
+            MenuStartGameSelected = Content.Load<Texture2D>("MenuStartGameSelected");
+            MenuCreditsSelected = Content.Load<Texture2D>("MenuCreditsSelected");
+            CreditScreen = Content.Load<Texture2D>("CreditScreen");
+            MenuBack = Content.Load<Texture2D>("MenuBack");
+            MenuBackSelected = Content.Load<Texture2D>("MenuBackSelected");
+            SecondStart = Content.Load<Texture2D>("SecondStart");
+            MenuNewGame = Content.Load<Texture2D>("MenuNewGame");
+            MenuNewGameSelected = Content.Load<Texture2D>("MenuNewGameSelected");
+            MenuContinue = Content.Load<Texture2D>("MenuContinue");
+            MenuContinueSelected = Content.Load<Texture2D>("MenuContinueSelected");
+            HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
+            HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
+            HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
+            HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
+            MenuBM = content.Load<SoundEffect>("BeginBM");
+            MenuBMI = MenuBM.CreateInstance();
+        
+            ButtonSound = content.Load<SoundEffect>("ButtonClick");
+            SafeZoneMusic = Content.Load<SoundEffect>("MenuBackgroundSong");
+            SafeZoneMoezic = SafeZoneMusic.CreateInstance();
+
+            font = Content.Load<SpriteFont>("Credit");
             actionHandeler = new ActionHandeler();
             player = new Player(Player, PlayerPosition)
             {
@@ -126,10 +192,12 @@ namespace BaseProject
                     Down = Keys.Down,
                 },
                 Position = PlayerPosition,
-                color = Color.Blue,
+                color = Color.White,
                 Speed = 15f,
+                
             };
 
+            noSprite = new List<Sprite>();
             _sprites = new List<Sprite>()
             {
 
@@ -154,40 +222,7 @@ namespace BaseProject
                 }
             };
 
-            jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
-            jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
-            jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
-            PillarV2_Torch = Content.Load<Texture2D>("PAD_Jg_PillarV2_Torch");
-            Floortile = Content.Load<Texture2D>("PAD_Jg_Floortile1");
-            WalltileStr = Content.Load<Texture2D>("PAD_Jg_walltileStraight");
-            WalltileCrnL = Content.Load<Texture2D>("PAD_Jg_walltileCornerL");
-            WalltileCrnR = Content.Load<Texture2D>("PAD_Jg_walltileCornerR");
-            WalltileStrD = Content.Load<Texture2D>("PAD_Jg_walltileStraightD");
-            WalltileCrnDL = Content.Load<Texture2D>("PAD_Jg_walltileCornerDL");
-            WalltileCrnDR = Content.Load<Texture2D>("PAD_Jg_walltileCornerDR");
-            WalltileL = Content.Load<Texture2D>("PAD_Jg_walltileL");
-            WalltileR = Content.Load<Texture2D>("PAD_Jg_walltileR");
-            PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
-            fireBallTexture = Content.Load<Texture2D>("Fireball");
-            HomeScreen = Content.Load<Texture2D>("HomeScreen");
-            MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
-            MenuCredits = Content.Load<Texture2D>("MenuCredits");
-            MenuStartGameSelected = Content.Load<Texture2D>("MenuStartGameSelected");
-            MenuCreditsSelected = Content.Load<Texture2D>("MenuCreditsSelected");
-            CreditScreen = Content.Load<Texture2D>("CreditScreen");
-            MenuBack = Content.Load<Texture2D>("MenuBack");
-            MenuBackSelected = Content.Load<Texture2D>("MenuBackSelected");
-            SecondStart = Content.Load<Texture2D>("SecondStart");
-            MenuNewGame = Content.Load<Texture2D>("MenuNewGame");
-            MenuNewGameSelected = Content.Load<Texture2D>("MenuNewGameSelected");
-            MenuContinue = Content.Load<Texture2D>("MenuContinue");
-            MenuContinueSelected = Content.Load<Texture2D>("MenuContinueSelected");
-            HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
-            HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
-            HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
-            HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
-
-            font = Content.Load<SpriteFont>("Credit");
+            MenuBMI.Play();
 
             menuchoice = 1;
             framecount = 0;
@@ -215,11 +250,15 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, player);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture,jogonSound , HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
+
             GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
 
             safeZoneState2 = new GameStates.SafeZoneState();
             GameEnvironment.gameStateList.Add(safeZoneState2);
+
+            selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
+            GameEnvironment.gameStateList.Add(selinLevelPlayingState);
         }
 
 
@@ -228,11 +267,18 @@ namespace BaseProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (menuchoice == 7 || menuchoice == 8)
+            if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)
-                    sprite.Update(gameTime, _sprites);
+                sprite.Update(gameTime, _sprites);
                 player.Update(gameTime, _sprites);
+                actionHandeler.Update();
+            }
+            if (menuchoice == 8)
+            {
+                foreach (var sprite in noSprite)
+                sprite.Update(gameTime, noSprite);
+                player.Update(gameTime, noSprite);
                 actionHandeler.Update();
             }
 
@@ -252,18 +298,21 @@ namespace BaseProject
 
             if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
+                ButtonSound.Play();
                 menuchoice = 3;
                 framecount = startframe;
             }
 
             if (menuchoice == 1 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
+                ButtonSound.Play();
                 menuchoice = 4;
                 framecount = startframe;
             }
 
             if (menuchoice == 3 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
             {
+                ButtonSound.Play();
                 menuchoice = 2;
                 framecount = startframe;
             }
@@ -276,13 +325,19 @@ namespace BaseProject
 
             if (menuchoice == 4 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
             {
+                ButtonSound.Play();
+                MenuBMI.Stop();
                 menuchoice = 7;
                 framecount = startframe;
+                SafeZoneMoezic.Play();
+
             }
 
             if (menuchoice == 1)
             {
                 menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
+                
+                
             }
 
             if (menuchoice == 2)
@@ -327,6 +382,11 @@ namespace BaseProject
             {
                 jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
                 player.Draw(spriteBatch);
+<<<<<<< HEAD
+=======
+                SafeZoneMoezic.Stop();
+
+>>>>>>> main
             }
 
             if (menuchoice == 9)
@@ -336,9 +396,19 @@ namespace BaseProject
                 safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
                 safeZone2.MovingPlatForm(TileSz3, spriteBatch);
                 spriteBatch.End();
+<<<<<<< HEAD
                 foreach (var sprite in _sprites)
                     sprite.Draw(spriteBatch);
                 player.Draw(spriteBatch);
+=======
+            }
+
+            if (menuchoice == 10)
+            {
+                spriteBatch.Begin();
+                selinLevelPlayingState.Draw(spriteBatch);
+                spriteBatch.End();
+>>>>>>> main
             }
         }
     }
