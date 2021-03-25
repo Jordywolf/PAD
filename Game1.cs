@@ -9,9 +9,9 @@ using System.Text;
 
 namespace BaseProject
 {
-    class Game1 : GameEnvironment
+    class Game1 : Engine.ExtendedGame
     {
-        private GraphicsDeviceManager _graphics;
+        //private GraphicsDeviceManager _graphics;
         //private SpriteBatch _spriteBatch;
 
         public Texture2D PillarV2_Torch;
@@ -105,8 +105,10 @@ namespace BaseProject
         {
             IsMouseVisible = true;
 
-            screen.X = width;
-            screen.Y = height;
+            windowSize = new Point(width, height);
+            worldSize = windowSize;
+
+
         }
 
         protected override void Initialize()
@@ -116,7 +118,7 @@ namespace BaseProject
 
         protected override void LoadContent()
         {
-            ApplyResolutionSettings();
+            FullScreen = false;
             base.LoadContent();
             //Safezone 1
             Pilaar = Content.Load<Texture2D>("Pilaar");
@@ -129,7 +131,7 @@ namespace BaseProject
             Deur = Content.Load<Texture2D>("Deur");
             //player
             Player = Content.Load<Texture2D>("De_Rakker");
-            PlayerShadow = content.Load<Texture2D>("PlayerShadow");
+            PlayerShadow = Content.Load<Texture2D>("PlayerShadow");
             //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
@@ -138,8 +140,8 @@ namespace BaseProject
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
             jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
-            jogonSound = content.Load<SoundEffect>("JogonRoar");
-            jogonFightSound = content.Load<SoundEffect>("JogonBattelMusic");
+            jogonSound = Content.Load<SoundEffect>("JogonRoar");
+            jogonFightSound = Content.Load<SoundEffect>("JogonBattelMusic");
             //JogonLevel
             PillarV2_Torch = Content.Load<Texture2D>("PAD_Jg_PillarV2_Torch");
             Floortile = Content.Load<Texture2D>("PAD_Jg_Floortile1");
@@ -171,9 +173,9 @@ namespace BaseProject
             HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
             HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
-            MenuBM = content.Load<SoundEffect>("BeginBM");
+            MenuBM = Content.Load<SoundEffect>("BeginBM");
             MenuBMI = MenuBM.CreateInstance();
-            ButtonSound = content.Load<SoundEffect>("ButtonClick");
+            ButtonSound = Content.Load<SoundEffect>("ButtonClick");
 
             font = Content.Load<SpriteFont>("Credit");
             actionHandeler = new ActionHandeler();
