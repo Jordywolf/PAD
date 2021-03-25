@@ -145,7 +145,7 @@ namespace BaseProject.GameStates
 
             //mapConstruction.PlayerCollision(player.Position, playerTexture);
 
-            /*for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
+            for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
             {
                 for (int iPillarsY = 1; iPillarsY <= mapConstruction.maxPillarsY; iPillarsY++)
                 {
@@ -172,7 +172,7 @@ namespace BaseProject.GameStates
                         PillarCollided = false;
                     }
                 }
-            }*/
+            }
 
             foreach (JogonPart part in JogonDragon)
             {

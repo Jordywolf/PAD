@@ -23,7 +23,7 @@ namespace BaseProject
         private SoundEffect chargeSound;
 
         private int fireTimer;
-        private int fireTimerMax = 30;
+        private int fireTimerMax = 90;
 
         public List<JogonPart> Body = new List<JogonPart>();
         public List<Fireball> fireballs = new List<Fireball>();
