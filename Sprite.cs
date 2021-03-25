@@ -10,6 +10,7 @@ namespace BaseProject
     {
         protected Texture2D _texture;
         public Vector2 Position;
+        public float scale;
         public Vector2 Velocity;
         public Color color = Color.White;
         public float Speed;
@@ -32,7 +33,8 @@ namespace BaseProject
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(_texture, Position, color);
+            spriteBatch.Draw(_texture, Position, null, color, 0f, Vector2.Zero, scale,SpriteEffects.None,0f);
+            //SteenTile, SteenPosition, null, Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f
             spriteBatch.End();
 
         }
