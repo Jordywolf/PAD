@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class SelinLevelPlayingState : GameState
+    class SelinLevelPlayingState : Engine.GameState
     {
         public Texture2D stone_grnd, grass_grnd, obstacle, pillar, brokenPillar;
         private int levelWidth, levelHeight;
@@ -78,12 +78,12 @@ namespace BaseProject.GameStates
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        /*public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
 
             mapConstruction.Draw(spriteBatch);
             selinTest.Draw(spriteBatch);
-        }
+        }*/
     }
 }

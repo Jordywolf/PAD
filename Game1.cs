@@ -226,36 +226,37 @@ namespace BaseProject
             startframe = -100;
 
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
-            GameEnvironment.gameStateList.Add(menuStartSelectedState);
-            GameEnvironment.SwitchTo(0);
+            GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
-            GameEnvironment.gameStateList.Add(menuCreditsSelectedState);
+            GameStateManager.AddGameState("menuCreditsSelectedState", menuCreditsSelectedState);
 
             menuCreditsState = new GameStates.MenuCreditsState();
-            GameEnvironment.gameStateList.Add(menuCreditsState);
+            GameStateManager.AddGameState("menuCreditsState", menuCreditsState);
 
             newGameState = new GameStates.NewGameState();
-            GameEnvironment.gameStateList.Add(newGameState);
+            GameStateManager.AddGameState("newGameState", newGameState);
 
             continueState = new GameStates.ContinueState();
-            GameEnvironment.gameStateList.Add(continueState);
+            GameStateManager.AddGameState("continueState", continueState);
 
             backState = new GameStates.BackState();
-            GameEnvironment.gameStateList.Add(backState);
+            GameStateManager.AddGameState("backState", backState);
 
             safeZoneState = new GameStates.SafeZoneState();
-            GameEnvironment.gameStateList.Add(safeZoneState);
+            GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture,jogonSound , HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
 
-            GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
+            GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
             safeZoneState2 = new GameStates.SafeZoneState();
-            GameEnvironment.gameStateList.Add(safeZoneState2);
+            GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
-            GameEnvironment.gameStateList.Add(selinLevelPlayingState);
+            GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
+
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
@@ -296,7 +297,8 @@ namespace BaseProject
             if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
                 ButtonSound.Play();
-                menuchoice = 3;
+                //menuchoice = 3;
+                GameStateManager.SwitchTo("menuCreditsState");
                 framecount = startframe;
             }
 
@@ -331,7 +333,7 @@ namespace BaseProject
 
             if (menuchoice == 1)
             {
-                menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
+                //menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
             }
 
             if (menuchoice == 2)
@@ -392,7 +394,7 @@ namespace BaseProject
             if (menuchoice == 10)
             {
                 spriteBatch.Begin();
-                selinLevelPlayingState.Draw(spriteBatch);
+                //selinLevelPlayingState.Draw(spriteBatch);
                 spriteBatch.End();
             }
         }

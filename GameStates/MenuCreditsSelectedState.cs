@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class MenuCreditsSelectedState : GameState
+    class MenuCreditsSelectedState : Engine.GameState
     {
 
             public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture, Texture2D texture2, Texture2D texture5, SpriteFont font)
