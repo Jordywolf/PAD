@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class SafeZoneState : GameState
+    class SafeZoneState : Engine.GameState
     {
         SafeZone1 safeZone;
 

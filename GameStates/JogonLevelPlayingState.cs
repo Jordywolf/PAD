@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace BaseProject.GameStates
 {
-    class JogonLevelPlayingState : GameState
+    class JogonLevelPlayingState : Engine.GameState
     {
         MapConstruction mapConstruction;
         private Jogonhead Jogon;
@@ -205,9 +205,9 @@ namespace BaseProject.GameStates
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+            base.Draw(gameTime, spriteBatch);
 
             mapConstruction.Draw(spriteBatch);
 

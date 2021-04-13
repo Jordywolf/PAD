@@ -9,14 +9,26 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class MenuStartSelectedState : GameState
+    class MenuStartSelectedState : Engine.GameState
     {
+        Engine.TextGameObject instructions;
+        public MenuStartSelectedState() : base()
+        {
+            gameObjects.AddChild(new Engine.SpriteGameObject("HomeScreen", 1));
+            gameObjects.AddChild(new Engine.SpriteGameObject("MenuCredits", 1));
+            gameObjects.AddChild(new Engine.SpriteGameObject("MenuStartGameSelected", 1));
+
+            instructions = new Engine.TextGameObject("Credit", 1, Color.Beige);
+            gameObjects.AddChild(instructions);
+            
+            instructions.Text = "press \narrow keys \npress space";
+            instructions.LocalPosition = new Vector2(0, 500);
+        }
 
 
 
 
- 
-        public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture, Texture2D texture3, Texture2D texture4, SpriteFont font)
+        /*public void Draw(SpriteBatch spriteBatch)
         {
 
            
@@ -57,6 +69,6 @@ Matrix.CreateScale(0.45f));
 
             }
             
-        }
+        }*/
     }
 }
