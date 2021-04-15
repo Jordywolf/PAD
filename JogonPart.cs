@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class JogonPart : GameObject
+    class JogonPart : Engine.SpriteGameObject
     {
         public Vector2 target;
         public float _minDistanceBetweenSegments = 4;
@@ -19,19 +19,25 @@ namespace BaseProject
         protected int Movingstate = 0;
         public Vector2 moveDir;
 
-        public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, JogonPart Parent) : base(position, velocity, rotation, scale, texture) { _minDistanceBetweenSegments = followDist; }
+        public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, string texture, float followDist, JogonPart Parent) : base(texture,1)
+        {
+            _minDistanceBetweenSegments = followDist;
+            Origin = new Vector2(this.sprite.Width / 2, this.Height / 2);
+            localPosition = position;
+            this.velocity = velocity;
+        }
 
         public override void Update(GameTime gameTime)
         {
             if (segment)
             {
-                target = Parent.position;
+                target = Parent.localPosition;
                 _followSpeed = Parent._followSpeed - 0.1f;
                 _followRange = 10;
             }
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            moveDir = target - this.position;
+            moveDir = target - this.localPosition;
             moveDir.Normalize();
             totalangle = MathF.Atan2(target.Y - this.position.Y, target.X - this.position.X) - MathF.PI / 2;
 

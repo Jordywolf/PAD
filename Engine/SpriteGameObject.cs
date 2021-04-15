@@ -11,7 +11,7 @@ namespace Engine
         /// <summary>
         /// The sprite that this object can draw on the screen.
         /// </summary>
-        protected SpriteSheet sprite;
+        public SpriteSheet sprite;
 
         /// <summary>
         /// The origin ('offset') to use when drawing the sprite on the screen.
@@ -33,6 +33,7 @@ namespace Engine
         /// </summary>
         protected float depth;
 
+        public float scale = 1.0f;
         /// <summary>
         /// Creates a new SpriteGameObject with a given sprite name.
         /// </summary>
@@ -61,7 +62,7 @@ namespace Engine
 
             // draw the sprite at its *global* position in the game world
            if (sprite != null)
-                sprite.Draw(spriteBatch, GlobalPosition, Origin);
+                sprite.Draw(spriteBatch, GlobalPosition, Origin, scale);
         }
 
         /// <summary>

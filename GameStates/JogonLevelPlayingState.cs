@@ -10,8 +10,9 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace BaseProject.GameStates
 {
-    class JogonLevelPlayingState : GameState
+    class JogonLevelPlayingState : Engine.GameState
     {
+
         MapConstruction mapConstruction;
         private Jogonhead Jogon;
         private JogonPart jogonBodyPart;
@@ -41,27 +42,39 @@ namespace BaseProject.GameStates
 
         public JogonLevelPlayingState(Texture2D aPillarTile, Texture2D jogonHeadTexture, Texture2D fireBallTexture, Texture2D jogonBodyTexture, SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
-            this.player = Game1.player;
-            this.playerTexture = playerTexture;
-
-            mapConstruction = new MapConstruction(aPillarTile);
-
-            this.fightSound = fightSound.CreateInstance();
-
-            bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
-            playerHealthBar = new HealthBar(new Vector2(640, 100), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
-
-            Jogon = new Jogonhead(new Vector2(100, 100), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player, null, aSound);
-            parentSegment = Jogon;
+            gameObjects.AddChild(new Engine.SpriteGameObject("Jogon_Heads", 1));
+            gameObjects.AddChild(new Engine.SpriteGameObject("healthbar", 1));
+            gameObjects.AddChild(new Engine.SpriteGameObject("healthbar", 1));
             for (int i = 0; i < Segments; i++)
             {
-                if (i == 0) { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), 0, 1.5f, jogonBodyTexture, 0.1f, parentSegment); }
-                else { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), 0, 1.5f, jogonBodyTexture, 15, parentSegment); }
-                jogonBodyPart.Parent = parentSegment;
-                Jogon.Body.Add(jogonBodyPart);
-                parentSegment = jogonBodyPart;
             }
-        }
+
+                /*
+
+                this.player = Game1.player;
+                this.playerTexture = playerTexture;
+
+                mapConstruction = new MapConstruction(aPillarTile);
+
+                this.fightSound = fightSound.CreateInstance();
+
+                bossHealthBar = new HealthBar(new Vector2(640, 20), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
+                playerHealthBar = new HealthBar(new Vector2(640, 100), HBedgeRTexture, HBedgeLTexture, HBmiddleTexture, HBhealthTexture);
+
+                Jogon = new Jogonhead(new Vector2(100, 100), new Vector2(0, 0), 0, 1.5f, jogonHeadTexture, 10, fireBallTexture, player, null, aSound);
+                parentSegment = Jogon;
+                for (int i = 0; i < Segments; i++)
+                {
+                    if (i == 0) { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), 0, 1.5f, jogonBodyTexture, 0.1f, parentSegment); }
+                    else { jogonBodyPart = new JogonPart(parentSegment.position, new Vector2(0, 0), 0, 1.5f, jogonBodyTexture, 15, parentSegment); }
+                    jogonBodyPart.Parent = parentSegment;
+                    Jogon.Body.Add(jogonBodyPart);
+                    parentSegment = jogonBodyPart;
+                }
+
+                */
+            }
+            
 
         public bool JogonCollision(Player p, JogonPart j, Texture2D pTexture)
         {
