@@ -12,20 +12,52 @@ namespace BaseProject.GameStates
     class MenuStartSelectedState : Engine.GameState
     {
         Engine.TextGameObject instructions;
+        Engine.SpriteGameObject background;
+        Engine.SpriteGameObject menuCredits;
+        Engine.SpriteGameObject menuStart;
         public MenuStartSelectedState() : base()
         {
-            gameObjects.AddChild(new Engine.SpriteGameObject("HomeScreen", 1));
-            gameObjects.AddChild(new Engine.SpriteGameObject("MenuCredits", 1));
-            gameObjects.AddChild(new Engine.SpriteGameObject("MenuStartGameSelected", 1));
+            background = new Engine.SpriteGameObject("HomeScreen", 1);
+            gameObjects.AddChild(background);
+
+            menuCredits = new Engine.SpriteGameObject("MenuCredits", 1);
+            gameObjects.AddChild(menuCredits);
+
+            menuStart = new Engine.SpriteGameObject("MenuStartGameSelected", 1);
+            gameObjects.AddChild(menuStart);
 
             instructions = new Engine.TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(instructions);
-            
-            instructions.Text = "press \narrow keys \npress space";
-            instructions.LocalPosition = new Vector2(0, 500);
+
+            instructions.Text = "Press \nPrrow Keys \nPress \nSpace";
+            instructions.LocalPosition = new Vector2(0, 450);
+
+            menuStart.LocalPosition = new Vector2(1280 / 2 - menuStart.sprite.Width * 2.7f / 2, 270);
+            menuCredits.LocalPosition = new Vector2(1280 / 2 - menuCredits.sprite.Width * 2.7f / 2, 405);
+            menuStart.scale = 2.7f;
+            menuCredits.scale = 2.7f;
+
+            instructions.scale = 0.45f;
+
+            background.scale = 1.3f;
+            background.LocalPosition = new Vector2(0, -65);
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && !Game1.buttonPressed)
+            {
+                Game1.GameStateManager.SwitchTo("menuCreditsSelectedState");
+                Game1.buttonPressed = true;
+            } else { Game1.buttonPressed = false; }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Game1.buttonPressed)
+            {
+                Game1.GameStateManager.SwitchTo("newGameState");
+            }
+        }
 
 
         /*public void Draw(SpriteBatch spriteBatch)

@@ -11,7 +11,54 @@ namespace BaseProject.GameStates
 {
     class BackState : Engine.GameState
     {
-        public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture9, Texture2D texture10, Texture2D texture12, Texture2D texture8)
+
+        Engine.SpriteGameObject background;
+        Engine.SpriteGameObject newGame;
+        Engine.SpriteGameObject continueGame;
+        Engine.SpriteGameObject back;
+
+        public BackState() : base()
+        {
+            background = new Engine.SpriteGameObject("SecondStart", 1);
+            gameObjects.AddChild(background);
+            background.scale = 2.1f;
+            background.LocalPosition = new Vector2(0, -105);
+
+            newGame = new Engine.SpriteGameObject("MenuNewGame", 1);
+            gameObjects.AddChild(newGame);
+            newGame.scale = 2.7f;
+            newGame.LocalPosition = new Vector2(540, 135);
+
+            continueGame = new Engine.SpriteGameObject("MenuContinue", 1);
+            gameObjects.AddChild(continueGame);
+            continueGame.scale = 2.7f;
+            continueGame.LocalPosition = new Vector2(540, 270);
+
+            back = new Engine.SpriteGameObject("MenuBackSelected", 1);
+            gameObjects.AddChild(back);
+            back.scale = 2.7f;
+            back.LocalPosition = new Vector2(945, 486);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !Game1.buttonPressed)
+            {
+                Game1.GameStateManager.SwitchTo("continueState");
+                Game1.buttonPressed = true;
+            }
+
+            else { Game1.buttonPressed = false; }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Game1.buttonPressed)
+            {
+                Game1.GameStateManager.SwitchTo("menuStartSelectedState");
+            }
+        }
+
+        /*public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture9, Texture2D texture10, Texture2D texture12, Texture2D texture8)
         {
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
 Matrix.CreateScale(2.1f));
@@ -32,6 +79,6 @@ Matrix.CreateScale(2.7f));
                 Game1.framecount = Game1.startframe;
 
             }
-        }
+        }*/
     }
 }
