@@ -98,6 +98,11 @@ namespace Engine
             get { return sprite.Height / sheetRows; }
         }
 
+        public Texture2D GetTexture
+        {
+            get { return sprite; }
+        }
+
         /// <summary>
         /// Gets a vector that represents the center of a single sprite in this sprite sheet.
         /// </summary>
