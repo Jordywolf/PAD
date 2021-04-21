@@ -48,15 +48,17 @@ namespace BaseProject.GameStates
         {
             base.Update(gameTime);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !Game1.buttonPressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState");
                 Game1.buttonPressed = true;
-            } else { Game1.buttonPressed = false; }
+                Game1.framecount = Game1.startframe;
+            }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Game1.buttonPressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("menuCreditsState");
+                Game1.framecount = Game1.startframe;
             }
         }
 

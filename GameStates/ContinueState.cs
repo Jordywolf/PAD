@@ -44,21 +44,24 @@ namespace BaseProject.GameStates
         {
             base.Update(gameTime);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && !Game1.buttonPressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Down) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("backState");
                 Game1.buttonPressed = true;
-            } else if (!Keyboard.GetState().IsKeyDown(Keys.Down)) { Game1.buttonPressed = false; }
+                Game1.framecount = Game1.startframe;
+            }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && !Game1.buttonPressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("newGameState");
                 Game1.buttonPressed = true;
-            } else if (!Keyboard.GetState().IsKeyDown(Keys.Up)) { Game1.buttonPressed = false; }
+                Game1.framecount = Game1.startframe;
+            }
 
             /*if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Game1.buttonPressed)
             {
                 Game1.GameStateManager.SwitchTo("safeZoneState");
+                Game1.framecount = Game1.startframe;
             }*/
         }
 
