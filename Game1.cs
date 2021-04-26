@@ -41,8 +41,8 @@ namespace BaseProject
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
-        public int width = 1280;
-        public int height = 640;
+        public static int width = 1280;
+        public static int height = 640;
 
         public Vector2 playerPos;
 
