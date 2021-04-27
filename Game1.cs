@@ -40,7 +40,7 @@ namespace BaseProject
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
-        GameStates.PauseState pauseState;
+        
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public static int width = 1280;
@@ -223,8 +223,7 @@ namespace BaseProject
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
 
-            pauseState = new GameStates.PauseState();
-            GameEnvironment.gameStateList.Add(pauseState);
+           
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
             GameStateManager.AddGameState("menuCreditsSelectedState", menuCreditsSelectedState);

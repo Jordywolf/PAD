@@ -19,24 +19,6 @@
 /processorParam:Quality=Best
 /build:BeginBM.wav
 
-#begin BeginBM.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:BeginBM.wav
-
-#begin Boom.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Boom.png
-
 #begin Boom.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -55,37 +37,12 @@
 /processorParam:Quality=Best
 /build:ButtonClick.wav
 
-#begin ButtonClick.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:ButtonClick.wav
-
 #begin Credit.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Credit.spritefont
-
-#begin Credit.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Credit.spritefont
-
-#begin CreditScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CreditScreen.png
 
 #begin CreditScreen.png
 /importer:TextureImporter
@@ -111,18 +68,6 @@
 /processorParam:TextureFormat=Color
 /build:De_Rakker.png
 
-#begin De_Rakker.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:De_Rakker.png
-
 #begin Deur.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -134,30 +79,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Deur.png
-
-#begin Deur.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Deur.png
-
-#begin Fireball.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Fireball.png
 
 #begin Fireball.png
 /importer:TextureImporter
@@ -183,18 +104,6 @@
 /processorParam:TextureFormat=Color
 /build:Fontein.png
 
-#begin Fontein.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Fontein.png
-
 #begin healthBarEnd.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -206,30 +115,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:healthBarEnd.png
-
-#begin healthBarEnd.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:healthBarEnd.png
-
-#begin healthBarEndL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:healthBarEndL.png
 
 #begin healthBarEndL.png
 /importer:TextureImporter
@@ -255,18 +140,6 @@
 /processorParam:TextureFormat=Color
 /build:healthBarMiddle.png
 
-#begin healthBarMiddle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:healthBarMiddle.png
-
 #begin healthBarMiddleBorder.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -278,30 +151,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:healthBarMiddleBorder.png
-
-#begin healthBarMiddleBorder.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:healthBarMiddleBorder.png
-
-#begin Heart.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Heart.png
 
 #begin Heart.png
 /importer:TextureImporter
@@ -327,18 +176,6 @@
 /processorParam:TextureFormat=Color
 /build:HomeScreen.png
 
-#begin HomeScreen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:HomeScreen.png
-
 #begin Jogon_ABL.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -350,30 +187,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Jogon_ABL.png
-
-#begin Jogon_ABL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_ABL.png
-
-#begin Jogon_ABR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_ABR.png
 
 #begin Jogon_ABR.png
 /importer:TextureImporter
@@ -399,18 +212,6 @@
 /processorParam:TextureFormat=Color
 /build:Jogon_APL.png
 
-#begin Jogon_APL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_APL.png
-
 #begin Jogon_BodyS.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -422,30 +223,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Jogon_BodyS.png
-
-#begin Jogon_BodyS.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_BodyS.png
-
-#begin Jogon_HoofdS.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_HoofdS.png
 
 #begin Jogon_HoofdS.png
 /importer:TextureImporter
@@ -471,18 +248,6 @@
 /processorParam:TextureFormat=Color
 /build:Jogon_VBL.png
 
-#begin Jogon_VBL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_VBL.png
-
 #begin Jogon_VBR.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -494,30 +259,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Jogon_VBR.png
-
-#begin Jogon_VBR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_VBR.png
-
-#begin Jogon_VPL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_VPL.png
 
 #begin Jogon_VPL.png
 /importer:TextureImporter
@@ -543,41 +284,11 @@
 /processorParam:TextureFormat=Color
 /build:Jogon_VPR.png
 
-#begin Jogon_VPR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Jogon_VPR.png
-
 #begin JogonBattelMusic.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:JogonBattelMusic.wav
-
-#begin JogonBattelMusic.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:JogonBattelMusic.wav
-
-#begin JogonHead.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:JogonHead.png
 
 #begin JogonHead.png
 /importer:TextureImporter
@@ -597,24 +308,6 @@
 /processorParam:Quality=Best
 /build:JogonRoar.wav
 
-#begin JogonRoar.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:JogonRoar.wav
-
-#begin MenuBack.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuBack.png
-
 #begin MenuBack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -632,24 +325,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:MenuBackgroundSong.wav
-
-#begin MenuBackgroundSong.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:MenuBackgroundSong.wav
-
-#begin MenuBackSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuBackSelected.png
 
 #begin MenuBackSelected.png
 /importer:TextureImporter
@@ -675,18 +350,6 @@
 /processorParam:TextureFormat=Color
 /build:MenuContinue.png
 
-#begin MenuContinue.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuContinue.png
-
 #begin MenuContinueSelected.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -698,30 +361,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MenuContinueSelected.png
-
-#begin MenuContinueSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuContinueSelected.png
-
-#begin MenuCredits.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuCredits.png
 
 #begin MenuCredits.png
 /importer:TextureImporter
@@ -747,18 +386,6 @@
 /processorParam:TextureFormat=Color
 /build:MenuCreditsSelected.png
 
-#begin MenuCreditsSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuCreditsSelected.png
-
 #begin MenuNewGame.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -770,30 +397,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MenuNewGame.png
-
-#begin MenuNewGame.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuNewGame.png
-
-#begin MenuNewGameSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuNewGameSelected.png
 
 #begin MenuNewGameSelected.png
 /importer:TextureImporter
@@ -819,18 +422,6 @@
 /processorParam:TextureFormat=Color
 /build:MenuStartGame.png
 
-#begin MenuStartGame.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuStartGame.png
-
 #begin MenuStartGameSelected.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -842,30 +433,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MenuStartGameSelected.png
-
-#begin MenuStartGameSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MenuStartGameSelected.png
-
-#begin PAD_Jg_Floortile1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_Floortile1.png
 
 #begin PAD_Jg_Floortile1.png
 /importer:TextureImporter
@@ -891,18 +458,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_pillar.png
 
-#begin PAD_Jg_pillar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_pillar.png
-
 #begin PAD_Jg_PillarV2_standard.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -914,30 +469,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_PillarV2_standard.png
-
-#begin PAD_Jg_PillarV2_standard.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_PillarV2_standard.png
-
-#begin PAD_Jg_PillarV2_Torch.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_PillarV2_Torch.png
 
 #begin PAD_Jg_PillarV2_Torch.png
 /importer:TextureImporter
@@ -963,18 +494,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_Torch.png
 
-#begin PAD_Jg_Torch.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_Torch.png
-
 #begin PAD_Jg_walltileCornerDL.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -986,30 +505,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileCornerDL.png
-
-#begin PAD_Jg_walltileCornerDL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileCornerDL.png
-
-#begin PAD_Jg_walltileCornerDR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileCornerDR.png
 
 #begin PAD_Jg_walltileCornerDR.png
 /importer:TextureImporter
@@ -1035,18 +530,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileCornerL.png
 
-#begin PAD_Jg_walltileCornerL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileCornerL.png
-
 #begin PAD_Jg_walltileCornerR.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1058,30 +541,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileCornerR.png
-
-#begin PAD_Jg_walltileCornerR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileCornerR.png
-
-#begin PAD_Jg_walltileGate.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileGate.png
 
 #begin PAD_Jg_walltileGate.png
 /importer:TextureImporter
@@ -1107,18 +566,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileInvCornerDL.png
 
-#begin PAD_Jg_walltileInvCornerDL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileInvCornerDL.png
-
 #begin PAD_Jg_walltileInvCornerDR.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1130,30 +577,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileInvCornerDR.png
-
-#begin PAD_Jg_walltileInvCornerDR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileInvCornerDR.png
-
-#begin PAD_Jg_walltileInvCornerTL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileInvCornerTL.png
 
 #begin PAD_Jg_walltileInvCornerTL.png
 /importer:TextureImporter
@@ -1179,18 +602,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileInvCornerTR.png
 
-#begin PAD_Jg_walltileInvCornerTR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileInvCornerTR.png
-
 #begin PAD_Jg_walltileL.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1202,30 +613,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileL.png
-
-#begin PAD_Jg_walltileL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileL.png
-
-#begin PAD_Jg_walltileR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileR.png
 
 #begin PAD_Jg_walltileR.png
 /importer:TextureImporter
@@ -1251,18 +638,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileSolid.png
 
-#begin PAD_Jg_walltileSolid.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileSolid.png
-
 #begin PAD_Jg_walltileStraight.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1274,30 +649,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_walltileStraight.png
-
-#begin PAD_Jg_walltileStraight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileStraight.png
-
-#begin PAD_Jg_walltileStraightD.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Jg_walltileStraightD.png
 
 #begin PAD_Jg_walltileStraightD.png
 /importer:TextureImporter
@@ -1323,18 +674,6 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Sn_grass.png
 
-#begin PAD_Sn_grass.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Sn_grass.png
-
 #begin PAD_Sn_obstacle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1346,30 +685,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Sn_obstacle.png
-
-#begin PAD_Sn_obstacle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Sn_obstacle.png
-
-#begin PAD_Sn_stone.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PAD_Sn_stone.png
 
 #begin PAD_Sn_stone.png
 /importer:TextureImporter
@@ -1395,18 +710,6 @@
 /processorParam:TextureFormat=Color
 /build:Pilaar.png
 
-#begin Pilaar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Pilaar.png
-
 #begin Player.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1418,30 +721,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Player.png
-
-#begin Player.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Player.png
-
-#begin PlayerShadow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:PlayerShadow.png
 
 #begin PlayerShadow.png
 /importer:TextureImporter
@@ -1467,18 +746,6 @@
 /processorParam:TextureFormat=Color
 /build:Rakker.png
 
-#begin Rakker.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Rakker.png
-
 #begin Rakker_Back.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1490,30 +757,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Rakker_Back.png
-
-#begin Rakker_Back.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Rakker_Back.png
-
-#begin Rots.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Rots.png
 
 #begin Rots.png
 /importer:TextureImporter
@@ -1539,18 +782,6 @@
 /processorParam:TextureFormat=Color
 /build:SecondStart.png
 
-#begin SecondStart.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:SecondStart.png
-
 #begin Selin_Body.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1562,30 +793,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Selin_Body.png
-
-#begin Selin_Body.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Selin_Body.png
-
-#begin Selin_HmrL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Selin_HmrL.png
 
 #begin Selin_HmrL.png
 /importer:TextureImporter
@@ -1611,18 +818,6 @@
 /processorParam:TextureFormat=Color
 /build:Selin_HmrR.png
 
-#begin Selin_HmrR.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Selin_HmrR.png
-
 #begin Selin_shock.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1634,30 +829,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Selin_shock.png
-
-#begin Selin_shock.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Selin_shock.png
-
-#begin Sleutel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sleutel.png
 
 #begin Sleutel.png
 /importer:TextureImporter
@@ -1683,18 +854,6 @@
 /processorParam:TextureFormat=Color
 /build:steen.png
 
-#begin steen.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:steen.png
-
 #begin SteenVert.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1706,30 +865,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SteenVert.png
-
-#begin SteenVert.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:SteenVert.png
-
-#begin TileSz2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:TileSz2.png
 
 #begin TileSz2.png
 /importer:TextureImporter
@@ -1755,18 +890,6 @@
 /processorParam:TextureFormat=Color
 /build:TileSz3.png
 
-#begin TileSz3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:TileSz3.png
-
 #begin Zand.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1778,30 +901,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Zand.png
-
-#begin Zand.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Zand.png
-
-#begin ZandTile.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:ZandTile.png
 
 #begin ZandTile.png
 /importer:TextureImporter
