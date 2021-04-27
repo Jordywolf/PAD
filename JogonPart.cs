@@ -7,61 +7,44 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class JogonPart : GameObject
+    class JogonPart : Engine.RotatingSpriteGameObject
     {
-        public Vector2 target;
-        public float _minDistanceBetweenSegments = 4;
+        public Engine.GameObject target;
         public float _followSpeed = 70;
-        protected float _followRange = 1f;
-        public JogonPart Parent;
+        protected float _followRange = 100f;
         protected bool segment = true;
-        public bool reached = false;
-        protected int Movingstate = 0;
-        public Vector2 moveDir;
 
-        public JogonPart(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, JogonPart Parent) : base(position, velocity, rotation, scale, texture) { _minDistanceBetweenSegments = followDist; }
+        public JogonPart(Vector2 position, float velocity, string texture, float followDist, Engine.SpriteGameObject Target) : base(texture,1)
+        {
+            scale = 1.5f;
+            _followRange = followDist;
+            Origin = new Vector2(this.sprite.Width / 2, this.Height / 2);
+            localPosition = position;
+            _followSpeed = velocity;
+            target = Target;
+        }
 
         public override void Update(GameTime gameTime)
         {
-            if (segment)
-            {
-                target = Parent.position;
-                _followSpeed = Parent._followSpeed - 0.1f;
-                _followRange = 10;
-            }
-
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            moveDir = target - this.position;
-            moveDir.Normalize();
-            totalangle = MathF.Atan2(target.Y - this.position.Y, target.X - this.position.X) - MathF.PI / 2;
-
-            if (Movingstate == 0)
-            {
-                if (!isInRange(this.position, target, _followRange))
+            offsetDegrees = 90;
+            base.Update(gameTime);
+                if (!isInRange(this.localPosition, target.LocalPosition, _followRange))
                 {
-                    Movingstate = 1;
+                    LookAt(target,offsetDegrees);
+                    velocity = AngularDirection * _followSpeed;
                 }
-            }
-            else if (Movingstate == 1)
-            {
-                if (isInRange(this.position, target, _followRange))
+            
+                if (isInRange(this.localPosition, target.LocalPosition, _followRange))
                 {
-                    Movingstate = 0;
+                    StopLookingAtTarget();
                 }
-
-                this.position += moveDir * _followSpeed * dt;
-            }
+            
         }
         protected bool isInRange(Vector2 V1, Vector2 V2, float range)
         {
             float dx = V2.X - V1.X;
             float dy = V2.Y - V2.Y;
             return MathF.Sqrt((dx * dx) + (dy * dy)) < range;
-        }
-
-        public override void Draw(SpriteBatch myspriteBatch)
-        {
-            base.Draw(myspriteBatch);
         }
     }
 }

@@ -9,31 +9,40 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class PauseState : GameState
+    class PauseState : Engine.GameState
     {
-        public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture6, Texture2D texture8, SpriteFont font)
+        Engine.SpriteGameObject background;
+        Engine.SpriteGameObject back;
+        Engine.TextGameObject pause;
+
+        public PauseState() : base()
         {
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(1.8f));
-            spriteBatch.Draw(texture6, new Vector2(0, 0), Color.White);
-            spriteBatch.End();
+            background = new Engine.SpriteGameObject("CreditScreen", 1);
+            gameObjects.AddChild(background);
+            background.scale = 1.8f;
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(2.7f));
-            spriteBatch.Draw(texture8, new Vector2(185, 100), Color.White);
-            spriteBatch.End();
+            back = new Engine.SpriteGameObject("MenuBackSelected", 1);
+            gameObjects.AddChild(back);
+            back.scale = 2.7f;
+            back.LocalPosition = new Vector2(500, 400);
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(1.5f));
+            pause = new Engine.TextGameObject("Credit", 1, Color.Beige);
+            gameObjects.AddChild(pause);
+            pause.LocalPosition = new Vector2(450, 60);
+            pause.Text = "PAUSED";
+        }
 
-            spriteBatch.DrawString(font, "PAUSED", new Vector2(250, 100), Color.Beige);
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
 
             spriteBatch.End();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
-                Game1.menuchoice = 1;
-
+                Game1.GameStateManager.SwitchTo("menuStartSelectedState");
+                Game1.buttonPressed = true;
+                Game1.framecount = Game1.startframe;
             }
         }
     }

@@ -77,9 +77,20 @@ namespace Engine
             SpriteEffects spriteEffects = SpriteEffects.None;
             if (Mirror)
                 spriteEffects = SpriteEffects.FlipHorizontally;
-            
+
             spriteBatch.Draw(sprite, position, spriteRectangle, Color.White,
                 0.0f, origin, 1.0f, spriteEffects, depth);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, float scale)
+        {
+            // mirror the sprite?
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (Mirror)
+                spriteEffects = SpriteEffects.FlipHorizontally;
+
+            spriteBatch.Draw(sprite, position, spriteRectangle, Color.White,
+                0.0f, origin, scale, spriteEffects, depth);
         }
 
         /// <summary>
@@ -96,6 +107,11 @@ namespace Engine
         public int Height
         {
             get { return sprite.Height / sheetRows; }
+        }
+
+        public Texture2D GetTexture
+        {
+            get { return sprite; }
         }
 
         /// <summary>
