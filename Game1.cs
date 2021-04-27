@@ -11,6 +11,10 @@ namespace BaseProject
 {
     class Game1 : Engine.ExtendedGame
     {
+        //-----------------------------------------------------------------------------------
+        public static bool buttonPressed;
+        //-----------------------------------------------------------------------------------
+
         //private GraphicsDeviceManager _graphics;
         //private SpriteBatch _spriteBatch;
 
@@ -37,8 +41,8 @@ namespace BaseProject
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
-        public int width = 1280;
-        public int height = 640;
+        public static int width = 1280;
+        public static int height = 640;
 
         public Vector2 playerPos;
 
@@ -294,11 +298,11 @@ namespace BaseProject
 
             framecount++;
 
-            if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
+            /*if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
                 ButtonSound.Play();
-                //menuchoice = 3;
-                GameStateManager.SwitchTo("menuCreditsState");
+                menuchoice = 3;
+                //GameStateManager.SwitchTo("menuCreditsState");
                 framecount = startframe;
             }
 
@@ -338,12 +342,12 @@ namespace BaseProject
 
             if (menuchoice == 2)
             {
-                menuCreditsSelectedState.Draw(spriteBatch, HomeScreen, MenuStartGame, MenuCreditsSelected, font);
+                //menuCreditsSelectedState.Draw(spriteBatch, HomeScreen, MenuStartGame, MenuCreditsSelected, font);
             }
 
             if (menuchoice == 3)
             {
-                menuCreditsState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
+                //menuCreditsState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
             }
 
             if (menuchoice == 4)
@@ -396,7 +400,7 @@ namespace BaseProject
                 spriteBatch.Begin();
                 //selinLevelPlayingState.Draw(spriteBatch);
                 spriteBatch.End();
-            }
+            }*/
         }
     }
 }

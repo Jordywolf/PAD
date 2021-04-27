@@ -1,31 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class Decoy
+    class Decoy : Engine.SpriteGameObject
     {
-        public Texture2D texture;
-        public Vector2 position;
-        public Vector2 velocity;
-
-        public Decoy(Texture2D decoyTexture)
+        public Decoy(String decoyTexture) : base(decoyTexture, 1)
         {
-            texture = decoyTexture;
+            Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         }
 
-        public void update()
+        public override void HandleInput(InputHelper inputHelper)
         {
-            position = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-        }
+            base.HandleInput(inputHelper);
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, Color.White);
+            localPosition = inputHelper.MousePositionScreen;
         }
     }
 }

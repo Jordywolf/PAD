@@ -78,7 +78,7 @@ namespace Engine
         {
             if (!Visible || sprite == null)
                 return;
-
+            
             spriteBatch.Draw(sprite.GetTexture, GlobalPosition, null, Color.White, radians - MathHelper.ToRadians(offsetDegrees), Origin, 1.0f, SpriteEffects.None, 0);
         }
 
