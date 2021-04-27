@@ -89,6 +89,15 @@ namespace BaseProject.GameStates
             mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
         }
 
+        public override void HandleInput(Engine.InputHelper inputHelper)
+        {
+            base.HandleInput(inputHelper);
+            if (inputHelper.KeyDown(Keys.P))
+            {
+                Game1.GameStateManager.SwitchTo("pauseState");
+                Game1.framecount = Game1.startframe;
+            }
+        }
         public override void Update(GameTime gameTime)
         {
             if (!fightSound.IsLooped)
@@ -151,7 +160,7 @@ namespace BaseProject.GameStates
 
             //mapConstruction.PlayerCollision(player.Position, playerTexture);
 
-            for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
+       /*    for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
             {
                 for (int iPillarsY = 1; iPillarsY <= mapConstruction.maxPillarsY; iPillarsY++)
                 {
@@ -178,7 +187,7 @@ namespace BaseProject.GameStates
                         PillarCollided = false;
                     }
                 }
-            }
+            } */
 
             foreach (JogonPart part in JogonDragon)
             {
@@ -210,6 +219,8 @@ namespace BaseProject.GameStates
                 }
             }*/
         }
+
+
         /*
         public override void Draw(SpriteBatch spriteBatch)
         {

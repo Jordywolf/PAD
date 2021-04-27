@@ -35,6 +35,7 @@ namespace BaseProject
         GameStates.NewGameState newGameState;
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
+        GameStates.PauseState pauseState;
         GameStates.SafeZoneState safeZoneState;
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
@@ -236,6 +237,9 @@ namespace BaseProject
             backState = new GameStates.BackState();
             GameStateManager.AddGameState("backState", backState);
 
+            pauseState = new GameStates.PauseState();
+            GameStateManager.AddGameState("pauseState", pauseState);
+
             safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
@@ -286,6 +290,12 @@ namespace BaseProject
             Keyboard.GetState();
 
             framecount++;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
+            {
+                GameStateManager.SwitchTo("pauseState");
+                framecount = startframe;
+            }
 
             /*if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
