@@ -36,6 +36,7 @@ namespace BaseProject
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
         GameStates.PauseState pauseState;
+        GameStates.DeathState deathState;
         GameStates.SafeZoneState safeZoneState;
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
@@ -164,6 +165,7 @@ namespace BaseProject
             PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
             fireBallTexture = Content.Load<Texture2D>("Fireball");
             //Home en menus
+            
             HomeScreen = Content.Load<Texture2D>("HomeScreen");
             MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
             MenuCredits = Content.Load<Texture2D>("MenuCredits");
@@ -243,6 +245,9 @@ namespace BaseProject
             pauseState = new GameStates.PauseState();
             GameStateManager.AddGameState("pauseState", pauseState);
 
+            deathState = new GameStates.DeathState();
+            GameStateManager.AddGameState("deathState", deathState);
+
             safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
@@ -293,6 +298,12 @@ namespace BaseProject
             Keyboard.GetState();
 
             framecount++;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.O) && framecount > startframe + 50)
+            {
+                GameStateManager.SwitchTo("deathState");
+                framecount = startframe;
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
             {
