@@ -57,9 +57,6 @@ namespace BaseProject.GameStates
                     JogonDragon.Add(jogonBodyPart);
                     target = jogonBodyPart;
             }
-            
-                
-
                 this.player = Game1.player;
                 this.playerTexture = playerTexture;
 
