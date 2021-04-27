@@ -60,8 +60,8 @@ namespace Engine
             Random = new Random();
 
             // default window and world size
-            windowSize = new Point(1024, 768);
-            worldSize = new Point(1024, 768);
+            windowSize = new Point(1280, 640);
+            worldSize = new Point(1280, 640);
         }
 
         /// <summary>
