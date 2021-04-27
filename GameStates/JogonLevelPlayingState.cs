@@ -95,6 +95,7 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
             //playerTest.update();
 
+
             Jogon.origin = player.Position;
 
             if (mapConstruction.Collision(Jogon.position, Jogon.texture) && !WallCollided)
