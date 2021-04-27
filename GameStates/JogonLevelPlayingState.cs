@@ -194,13 +194,13 @@ namespace BaseProject.GameStates
             {
                 if (deathTimer >= 500)
                 {
-<<<<<<< HEAD
+
                     GameEnvironment.SwitchTo(8);
                     Game1.menuchoice = 9;
-=======
+
                     GameEnvironment.SwitchTo(0);
                     Game1.menuchoice = 1;
->>>>>>> main
+
                 }
                 else
                 {

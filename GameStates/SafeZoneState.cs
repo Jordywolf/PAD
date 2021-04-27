@@ -7,22 +7,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 
-namespace BaseProject.GameStates
+namespace Engine.GameStates
 {
     class SafeZoneState : GameState
     {
-        SafeZone1 safeZone;
+        BaseProject.SafeZone1 safeZone;
+        BaseProject.Fontein fontein;
 
 
         public SafeZoneState() : base()
         {
-            safeZone = new SafeZone1();
+            safeZone = new BaseProject.SafeZone1();
         }
 
-        public void SafzoneConstruction(SpriteBatch spriteBatch, Player player, List<Sprite> sprites, Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert)
+        public void SafeZoneConstruction(SpriteBatch spriteBatch, BaseProject.Player player, List<BaseProject.Sprite> sprites, Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert)
         {
             spriteBatch.Begin();
-
+            fontein = new BaseProject.Fontein();
+            //this.AddChild(fontein);
+            
             safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
             safeZone.SafeZoneStone(SteenTile, spriteBatch);
             safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);

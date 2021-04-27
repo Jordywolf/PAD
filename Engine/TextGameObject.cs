@@ -43,7 +43,7 @@ namespace Engine
         /// The horizontal alignment of this text.
         /// </summary>
         protected Alignment alignment;
-
+        public float scale = 1.0f;
         /// <summary>
         /// Creates a new TextGameObject with the given details.
         /// </summary>
@@ -77,7 +77,7 @@ namespace Engine
 
             // draw the text
             spriteBatch.DrawString(font, Text, GlobalPosition,
-                Color, 0f, origin, 1, SpriteEffects.None, depth);
+                Color, 0f, origin, scale, SpriteEffects.None, depth);
         }
 
         /// <summary>

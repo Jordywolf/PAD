@@ -5,6 +5,11 @@ namespace Engine
 {
     public class GameObject : IGameLoopObject
     {
+        public Texture2D texture;
+        public Vector2 Position;
+        public Vector2 Scale;
+        public Vector2 Velocity;
+        public GameObject Deur, Rots, Fontein, Sleutel1;
         /// <summary>
         /// The position of this game object, relative to its parent in the game-object hierachy.
         /// </summary>
@@ -19,6 +24,9 @@ namespace Engine
         /// The current velocity of this game object, in units per second.
         /// </summary>
         protected Vector2 velocity;
+        protected Vector2 RotsPosition = new Vector2(1920 / 3, 1080 / 2.5f);
+        protected Vector2 PilaarPosition = new Vector2(1590, 200);
+        public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
 
         /// <summary>
         /// Whether or not this game object is currently visible.
@@ -39,6 +47,10 @@ namespace Engine
             LocalPosition = Vector2.Zero;
             velocity = Vector2.Zero;
             Visible = true;
+            //Deur = new SpriteGameObject("Deur",0,0);
+            
+           
+            
         }
 
         /// <summary>

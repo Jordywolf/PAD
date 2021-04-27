@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+
 namespace Engine
 {
     /// <summary>
@@ -12,6 +13,7 @@ namespace Engine
         /// The game objects associated to this game state.
         /// </summary>
         protected GameObjectList gameObjects;
+        
 
         /// <summary>
         /// Creates a new GameState object with an empty list of game objects.
@@ -19,6 +21,7 @@ namespace Engine
         protected GameState()
         {
             gameObjects = new GameObjectList();
+            
         }
 
         /// <summary>
@@ -47,6 +50,7 @@ namespace Engine
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             gameObjects.Draw(gameTime, spriteBatch);
+            
         }
 
         /// <summary>
@@ -55,6 +59,7 @@ namespace Engine
         public virtual void Reset()
         {
             gameObjects.Reset();
+            
         }
     }
 }

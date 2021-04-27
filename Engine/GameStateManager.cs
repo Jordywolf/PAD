@@ -33,6 +33,7 @@ namespace Engine
         public void AddGameState(string name, GameState state)
         {
             gameStates[name] = state;
+            
         }
 
         /// <summary>

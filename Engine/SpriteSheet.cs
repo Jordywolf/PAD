@@ -81,6 +81,16 @@ namespace Engine
             spriteBatch.Draw(sprite, position, spriteRectangle, Color.White,
                 0.0f, origin, 1.0f, spriteEffects, depth);
         }
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, Vector2 origin, float scale)
+        {
+            // mirror the sprite?
+            SpriteEffects spriteEffects = SpriteEffects.None;
+            if (Mirror)
+                spriteEffects = SpriteEffects.FlipHorizontally;
+
+            spriteBatch.Draw(sprite, position, spriteRectangle, Color.White,
+                0.0f, origin, scale, spriteEffects, depth);
+        }
 
         /// <summary>
         /// Gets the width of a single sprite in this sprite sheet.

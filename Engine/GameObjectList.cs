@@ -29,7 +29,7 @@ namespace Engine
         public void AddChild(GameObject obj)
         {
             obj.Parent = this;
-            children.Add(obj);
+
         }
 
         /// <summary>
