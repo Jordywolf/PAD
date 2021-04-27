@@ -87,14 +87,42 @@ namespace BaseProject.GameStates
                 Game1.framecount = Game1.startframe;
             }
 
-            /*foreach (SpriteGameObject spgo in test.children)
+            test.CollShockPlayer(playerTest);
+
+            /*
+            foreach (Engine.GameObject g in test.children)
             {
-                if (OverlapsWith(spgo, playerTest))
+                if (g is Engine.GameObjectList)
                 {
-                    Game1.GameStateManager.SwitchTo("newGameState");
+                    foreach (GameObjectList gol in gameObjects.children)
+                    {
+                        foreach (SpriteGameObject sgo in gol.children)
+                        {
+                            if (OverlapsWith(sgo, playerTest))
+                            {
+                                Game1.GameStateManager.SwitchTo("newGameState");
+                            }
+                        }
+                    }
                 }
-            }*/
+            }
+
+            foreach (Engine.GameObject g in test.children)
+            {
+                if (g is Engine.SpriteGameObject)
+                {
+                    foreach (SpriteGameObject sgo in test.children)
+                    {
+                        if (OverlapsWith(sgo, playerTest))
+                        {
+                            Game1.GameStateManager.SwitchTo("newGameState");
+                        }
+                    }
+                }
+            }
+            */
         }
+
 
         public override void HandleInput(InputHelper inputHelper)
         {
@@ -107,24 +135,24 @@ namespace BaseProject.GameStates
         /*public void Draw(SpriteBatch spriteBatch)
         {
 
-           
+
 
 
 
 
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(1.3f));
+    Matrix.CreateScale(1.3f));
             spriteBatch.Draw(texture, new Vector2(0, -50), Color.White);
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(2.7f));
+    Matrix.CreateScale(2.7f));
             spriteBatch.Draw(texture4, new Vector2(200, 100), Color.White);
             spriteBatch.Draw(texture3, new Vector2(200, 150), Color.White);
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(0.45f));
+    Matrix.CreateScale(0.45f));
             spriteBatch.DrawString(font, "Press", new Vector2(0, 1000), Color.Beige);
             spriteBatch.DrawString(font, "Arrow Keys", new Vector2(0, 1050), Color.Beige);
             spriteBatch.DrawString(font, "Press", new Vector2(0, 1150), Color.Beige);
@@ -144,7 +172,7 @@ Matrix.CreateScale(0.45f));
                 Game1.menuchoice = 2;
 
             }
-            
+
         }*/
     }
 }
