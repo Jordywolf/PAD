@@ -27,6 +27,7 @@ namespace BaseProject.GameStates
             safeZone.SafeZoneStone(SteenTile, spriteBatch);
             safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
             safeZone.NextLevel1();
+
             spriteBatch.End();
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);

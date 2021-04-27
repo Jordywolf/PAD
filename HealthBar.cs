@@ -31,10 +31,10 @@ namespace BaseProject
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             float healthbarWidth = 20;
-            spriteBatch.Draw(HBhealthTexture, new Vector2(GameEnvironment.Screen.X / 2 - HBhealthTexture.Width * ((healthbarWidth + 1) / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2((healthbarWidth + 1) * MaxHealthLength, 1), SpriteEffects.None, 0f);
-            spriteBatch.Draw(HBbeginLTexture, new Vector2(GameEnvironment.Screen.X / 2 - HBhealthTexture.Width * (healthbarWidth / 2) - HBbeginLTexture.Width, 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
-            spriteBatch.Draw(HBbeginRTexture, new Vector2(GameEnvironment.Screen.X / 2 + HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
-            spriteBatch.Draw(HBmiddleTexture, new Vector2(GameEnvironment.Screen.X / 2 - HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2(healthbarWidth, 1), SpriteEffects.None, 0f);
+            spriteBatch.Draw(HBhealthTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * ((healthbarWidth + 1) / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2((healthbarWidth + 1) * MaxHealthLength, 1), SpriteEffects.None, 0f);
+            spriteBatch.Draw(HBbeginLTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * (healthbarWidth / 2) - HBbeginLTexture.Width, 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+            spriteBatch.Draw(HBbeginRTexture, new Vector2(Game1.width / 2 + HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+            spriteBatch.Draw(HBmiddleTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2(healthbarWidth, 1), SpriteEffects.None, 0f);
         }
     }
 }

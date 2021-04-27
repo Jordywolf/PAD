@@ -69,14 +69,14 @@ namespace BaseProject.GameStates
 
         public bool JogonCollision(Player p, JogonPart j, Texture2D pTexture)
         {
-            return (MathF.Abs(p.LocalPosition.X - j.position.X) < pTexture.Width + j.texture.Width
-                && MathF.Abs(p.LocalPosition.Y - j.position.Y) < pTexture.Height + j.texture.Height);
+            return (MathF.Abs(p.LocalPosition.X - j.LocalPosition.X) < pTexture.Width + j.sprite.Width
+                && MathF.Abs(p.LocalPosition.Y - j.LocalPosition.Y) < pTexture.Height + j.sprite.Height);
         }
 
         public bool FireballCollision(Player p, Fireball f, Texture2D pTexture)
         {
-            return (p.LocalPosition.X +pTexture.Width > f.position.X && p.LocalPosition.X < f.position.X + f.texture.Width
-                && p.LocalPosition.Y + pTexture.Height > f.position.Y && p.LocalPosition.Y < f.position.Y + f.texture.Height);
+            return (p.LocalPosition.X +pTexture.Width > f.LocalPosition.X && p.LocalPosition.X < f.LocalPosition.X + f.sprite.Width
+                && p.LocalPosition.Y + pTexture.Height > f.LocalPosition.Y && p.LocalPosition.Y < f.LocalPosition.Y + f.sprite.Height);
         }
 
         public void JogonLevelConstruction(Player player, Texture2D Floortile, int width, int height, Texture2D WalltileStr, Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR, Texture2D PillarTile, Texture2D PlayerTexture, int menuChoice)
