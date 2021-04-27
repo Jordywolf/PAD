@@ -216,7 +216,7 @@ namespace BaseProject
                 }
             };
 
-            MenuBMI.Play();
+       
 
             menuchoice = 1;
             framecount = 0;
@@ -270,6 +270,8 @@ namespace BaseProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            MenuBMI.Play();
+
             if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)
@@ -303,6 +305,7 @@ namespace BaseProject
             {
                 GameStateManager.SwitchTo("deathState");
                 framecount = startframe;
+                MenuBMI.Stop();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
