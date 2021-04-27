@@ -77,7 +77,7 @@ namespace Engine
             SpriteEffects spriteEffects = SpriteEffects.None;
             if (Mirror)
                 spriteEffects = SpriteEffects.FlipHorizontally;
-            
+
             spriteBatch.Draw(sprite, position, spriteRectangle, Color.White,
                 0.0f, origin, 1.0f, spriteEffects, depth);
         }

@@ -99,6 +99,7 @@ namespace BaseProject
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public static Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel, TileSz2, TileSz3;
         public static Texture2D PlayerShadow;
+        public static Texture2D PlayerHealth;
 
         private ActionHandeler actionHandeler;
 
@@ -136,6 +137,7 @@ namespace BaseProject
             //player
             Player = Content.Load<Texture2D>("De_Rakker");
             PlayerShadow = Content.Load<Texture2D>("PlayerShadow");
+            PlayerHealth = Content.Load<Texture2D>("Heart");
             //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
@@ -183,20 +185,7 @@ namespace BaseProject
 
             font = Content.Load<SpriteFont>("Credit");
             actionHandeler = new ActionHandeler();
-            player = new Player(Player, PlayerPosition)
-            {
-                Input = new Input()
-                {
-                    Left = Keys.Left,
-                    Right = Keys.Right,
-                    Up = Keys.Up,
-                    Down = Keys.Down,
-                },
-                Position = PlayerPosition,
-                color = Color.White,
-                Speed = 15f,
-
-            };
+            player = new Player();
 
             noSprite = new List<Sprite>();
             _sprites = new List<Sprite>()
@@ -272,15 +261,15 @@ namespace BaseProject
             if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)
-                    sprite.Update(gameTime, _sprites);
-                player.Update(gameTime, _sprites);
+                sprite.Update(gameTime, _sprites);
+                player.Update(gameTime);
                 actionHandeler.Update();
             }
             if (menuchoice == 8)
             {
                 foreach (var sprite in noSprite)
-                    sprite.Update(gameTime, noSprite);
-                player.Update(gameTime, noSprite);
+                sprite.Update(gameTime, noSprite);
+                player.Update(gameTime);
                 actionHandeler.Update();
             }
 
@@ -372,16 +361,16 @@ namespace BaseProject
                 safeZone.SafeZoneStone(SteenTile, spriteBatch);
                 safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
                 safeZone.NextLevel1();
+                player.Draw(gameTime, spriteBatch);
                 spriteBatch.End();
                 foreach (var sprite in _sprites)
                     sprite.Draw(spriteBatch);
-                player.Draw(spriteBatch);
             }
 
             if (menuchoice == 8)
             {
                 jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
-                player.Draw(spriteBatch);
+                player.Draw(gameTime, spriteBatch);
 
 
             }
