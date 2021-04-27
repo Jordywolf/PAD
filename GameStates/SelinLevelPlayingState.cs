@@ -30,8 +30,8 @@ namespace BaseProject.GameStates
             pillar = Sn_pillar;
             brokenPillar = Sn_brokenPillar;
 
-            levelHeight = GameEnvironment.Screen.Y;
-            levelWidth = GameEnvironment.Screen.X;
+            //levelHeight = GameEnvironment.Screen.Y;
+            //levelWidth = GameEnvironment.Screen.X;
 
             mapConstruction = new MapConstruction(pillar);
             //selinTest = new Decoy(brokenPillar);

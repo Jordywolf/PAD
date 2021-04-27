@@ -195,7 +195,7 @@ namespace BaseProject
                 Position = PlayerPosition,
                 color = Color.White,
                 Speed = 15f,
-                
+
             };
 
             noSprite = new List<Sprite>();
@@ -250,7 +250,7 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture,jogonSound , HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
 
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
@@ -272,14 +272,14 @@ namespace BaseProject
             if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
+                    sprite.Update(gameTime, _sprites);
                 player.Update(gameTime, _sprites);
                 actionHandeler.Update();
             }
             if (menuchoice == 8)
             {
                 foreach (var sprite in noSprite)
-                sprite.Update(gameTime, noSprite);
+                    sprite.Update(gameTime, noSprite);
                 player.Update(gameTime, noSprite);
                 actionHandeler.Update();
             }
