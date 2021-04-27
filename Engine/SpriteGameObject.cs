@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Engine
 {
     /// <summary>
-    /// A class that can represent a game object with a sprite.     
+    /// A class that can represent a game object with a sprite.
     /// </summary>
     public class SpriteGameObject : GameObject
     {
@@ -32,6 +32,7 @@ namespace Engine
         /// A larger value means that the object will be drawn on top.
         /// </summary>
         protected float depth;
+
         public float scale = 1.0f;
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Engine
 
             // draw the sprite at its *global* position in the game world
            if (sprite != null)
-                sprite.Draw(spriteBatch, GlobalPosition, Origin,scale);
+                sprite.Draw(spriteBatch, GlobalPosition, Origin, scale);
         }
 
         /// <summary>

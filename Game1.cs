@@ -11,7 +11,11 @@ namespace BaseProject
 {
     class Game1 : Engine.ExtendedGame
     {
-        private GraphicsDeviceManager _graphics;
+        //-----------------------------------------------------------------------------------
+        public static bool buttonPressed;
+        //-----------------------------------------------------------------------------------
+
+        //private GraphicsDeviceManager _graphics;
         //private SpriteBatch _spriteBatch;
 
         public Texture2D PillarV2_Torch;
@@ -31,14 +35,14 @@ namespace BaseProject
         GameStates.NewGameState newGameState;
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
-        Engine.GameStates.SafeZoneState SafeZoneState;
-        Engine.GameStates.SafeZoneState2 SafeZoneState2;
+        GameStates.SafeZoneState safeZoneState;
+        GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
-        public int width = 1280;
-        public int height = 640;
+        public static int width = 1280;
+        public static int height = 640;
 
         public Vector2 playerPos;
 
@@ -71,9 +75,7 @@ namespace BaseProject
         public SoundEffect jogonFightSound;
         public SoundEffect MenuBM;
         public SoundEffect ButtonSound;
-        public SoundEffect SafeZoneMusic;
         public SoundEffectInstance MenuBMI;
-        public SoundEffectInstance SafeZoneMoezic;
 
         public Texture2D HBedgeLTexture;
         public Texture2D HBedgeRTexture;
@@ -93,11 +95,11 @@ namespace BaseProject
         public Vector2 PlayerPosition = new Vector2(1920 / 2, 1080);
         public Vector2 RotsPosition = new Vector2(1920 / 3, 1080 / 2.5f);
         public Vector2 position = new Vector2(0, 0);
-        public Vector2 screen;
-        public Vector2 PilaarPosition = new Vector2(990, 100);
+        public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public static Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel, TileSz2, TileSz3;
         public static Texture2D PlayerShadow;
+        public static Texture2D PlayerHealth;
 
         private ActionHandeler actionHandeler;
 
@@ -108,8 +110,10 @@ namespace BaseProject
         {
             IsMouseVisible = true;
 
-            screen.X = width;
-            screen.Y = height;
+            windowSize = new Point(width, height);
+            worldSize = windowSize;
+
+
         }
 
         protected override void Initialize()
@@ -119,7 +123,7 @@ namespace BaseProject
 
         protected override void LoadContent()
         {
-           //ApplyResolutionSettings();
+            FullScreen = false;
             base.LoadContent();
             //Safezone 1
             Pilaar = Content.Load<Texture2D>("Pilaar");
@@ -133,6 +137,7 @@ namespace BaseProject
             //player
             Player = Content.Load<Texture2D>("De_Rakker");
             PlayerShadow = Content.Load<Texture2D>("PlayerShadow");
+            PlayerHealth = Content.Load<Texture2D>("Heart");
             //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
@@ -176,27 +181,11 @@ namespace BaseProject
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
             MenuBM = Content.Load<SoundEffect>("BeginBM");
             MenuBMI = MenuBM.CreateInstance();
-        
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
-            SafeZoneMusic = Content.Load<SoundEffect>("MenuBackgroundSong");
-            SafeZoneMoezic = SafeZoneMusic.CreateInstance();
 
             font = Content.Load<SpriteFont>("Credit");
             actionHandeler = new ActionHandeler();
-            player = new Player(Player, PlayerPosition)
-            {
-                Input = new Input()
-                {
-                    Left = Keys.Left,
-                    Right = Keys.Right,
-                    Up = Keys.Up,
-                    Down = Keys.Down,
-                },
-                Position = PlayerPosition,
-                color = Color.White,
-                Speed = 15f,
-                
-            };
+            player = new Player();
 
             noSprite = new List<Sprite>();
             _sprites = new List<Sprite>()
@@ -230,39 +219,37 @@ namespace BaseProject
             startframe = -100;
 
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
-            GameEnvironment.gameStateList.Add(menuStartSelectedState);
-            GameEnvironment.SwitchTo(0);
+            GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
-            GameEnvironment.gameStateList.Add(menuCreditsSelectedState);
+            GameStateManager.AddGameState("menuCreditsSelectedState", menuCreditsSelectedState);
 
             menuCreditsState = new GameStates.MenuCreditsState();
-            GameEnvironment.gameStateList.Add(menuCreditsState);
+            GameStateManager.AddGameState("menuCreditsState", menuCreditsState);
 
             newGameState = new GameStates.NewGameState();
-            GameEnvironment.gameStateList.Add(newGameState);
+            GameStateManager.AddGameState("newGameState", newGameState);
 
             continueState = new GameStates.ContinueState();
-            GameEnvironment.gameStateList.Add(continueState);
+            GameStateManager.AddGameState("continueState", continueState);
 
             backState = new GameStates.BackState();
-            GameEnvironment.gameStateList.Add(backState);
-            SafeZoneState = new Engine.GameStates.SafeZoneState();
-            GameStateManager.AddGameState("SafeZoneState", SafeZoneState);
-           
+            GameStateManager.AddGameState("backState", backState);
 
-            //gameStateList.Add("SafeZoneState", new SafeZoneState());
+            safeZoneState = new GameStates.SafeZoneState();
+            GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonHeadTexture, fireBallTexture, jogonBodyTexture,jogonSound , HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
 
-            GameEnvironment.gameStateList.Add(jogonLevelPlayingState);
+            GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
-            SafeZoneState2 = new Engine.GameStates.SafeZoneState2();
-            GameStateManager.AddGameState("SafeZoneState2", SafeZoneState2);
-            
+            safeZoneState2 = new GameStates.SafeZoneState();
+            GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
-            GameEnvironment.gameStateList.Add(selinLevelPlayingState);
+            GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
+
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
@@ -275,14 +262,14 @@ namespace BaseProject
             {
                 foreach (var sprite in _sprites)
                 sprite.Update(gameTime, _sprites);
-                player.Update(gameTime, _sprites);
+                player.Update(gameTime);
                 actionHandeler.Update();
             }
             if (menuchoice == 8)
             {
                 foreach (var sprite in noSprite)
                 sprite.Update(gameTime, noSprite);
-                player.Update(gameTime, noSprite);
+                player.Update(gameTime);
                 actionHandeler.Update();
             }
 
@@ -300,10 +287,11 @@ namespace BaseProject
 
             framecount++;
 
-            if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
+            /*if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
                 ButtonSound.Play();
                 menuchoice = 3;
+                //GameStateManager.SwitchTo("menuCreditsState");
                 framecount = startframe;
             }
 
@@ -333,25 +321,22 @@ namespace BaseProject
                 MenuBMI.Stop();
                 menuchoice = 7;
                 framecount = startframe;
-                SafeZoneMoezic.Play();
-
+                
             }
 
             if (menuchoice == 1)
             {
-                menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
-                
-                
+                //menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
             }
 
             if (menuchoice == 2)
             {
-                menuCreditsSelectedState.Draw(spriteBatch, HomeScreen, MenuStartGame, MenuCreditsSelected, font);
+                //menuCreditsSelectedState.Draw(spriteBatch, HomeScreen, MenuStartGame, MenuCreditsSelected, font);
             }
 
             if (menuchoice == 3)
             {
-                menuCreditsState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
+                //menuCreditsState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
             }
 
             if (menuchoice == 4)
@@ -371,52 +356,40 @@ namespace BaseProject
 
             if (menuchoice == 7)
             {
-                GameStateManager.SwitchTo("SafeZoneState");
-                //SafeZoneState.Draw(spriteBatch,player,_sprites,ZandTile,Sleutel,SteenTile,SteenVert);
-               // spriteBatch.Begin();
-                //safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-               //safeZone.SafeZoneStone(SteenTile, spriteBatch);
-               //safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-               // safeZone.NextLevel1();
-               // spriteBatch.End();
-               // foreach (var sprite in _sprites)
-               // sprite.Draw(spriteBatch);
-               // player.Draw(spriteBatch);
+                spriteBatch.Begin();
+                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
+                safeZone.SafeZoneStone(SteenTile, spriteBatch);
+                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
+                safeZone.NextLevel1();
+                player.Draw(gameTime, spriteBatch);
+                spriteBatch.End();
+                foreach (var sprite in _sprites)
+                    sprite.Draw(spriteBatch);
             }
 
             if (menuchoice == 8)
             {
                 jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
-                player.Draw(spriteBatch);
-
-
-                SafeZoneMoezic.Stop();
+                player.Draw(gameTime, spriteBatch);
 
 
             }
 
             if (menuchoice == 9)
             {
-                GameStateManager.SwitchTo("SafeZoneState2");
-                //spriteBatch.Begin();
-                //safeZone2.SafeZone(TileSz2, spriteBatch);
-               // safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
-               // safeZone2.MovingPlatForm(TileSz3, spriteBatch);
-               // spriteBatch.End();
-
-                //foreach (var sprite in _sprites)
-               //     sprite.Draw(spriteBatch);
-                //player.Draw(spriteBatch);
-
+                spriteBatch.Begin();
+                safeZone2.SafeZone(TileSz2, spriteBatch);
+                safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
+                safeZone2.MovingPlatForm(TileSz3, spriteBatch);
+                spriteBatch.End();
             }
 
             if (menuchoice == 10)
             {
                 spriteBatch.Begin();
-                selinLevelPlayingState.Draw(spriteBatch);
+                //selinLevelPlayingState.Draw(spriteBatch);
                 spriteBatch.End();
-
-            }
+            }*/
         }
     }
 }

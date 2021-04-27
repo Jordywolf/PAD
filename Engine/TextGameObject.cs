@@ -43,7 +43,9 @@ namespace Engine
         /// The horizontal alignment of this text.
         /// </summary>
         protected Alignment alignment;
+
         public float scale = 1.0f;
+
         /// <summary>
         /// Creates a new TextGameObject with the given details.
         /// </summary>

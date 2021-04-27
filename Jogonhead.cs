@@ -15,9 +15,6 @@ namespace BaseProject
         private static float chargeOffset = 0;
         private float chargeInc = chargeOffset;
         private bool charging = false;
-        private float targetSpeed = 0.01f;
-        private float targetTime = 0;
-        private float targetRadius = 200;
         public Vector2 origin = new Vector2(1280, 320);
         private Vector2 fireballOffset = new Vector2(20, 10);
         private SoundEffect chargeSound;
@@ -25,27 +22,25 @@ namespace BaseProject
         private int fireTimer;
         private int fireTimerMax = 30;
 
+        public Engine.GameObjectList Body1 = new Engine.GameObjectList();
         public List<JogonPart> Body = new List<JogonPart>();
         public List<Fireball> fireballs = new List<Fireball>();
-        public Texture2D fireBallTexture;
+        public string fireBallTexture;
+        public bool reached;
         bool keyPressed;
 
         Player player;
 
-        public Jogonhead(Vector2 position, Vector2 velocity, float rotation, float scale, Texture2D texture, float followDist, Texture2D fireballTexture, Player target, JogonPart parent, SoundEffect aSound) : base(position, velocity, rotation, scale, texture, followDist, parent)
+        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, Engine.SpriteGameObject target,  SoundEffect aSound) : base(position, velocity, texture, followDist, target)
         {
-            this.player = target;
-            segment = false;
+            localPosition = position;
             this.fireBallTexture = fireballTexture;
-            this.target = new Vector2(1280, 320);
             chargeSound = aSound;
-            _followRange = 10f;
         }
 
         public override void Update(GameTime gameTime)
         {
-            targetTime++;
-            this.target = new Vector2((float)Math.Cos(targetTime * targetSpeed) * targetRadius + origin.X, (float)Math.Sin(targetTime * targetSpeed) * targetRadius + origin.Y);
+            base.Update(gameTime);
             if (fireTimer >= fireTimerMax)
             {
                 Fireball();
@@ -56,22 +51,12 @@ namespace BaseProject
             {
                 keyPressed = false;
             }
-
-            //turning
-
             chargingdelay--;
-
-            foreach (JogonPart bodypart in Body)
-            {
-                bodypart.Update(gameTime);
-            }
-            base.Update(gameTime);
 
             if (chargingdelay <= 0)
             {
                 charging = true;
                 _followSpeed = 200;
-                chargingdelay = 2000;
                 Charge();
 
             }
@@ -79,29 +64,37 @@ namespace BaseProject
 
         public void Charge()
         {
+            
             chargeSound.Play();
             if (charging)
             {
-                if (chargeInc <= MathF.PI * 2 + chargeOffset)
+                if (chargeInc <= MathF.PI * 2)
                 {
-                    chargeInc += chargeTime;
-                    _followSpeed += (-MathF.Cos(chargeInc)) * (chargeTime * 15f);
+                    chargeInc+= 0.1f;
+                    _followSpeed = (float) (35 * -Math.Cos(2*MathF.PI*(chargeInc+2)));
                 }
-                else { chargeInc = chargeOffset; chargingdelay = 2000; chargeTime = 0.1f; _followSpeed = 50; charging = false; }
+                else
+                {
+                    chargingdelay = 2000;
+                    chargeTime = 0.1f;
+                    _followSpeed = 70;
+                    charging = false;
+                }
             }
             else
             {
                 _followSpeed = 50;
                 charging = true;
             }
+            
         }
 
         public void Fireball()
         {
-            fireballOffset = -new Vector2(-this.texture.Width / 2, this.texture.Height / 2);
+            fireballOffset = -new Vector2(-this.sprite.Width / 2, this.sprite.Height / 2);
             fireballOffset.Normalize();
-            //fireball zooi
-            fireballs.Add(new Fireball(this.position + fireballOffset, Vector2.Zero, 0, 1, fireBallTexture, player));
+            //fireball zooi  
+            fireballs.Add(new Fireball(this.localPosition + fireballOffset, fireBallTexture, target));
             for (int i = 0; i < fireballs.Count; i++)
             {
                 if (fireballs[i].IsObjectOffScreen(fireballs[i]))
@@ -110,15 +103,5 @@ namespace BaseProject
                 }
             }
         }
-        public override void Draw(SpriteBatch myspriteBatch)
-        {
-            foreach (JogonPart bodypart in Body)
-            {
-                bodypart.Draw(myspriteBatch);
-            }
-            base.Draw(myspriteBatch);
-        }
-
-
     }
 }

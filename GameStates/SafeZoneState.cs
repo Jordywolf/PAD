@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Engine.GameStates
 {
-    class SafeZoneState : GameState
+    class SafeZoneState : Engine.GameState
     {
         BaseProject.SafeZone1 safeZone;
         BaseProject.Fontein fontein;
@@ -30,11 +30,10 @@ namespace Engine.GameStates
             safeZone.SafeZoneStone(SteenTile, spriteBatch);
             safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
             safeZone.NextLevel1();
+
             spriteBatch.End();
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-
         }
     }
 }
