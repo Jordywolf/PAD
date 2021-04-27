@@ -35,6 +35,7 @@ namespace BaseProject
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
+        GameStates.PauseState pauseState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public int width = 1280;
@@ -232,6 +233,9 @@ namespace BaseProject
             GameEnvironment.gameStateList.Add(menuStartSelectedState);
             GameEnvironment.SwitchTo(0);
 
+            pauseState = new GameStates.PauseState();
+            GameEnvironment.gameStateList.Add(pauseState);
+
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
             GameEnvironment.gameStateList.Add(menuCreditsSelectedState);
 
@@ -333,6 +337,12 @@ namespace BaseProject
 
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
+            {
+                menuchoice = 11;
+                framecount = startframe;
+            }
+
             if (menuchoice == 1)
             {
                 menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
@@ -400,6 +410,11 @@ namespace BaseProject
                 spriteBatch.Begin();
                 selinLevelPlayingState.Draw(spriteBatch);
                 spriteBatch.End();
+            }
+
+            if (menuchoice == 11)
+            {
+                pauseState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
             }
         }
     }

@@ -43,6 +43,8 @@ public class MapConstruction
 
     public bool check;
 
+
+
     public List<Pillar> pillars = new List<Pillar>();
 
     public MapConstruction(Texture2D pilTexture)
@@ -56,7 +58,11 @@ public class MapConstruction
             Pillar pillar = new Pillar(new Vector2(0, 0), aTexture);
             pillars.Add(pillar);
         }
+
+
     }
+
+
 
     public void FloorConstruction(Vector2 floorPosition, Texture2D floorTexture, int width, int height, Color color)
     {
@@ -192,11 +198,14 @@ public class MapConstruction
         }
     }
 
+
+
     public void Draw(SpriteBatch spriteBatch)
     {
         if (Fconstruct) { DrawFloor(spriteBatch); }
         if (Pconstruct) { DrawPillars(spriteBatch); }
         if (Wconstruct) { DrawWalls(spriteBatch); }
+
     }
 }
 
