@@ -8,18 +8,24 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class Decoy : Engine.SpriteGameObject
+    class Decoy
     {
-        public Decoy(String decoyTexture) : base(decoyTexture, 1)
+        public Texture2D texture;
+        public Vector2 position;
+        public Vector2 velocity;
+
+        public Decoy(Texture2D decoyTexture)
         {
-            Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            texture = decoyTexture;
         }
 
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
 
-            localPosition = inputHelper.MousePositionScreen;
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }
