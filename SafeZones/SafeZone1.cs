@@ -27,7 +27,7 @@ namespace BaseProject
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) && Game1.menuchoice == 7)
             {
                 Game1.menuchoice = 8;
-                GameEnvironment.SwitchTo(7);
+                Game1.GameStateManager.SwitchTo("jogonLevelPlayingState");
 
             }
             if (PlayerPosition.Y == PilaarPosition.Y)
