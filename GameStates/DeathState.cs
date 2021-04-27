@@ -17,7 +17,8 @@ namespace BaseProject.GameStates
         {
             deathground = new Engine.SpriteGameObject("DeathScreen", 1);
             gameObjects.AddChild(deathground);
-            deathground.scale = 1.2f;
+            deathground.scale = 1.3f;
+            deathground.LocalPosition = new Vector2(25, -70);
 
 
         }
