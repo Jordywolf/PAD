@@ -30,8 +30,6 @@ namespace BaseProject.GameStates
             spriteBatch.End();
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);
-            player.Draw(spriteBatch);
-
         }
     }
 }

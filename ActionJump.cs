@@ -20,7 +20,7 @@ namespace BaseProject
             if (playerOnGround == true)
             {
                 playerVelocityY = playerJumpVelocity;
-                jumpLocation = Game1.player.Position;
+                jumpLocation = Game1.player.LocalPosition;
                 playerOnGround = false;
             }
         }
@@ -29,18 +29,18 @@ namespace BaseProject
         {
             if (playerOnGround == false)
             {
-                Game1.player.Position.Y -= playerVelocityY;
+                Game1.player.LocalPosition -= new Vector2(0, playerVelocityY);
                 playerVelocityY -= playerZwaartekracht;
 
-                if (Game1.player.Position.Y > jumpLocation.Y)
+                if (Game1.player.LocalPosition.Y > jumpLocation.Y)
                 {
-                    Game1.player.Position.Y = jumpLocation.Y;
+                    Game1.player.LocalPosition = new Vector2(Game1.player.LocalPosition.X, playerVelocityY);
                     playerOnGround = true;
                 }
             }
             else
             {
-                jumpLocation = Game1.player.Position;
+                jumpLocation = Game1.player.LocalPosition;
             }
         }
     }

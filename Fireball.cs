@@ -27,7 +27,7 @@ namespace BaseProject
         {
             Timer = 0;
             SpawnPosition = position;
-            TargetPosition = this.player.Position; // hier komt de target te staat wss dus de player
+            TargetPosition = this.player.LocalPosition; // hier komt de target te staat wss dus de player
             totalangle = (float)Math.Atan2(TargetPosition.Y - SpawnPosition.Y, TargetPosition.X - SpawnPosition.X);
         }
 
