@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class SelinLevelPlayingState : GameState
+    class SelinLevelPlayingState : Engine.GameState
     {
         public Texture2D stone_grnd, grass_grnd, obstacle, pillar, brokenPillar;
         private int levelWidth, levelHeight;
@@ -30,11 +30,11 @@ namespace BaseProject.GameStates
             pillar = Sn_pillar;
             brokenPillar = Sn_brokenPillar;
 
-            levelHeight = GameEnvironment.Screen.Y;
-            levelWidth = GameEnvironment.Screen.X;
+            levelHeight = Game1.height;
+            levelWidth = Game1.width;
 
             mapConstruction = new MapConstruction(pillar);
-            selinTest = new Decoy(brokenPillar);
+            //selinTest = new Decoy(brokenPillar);
         }
 
         public override void Update(GameTime gameTime)
@@ -44,7 +44,7 @@ namespace BaseProject.GameStates
             mapConstruction.FloorConstruction(new Vector2(0, 0), grass_grnd, levelWidth, levelHeight, Color.Green);
             mapConstruction.PillarSetup(pillar, levelWidth, levelHeight, new Vector2(0, 0), Color.Gray);
 
-            selinTest.update();
+            //selinTest.update();
 
             //pillar collision met selin's hamer
             for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
@@ -54,7 +54,7 @@ namespace BaseProject.GameStates
                     pillarPositionCollision.X = ((levelWidth / (mapConstruction.maxPillarsX + 1)) * (iPillarsX)) - (mapConstruction.pillarTile.Width / 2);
                     pillarPositionCollision.Y = ((levelHeight / (mapConstruction.maxPillarsY + 1)) * (iPillarsY)) - (mapConstruction.pillarTile.Height / 2);
 
-                     
+                     /*
                     if (mapConstruction.pillars[iPillarsX * iPillarsY].Collision(selinTest.position, selinTest.texture, pillarPositionCollision) && !PillarCollided)
                     {
                         if (pillarBrokenTimer < pillerBrokenMax)
@@ -70,20 +70,14 @@ namespace BaseProject.GameStates
 
                         PillarCollided = true;
                     }
+                    /*
                     else if (!mapConstruction.pillars[iPillarsX * iPillarsY].Collision(selinTest.position, selinTest.texture, pillarPositionCollision))
                     {
                         PillarCollided = false;
                     }
+                    */
                 }
             }
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-
-            mapConstruction.Draw(spriteBatch);
-            selinTest.Draw(spriteBatch);
         }
     }
 }

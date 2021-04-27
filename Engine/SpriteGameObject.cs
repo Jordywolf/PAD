@@ -34,6 +34,7 @@ namespace Engine
         protected float depth;
 
         public float scale = 1.0f;
+
         /// <summary>
         /// Creates a new SpriteGameObject with a given sprite name.
         /// </summary>

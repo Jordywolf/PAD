@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject.GameStates
 {
-    class MenuStartSelectedState : GameState
+    class MenuStartSelectedState : Engine.GameState
     {
 
 
