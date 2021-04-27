@@ -102,6 +102,7 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
             //playerTest.update();
 
+
             Jogon.origin = player.Position;
 
             /*
