@@ -36,10 +36,12 @@ namespace BaseProject
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
         GameStates.PauseState pauseState;
+        GameStates.DeathState deathState;
         GameStates.SafeZoneState safeZoneState;
         GameStates.SafeZoneState safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
+        
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public static int width = 1280;
@@ -163,6 +165,7 @@ namespace BaseProject
             PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
             fireBallTexture = Content.Load<Texture2D>("Fireball");
             //Home en menus
+            
             HomeScreen = Content.Load<Texture2D>("HomeScreen");
             MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
             MenuCredits = Content.Load<Texture2D>("MenuCredits");
@@ -213,7 +216,7 @@ namespace BaseProject
                 }
             };
 
-            MenuBMI.Play();
+       
 
             menuchoice = 1;
             framecount = 0;
@@ -221,6 +224,8 @@ namespace BaseProject
 
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
+
+           
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
             GameStateManager.AddGameState("menuCreditsSelectedState", menuCreditsSelectedState);
@@ -239,6 +244,9 @@ namespace BaseProject
 
             pauseState = new GameStates.PauseState();
             GameStateManager.AddGameState("pauseState", pauseState);
+
+            deathState = new GameStates.DeathState();
+            GameStateManager.AddGameState("deathState", deathState);
 
             safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
@@ -261,6 +269,8 @@ namespace BaseProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            MenuBMI.Play();
 
             if (menuchoice == 7)
             {
@@ -290,6 +300,13 @@ namespace BaseProject
             Keyboard.GetState();
 
             framecount++;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.O) && framecount > startframe + 50)
+            {
+                GameStateManager.SwitchTo("deathState");
+                framecount = startframe;
+                MenuBMI.Stop();
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
             {
@@ -332,6 +349,12 @@ namespace BaseProject
                 menuchoice = 7;
                 framecount = startframe;
                 
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
+            {
+                menuchoice = 11;
+                framecount = startframe;
             }
 
             if (menuchoice == 1)
