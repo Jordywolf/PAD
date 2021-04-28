@@ -6,84 +6,73 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
     class SelinLevelPlayingState : Engine.GameState
     {
-        public Texture2D stone_grnd, grass_grnd, obstacle, pillar, brokenPillar;
-        private int levelWidth, levelHeight;
-        private Vector2 pillarPositionCollision;
-        private bool PillarCollided;
+        Selin selinBoss;
+        Decoy playerTest;
+        SpriteGameObject platform;
+        SpriteGameObject background;
 
-        MapConstruction mapConstruction;
-        Decoy selinTest;
+        private int maxPillars = 4;
 
-        private int pillarBrokenTimer;
-        private int pillerBrokenMax = 100;
+        List<Vector2> pillarPS;
 
-        public SelinLevelPlayingState(Texture2D Sn_stone_grnd, Texture2D Sn_grass_grnd, Texture2D Sn_obstacle, Texture2D Sn_pillar, Texture2D Sn_brokenPillar) : base()
+        public SelinLevelPlayingState() : base()
         {
-            stone_grnd = Sn_stone_grnd;
-            grass_grnd = Sn_grass_grnd;
-            obstacle = Sn_obstacle;
-            pillar = Sn_pillar;
-            brokenPillar = Sn_brokenPillar;
+            background = new SpriteGameObject("Fontein", 1);
+            gameObjects.AddChild(background);
+            background.Origin = new Vector2(background.sprite.Width / 2, background.sprite.Height / 2);
+            background.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 4);
+            background.scale = 20;
 
-            //levelHeight = GameEnvironment.Screen.Y;
-            //levelWidth = GameEnvironment.Screen.X;
+            platform = new SpriteGameObject("Selin_Arena_Pr", 1);
+            gameObjects.AddChild(platform);
+            platform.Origin = new Vector2(platform.sprite.Width / 2, platform.sprite.Height / 2);
+            platform.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
-            mapConstruction = new MapConstruction(pillar);
-            //selinTest = new Decoy(brokenPillar);
+            pillarPS = new List<Vector2>();
+            pillarPS.Add(new Vector2()
+
+            selinBoss = new Selin();
+            gameObjects.AddChild(selinBoss);
+
+            playerTest = new Decoy("Deur");
+            gameObjects.AddChild(playerTest);
+            playerTest.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+
+            
+            for (int iPillar = 0; iPillar < maxPillars; iPillar++)
+            {
+                Pillar pilaar = new Pillar(, "Pilaar");
+            }
+            
+        }
+
+        public bool OverlapsWith(Engine.SpriteGameObject thisOne, Engine.SpriteGameObject thatOne)
+        {
+            return (thisOne.LocalPosition.X + thisOne.sprite.Width / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width / 2
+                && thisOne.LocalPosition.X - thisOne.sprite.Width / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width / 2
+                && thisOne.LocalPosition.Y + thisOne.sprite.Height / 2 > thatOne.LocalPosition.Y - thatOne.sprite.Height / 2
+                && thisOne.LocalPosition.Y - thisOne.sprite.Height / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height / 2);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            mapConstruction.FloorConstruction(new Vector2(0, 0), grass_grnd, levelWidth, levelHeight, Color.Green);
-            mapConstruction.PillarSetup(pillar, levelWidth, levelHeight, new Vector2(0, 0), Color.Gray);
-
-            //selinTest.update();
-
-            //pillar collision met selin's hamer
-            for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
-            {
-                for (int iPillarsY = 1; iPillarsY <= mapConstruction.maxPillarsY; iPillarsY++)
-                {
-                    pillarPositionCollision.X = ((levelWidth / (mapConstruction.maxPillarsX + 1)) * (iPillarsX)) - (mapConstruction.pillarTile.Width / 2);
-                    pillarPositionCollision.Y = ((levelHeight / (mapConstruction.maxPillarsY + 1)) * (iPillarsY)) - (mapConstruction.pillarTile.Height / 2);
-
-                     
-                    /*if (mapConstruction.pillars[iPillarsX * iPillarsY].Collision(selinTest.position, selinTest.texture, pillarPositionCollision) && !PillarCollided)
-                    {
-                        if (pillarBrokenTimer < pillerBrokenMax)
-                        {
-                            mapConstruction.pillars[iPillarsX * iPillarsY].myTexture = grass_grnd;
-                            pillarBrokenTimer++;
-                        } else if (pillarBrokenTimer >= pillerBrokenMax)
-                        {
-                            pillarBrokenTimer = 0;
-                            mapConstruction.pillars[iPillarsX * iPillarsY].myTexture = pillar;
-                        }
-
-
-                        PillarCollided = true;
-                    }
-                    else if (!mapConstruction.pillars[iPillarsX * iPillarsY].Collision(selinTest.position, selinTest.texture, pillarPositionCollision))
-                    {
-                        PillarCollided = false;
-                    }*/
-                }
-            }
+            selinBoss.CollShockPlayer(playerTest);
         }
 
-        /*public override void Draw(SpriteBatch spriteBatch)
+        public override void HandleInput(InputHelper inputHelper)
         {
-            base.Draw(spriteBatch);
+            base.HandleInput(inputHelper);
 
-            mapConstruction.Draw(spriteBatch);
-            selinTest.Draw(spriteBatch);
-        }*/
+            selinBoss.Targeting(playerTest.LocalPosition);
+
+        }
     }
 }

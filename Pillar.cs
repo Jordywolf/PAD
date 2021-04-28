@@ -5,39 +5,26 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class Pillar
+public class Pillar : Engine.SpriteGameObject
 {
-    public Vector2 position;
-    public Texture2D myTexture;
-
     public int Pillartimer;
 
-    public Pillar(Vector2 pillarPosition, Texture2D pillarTexture)
+    public Pillar(Vector2 pillarPosition, String pillarTexture) : base(pillarTexture, 1)
     {
-        this.position = pillarPosition;
-        myTexture = pillarTexture;
+        this.localPosition = pillarPosition;
+        Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
     }
 
     public bool Collision(Vector2 playerPosition, Texture2D playerTexture, Vector2 pillarPosition)
      {
-        return (playerPosition.X + playerTexture.Width > pillarPosition.X && playerPosition.X < pillarPosition.X + myTexture.Width 
-            && playerPosition.Y + playerTexture.Height > pillarPosition.Y && playerPosition.Y < pillarPosition.Y + myTexture.Height);
+        return (playerPosition.X + playerTexture.Width > pillarPosition.X && playerPosition.X < pillarPosition.X + sprite.Width 
+            && playerPosition.Y + playerTexture.Height > pillarPosition.Y && playerPosition.Y < pillarPosition.Y + sprite.Height);
     }
 
     public bool Collision(Vector2 playerPosition, Rectangle playerRectangle, Vector2 pillarPosition)
     {
-        return (playerPosition.X + playerRectangle.Width > pillarPosition.X && playerPosition.X < pillarPosition.X + myTexture.Width
-            && playerPosition.Y + playerRectangle.Height > pillarPosition.Y && playerPosition.Y < pillarPosition.Y + myTexture.Height);
-    }
-
-    public void Update()
-    {
-
-    }
-
-    public void Draw(SpriteBatch spriteBatch, Vector2 pillarPosition, Color color)
-    {
-        spriteBatch.Draw(myTexture, pillarPosition, color);
+        return (playerPosition.X + playerRectangle.Width > pillarPosition.X && playerPosition.X < pillarPosition.X + sprite.Width
+            && playerPosition.Y + playerRectangle.Height > pillarPosition.Y && playerPosition.Y < pillarPosition.Y + sprite.Height);
     }
 }
 

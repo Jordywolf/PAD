@@ -27,7 +27,7 @@ class Selin_Hammer : Engine.SpriteGameObject
         returnPos = new Vector2(0, 300);
         targetPos = new Vector2(1000, 300);
         localPosition = returnPos;
-        scale = 0.25f;
+        scale = 0.15f;
         speed = 500;
         Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         shocked = false;

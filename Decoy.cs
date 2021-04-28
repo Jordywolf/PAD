@@ -8,24 +8,40 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class Decoy
+    class Decoy : Engine.SpriteGameObject
     {
-        public Texture2D texture;
-        public Vector2 position;
-        public Vector2 velocity;
-
-        public Decoy(Texture2D decoyTexture)
+        public Decoy(String decoyTexture) : base(decoyTexture, 1)
         {
-            texture = decoyTexture;
+            Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            velocity = Vector2.Zero;
         }
 
         public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, Color.White);
+            if (inputHelper.KeyDown(Keys.Up))
+            {
+                velocity.Y = -500;
+            }
+            if (inputHelper.KeyDown(Keys.Down))
+            {
+                velocity.Y = 500;
+            }
+            if (inputHelper.KeyDown(Keys.Left))
+            {
+                velocity.X = -500;
+            }
+            if (inputHelper.KeyDown(Keys.Right))
+            {
+                velocity.X = 500;
+            }
         }
     }
 }

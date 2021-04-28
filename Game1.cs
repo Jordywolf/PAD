@@ -250,10 +250,10 @@ namespace BaseProject
             safeZoneState2 = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
-            selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
+            selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("selinLevelPlayingState");
         }
 
 

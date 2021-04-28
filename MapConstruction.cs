@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class MapConstruction
+public class MapConstruction : Engine.GameObjectList
 {
     public int maxPillarsY = 2;
     public int maxPillarsX = 2;
@@ -43,19 +43,27 @@ public class MapConstruction
 
     public bool check;
 
-    public List<Pillar> pillars = new List<Pillar>();
+    Engine.GameObjectList pillars;
+    Engine.GameObjectList floor;
+    Engine.GameObjectList walls;
 
-    public MapConstruction(Texture2D pilTexture)
+    public MapConstruction(/*String WalltileStr, String WalltileStrD, String WalltileL, String WalltileR, String WalltileCrnL,
+        String WalltileCrnR, String WalltileCrnDL, String WalltileCrnDR, String floorTexture, */String pillarTexture) : base()
     {
-        aTexture = pilTexture;
+        pillars = new Engine.GameObjectList();
+
+        floor = new Engine.GameObjectList();
+
+        walls = new Engine.GameObjectList();
 
         maxPillars = maxPillarsX * maxPillarsY;
 
         for (int iPillars = 0; iPillars <= maxPillars; iPillars++)
         {
-            Pillar pillar = new Pillar(new Vector2(0, 0), aTexture);
-            pillars.Add(pillar);
+            pillars.AddChild(new Pillar(new Vector2(0, 0), pillarTexture));
         }
+
+
     }
 
     public void FloorConstruction(Vector2 floorPosition, Texture2D floorTexture, int width, int height, Color color)
@@ -71,9 +79,9 @@ public class MapConstruction
         Fconstruct = true;
     }
 
-    public void WallConstruction(Vector2 wallPositionT, Vector2 wallPositionD, Vector2 wallPositionL, 
-        Vector2 wallPositionR, int width, int height, Texture2D WalltileStr, 
-        Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, 
+    public void WallConstruction(Vector2 wallPositionT, Vector2 wallPositionD, Vector2 wallPositionL,
+        Vector2 wallPositionR, int width, int height, Texture2D WalltileStr,
+        Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL,
         Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR, Color color)
     {
         this.wallPositionT = wallPositionT;
@@ -143,17 +151,17 @@ public class MapConstruction
         }
     }
 
-    public void DrawPillars(SpriteBatch spriteBatch)
+    public void DrawPillars()
     {
         for (int iPillarsX = 1; iPillarsX <= maxPillarsX; iPillarsX++)
         {
             for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
             {
 
-                pillarPosition.X = ((width / (maxPillarsX + 1)) * (iPillarsX)) - (pillarTile.Width / 2);
-                pillarPosition.Y = ((height / (maxPillarsY + 1)) * (iPillarsY)) - (pillarTile.Height / 2);
+                pillarPosition.X = ((1280 / (maxPillarsX + 1)) * (iPillarsX)) - (64 / 2);
+                pillarPosition.Y = ((640 / (maxPillarsY + 1)) * (iPillarsY)) - (64 / 2);
 
-                pillars[iPillarsX * iPillarsY].Draw(spriteBatch, pillarPosition, Pcolor);
+                pillars.children[iPillarsX * iPillarsY].LocalPosition = new Vector2(pillarPosition.X, pillarPosition.Y);
             }
         }
     }
@@ -195,7 +203,7 @@ public class MapConstruction
     public void Draw(SpriteBatch spriteBatch)
     {
         if (Fconstruct) { DrawFloor(spriteBatch); }
-        if (Pconstruct) { DrawPillars(spriteBatch); }
+        if (Pconstruct) { DrawPillars(); }
         if (Wconstruct) { DrawWalls(spriteBatch); }
     }
 }

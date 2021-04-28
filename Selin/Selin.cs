@@ -72,13 +72,13 @@ class Selin : Engine.GameObjectList
         {
             if (OverlapsWith(sk, p) && sk.Visible)
             {
-                p.Visible = false;
+                //p.Visible = false;
             }
         }
 
         if (OverlapsWith(selinBody, p))
         {
-            p.Visible = false;
+            //p.Visible = false;
         }
     }
 

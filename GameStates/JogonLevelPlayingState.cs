@@ -60,7 +60,8 @@ namespace BaseProject.GameStates
                 this.player = Game1.player;
                 this.playerTexture = playerTexture;
 
-                mapConstruction = new MapConstruction(aPillarTile);
+                mapConstruction = new MapConstruction("PAD_Jg_PillarV2_standard");
+            gameObjects.AddChild(mapConstruction);
             gameObjects.AddChild(Jogon);
             foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
@@ -86,8 +87,23 @@ namespace BaseProject.GameStates
             levelWidth = width;
             mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, levelWidth, levelHeight, Color.White);
             mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(levelHeight / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(levelWidth / Floortile.Width) - 1) * Floortile.Width, 0), levelWidth, levelHeight, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, Color.White);
-            mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
+            //mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
         }
+
+        /*public void DrawPillars()
+        {
+            for (int iPillarsX = 1; iPillarsX <= maxPillarsX; iPillarsX++)
+            {
+                for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
+                {
+
+                    pillarPosition.X = ((1280 / (maxPillarsX + 1)) * (iPillarsX)) - (64 / 2);
+                    pillarPosition.Y = ((640 / (maxPillarsY + 1)) * (iPillarsY)) - (64 / 2);
+
+                    pillars.children[iPillarsX * iPillarsY].LocalPosition = new Vector2(pillarPosition.X, pillarPosition.Y);
+                }
+            }
+        }*/
 
         public override void HandleInput(Engine.InputHelper inputHelper)
         {
@@ -107,6 +123,10 @@ namespace BaseProject.GameStates
             }
             base.Update(gameTime);
             //playerTest.update();
+
+            //mapConstruction.PillarSetup("PAD_Jg_PillarV2_standard");
+
+            mapConstruction.DrawPillars();
 
             Jogon.origin = player.LocalPosition;
 
