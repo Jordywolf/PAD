@@ -16,7 +16,7 @@ namespace BaseProject
         private int Iframes = 120;
 
         public Player()
-            : base("De_Rakker",0,0)
+            : base("De_Rakker",1)
         {
             health = 3;
         }
@@ -106,7 +106,7 @@ namespace BaseProject
                 }
                 else
                 {
-                    //todo implement GAMEOVER here
+                    Game1.GameStateManager.SwitchTo("deathState");
                     health = 3;
                 }
                 IframesCounter = Iframes;

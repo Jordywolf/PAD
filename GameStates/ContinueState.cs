@@ -58,11 +58,11 @@ namespace BaseProject.GameStates
                 Game1.framecount = Game1.startframe;
             }
 
-            /*if (Keyboard.GetState().IsKeyDown(Keys.Space) && !Game1.buttonPressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
-                Game1.GameStateManager.SwitchTo("safeZoneState");
+                Game1.GameStateManager.SwitchTo("jogonLevelPlayingState");
                 Game1.framecount = Game1.startframe;
-            }*/
+            }
         }
 
         /*public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture9, Texture2D texture10, Texture2D texture13, Texture2D texture7)

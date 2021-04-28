@@ -123,6 +123,18 @@
 /processorParam:TextureFormat=Color
 /build:De_Rakker.png
 
+#begin DeathScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:DeathScreen.png
+
 #begin Deur.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1550,6 +1562,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SecondStart.png
+
+#begin Selin_Arena_pr.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Selin_Arena_pr.png
 
 #begin Selin_Body.png
 /importer:TextureImporter

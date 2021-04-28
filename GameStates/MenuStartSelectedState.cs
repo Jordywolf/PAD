@@ -16,11 +16,6 @@ namespace BaseProject.GameStates
         Engine.SpriteGameObject background;
         Engine.SpriteGameObject menuCredits;
         Engine.SpriteGameObject menuStart;
-        //SelinBody test;
-        //Selin_Hammer test2;
-
-        Selin test;
-        Decoy playerTest;
 
         public MenuStartSelectedState() : base()
         {
@@ -35,18 +30,6 @@ namespace BaseProject.GameStates
 
             instructions = new Engine.TextGameObject("Credit", 0.2f, Color.Beige);
             gameObjects.AddChild(instructions);
-
-            /*test = new SelinBody();
-            gameObjects.AddChild(test);
-
-            test2 = new Selin_Hammer("Selin_HmrL");
-            gameObjects.AddChild(test2);*/
-
-            playerTest = new Decoy("Deur");
-            gameObjects.AddChild(playerTest);
-
-            test = new Selin();
-            gameObjects.AddChild(test);
 
             instructions.Text = "Press \nPrrow Keys \nPress \nSpace";
             instructions.LocalPosition = new Vector2(0, 450);
@@ -86,51 +69,7 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("newGameState");
                 Game1.framecount = Game1.startframe;
             }
-
-            test.CollShockPlayer(playerTest);
-
-            /*
-            foreach (Engine.GameObject g in test.children)
-            {
-                if (g is Engine.GameObjectList)
-                {
-                    foreach (GameObjectList gol in gameObjects.children)
-                    {
-                        foreach (SpriteGameObject sgo in gol.children)
-                        {
-                            if (OverlapsWith(sgo, playerTest))
-                            {
-                                Game1.GameStateManager.SwitchTo("newGameState");
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (Engine.GameObject g in test.children)
-            {
-                if (g is Engine.SpriteGameObject)
-                {
-                    foreach (SpriteGameObject sgo in test.children)
-                    {
-                        if (OverlapsWith(sgo, playerTest))
-                        {
-                            Game1.GameStateManager.SwitchTo("newGameState");
-                        }
-                    }
-                }
-            }
-            */
         }
-
-
-        public override void HandleInput(InputHelper inputHelper)
-        {
-            base.HandleInput(inputHelper);
-
-            test.Targeting(playerTest.LocalPosition);
-        }
-
 
         /*public void Draw(SpriteBatch spriteBatch)
         {

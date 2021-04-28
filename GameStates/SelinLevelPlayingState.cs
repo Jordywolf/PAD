@@ -13,51 +13,73 @@ namespace BaseProject.GameStates
     class SelinLevelPlayingState : Engine.GameState
     {
         Selin selinBoss;
-        Decoy playerTest;
+        Player playerTest;
         SpriteGameObject platform;
         SpriteGameObject background;
+        GameObjectList pillars;
+        GameObjectList stenen;
+
+        Random rnd = new Random();
 
         private int maxPillars = 4;
+        private int maxStenen = 10;
 
         List<Vector2> pillarPS;
 
         public SelinLevelPlayingState() : base()
         {
-            background = new SpriteGameObject("Fontein", 1);
+            background = new SpriteGameObject("Fontein", 0.5f);
             gameObjects.AddChild(background);
             background.Origin = new Vector2(background.sprite.Width / 2, background.sprite.Height / 2);
             background.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 4);
             background.scale = 20;
 
-            platform = new SpriteGameObject("Selin_Arena_Pr", 1);
+            platform = new SpriteGameObject("Selin_Arena_Pr", 0.6f);
             gameObjects.AddChild(platform);
             platform.Origin = new Vector2(platform.sprite.Width / 2, platform.sprite.Height / 2);
             platform.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
             pillarPS = new List<Vector2>();
-            pillarPS.Add(new Vector2()
+            pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, 100));
+            pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, 100));
+            pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, Game1.height - 100));
+            pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, Game1.height - 100));
+
+            pillars = new GameObjectList();
+            gameObjects.AddChild(pillars);
+
+            stenen = new GameObjectList();
+            gameObjects.AddChild(stenen);
 
             selinBoss = new Selin();
             gameObjects.AddChild(selinBoss);
 
-            playerTest = new Decoy("Deur");
+            playerTest = new Player();
             gameObjects.AddChild(playerTest);
             playerTest.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
-            
+
             for (int iPillar = 0; iPillar < maxPillars; iPillar++)
             {
-                Pillar pilaar = new Pillar(, "Pilaar");
+                Pillar pilaar = new Pillar(pillarPS[iPillar], "Pilaar");
+                pillars.AddChild(pilaar);
             }
-            
+
+            for (int iSteen = 0; iSteen < maxStenen; iSteen++)
+            {
+                SpriteGameObject steen = new SpriteGameObject("Rots", 1);
+                steen.LocalPosition = new Vector2(rnd.Next(0, Game1.width - steen.sprite.Width),
+                    rnd.Next(0, Game1.height - steen.sprite.Height));
+                //stenen.AddChild(steen);
+            }
         }
 
         public bool OverlapsWith(Engine.SpriteGameObject thisOne, Engine.SpriteGameObject thatOne)
         {
-            return (thisOne.LocalPosition.X + thisOne.sprite.Width / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width / 2
-                && thisOne.LocalPosition.X - thisOne.sprite.Width / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width / 2
-                && thisOne.LocalPosition.Y + thisOne.sprite.Height / 2 > thatOne.LocalPosition.Y - thatOne.sprite.Height / 2
-                && thisOne.LocalPosition.Y - thisOne.sprite.Height / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height / 2);
+            return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2.5f > thatOne.LocalPosition.X - thatOne.sprite.Width * thatOne.scale / 2.5f
+                && thisOne.LocalPosition.X - thisOne.sprite.Width * thisOne.scale / 2.5f < thatOne.LocalPosition.X + thatOne.sprite.Width * thatOne.scale / 2.5f
+                && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 2.5f > thatOne.LocalPosition.Y - thatOne.sprite.Height * thatOne.scale / 2.5f
+                && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2.5f < thatOne.LocalPosition.Y + thatOne.sprite.Height * thatOne.scale / 2.5f);
         }
 
         public override void Update(GameTime gameTime)
@@ -65,6 +87,31 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
 
             selinBoss.CollShockPlayer(playerTest);
+            if (!OverlapsWith(platform, playerTest))
+            {
+                Game1.GameStateManager.SwitchTo("deathState");
+            }
+
+            foreach (Pillar p in pillars.children)
+            {
+                foreach (Selin_Hammer s in selinBoss.hammers.children)
+                {
+                    if (OverlapsWith(s, p))
+                    {
+                        p.Visible = false;
+                    }
+                }
+            }
+
+            bool tmp = true;
+            foreach (Pillar p in pillars.children)
+            {
+                if (p.Visible == false/* && pillars.children.Count < 1*/)
+                {
+                    Game1.GameStateManager.SwitchTo("menuCreditsState");
+                }
+
+            }
         }
 
         public override void HandleInput(InputHelper inputHelper)
