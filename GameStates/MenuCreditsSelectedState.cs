@@ -6,28 +6,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class MenuCreditsSelectedState : Engine.GameState
+    class MenuCreditsSelectedState : GameState
     {
-        Engine.TextGameObject instructions;
-        Engine.SpriteGameObject background;
-        Engine.SpriteGameObject menuCredits;
-        Engine.SpriteGameObject menuStart;
+        TextGameObject instructions;
+        SpriteGameObject background;
+        SpriteGameObject menuCredits;
+        SpriteGameObject menuStart;
 
         public MenuCreditsSelectedState() : base()
         {
-            background = new Engine.SpriteGameObject("HomeScreen", 1);
+            background = new SpriteGameObject("HomeScreen", 1);
             gameObjects.AddChild(background);
 
-            menuCredits = new Engine.SpriteGameObject("MenuCreditsSelected", 1);
+            menuCredits = new SpriteGameObject("MenuCreditsSelected", 1);
             gameObjects.AddChild(menuCredits);
 
-            menuStart = new Engine.SpriteGameObject("MenuStartGame", 1);
+            menuStart = new SpriteGameObject("MenuStartGame", 1);
             gameObjects.AddChild(menuStart);
 
-            instructions = new Engine.TextGameObject("Credit", 1, Color.Beige);
+            instructions = new TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(instructions);
 
             instructions.Text = "Press \nPrrow Keys \nPress \nSpace";

@@ -10,12 +10,12 @@ using Engine;
 
 namespace BaseProject.GameStates
 {
-    class SelinLevelPlayingState : Engine.GameState
+    class SelinLevelPlayingState : Engine.LevelPlayingState
     {
         Selin selinBoss;
         Player playerTest;
-        SpriteGameObject platform;
-        SpriteGameObject background;
+        //SpriteGameObject platform;
+        //SpriteGameObject background;
         GameObjectList pillars;
         GameObjectList stenen;
 
@@ -28,22 +28,30 @@ namespace BaseProject.GameStates
 
         public SelinLevelPlayingState() : base()
         {
-            background = new SpriteGameObject("Fontein", 0.5f);
+            /*background = new SpriteGameObject("Fontein", 0.5f);
             gameObjects.AddChild(background);
             background.Origin = new Vector2(background.sprite.Width / 2, background.sprite.Height / 2);
             background.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 4);
-            background.scale = 20;
+            background.scale = 20;*/
 
-            platform = new SpriteGameObject("Selin_Arena_Pr", 0.6f);
+            /*platform = new SpriteGameObject("Selin_Arena_Pr", 0.6f);
             gameObjects.AddChild(platform);
             platform.Origin = new Vector2(platform.sprite.Width / 2, platform.sprite.Height / 2);
-            platform.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            platform.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);*/
 
-            pillarPS = new List<Vector2>();
-            pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, 100));
-            pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, 100));
-            pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, Game1.height - 100));
-            pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, Game1.height - 100));
+            //pillarPS = new List<Vector2>();
+            //pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, 100));     PAD_Jg_walltileStraightD
+            //pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, 100));
+            //pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, Game1.height - 100));
+            //pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, Game1.height - 100));
+
+            //LoadFullFloor("PAD_Jg_Floortile1");
+
+            LoadSquareFloor("PAD_Jg_Floortile1", 10, 10, new Vector2 (Game1.width/4, Game1.height/2));
+
+            LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
+                "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
+            
 
             pillars = new GameObjectList();
             gameObjects.AddChild(pillars);
@@ -57,13 +65,13 @@ namespace BaseProject.GameStates
             playerTest = new Player();
             gameObjects.AddChild(playerTest);
             playerTest.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            
 
-
-            for (int iPillar = 0; iPillar < maxPillars; iPillar++)
+            /*for (int iPillar = 0; iPillar < maxPillars; iPillar++)
             {
                 Pillar pilaar = new Pillar(pillarPS[iPillar], "Pilaar");
                 pillars.AddChild(pilaar);
-            }
+            }*/
 
             for (int iSteen = 0; iSteen < maxStenen; iSteen++)
             {
@@ -74,25 +82,23 @@ namespace BaseProject.GameStates
             }
         }
 
-        public bool OverlapsWith(Engine.SpriteGameObject thisOne, Engine.SpriteGameObject thatOne)
-        {
-            return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2.5f > thatOne.LocalPosition.X - thatOne.sprite.Width * thatOne.scale / 2.5f
-                && thisOne.LocalPosition.X - thisOne.sprite.Width * thisOne.scale / 2.5f < thatOne.LocalPosition.X + thatOne.sprite.Width * thatOne.scale / 2.5f
-                && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 2.5f > thatOne.LocalPosition.Y - thatOne.sprite.Height * thatOne.scale / 2.5f
-                && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2.5f < thatOne.LocalPosition.Y + thatOne.sprite.Height * thatOne.scale / 2.5f);
-        }
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            selinBoss.CollShockPlayer(playerTest);
-            if (!OverlapsWith(platform, playerTest))
+            CollisionUpdate(playerTest);
+
+            //selinBoss.CollShockPlayer(playerTest);
+
+            //foreach (ObjectTile o in walls.children)
+            //if (OverlapsWith(o, playerTest))
+
+            /*if (!OverlapsWith(platform, playerTest))
             {
                 Game1.GameStateManager.SwitchTo("deathState");
-            }
+            }*/
 
-            foreach (Pillar p in pillars.children)
+            /*foreach (Pillar p in pillars.children)
             {
                 foreach (Selin_Hammer s in selinBoss.hammers.children)
                 {
@@ -101,17 +107,17 @@ namespace BaseProject.GameStates
                         p.Visible = false;
                     }
                 }
-            }
+            }*/
 
-            bool tmp = true;
+            /*bool tmp = true;
             foreach (Pillar p in pillars.children)
             {
-                if (p.Visible == false/* && pillars.children.Count < 1*/)
+                if (p.Visible == false && pillars.children.Count < 1)
                 {
                     Game1.GameStateManager.SwitchTo("menuCreditsState");
                 }
 
-            }
+            }*/
         }
 
         public override void HandleInput(InputHelper inputHelper)

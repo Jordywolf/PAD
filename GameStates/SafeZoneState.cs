@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class SafeZoneState : Engine.GameState
+    class SafeZoneState : GameState
     {
         SafeZone1 safeZone;
 

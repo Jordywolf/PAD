@@ -6,10 +6,11 @@ using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Engine;
 
 namespace BaseProject
 {
-    class Game1 : Engine.ExtendedGame
+    class Game1 : ExtendedGame
     {
         //-----------------------------------------------------------------------------------
         public static bool buttonPressed;
@@ -261,7 +262,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("selinLevelPlayingState");
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 

@@ -6,35 +6,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class BackState : Engine.GameState
+    class BackState : GameState
     {
 
-        Engine.SpriteGameObject background;
-        Engine.SpriteGameObject newGame;
-        Engine.SpriteGameObject continueGame;
-        Engine.SpriteGameObject back;
+        SpriteGameObject background;
+        SpriteGameObject newGame;
+        SpriteGameObject continueGame;
+        SpriteGameObject back;
 
         public BackState() : base()
         {
-            background = new Engine.SpriteGameObject("SecondStart", 1);
+            background = new SpriteGameObject("SecondStart", 1);
             gameObjects.AddChild(background);
             background.scale = 2.1f;
             background.LocalPosition = new Vector2(0, -105);
 
-            newGame = new Engine.SpriteGameObject("MenuNewGame", 1);
+            newGame = new SpriteGameObject("MenuNewGame", 1);
             gameObjects.AddChild(newGame);
             newGame.scale = 2.7f;
             newGame.LocalPosition = new Vector2(540, 135);
 
-            continueGame = new Engine.SpriteGameObject("MenuContinue", 1);
+            continueGame = new SpriteGameObject("MenuContinue", 1);
             gameObjects.AddChild(continueGame);
             continueGame.scale = 2.7f;
             continueGame.LocalPosition = new Vector2(540, 270);
 
-            back = new Engine.SpriteGameObject("MenuBackSelected", 1);
+            back = new SpriteGameObject("MenuBackSelected", 1);
             gameObjects.AddChild(back);
             back.scale = 2.7f;
             back.LocalPosition = new Vector2(945, 486);

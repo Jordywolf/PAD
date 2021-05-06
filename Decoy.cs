@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    class Decoy : Engine.SpriteGameObject
+    class Decoy : SpriteGameObject
     {
         public Decoy(String decoyTexture) : base(decoyTexture, 1)
         {

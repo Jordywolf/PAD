@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class JogonLevelPlayingState : Engine.GameState
+    class JogonLevelPlayingState : Engine.LevelPlayingState
     {
 
         MapConstruction mapConstruction;
@@ -21,7 +22,7 @@ namespace BaseProject.GameStates
         public HealthBar playerHealthBar;
         //private Decoy playerTest;
 
-        private Engine.SpriteGameObject target;
+        private SpriteGameObject target;
         private bool WallCollided;
         private bool PillarCollided;
         private bool playerWallCollided;
@@ -42,11 +43,13 @@ namespace BaseProject.GameStates
 
         public JogonLevelPlayingState(Texture2D aPillarTile,  SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
+            LoadFullFloor("PAD_Jg_Floortile1");
+
             epicDeur = new Decoy("Deur");
             Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound);
             gameObjects.AddChild(epicDeur);
-            gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEnd", 1));
-            gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEndL", 1));
+            gameObjects.AddChild(new SpriteGameObject("healthBarEnd", 1));
+            gameObjects.AddChild(new SpriteGameObject("healthBarEndL", 1));
             target = Jogon;
             for (int i = 0; i < Segments; i++)
             {
@@ -63,7 +66,7 @@ namespace BaseProject.GameStates
                 mapConstruction = new MapConstruction("PAD_Jg_PillarV2_standard");
             gameObjects.AddChild(mapConstruction);
             gameObjects.AddChild(Jogon);
-            foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
+            foreach (GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
             }
             
@@ -105,7 +108,7 @@ namespace BaseProject.GameStates
             }
         }*/
 
-        public override void HandleInput(Engine.InputHelper inputHelper)
+        public override void HandleInput(InputHelper inputHelper)
         {
             base.HandleInput(inputHelper);
             if (inputHelper.KeyDown(Keys.P))
@@ -172,7 +175,7 @@ namespace BaseProject.GameStates
                     f.LocalPosition = new Vector2(1000, 1000);
                     playerHealthBar.MaxHealthLength -= 0.2f;
                     FhitJ = true;
-                    Game1.GameStateManager.SwitchTo("");
+                    Game1.GameStateManager.SwitchTo("deathState");
                     Game1.menuchoice = 1;
                 }
                 else { FhitJ = false; }

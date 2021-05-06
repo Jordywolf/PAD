@@ -10,25 +10,25 @@ using Engine;
 
 namespace BaseProject.GameStates
 {
-    class MenuStartSelectedState : Engine.GameState
+    class MenuStartSelectedState : GameState
     {
-        Engine.TextGameObject instructions;
-        Engine.SpriteGameObject background;
-        Engine.SpriteGameObject menuCredits;
-        Engine.SpriteGameObject menuStart;
+        TextGameObject instructions;
+        SpriteGameObject background;
+        SpriteGameObject menuCredits;
+        SpriteGameObject menuStart;
 
         public MenuStartSelectedState() : base()
         {
-            background = new Engine.SpriteGameObject("HomeScreen", 0.1f);
+            background = new SpriteGameObject("HomeScreen", 0.1f);
             gameObjects.AddChild(background);
 
-            menuCredits = new Engine.SpriteGameObject("MenuCredits", 0.1f);
+            menuCredits = new SpriteGameObject("MenuCredits", 0.1f);
             gameObjects.AddChild(menuCredits);
 
-            menuStart = new Engine.SpriteGameObject("MenuStartGameSelected", 0.1f);
+            menuStart = new SpriteGameObject("MenuStartGameSelected", 0.1f);
             gameObjects.AddChild(menuStart);
 
-            instructions = new Engine.TextGameObject("Credit", 0.2f, Color.Beige);
+            instructions = new TextGameObject("Credit", 0.2f, Color.Beige);
             gameObjects.AddChild(instructions);
 
             instructions.Text = "Press \nPrrow Keys \nPress \nSpace";
@@ -45,7 +45,7 @@ namespace BaseProject.GameStates
             background.LocalPosition = new Vector2(0, -65);
         }
 
-        public bool OverlapsWith(Engine.SpriteGameObject thisOne, Engine.SpriteGameObject thatOne)
+        public bool OverlapsWith(SpriteGameObject thisOne, SpriteGameObject thatOne)
         {
             return (thisOne.LocalPosition.X + thisOne.sprite.Width / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width / 2
                 && thisOne.LocalPosition.X - thisOne.sprite.Width / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width / 2

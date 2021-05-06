@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Engine;
 
 namespace BaseProject
 {
@@ -22,7 +23,7 @@ namespace BaseProject
         private int fireTimer;
         private int fireTimerMax = 90;
 
-        public Engine.GameObjectList Body1 = new Engine.GameObjectList();
+        public GameObjectList Body1 = new GameObjectList();
         public List<JogonPart> Body = new List<JogonPart>();
         public List<Fireball> fireballs = new List<Fireball>();
         public string fireBallTexture;
@@ -31,7 +32,7 @@ namespace BaseProject
 
         Player player;
 
-        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, Engine.SpriteGameObject target,  SoundEffect aSound) : base(position, velocity, texture, followDist, target)
+        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, SpriteGameObject target,  SoundEffect aSound) : base(position, velocity, texture, followDist, target)
         {
             localPosition = position;
             this.fireBallTexture = fireballTexture;

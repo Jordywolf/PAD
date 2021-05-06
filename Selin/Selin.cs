@@ -61,10 +61,10 @@ class Selin : Engine.GameObjectList
 
     public bool OverlapsWith(Engine.SpriteGameObject thisOne, Engine.SpriteGameObject thatOne)
     {
-        return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 20 > thatOne.LocalPosition.X - thatOne.sprite.Width * thatOne.scale / 2
-            && thisOne.LocalPosition.X - thisOne.sprite.Width * thisOne.scale / 20 < thatOne.LocalPosition.X + thatOne.sprite.Width * thatOne.scale / 2
-            && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 20 > thatOne.LocalPosition.Y - thatOne.sprite.Height * thatOne.scale / 2
-            && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 20 < thatOne.LocalPosition.Y + thatOne.sprite.Height * thatOne.scale / 2);
+        return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width * thatOne.scale / 2
+            && thisOne.LocalPosition.X - thisOne.sprite.Width * thisOne.scale / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width * thatOne.scale / 2
+            && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 2 > thatOne.LocalPosition.Y - thatOne.sprite.Height * thatOne.scale / 2
+            && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height * thatOne.scale / 2);
     }
 
     public void CollShockPlayer(Engine.SpriteGameObject p)

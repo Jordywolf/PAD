@@ -6,27 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class MenuCreditsState : Engine.GameState
+    class MenuCreditsState : GameState
     {
-        Engine.SpriteGameObject background;
-        Engine.SpriteGameObject back;
-        Engine.TextGameObject creditNames;
+        SpriteGameObject background;
+        SpriteGameObject back;
+        TextGameObject creditNames;
 
         public MenuCreditsState() : base()
         {
-            background = new Engine.SpriteGameObject("CreditScreen", 1);
+            background = new SpriteGameObject("CreditScreen", 1);
             gameObjects.AddChild(background);
             background.scale = 1.8f;
 
-            back = new Engine.SpriteGameObject("MenuBackSelected", 1);
+            back = new SpriteGameObject("MenuBackSelected", 1);
             gameObjects.AddChild(back);
             back.scale = 2.7f;
             back.LocalPosition = new Vector2(945, 486);
 
-            creditNames = new Engine.TextGameObject("Credit", 1, Color.Beige);
+            creditNames = new TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(creditNames);
             creditNames.Text = "Nick Baptist\nNidal Toufik\nOlivier Molenaar\nJordy Wolf\nJordi van der Lem\nJort Keppel";
             creditNames.LocalPosition = new Vector2(60, 60);

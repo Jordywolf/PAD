@@ -4,8 +4,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
-public class Pillar : Engine.SpriteGameObject
+public class Pillar : SpriteGameObject
 {
     public int Pillartimer;
 

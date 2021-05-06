@@ -6,27 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class PauseState : Engine.GameState
+    class PauseState : GameState
     {
-        Engine.SpriteGameObject background;
-        Engine.SpriteGameObject back;
-        Engine.TextGameObject pause;
+        SpriteGameObject background;
+        SpriteGameObject back;
+        TextGameObject pause;
 
         public PauseState() : base()
         {
-            background = new Engine.SpriteGameObject("CreditScreen", 1);
+            background = new SpriteGameObject("CreditScreen", 1);
             gameObjects.AddChild(background);
             background.scale = 1.8f;
 
-            back = new Engine.SpriteGameObject("MenuBackSelected", 1);
+            back = new SpriteGameObject("MenuBackSelected", 1);
             gameObjects.AddChild(back);
             back.scale = 2.7f;
             back.LocalPosition = new Vector2(500, 400);
 
-            pause = new Engine.TextGameObject("Credit", 1, Color.Beige);
+            pause = new TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(pause);
             pause.LocalPosition = new Vector2(450, 60);
             pause.Text = "PAUSED";

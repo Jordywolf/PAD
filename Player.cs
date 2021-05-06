@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    public class Player : Engine.SpriteGameObject
+    public class Player : SpriteGameObject
     {
         public float moveSpeed = 15f;
         public int health;
@@ -19,6 +19,7 @@ namespace BaseProject
             : base("De_Rakker",1)
         {
             health = 3;
+            Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         }
         public override void Update(GameTime gameTime)
         {
