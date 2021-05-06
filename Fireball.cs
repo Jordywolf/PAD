@@ -12,26 +12,28 @@ namespace BaseProject
         Vector2 SpawnPosition;
         Engine.GameObject TargetPosition;
         private float Timer;
-        private float Speed = 300;
+        public float Speed = 500;
 
 
-        public Fireball(Vector2 position, String texture, Engine.GameObject target) : base(texture,1)
+        public Fireball(Vector2 position, String texture, float rotation) : base(texture,1)
         {
-            TargetPosition = target;
+            this.scale = 2.0f;
+            Origin = new Vector2(this.sprite.Width / 2, this.Height / 2);
             localPosition = position;
             Reset();
+            this.Angle = rotation;
         }
 
         override public void Reset()
         {
             Timer = 0;
             SpawnPosition = localPosition;// hier komt de target te staat wss dus de player
-            LookAt(TargetPosition);
             //totalangle = (float)Math.Atan2(TargetPosition.Y - SpawnPosition.Y, TargetPosition.X - SpawnPosition.X);
         }
 
         override public void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             velocity = AngularDirection * Speed;
             /*
             float distance = Vector2.Distance(SpawnPosition, TargetPosition);

@@ -15,7 +15,7 @@ namespace BaseProject.GameStates
 
         MapConstruction mapConstruction;
         private Jogonhead Jogon;
-        private JogonPart jogonBodyPart;
+        
         private JogonPart parentSegment;
         public HealthBar bossHealthBar;
         public HealthBar playerHealthBar;
@@ -38,30 +38,26 @@ namespace BaseProject.GameStates
         Random rnd = new Random();
 
         List<JogonPart> JogonDragon = new List<JogonPart>();
-        private int Segments = 15;
+
 
         public JogonLevelPlayingState(Texture2D aPillarTile,  SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
             epicDeur = new Decoy("Deur");
-            Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound);
+            Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
             gameObjects.AddChild(epicDeur);
             gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEnd", 1));
             gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEndL", 1));
+            gameObjects.AddChild(Jogon);
+            gameObjects.AddChild(Jogon.fireballs);
+            gameObjects.AddChild(Jogon.Body);
+
             target = Jogon;
-            for (int i = 0; i < Segments; i++)
-            {
-                if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target ); }
-                
-                else { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target); }
-                 
-                    JogonDragon.Add(jogonBodyPart);
-                    target = jogonBodyPart;
-            }
+
                 this.player = Game1.player;
                 this.playerTexture = playerTexture;
 
                 mapConstruction = new MapConstruction(aPillarTile);
-            gameObjects.AddChild(Jogon);
+
             foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
             }
@@ -69,14 +65,14 @@ namespace BaseProject.GameStates
 
         public bool JogonCollision(Player p, JogonPart j, Texture2D pTexture)
         {
-            return (MathF.Abs(p.LocalPosition.X - j.LocalPosition.X) < pTexture.Width + j.sprite.Width
-                && MathF.Abs(p.LocalPosition.Y - j.LocalPosition.Y) < pTexture.Height + j.sprite.Height);
+            return (MathF.Abs(p.Position.X - j.LocalPosition.X) < pTexture.Width + j.sprite.Width
+                && MathF.Abs(p.Position.Y - j.LocalPosition.Y) < pTexture.Height + j.sprite.Height);
         }
 
         public bool FireballCollision(Player p, Fireball f, Texture2D pTexture)
         {
-            return (p.LocalPosition.X +pTexture.Width > f.LocalPosition.X && p.LocalPosition.X < f.LocalPosition.X + f.sprite.Width
-                && p.LocalPosition.Y + pTexture.Height > f.LocalPosition.Y && p.LocalPosition.Y < f.LocalPosition.Y + f.sprite.Height);
+            return (p.Position.X +pTexture.Width > f.LocalPosition.X && p.Position.X < f.LocalPosition.X + f.sprite.Width
+                && p.Position.Y + pTexture.Height > f.LocalPosition.Y && p.Position.Y < f.LocalPosition.Y + f.sprite.Height);
         }
 
         public void JogonLevelConstruction(Player player, Texture2D Floortile, int width, int height, Texture2D WalltileStr, Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR, Texture2D PillarTile, Texture2D PlayerTexture, int menuChoice)
@@ -89,15 +85,6 @@ namespace BaseProject.GameStates
             mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
         }
 
-        public override void HandleInput(Engine.InputHelper inputHelper)
-        {
-            base.HandleInput(inputHelper);
-            if (inputHelper.KeyDown(Keys.P))
-            {
-                Game1.GameStateManager.SwitchTo("pauseState");
-                Game1.framecount = Game1.startframe;
-            }
-        }
         public override void Update(GameTime gameTime)
         {
             if (!fightSound.IsLooped)
@@ -107,8 +94,6 @@ namespace BaseProject.GameStates
             }
             base.Update(gameTime);
             //playerTest.update();
-
-            Jogon.origin = player.LocalPosition;
 
             /*
             if (mapConstruction.Collision(Jogon.LocalPosition, Jogon.sprite) && !WallCollided)
@@ -123,14 +108,14 @@ namespace BaseProject.GameStates
             }
             */
 
-            if (mapConstruction.Collision(player.LocalPosition, playerTexture) && !playerWallCollided)
+            if (mapConstruction.Collision(player.Position, playerTexture) && !playerWallCollided)
             {
-                player.moveSpeed = -player.moveSpeed;
+                player.Speed = -player.Speed;
                 playerWallCollided = true;
             }
-            else if (player.moveSpeed < 0)
+            else if (player.Speed < 0)
             {
-                player.moveSpeed = -player.moveSpeed;
+                player.Speed = -player.Speed;
                 playerWallCollided = false;
             }
 
@@ -145,12 +130,12 @@ namespace BaseProject.GameStates
                 else { PhitJ = false; }
             }
 
-            foreach (Fireball f in Jogon.fireballs)
+            foreach (Fireball f in Jogon.fireballs.children)
             {
                 if (FireballCollision(player, f, playerTexture) && !FhitJ)
                 {
                     f.LocalPosition = new Vector2(1000, 1000);
-                    playerHealthBar.MaxHealthLength -= 0.2f;
+                    //playerHealthBar.MaxHealthLength -= 0.2f;
                     FhitJ = true;
                     Game1.GameStateManager.SwitchTo("");
                     Game1.menuchoice = 1;
@@ -160,7 +145,7 @@ namespace BaseProject.GameStates
 
             //mapConstruction.PlayerCollision(player.Position, playerTexture);
 
-       /*    for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
+            /*for (int iPillarsX = 1; iPillarsX <= mapConstruction.maxPillarsX; iPillarsX++)
             {
                 for (int iPillarsY = 1; iPillarsY <= mapConstruction.maxPillarsY; iPillarsY++)
                 {
@@ -187,7 +172,7 @@ namespace BaseProject.GameStates
                         PillarCollided = false;
                     }
                 }
-            } */
+            }*/
 
             foreach (JogonPart part in JogonDragon)
             {
@@ -199,10 +184,6 @@ namespace BaseProject.GameStates
                 Jogon.LocalPosition = new Vector2(100, 4000);
                 Game1.GameStateManager.SwitchTo("");
                 //menuChoice = 2;
-            }
-            foreach (Fireball fireball in Jogon.fireballs)
-            {
-                fireball.Update(gameTime);
             }
             /*
             if (bossHealthBar.MaxHealthLength <= 0)
@@ -219,8 +200,6 @@ namespace BaseProject.GameStates
                 }
             }*/
         }
-
-
         /*
         public override void Draw(SpriteBatch spriteBatch)
         {
