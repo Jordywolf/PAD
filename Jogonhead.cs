@@ -58,7 +58,6 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
-            
             base.Update(gameTime);
             foreach (JogonPart epic in Body.children)
             {
