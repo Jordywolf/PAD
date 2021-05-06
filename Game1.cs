@@ -261,7 +261,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("jogonLevelPlayingState");
         }
 
 

@@ -15,7 +15,7 @@ namespace BaseProject.GameStates
 
         MapConstruction mapConstruction;
         private Jogonhead Jogon;
-        
+
         private JogonPart parentSegment;
         public HealthBar bossHealthBar;
         public HealthBar playerHealthBar;
@@ -40,7 +40,7 @@ namespace BaseProject.GameStates
         List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
-        public JogonLevelPlayingState(Texture2D aPillarTile,  SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
+        public JogonLevelPlayingState(Texture2D aPillarTile, SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
             epicDeur = new Decoy("Deur");
             Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
@@ -53,25 +53,25 @@ namespace BaseProject.GameStates
 
             target = Jogon;
 
-                this.player = Game1.player;
-                this.playerTexture = playerTexture;
+            this.player = Game1.player;
+            this.playerTexture = playerTexture;
 
-                mapConstruction = new MapConstruction(aPillarTile);
+            mapConstruction = new MapConstruction(aPillarTile);
 
             foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
-            }           
+        }
 
         public bool JogonCollision(Player p, JogonPart j, Texture2D pTexture)
         {
-            return (MathF.Abs(p.Position.X - j.LocalPosition.X) < pTexture.Width + j.sprite.Width
-                && MathF.Abs(p.Position.Y - j.LocalPosition.Y) < pTexture.Height + j.sprite.Height);
+            return (MathF.Abs(p.LocalPosition.X - j.LocalPosition.X) < pTexture.Width + j.sprite.Width
+                && MathF.Abs(p.LocalPosition.Y - j.LocalPosition.Y) < pTexture.Height + j.sprite.Height);
         }
 
         public bool FireballCollision(Player p, Fireball f, Texture2D pTexture)
         {
-            return (p.Position.X +pTexture.Width > f.LocalPosition.X && p.Position.X < f.LocalPosition.X + f.sprite.Width
-                && p.Position.Y + pTexture.Height > f.LocalPosition.Y && p.Position.Y < f.LocalPosition.Y + f.sprite.Height);
+            return (p.LocalPosition.X + pTexture.Width > f.LocalPosition.X && p.LocalPosition.X < f.LocalPosition.X + f.sprite.Width
+                && p.LocalPosition.Y + pTexture.Height > f.LocalPosition.Y && p.LocalPosition.Y < f.LocalPosition.Y + f.sprite.Height);
         }
 
         public void JogonLevelConstruction(Player player, Texture2D Floortile, int width, int height, Texture2D WalltileStr, Texture2D WalltileStrD, Texture2D WalltileL, Texture2D WalltileR, Texture2D WalltileCrnL, Texture2D WalltileCrnR, Texture2D WalltileCrnDL, Texture2D WalltileCrnDR, Texture2D PillarTile, Texture2D PlayerTexture, int menuChoice)
@@ -107,14 +107,14 @@ namespace BaseProject.GameStates
             }
             */
 
-            if (mapConstruction.Collision(player.Position, playerTexture) && !playerWallCollided)
+            if (mapConstruction.Collision(player.LocalPosition, playerTexture) && !playerWallCollided)
             {
-                player.Speed = -player.Speed;
+                player.moveSpeed = -player.moveSpeed;
                 playerWallCollided = true;
             }
-            else if (player.Speed < 0)
+            else if (player.moveSpeed < 0)
             {
-                player.Speed = -player.Speed;
+                player.moveSpeed = -player.moveSpeed;
                 playerWallCollided = false;
             }
 
