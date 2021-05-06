@@ -60,8 +60,7 @@ namespace BaseProject.GameStates
 
             foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
-            }
-            
+            }           
 
         public bool JogonCollision(Player p, JogonPart j, Texture2D pTexture)
         {
