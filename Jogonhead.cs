@@ -10,96 +10,130 @@ namespace BaseProject
 {
     class Jogonhead : JogonPart
     {
-        private float chargingdelay = 1000;
-        private float chargeTime = 0.1f;
-        private static float chargeOffset = 0;
-        private float chargeInc = chargeOffset;
-        private bool charging = false;
-        public Vector2 origin = new Vector2(1280, 320);
-        private Vector2 fireballOffset = new Vector2(20, 10);
+        private Random random = new Random();
+        private int Attackstate = 2;
+
+        private float chargeTimer = 0;
+        private float chargingdelay = 500;
+        private bool charging = true;
+
         private SoundEffect chargeSound;
 
+        private float angleoffset = 0;
         private int fireTimer;
-        private int fireTimerMax = 30;
+        private int fireTimerMax = 500;
+        private float angleincrease = 0;
 
-        public Engine.GameObjectList Body1 = new Engine.GameObjectList();
-        public List<JogonPart> Body = new List<JogonPart>();
-        public List<Fireball> fireballs = new List<Fireball>();
+        private int Segments = 15;
+        private float health = 10;
+        private Engine.SpriteGameObject target;
+        private JogonPart jogonBodyPart;
+        public Engine.GameObjectList Body = new Engine.GameObjectList();
+        public Engine.GameObjectList fireballs = new Engine.GameObjectList();
         public string fireBallTexture;
         public bool reached;
         bool keyPressed;
 
         Player player;
 
-        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, Engine.SpriteGameObject target,  SoundEffect aSound) : base(position, velocity, texture, followDist, target)
+        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, Engine.SpriteGameObject target,  SoundEffect aSound, float depth ) : base(position, velocity, texture, followDist, target, depth)
         {
+            depth = 1f;
             localPosition = position;
             this.fireBallTexture = fireballTexture;
             chargeSound = aSound;
+            Constructbody();
         }
 
+
+        public void Constructbody()
+        {
+            for (int i = 0; i < Segments; i++)
+            {
+                if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, this, 0.9f); }
+                else { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target,0.9f); }
+                Body.AddChild(jogonBodyPart);
+                target = jogonBodyPart;
+            }
+        }
         public override void Update(GameTime gameTime)
         {
+            
             base.Update(gameTime);
-            if (fireTimer >= fireTimerMax)
+            foreach (JogonPart epic in Body.children)
             {
-                Fireball();
-                fireTimer = 0;
-            } else { fireTimer++; }
+                epic._followSpeed = this._followSpeed * 1.99f;
+            }
+            switch (Attackstate)
+            {
+                case 1:
+                    chargingdelay--;
+                    if (chargingdelay <= 0)
+                    {
+                        Charge();
+                    }
+                    break;
+                case 2:
+                    if (fireTimer >= fireTimerMax)
+                    {
+                        
+                        for (int i = 1; i < 4; i++)
+                        {
+                            angleincrease += 1f;
+                            angleoffset =  (MathF.PI/180) * ((angleincrease+10)*(i%3));
+                            Fireball();
+                            fireTimer = 0;
+                            if (angleincrease > 35) { angleincrease = 0; }
+                        }
+                    }
+                    else { fireTimer++; }
+                    break;
+                case 3:
+
+                    break;
+
+            }
+
+
 
             if (Keyboard.GetState().IsKeyUp(Keys.Space))
             {
                 keyPressed = false;
             }
-            chargingdelay--;
 
-            if (chargingdelay <= 0)
-            {
-                charging = true;
-                _followSpeed = 200;
-                Charge();
 
-            }
+
         }
 
         public void Charge()
         {
             
             chargeSound.Play();
-            if (charging)
-            {
-                if (chargeInc <= MathF.PI * 2)
+
+                if (chargeTimer < MathF.PI)
                 {
-                    chargeInc+= 0.1f;
-                    _followSpeed = (float) (35 * -Math.Cos(2*MathF.PI*(chargeInc+2)));
+                    chargeTimer += 0.02f;
+                    _followSpeed += (float) (4 * MathF.Sin(chargeTimer));
+
                 }
-                else
+                else if(chargeTimer > MathF.PI)
                 {
-                    chargingdelay = 2000;
-                    chargeTime = 0.1f;
                     _followSpeed = 70;
-                    charging = false;
+                    chargeTimer = 0;
+                    chargingdelay = 500;
                 }
-            }
-            else
-            {
-                _followSpeed = 50;
-                charging = true;
-            }
             
         }
 
         public void Fireball()
         {
-            fireballOffset = -new Vector2(-this.sprite.Width / 2, this.sprite.Height / 2);
-            fireballOffset.Normalize();
-            //fireball zooi  
-            fireballs.Add(new Fireball(this.localPosition + fireballOffset, fireBallTexture, target));
-            for (int i = 0; i < fireballs.Count; i++)
+            //fireballOffset = new Vector2(-this.sprite.Width / 2, this.sprite.Height / 2);
+            fireballs.AddChild(new Fireball(this.localPosition,"fireball",this.Angle + angleoffset));
+            foreach(Fireball ball in fireballs.children)
             {
-                if (fireballs[i].IsObjectOffScreen(fireballs[i]))
+                if (ball.IsObjectOffScreen(ball))
                 {
-                    fireballs.RemoveAt(i);
+                    ball.Visible = false;
                 }
             }
         }

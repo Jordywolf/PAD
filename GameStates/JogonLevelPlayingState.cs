@@ -15,7 +15,7 @@ namespace BaseProject.GameStates
 
         MapConstruction mapConstruction;
         private Jogonhead Jogon;
-        private JogonPart jogonBodyPart;
+        
         private JogonPart parentSegment;
         public HealthBar bossHealthBar;
         public HealthBar playerHealthBar;
@@ -38,30 +38,26 @@ namespace BaseProject.GameStates
         Random rnd = new Random();
 
         List<JogonPart> JogonDragon = new List<JogonPart>();
-        private int Segments = 15;
+
 
         public JogonLevelPlayingState(Texture2D aPillarTile,  SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
             epicDeur = new Decoy("Deur");
-            Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound);
+            Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
             gameObjects.AddChild(epicDeur);
             gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEnd", 1));
             gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEndL", 1));
+            gameObjects.AddChild(Jogon);
+            gameObjects.AddChild(Jogon.fireballs);
+            gameObjects.AddChild(Jogon.Body);
+
             target = Jogon;
-            for (int i = 0; i < Segments; i++)
-            {
-                if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target ); }
-                
-                else { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target); }
-                 
-                    JogonDragon.Add(jogonBodyPart);
-                    target = jogonBodyPart;
-            }
+
                 this.player = Game1.player;
                 this.playerTexture = playerTexture;
 
                 mapConstruction = new MapConstruction(aPillarTile);
-            gameObjects.AddChild(Jogon);
+
             foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
             }
@@ -99,9 +95,6 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
             //playerTest.update();
 
-
-            Jogon.origin = player.Position;
-
             /*
             if (mapConstruction.Collision(Jogon.LocalPosition, Jogon.sprite) && !WallCollided)
             {
@@ -137,12 +130,12 @@ namespace BaseProject.GameStates
                 else { PhitJ = false; }
             }
 
-            foreach (Fireball f in Jogon.fireballs)
+            foreach (Fireball f in Jogon.fireballs.children)
             {
                 if (FireballCollision(player, f, playerTexture) && !FhitJ)
                 {
                     f.LocalPosition = new Vector2(1000, 1000);
-                    playerHealthBar.MaxHealthLength -= 0.2f;
+                    //playerHealthBar.MaxHealthLength -= 0.2f;
                     FhitJ = true;
                     Game1.GameStateManager.SwitchTo("");
                     Game1.menuchoice = 1;
@@ -191,10 +184,6 @@ namespace BaseProject.GameStates
                 Jogon.LocalPosition = new Vector2(100, 4000);
                 Game1.GameStateManager.SwitchTo("");
                 //menuChoice = 2;
-            }
-            foreach (Fireball fireball in Jogon.fireballs)
-            {
-                fireball.Update(gameTime);
             }
             /*
             if (bossHealthBar.MaxHealthLength <= 0)
