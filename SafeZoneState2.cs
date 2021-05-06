@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class SafeZoneState2 : Engine.GameState
+    class SafeZoneState2 : GameState
     {
         SafeZone2 safeZone2;
-        Engine.SpriteGameObject Fontein2, rots2, deur2;
+        SpriteGameObject Fontein2, rots2, deur2;
         public Vector2 deurPos = new Vector2(600, 0);
 
 
@@ -30,15 +31,15 @@ namespace BaseProject.GameStates
             safeZone2.NextLevel2();
             spriteBatch.End();
 
-            deur2 = new Engine.SpriteGameObject("Deur", 1);
+            deur2 = new SpriteGameObject("Deur", 1);
             gameObjects.AddChild(deur2);
             deur2.LocalPosition = deurPos;
             deur2.scale = 0.9f;
-            Fontein2 = new Engine.SpriteGameObject("Fontein", 1);
+            Fontein2 = new SpriteGameObject("Fontein", 1);
             gameObjects.AddChild(Fontein2);
             Fontein2.scale = 0.3f;
             Fontein2.LocalPosition = new Vector2(400, 50);
-            rots2 = new Engine.SpriteGameObject("Rots", 1);
+            rots2 = new SpriteGameObject("Rots", 1);
             gameObjects.AddChild(rots2);
             rots2.scale = 0.3f;
             rots2.LocalPosition = new Vector2(300, 300);

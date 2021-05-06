@@ -249,7 +249,7 @@ namespace BaseProject
             deathState = new GameStates.DeathState();
             GameStateManager.AddGameState("deathState", deathState);
 
-            safeZoneState = new GameStates.SafeZoneState();
+            safeZoneState = new GameStates.SafeZoneState(spriteBatch,ZandTile,Sleutel,SteenTile,SteenVert);
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
@@ -262,7 +262,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("jogonLevelPlayingState");
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
