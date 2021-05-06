@@ -48,8 +48,8 @@ namespace BaseProject.GameStates
             epicDeur = new Decoy("Deur");
             Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
             gameObjects.AddChild(epicDeur);
-            gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEnd", 1));
-            gameObjects.AddChild(new Engine.SpriteGameObject("healthBarEndL", 1));
+            gameObjects.AddChild(new SpriteGameObject("healthBarEnd", 1));
+            gameObjects.AddChild(new SpriteGameObject("healthBarEndL", 1));
             gameObjects.AddChild(Jogon);
             gameObjects.AddChild(Jogon.fireballs);
             gameObjects.AddChild(Jogon.Body);
@@ -59,9 +59,7 @@ namespace BaseProject.GameStates
             this.player = Game1.player;
             this.playerTexture = playerTexture;
 
-            mapConstruction = new MapConstruction(aPillarTile);
-
-            foreach (Engine.GameObject part in JogonDragon) { gameObjects.AddChild(part); }
+            foreach (GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
         }
 
@@ -124,7 +122,7 @@ namespace BaseProject.GameStates
                 WallCollided = false;
             }
             */
-
+/*
             if (mapConstruction.Collision(player.LocalPosition, playerTexture) && !playerWallCollided)
             {
                 player.moveSpeed = -player.moveSpeed;
@@ -134,7 +132,7 @@ namespace BaseProject.GameStates
             {
                 player.moveSpeed = -player.moveSpeed;
                 playerWallCollided = false;
-            }
+            }*/
 
             foreach (JogonPart j in JogonDragon)
             {

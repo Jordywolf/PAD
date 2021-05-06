@@ -15,7 +15,7 @@ namespace BaseProject
         protected float _followRange = 100f;
         protected bool segment = true;
 
-        public JogonPart(Vector2 position, float velocity, string texture, float followDist, Engine.SpriteGameObject Target, float depth) : base(texture,depth)
+        public JogonPart(Vector2 position, float velocity, string texture, float followDist, SpriteGameObject Target, float depth) : base(texture,depth)
         {
             scale = 1.5f;
             _followRange = followDist;

@@ -27,17 +27,17 @@ namespace BaseProject
 
         private int Segments = 15;
         private float health = 10;
-        private Engine.SpriteGameObject target;
+        private SpriteGameObject target;
         private JogonPart jogonBodyPart;
-        public Engine.GameObjectList Body = new Engine.GameObjectList();
-        public Engine.GameObjectList fireballs = new Engine.GameObjectList();
+        public GameObjectList Body = new GameObjectList();
+        public GameObjectList fireballs = new GameObjectList();
         public string fireBallTexture;
         public bool reached;
         bool keyPressed;
 
         Player player;
 
-        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, Engine.SpriteGameObject target,  SoundEffect aSound, float depth ) : base(position, velocity, texture, followDist, target, depth)
+        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, SpriteGameObject target,  SoundEffect aSound, float depth ) : base(position, velocity, texture, followDist, target, depth)
         {
             depth = 1f;
             localPosition = position;
