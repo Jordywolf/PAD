@@ -39,7 +39,7 @@ namespace BaseProject
         GameStates.PauseState pauseState;
         GameStates.DeathState deathState;
         GameStates.SafeZoneState safeZoneState;
-        GameStates.SafeZoneState safeZoneState2;
+        GameStates.SafeZoneState2 safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
         
@@ -256,7 +256,7 @@ namespace BaseProject
 
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
-            safeZoneState2 = new GameStates.SafeZoneState();
+            safeZoneState2 = new GameStates.SafeZoneState2(spriteBatch,TileSz3,TileSz2);
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
