@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    public class Player : Engine.SpriteGameObject
+    public class Player : SpriteGameObject
     {
         public float moveSpeed = 15f;
         public int health;
@@ -16,9 +16,10 @@ namespace BaseProject
         private int Iframes = 120;
 
         public Player()
-            : base("De_Rakker",0,0)
+            : base("De_Rakker",1)
         {
             health = 3;
+            Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         }
         public override void Update(GameTime gameTime)
         {
@@ -106,7 +107,7 @@ namespace BaseProject
                 }
                 else
                 {
-                    //todo implement GAMEOVER here
+                    Game1.GameStateManager.SwitchTo("deathState");
                     health = 3;
                 }
                 IframesCounter = Iframes;

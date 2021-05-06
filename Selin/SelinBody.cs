@@ -16,8 +16,7 @@ class SelinBody : Engine.SpriteGameObject
     public SelinBody() : base("Selin_Body", 1)
     {
         Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-
-        scale = 0.25f;
+        scale = 0.15f;
         speed = 100;
 
     }

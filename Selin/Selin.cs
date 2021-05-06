@@ -12,13 +12,14 @@ class Selin : Engine.GameObjectList
     Selin_Hammer selin_HammerL;
     Selin_Hammer selin_HammerR;
 
-    Engine.GameObjectList hammers;
-    Engine.GameObjectList shocks;
+    public Engine.GameObjectList hammers;
+    public Engine.GameObjectList shocks;
 
     public Selin() : base()
     {
         selinBody = new SelinBody();
         AddChild(selinBody);
+        selinBody.LocalPosition = new Vector2(BaseProject.Game1.width / 2, -200);
 
         hammers = new Engine.GameObjectList();
         AddChild(hammers);
@@ -68,17 +69,18 @@ class Selin : Engine.GameObjectList
 
     public void CollShockPlayer(Engine.SpriteGameObject p)
     {
+
         foreach (SelinShock sk in shocks.children)
         {
             if (OverlapsWith(sk, p) && sk.Visible)
             {
-                p.Visible = false;
+                BaseProject.Game1.GameStateManager.SwitchTo("deathState");
             }
         }
 
         if (OverlapsWith(selinBody, p))
         {
-            p.Visible = false;
+            BaseProject.Game1.GameStateManager.SwitchTo("deathState");
         }
     }
 

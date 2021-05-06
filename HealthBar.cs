@@ -4,10 +4,11 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject
 {
-    class HealthBar : Engine.SpriteGameObject
+    class HealthBar : SpriteGameObject
     {
         public Vector2 HBposition;
         public Texture2D HBbeginRTexture;

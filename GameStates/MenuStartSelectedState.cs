@@ -10,43 +10,26 @@ using Engine;
 
 namespace BaseProject.GameStates
 {
-    class MenuStartSelectedState : Engine.GameState
+    class MenuStartSelectedState : GameState
     {
-        Engine.TextGameObject instructions;
-        Engine.SpriteGameObject background;
-        Engine.SpriteGameObject menuCredits;
-        Engine.SpriteGameObject menuStart;
-        //SelinBody test;
-        //Selin_Hammer test2;
-
-        Selin test;
-        Decoy playerTest;
+        TextGameObject instructions;
+        SpriteGameObject background;
+        SpriteGameObject menuCredits;
+        SpriteGameObject menuStart;
 
         public MenuStartSelectedState() : base()
         {
-            background = new Engine.SpriteGameObject("HomeScreen", 0.1f);
+            background = new SpriteGameObject("HomeScreen", 0.1f);
             gameObjects.AddChild(background);
 
-            menuCredits = new Engine.SpriteGameObject("MenuCredits", 0.1f);
+            menuCredits = new SpriteGameObject("MenuCredits", 0.1f);
             gameObjects.AddChild(menuCredits);
 
-            menuStart = new Engine.SpriteGameObject("MenuStartGameSelected", 0.1f);
+            menuStart = new SpriteGameObject("MenuStartGameSelected", 0.1f);
             gameObjects.AddChild(menuStart);
 
-            instructions = new Engine.TextGameObject("Credit", 0.2f, Color.Beige);
+            instructions = new TextGameObject("Credit", 0.2f, Color.Beige);
             gameObjects.AddChild(instructions);
-
-            /*test = new SelinBody();
-            gameObjects.AddChild(test);
-
-            test2 = new Selin_Hammer("Selin_HmrL");
-            gameObjects.AddChild(test2);*/
-
-            playerTest = new Decoy("Deur");
-            gameObjects.AddChild(playerTest);
-
-            test = new Selin();
-            gameObjects.AddChild(test);
 
             instructions.Text = "Press \nPrrow Keys \nPress \nSpace";
             instructions.LocalPosition = new Vector2(0, 450);
@@ -62,7 +45,7 @@ namespace BaseProject.GameStates
             background.LocalPosition = new Vector2(0, -65);
         }
 
-        public bool OverlapsWith(Engine.SpriteGameObject thisOne, Engine.SpriteGameObject thatOne)
+        public bool OverlapsWith(SpriteGameObject thisOne, SpriteGameObject thatOne)
         {
             return (thisOne.LocalPosition.X + thisOne.sprite.Width / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width / 2
                 && thisOne.LocalPosition.X - thisOne.sprite.Width / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width / 2
@@ -86,51 +69,7 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("newGameState");
                 Game1.framecount = Game1.startframe;
             }
-
-            test.CollShockPlayer(playerTest);
-
-            /*
-            foreach (Engine.GameObject g in test.children)
-            {
-                if (g is Engine.GameObjectList)
-                {
-                    foreach (GameObjectList gol in gameObjects.children)
-                    {
-                        foreach (SpriteGameObject sgo in gol.children)
-                        {
-                            if (OverlapsWith(sgo, playerTest))
-                            {
-                                Game1.GameStateManager.SwitchTo("newGameState");
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (Engine.GameObject g in test.children)
-            {
-                if (g is Engine.SpriteGameObject)
-                {
-                    foreach (SpriteGameObject sgo in test.children)
-                    {
-                        if (OverlapsWith(sgo, playerTest))
-                        {
-                            Game1.GameStateManager.SwitchTo("newGameState");
-                        }
-                    }
-                }
-            }
-            */
         }
-
-
-        public override void HandleInput(InputHelper inputHelper)
-        {
-            base.HandleInput(inputHelper);
-
-            test.Targeting(playerTest.LocalPosition);
-        }
-
 
         /*public void Draw(SpriteBatch spriteBatch)
         {

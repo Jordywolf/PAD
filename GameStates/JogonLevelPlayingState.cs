@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class JogonLevelPlayingState : Engine.GameState
+    class JogonLevelPlayingState : Engine.LevelPlayingState
     {
 
         MapConstruction mapConstruction;
@@ -21,7 +22,7 @@ namespace BaseProject.GameStates
         public HealthBar playerHealthBar;
         //private Decoy playerTest;
 
-        private Engine.SpriteGameObject target;
+        private SpriteGameObject target;
         private bool WallCollided;
         private bool PillarCollided;
         private bool playerWallCollided;
@@ -42,6 +43,8 @@ namespace BaseProject.GameStates
 
         public JogonLevelPlayingState(Texture2D aPillarTile, SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
+            LoadFullFloor("PAD_Jg_Floortile1");
+
             epicDeur = new Decoy("Deur");
             Jogon = new Jogonhead(new Vector2(100, 100), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
             gameObjects.AddChild(epicDeur);
@@ -81,8 +84,23 @@ namespace BaseProject.GameStates
             levelWidth = width;
             mapConstruction.FloorConstruction(new Vector2(0, 0), Floortile, levelWidth, levelHeight, Color.White);
             mapConstruction.WallConstruction(new Vector2(0, 0), new Vector2(0, ((int)(levelHeight / Floortile.Height) - 1) * Floortile.Height), new Vector2(0, 0), new Vector2(((int)(levelWidth / Floortile.Width) - 1) * Floortile.Width, 0), levelWidth, levelHeight, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, Color.White);
-            mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
+            //mapConstruction.PillarSetup(PillarTile, levelWidth, levelHeight, pillarPositionCollision, Color.White);
         }
+
+        /*public void DrawPillars()
+        {
+            for (int iPillarsX = 1; iPillarsX <= maxPillarsX; iPillarsX++)
+            {
+                for (int iPillarsY = 1; iPillarsY <= maxPillarsY; iPillarsY++)
+                {
+
+                    pillarPosition.X = ((1280 / (maxPillarsX + 1)) * (iPillarsX)) - (64 / 2);
+                    pillarPosition.Y = ((640 / (maxPillarsY + 1)) * (iPillarsY)) - (64 / 2);
+
+                    pillars.children[iPillarsX * iPillarsY].LocalPosition = new Vector2(pillarPosition.X, pillarPosition.Y);
+                }
+            }
+        }*/
 
         public override void Update(GameTime gameTime)
         {
@@ -136,7 +154,7 @@ namespace BaseProject.GameStates
                     f.LocalPosition = new Vector2(1000, 1000);
                     //playerHealthBar.MaxHealthLength -= 0.2f;
                     FhitJ = true;
-                    Game1.GameStateManager.SwitchTo("");
+                    Game1.GameStateManager.SwitchTo("deathState");
                     Game1.menuchoice = 1;
                 }
                 else { FhitJ = false; }

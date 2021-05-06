@@ -6,16 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject.GameStates
 {
-    class DeathState : Engine.GameState
+    class DeathState : GameState
     {
-        Engine.SpriteGameObject deathground;
+        SpriteGameObject deathground;
 
         public DeathState() : base()
         {
-            deathground = new Engine.SpriteGameObject("DeathScreen", 1);
+            deathground = new SpriteGameObject("DeathScreen", 1);
             gameObjects.AddChild(deathground);
             deathground.scale = 1.3f;
             deathground.LocalPosition = new Vector2(25, -70);

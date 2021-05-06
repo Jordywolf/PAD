@@ -4,12 +4,13 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject
 {
-    class JogonPart : Engine.RotatingSpriteGameObject
+    class JogonPart : RotatingSpriteGameObject
     {
-        public Engine.GameObject target;
+        public GameObject target;
         public float _followSpeed = 70;
         protected float _followRange = 100f;
         protected bool segment = true;

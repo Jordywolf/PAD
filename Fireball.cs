@@ -4,13 +4,14 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Engine;
 
 namespace BaseProject
 {
-    class Fireball : Engine.RotatingSpriteGameObject //fireball class
+    class Fireball : RotatingSpriteGameObject //fireball class
     {
         Vector2 SpawnPosition;
-        Engine.GameObject TargetPosition;
+        GameObject TargetPosition;
         private float Timer;
         public float Speed = 500;
 
@@ -42,7 +43,7 @@ namespace BaseProject
             */
         }
 
-        public bool IsObjectOffScreen(Engine.SpriteGameObject gameObject)
+        public bool IsObjectOffScreen(SpriteGameObject gameObject)
         {
             if (gameObject.LocalPosition.X + gameObject.sprite.Width < 0 || 
                 gameObject.LocalPosition.X - gameObject.sprite.Width > 64*20 ||

@@ -6,10 +6,11 @@ using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Engine;
 
 namespace BaseProject
 {
-    class Game1 : Engine.ExtendedGame
+    class Game1 : ExtendedGame
     {
         //-----------------------------------------------------------------------------------
         public static bool buttonPressed;
@@ -258,7 +259,7 @@ namespace BaseProject
             safeZoneState2 = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
-            selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
+            selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
             GameStateManager.SwitchTo("jogonLevelPlayingState");
