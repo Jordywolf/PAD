@@ -36,7 +36,7 @@ namespace BaseProject
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
         GameStates.SafeZoneState safeZoneState;
-        GameStates.SafeZoneState safeZoneState2;
+        GameStates.SafeZoneState2 safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
@@ -236,20 +236,20 @@ namespace BaseProject
             backState = new GameStates.BackState();
             GameStateManager.AddGameState("backState", backState);
 
-            safeZoneState = new GameStates.SafeZoneState();
+            safeZoneState = new GameStates.SafeZoneState(spriteBatch,  ZandTile,  Sleutel,  SteenTile,  SteenVert);
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
 
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
-            safeZoneState2 = new GameStates.SafeZoneState();
+            safeZoneState2 = new GameStates.SafeZoneState2(spriteBatch,TileSz3,TileSz2);
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState(Sn_stoneTexture, Sn_grassTexture, Sn_obstacleTexture, Pilaar, Pilaar);
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("safeZoneState2");
         }
 
 
