@@ -18,11 +18,11 @@ namespace BaseProject.GameStates
         SpriteGameObject Fontein, Key, rots, pilaar, boom, deur;
 
 
-        public SafeZoneState(SpriteBatch spriteBatch,Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert) : base()
+        public SafeZoneState(SpriteBatch spriteBatch, Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert) : base()
         {
-            
-        safeZone = new SafeZone1();
-            
+
+            safeZone = new SafeZone1();
+
             spriteBatch.Begin();
             safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
             safeZone.SafeZoneStone(SteenTile, spriteBatch);
@@ -45,8 +45,8 @@ namespace BaseProject.GameStates
             boom = new SpriteGameObject("boom", 1);
             gameObjects.AddChild(boom);
             boom.scale = 0.5f;
-            boom.LocalPosition = new Vector2(300, 400); 
-            
+            boom.LocalPosition = new Vector2(300, 400);
+
             Key = new SpriteGameObject("Sleutel", 1);
             gameObjects.AddChild(Key);
             Key.LocalPosition = new Vector2(1000, 100);

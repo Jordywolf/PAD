@@ -63,7 +63,6 @@ class Selin_Hammer : Engine.SpriteGameObject
         else if (!attack && (inRange() || outRange()))
         {
             attack = true;
-            localPosition.Y += 100;
             m2 = true;
         }
         else if (m2)

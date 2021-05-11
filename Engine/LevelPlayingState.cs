@@ -86,7 +86,7 @@ namespace BaseProject.Engine
                 && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height * thisOne.scale / 2);
         }
 
-        public void CollisionUpdate(Player p)
+        public void CollisionUpdate(SpriteGameObject p)
         {
             foreach (ObjectTile o in walls.children)
             {
@@ -94,7 +94,7 @@ namespace BaseProject.Engine
                 {
                     collisionVector = -(o.LocalPosition - p.LocalPosition);
                     collisionVector.Normalize();
-                    p.LocalPosition += collisionVector*30;
+                    p.LocalPosition += collisionVector * 30;
                 }
             }
         }

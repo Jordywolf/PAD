@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 class FloorTile : Engine.SpriteGameObject
 {
 
-    public FloorTile(String assetname, Vector2 position) : base(assetname, 0.5f)
+    public FloorTile(String assetname, Vector2 position) : base(assetname, 0.4f)
     {
         this.localPosition = position;
     }

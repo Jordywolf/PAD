@@ -42,7 +42,7 @@ namespace BaseProject
         GameStates.SafeZoneState2 safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
-        
+
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
         public static int width = 1280;
@@ -166,7 +166,7 @@ namespace BaseProject
             PillarTile = Content.Load<Texture2D>("PAD_Jg_PillarV2_Standard");
             fireBallTexture = Content.Load<Texture2D>("Fireball");
             //Home en menus
-            
+
             HomeScreen = Content.Load<Texture2D>("HomeScreen");
             MenuStartGame = Content.Load<Texture2D>("MenuStartGame");
             MenuCredits = Content.Load<Texture2D>("MenuCredits");
@@ -217,7 +217,7 @@ namespace BaseProject
                 }
             };
 
-       
+
 
             menuchoice = 1;
             framecount = 0;
@@ -226,7 +226,7 @@ namespace BaseProject
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
 
-           
+
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
             GameStateManager.AddGameState("menuCreditsSelectedState", menuCreditsSelectedState);
@@ -249,20 +249,20 @@ namespace BaseProject
             deathState = new GameStates.DeathState();
             GameStateManager.AddGameState("deathState", deathState);
 
-            safeZoneState = new GameStates.SafeZoneState(spriteBatch,ZandTile,Sleutel,SteenTile,SteenVert);
+            safeZoneState = new GameStates.SafeZoneState(spriteBatch, ZandTile, Sleutel, SteenTile, SteenVert);
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
 
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
-            safeZoneState2 = new GameStates.SafeZoneState2(spriteBatch,TileSz3,TileSz2);
+            safeZoneState2 = new GameStates.SafeZoneState2(spriteBatch, TileSz3, TileSz2);
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("jogonLevelPlayingState");
         }
 
 
@@ -276,14 +276,14 @@ namespace BaseProject
             if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)
-                sprite.Update(gameTime, _sprites);
+                    sprite.Update(gameTime, _sprites);
                 player.Update(gameTime);
                 actionHandeler.Update();
             }
             if (menuchoice == 8)
             {
                 foreach (var sprite in noSprite)
-                sprite.Update(gameTime, noSprite);
+                    sprite.Update(gameTime, noSprite);
                 player.Update(gameTime);
                 actionHandeler.Update();
             }

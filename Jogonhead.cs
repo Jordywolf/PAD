@@ -37,9 +37,8 @@ namespace BaseProject
 
         Player player;
 
-        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, SpriteGameObject target,  SoundEffect aSound, float depth ) : base(position, velocity, texture, followDist, target, depth)
+        public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, SpriteGameObject target, SoundEffect aSound, float depth) : base(position, velocity, texture, followDist, target, depth)
         {
-            depth = 1f;
             localPosition = position;
             this.fireBallTexture = fireballTexture;
             chargeSound = aSound;
@@ -52,7 +51,7 @@ namespace BaseProject
             for (int i = 0; i < Segments; i++)
             {
                 if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, this, 0.9f); }
-                else { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target,0.9f); }
+                else { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target, 0.9f); }
                 Body.AddChild(jogonBodyPart);
                 target = jogonBodyPart;
             }
@@ -76,11 +75,11 @@ namespace BaseProject
                 case 2:
                     if (fireTimer >= fireTimerMax)
                     {
-                        
+
                         for (int i = 1; i < 4; i++)
                         {
                             angleincrease += 1f;
-                            angleoffset =  (MathF.PI/180) * ((angleincrease+10)*(i%3));
+                            angleoffset = (MathF.PI / 180) * ((angleincrease + 10) * (i % 3));
                             Fireball();
                             fireTimer = 0;
                             if (angleincrease > 35) { angleincrease = 0; }
@@ -107,29 +106,29 @@ namespace BaseProject
 
         public void Charge()
         {
-            
+
             chargeSound.Play();
 
-                if (chargeTimer < MathF.PI)
-                {
-                    chargeTimer += 0.02f;
-                    _followSpeed += (float) (4 * MathF.Sin(chargeTimer));
+            if (chargeTimer < MathF.PI)
+            {
+                chargeTimer += 0.02f;
+                _followSpeed += (float)(4 * MathF.Sin(chargeTimer));
 
-                }
-                else if(chargeTimer > MathF.PI)
-                {
-                    _followSpeed = 70;
-                    chargeTimer = 0;
-                    chargingdelay = 500;
-                }
-            
+            }
+            else if (chargeTimer > MathF.PI)
+            {
+                _followSpeed = 70;
+                chargeTimer = 0;
+                chargingdelay = 500;
+            }
+
         }
 
         public void Fireball()
         {
             //fireballOffset = new Vector2(-this.sprite.Width / 2, this.sprite.Height / 2);
-            fireballs.AddChild(new Fireball(this.localPosition,"fireball",this.Angle + angleoffset));
-            foreach(Fireball ball in fireballs.children)
+            fireballs.AddChild(new Fireball(this.localPosition, "fireball", this.Angle + angleoffset));
+            foreach (Fireball ball in fireballs.children)
             {
                 if (ball.IsObjectOffScreen(ball))
                 {
