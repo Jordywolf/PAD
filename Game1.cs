@@ -36,7 +36,8 @@ namespace BaseProject
         GameStates.NewGameState newGameState;
         GameStates.ContinueState continueState;
         GameStates.BackState backState;
-        GameStates.PauseState pauseState;
+        GameStates.PauseStateJogon pauseState;
+        GameStates.PauseStateSelin pauseStateSelin;
         GameStates.DeathState deathState;
         GameStates.SafeZoneState safeZoneState;
         GameStates.SafeZoneState2 safeZoneState2;
@@ -243,8 +244,11 @@ namespace BaseProject
             backState = new GameStates.BackState();
             GameStateManager.AddGameState("backState", backState);
 
-            pauseState = new GameStates.PauseState();
+            pauseState = new GameStates.PauseStateJogon();
             GameStateManager.AddGameState("pauseState", pauseState);
+
+            pauseStateSelin = new GameStates.PauseStateSelin();
+            GameStateManager.AddGameState("pauseStateSelin", pauseStateSelin);
 
             deathState = new GameStates.DeathState();
             GameStateManager.AddGameState("deathState", deathState);
@@ -309,11 +313,24 @@ namespace BaseProject
                 MenuBMI.Stop();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
-            {
-                GameStateManager.SwitchTo("pauseState");
-                framecount = startframe;
-            }
+          
+
+                if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
+                {
+                    GameStateManager.SwitchTo("pauseState");
+                    framecount = startframe;
+                    
+                }
+            
+
+          
+                if (Keyboard.GetState().IsKeyDown(Keys.L) && framecount > startframe + 50)
+                {
+                    GameStateManager.SwitchTo("pauseStateSelin");
+                    framecount = startframe;
+
+                }
+            
 
             /*if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
             {
