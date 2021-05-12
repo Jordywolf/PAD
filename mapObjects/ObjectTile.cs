@@ -11,7 +11,7 @@ namespace BaseProject
     class ObjectTile : SpriteGameObject
     {
 
-        public ObjectTile(String assetname, Vector2 position) : base(assetname, 0.6f)
+        public ObjectTile(String assetname, Vector2 position) : base(assetname, 0.5f)
         {
             this.localPosition = position;
             Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);

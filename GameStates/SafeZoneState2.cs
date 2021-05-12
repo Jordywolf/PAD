@@ -15,7 +15,6 @@ namespace BaseProject.GameStates
         SafeZone2 safeZone2;
         SpriteGameObject Fontein2, rots2, deur2;
         public Vector2 deurPos = new Vector2(600, 0);
-        private SafeZoneState safeZone;
 
 
 
@@ -23,14 +22,14 @@ namespace BaseProject.GameStates
         public SafeZoneState2(SpriteBatch spriteBatch, Texture2D TileSz3, Texture2D TileSz2) : base()
         {
 
-            safeZone2 = new SafeZone2();
+            //safeZone2 = new SafeZone2();
 
-           // spriteBatch.Begin();
-            //safeZone2.MovingPlatForm(TileSz3, spriteBatch);
-            //safeZone2.SafeZone(TileSz2, spriteBatch);
-            //safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
-            //safeZone2.NextLevel2();
-            //spriteBatch.End();
+            /*spriteBatch.Begin();
+            safeZone2.MovingPlatForm(TileSz3, spriteBatch);
+            safeZone2.SafeZone(TileSz2, spriteBatch);
+            safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
+            safeZone2.NextLevel2();
+            spriteBatch.End();*/
 
             deur2 = new SpriteGameObject("Deur", 1);
             gameObjects.AddChild(deur2);
