@@ -128,6 +128,7 @@ namespace BaseProject.GameStates
                 fightSound.Play();
             }
 
+
             //CollisionUpdate(epicDeur);
 
             //CollisionDetection.ShapesIntersect(epicDeur, player);
