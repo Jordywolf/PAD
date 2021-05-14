@@ -256,13 +256,13 @@ namespace BaseProject
 
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
-            safeZoneState2 = new GameStates.SafeZoneState2(spriteBatch,TileSz3,TileSz2);
+            safeZoneState2 = new GameStates.SafeZoneState2();
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("safeZoneState");
         }
 
 
