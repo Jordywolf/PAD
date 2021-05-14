@@ -91,8 +91,14 @@ namespace BaseProject
         public Texture2D Sn_obstacleTexture;
 
         public static Player player;
+        public static SpriteGameObject playerShadow;
+        public static SpriteGameObject playerHealth1;
+        public static SpriteGameObject playerHealth2;
+        public static SpriteGameObject playerHealth3;
         public static List<Sprite> _sprites;
         public static List<Sprite> noSprite;
+
+        public static ItemPickup ItemPickup;
 
         public Boolean KeyCollected;
         public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
@@ -102,10 +108,6 @@ namespace BaseProject
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public static Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel, TileSz2, TileSz3;
-        public static Texture2D PlayerShadow;
-        public static Texture2D PlayerHealth;
-
-        private ActionHandeler actionHandeler;
 
         SafeZone1 safeZone = new SafeZone1();
         SafeZone2 safeZone2 = new SafeZone2();
@@ -140,8 +142,6 @@ namespace BaseProject
             Deur = Content.Load<Texture2D>("Deur");
             //player
             Player = Content.Load<Texture2D>("De_Rakker");
-            PlayerShadow = Content.Load<Texture2D>("PlayerShadow");
-            PlayerHealth = Content.Load<Texture2D>("Heart");
             //Tiles
             Sleutel = Content.Load<Texture2D>("Sleutel");
             TileSz2 = Content.Load<Texture2D>("TileSz2");
@@ -189,8 +189,11 @@ namespace BaseProject
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
 
             font = Content.Load<SpriteFont>("Credit");
-            actionHandeler = new ActionHandeler();
             player = new Player();
+            playerShadow = new SpriteGameObject("PlayerShadow", 0.9f);
+            playerHealth1 = new SpriteGameObject("Heart", 1);
+            playerHealth2 = new SpriteGameObject("Heart", 1);
+            playerHealth3 = new SpriteGameObject("Heart", 1);
 
             noSprite = new List<Sprite>();
             _sprites = new List<Sprite>()
@@ -278,14 +281,12 @@ namespace BaseProject
                 foreach (var sprite in _sprites)
                     sprite.Update(gameTime, _sprites);
                 player.Update(gameTime);
-                actionHandeler.Update();
             }
             if (menuchoice == 8)
             {
                 foreach (var sprite in noSprite)
                     sprite.Update(gameTime, noSprite);
                 player.Update(gameTime);
-                actionHandeler.Update();
             }
 
             base.Update(gameTime);

@@ -56,7 +56,7 @@ namespace BaseProject.GameStates
             selinBoss = new Selin();
             gameObjects.AddChild(selinBoss);
 
-            playerTest = new Player();
+            playerTest = Game1.player;
             gameObjects.AddChild(playerTest);
             playerTest.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
             

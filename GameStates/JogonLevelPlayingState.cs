@@ -35,7 +35,6 @@ namespace BaseProject.GameStates
         private SoundEffectInstance fightSound;
         Player player;
         private Texture2D playerTexture;
-        Decoy epicDeur;
         Random rnd = new Random();
 
         List<JogonPart> JogonDragon = new List<JogonPart>();
@@ -48,13 +47,22 @@ namespace BaseProject.GameStates
             LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
     "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
             
-            epicDeur = new Decoy("Deur");
-            Jogon = new Jogonhead(new Vector2(Game1.width/2, Game1.height/2), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
+            player = Game1.player;
+            gameObjects.AddChild(Game1.playerShadow);
+            Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
+            gameObjects.AddChild(Game1.playerHealth1);
+            gameObjects.AddChild(Game1.playerHealth2);
+            gameObjects.AddChild(Game1.playerHealth3);
+            Jogon = new Jogonhead(new Vector2(Game1.width/2, Game1.height/2), 70, "JogonHead", 0.1f, "Fireball", player, aSound, 1);
 
             gameObjects.AddChild(new SpriteGameObject("JogonHead", 1));
             
-            gameObjects.AddChild(epicDeur);
-            epicDeur.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            gameObjects.AddChild(player);
+            player.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+
+            //Do this when jogon dies
+            //Game1.ItemPickup = new ItemPickup("De_Rakker", 1);
+            //gameObjects.AddChild(Game1.ItemPickup);
 
             gameObjects.AddChild(new SpriteGameObject("healthBarEnd", 1));
             gameObjects.AddChild(new SpriteGameObject("healthBarEndL", 1));

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Engine;
 
 namespace BaseProject
 {
@@ -13,7 +14,7 @@ namespace BaseProject
         float playerJumpVelocity = 20;
         float playerZwaartekracht = 1.2f;
         public static Vector2 jumpLocation;
-        public static bool playerOnGround = false;
+        public static bool playerOnGround = true;
 
         public void Jump()
         { 
@@ -34,7 +35,7 @@ namespace BaseProject
 
                 if (Game1.player.LocalPosition.Y > jumpLocation.Y)
                 {
-                    Game1.player.LocalPosition = new Vector2(Game1.player.LocalPosition.X, playerVelocityY);
+                    Game1.player.LocalPosition = jumpLocation;
                     playerOnGround = true;
                 }
             }
