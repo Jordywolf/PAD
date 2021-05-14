@@ -261,7 +261,7 @@ namespace BaseProject
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
-            safeZoneState2 = new GameStates.SafeZoneState2(spriteBatch, TileSz3, TileSz2);
+            safeZoneState2 = new GameStates.SafeZoneState2();
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();

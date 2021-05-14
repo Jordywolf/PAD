@@ -37,7 +37,7 @@ namespace BaseProject.Engine
             }
         }
 
-        public void LoadSquareFloor(String floorTexture, int Ysize, int Xsize, Vector2 midPos)
+        public void LoadSquareFloor(String floorTexture, float Ysize, float Xsize, Vector2 midPos)
         {
             for (int iXFloor = 0; iXFloor < Game1.width / grid; iXFloor++)
             {

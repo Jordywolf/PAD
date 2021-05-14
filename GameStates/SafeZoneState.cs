@@ -10,25 +10,26 @@ using Engine;
 
 namespace BaseProject.GameStates
 {
-    class SafeZoneState : GameState
+    class SafeZoneState : Engine.LevelPlayingState
     {
         SafeZone1 safeZone;
         public int height = 1080;
         public int width = 1920;
+        Player player1;
+        private Vector2 steenSize = new Vector2(0, 0);
+        private Vector2 steenPos = new Vector2(Game1.width/2, Game1.height/2);
         SpriteGameObject Fontein, Key, rots, pilaar, boom, deur;
+        Boolean KeyCollected = false;
 
 
         public SafeZoneState(SpriteBatch spriteBatch, Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert) : base()
         {
+            
+        safeZone = new SafeZone1();
+            //Floor Construction + Stone Tiles
+            LoadFullFloor("ZandTile");
+            
 
-            safeZone = new SafeZone1();
-
-            spriteBatch.Begin();
-            safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-            safeZone.SafeZoneStone(SteenTile, spriteBatch);
-            safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-            safeZone.NextLevel1();
-            spriteBatch.End();
 
             deur = new SpriteGameObject("Deur", 1);
             gameObjects.AddChild(deur);
@@ -36,10 +37,11 @@ namespace BaseProject.GameStates
             deur.scale = 0.7f;
             Fontein = new SpriteGameObject("Fontein", 1);
             gameObjects.AddChild(Fontein);
-            Fontein.scale = 0.5f;
-            Fontein.LocalPosition = new Vector2(200, 50);
+            Fontein.scale = 0.7f;
+            Fontein.LocalPosition = new Vector2(125, 50);
             rots = new SpriteGameObject("Rots", 1);
             gameObjects.AddChild(rots);
+            rots.Origin = new Vector2(rots.sprite.Width / 2, rots.Height / 2);
             rots.scale = 0.5f;
             rots.LocalPosition = new Vector2(300, 300);
             boom = new SpriteGameObject("boom", 1);
@@ -56,22 +58,24 @@ namespace BaseProject.GameStates
             pilaar.LocalPosition = new Vector2(1000, 100);
             pilaar.scale = 0.5f;
 
-
+            player1 = new Player();
+            gameObjects.AddChild(player1);
+            player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+             
 
         }
 
-        public void SafzoneConstruction(SpriteBatch spriteBatch, Player player, List<Sprite> sprites, Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert)
+        public override void Update(GameTime gameTime)
         {
-            spriteBatch.Begin();
+            base.Update(gameTime);
+            if(OverlapsWith(rots, player1) == true)
+            {
+                Vector2 PushDir = new Vector2(rots.LocalPosition.X - player1.LocalPosition.X, rots.LocalPosition.Y - player1.LocalPosition.Y);
+                
+                PushDir.Normalize();
 
-            safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-            safeZone.SafeZoneStone(SteenTile, spriteBatch);
-            safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-            safeZone.NextLevel1();
-
-            spriteBatch.End();
-            foreach (var sprite in sprites)
-                sprite.Draw(spriteBatch);
+                rots.LocalPosition = new Vector2(rots.LocalPosition.X + PushDir.X * 20, rots.LocalPosition.Y + PushDir.Y * 20);
+            }
         }
     }
 }
