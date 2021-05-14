@@ -150,7 +150,6 @@ namespace BaseProject
             //Jogon
             jogonBodyTexture = Content.Load<Texture2D>("jogon_BodyS");
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
-            jogonHSTexture = Content.Load<Texture2D>("Jogon_HoofdS");
             jogonSound = Content.Load<SoundEffect>("JogonRoar");
             jogonFightSound = Content.Load<SoundEffect>("JogonBattelMusic");
             //JogonLevel

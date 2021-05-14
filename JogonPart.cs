@@ -44,15 +44,6 @@ namespace BaseProject
             }
             offsetDegrees = 90;
         }
-        public void SetNextpostition(Vector2 Pos, Vector2 Ag)
-        {
-            if (!(target is Decoy))
-            {
-                (target as JogonPart).SetNextpostition(localPosition, AngularDirection);
-            }
-            previousPosition = Pos;
-            previousRotation = Ag;
-        }
         protected bool isInRange(Vector2 V1, Vector2 V2, float range)
         {
             float dx = V2.X - V1.X;
