@@ -267,7 +267,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("safeZoneState2");
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
