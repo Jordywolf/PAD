@@ -46,7 +46,7 @@ namespace BaseProject.Engine
                     if (iXFloor * grid >= Game1.width / 2 - Xsize / 2 * grid && iXFloor * grid <= Game1.width / 2 + Xsize / 2 * grid
                         && iYFloor * grid >= Game1.height / 2 - Ysize / 2 * grid && iYFloor * grid <= Game1.height / 2 + Ysize / 2 * grid)
                     {
-                        floor.AddChild(new FloorTile(floorTexture, new Vector2(grid * iXFloor - (Game1.width/2 - midPos.X), grid * iYFloor - (Game1.height / 2 - midPos.Y))));
+                        floor.AddChild(new FloorTile(floorTexture, new Vector2(grid * iXFloor - (Game1.width / 2 - midPos.X), grid * iYFloor - (Game1.height / 2 - midPos.Y))));
                     }
                 }
             }
@@ -58,7 +58,7 @@ namespace BaseProject.Engine
             {
                 if (iWalltile <= 0)
                 {
-                    walls.AddChild(new ObjectTile(ctl, new Vector2(grid * iWalltile + grid/2, grid / 2)));
+                    walls.AddChild(new ObjectTile(ctl, new Vector2(grid * iWalltile + grid / 2, grid / 2)));
                     walls.AddChild(new ObjectTile(cdl, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2)));
                 }
 
@@ -90,11 +90,30 @@ namespace BaseProject.Engine
         {
             foreach (ObjectTile o in walls.children)
             {
-                if (OverlapsWith(p, o))
+                if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.X + p.Width / 2
+                    > o.LocalPosition.X - o.Width / 2 && p.LocalPosition.X + p.Width / 2 < o.LocalPosition.X)
                 {
-                    collisionVector = -(o.LocalPosition - p.LocalPosition);
-                    collisionVector.Normalize();
-                    p.LocalPosition += collisionVector * 30;
+                    p.LocalPosition = new Vector2(p.LocalPosition.X - CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width,
+                        p.LocalPosition.Y);
+                }
+
+                if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.X - p.Width / 2
+                    < o.LocalPosition.X + o.Width / 2 && p.LocalPosition.X - p.Width / 2 > o.LocalPosition.X)
+                {
+                    p.LocalPosition = new Vector2(p.LocalPosition.X + CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width,
+                        p.LocalPosition.Y);
+                }
+
+                if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.Y + p.Height / 2
+                    > o.LocalPosition.Y - o.Height / 2 && p.LocalPosition.Y + p.Height / 2 < o.LocalPosition.Y)
+                {
+                    p.LocalPosition = new Vector2(p.LocalPosition.X, p.LocalPosition.Y - CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height);
+                }
+
+                if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.Y - p.Height / 2
+                    < o.LocalPosition.Y + o.Height / 2 && p.LocalPosition.Y - p.Height / 2 > o.LocalPosition.Y)
+                {
+                    p.LocalPosition = new Vector2(p.LocalPosition.X, p.LocalPosition.Y + CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height);
                 }
             }
         }
