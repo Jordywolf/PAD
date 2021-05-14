@@ -10,6 +10,8 @@ namespace BaseProject
 {
     class Decoy : SpriteGameObject
     {
+        public Rectangle collision;
+
         public Decoy(String decoyTexture) : base(decoyTexture, 1)
         {
             Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
@@ -20,6 +22,8 @@ namespace BaseProject
             base.Update(gameTime);
 
             velocity = Vector2.Zero;
+
+            collision = new Rectangle((int)localPosition.X - sprite.Width/2, (int)localPosition.Y - sprite.Height/2, sprite.Width, sprite.Height);
         }
 
         public override void HandleInput(InputHelper inputHelper)
