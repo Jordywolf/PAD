@@ -271,8 +271,6 @@ namespace BaseProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            MenuBMI.Play();
-
             if (menuchoice == 7)
             {
                 foreach (var sprite in _sprites)

@@ -33,7 +33,7 @@ namespace Engine
         /// </summary>
         protected float depth;
 
-        public float scale = 1.0f;
+
 
         /// <summary>
         /// Creates a new SpriteGameObject with a given sprite name.
@@ -56,6 +56,8 @@ namespace Engine
         /// </summary>
         /// <param name="gameTime">An object containing information about the time that has passed in the game.</param>
         /// <param name="spriteBatch">A sprite batch object used for drawing sprites.</param>
+        /// 
+        public float scale = 1.0f;
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (!Visible)

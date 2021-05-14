@@ -35,7 +35,7 @@ namespace BaseProject.GameStates
         private SoundEffectInstance fightSound;
         Player player;
         private Texture2D playerTexture;
-        Decoy epicDeur;
+        Decoy speler;
         Random rnd = new Random();
 
         List<JogonPart> JogonDragon = new List<JogonPart>();
@@ -47,14 +47,14 @@ namespace BaseProject.GameStates
             LoadFullFloor("PAD_Jg_Floortile1");
             LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
     "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
-            
-            epicDeur = new Decoy("Deur");
-            Jogon = new Jogonhead(new Vector2(Game1.width/2, Game1.height/2), 70, "JogonHead", 0.1f, "Fireball", epicDeur, aSound, 1);
+
+            speler = new Decoy("Deur");
+            Jogon = new Jogonhead(new Vector2(Game1.width/2, Game1.height/2), 70, "JogonHead", 0.1f, "Fireball", speler, aSound, 1);
 
             gameObjects.AddChild(new SpriteGameObject("JogonHead", 1));
             
-            gameObjects.AddChild(epicDeur);
-            epicDeur.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            gameObjects.AddChild(speler);
+            speler.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
             gameObjects.AddChild(new SpriteGameObject("healthBarEnd", 1));
             gameObjects.AddChild(new SpriteGameObject("healthBarEndL", 1));
@@ -117,6 +117,7 @@ namespace BaseProject.GameStates
             if (!fightSound.IsLooped)
             {
                 fightSound.IsLooped = true;
+                fightSound.Volume = 0.5f;
                 fightSound.Play();
             }
 

@@ -16,9 +16,9 @@ namespace BaseProject
         public float Speed = 500;
 
 
-        public Fireball(Vector2 position, String texture, float rotation) : base(texture,1)
+        public Fireball(Vector2 position, String texture, float rotation) : base(texture,0.8f)
         {
-            this.scale = 2.0f;
+            this.scale = 20.0f;
             Origin = new Vector2(this.sprite.Width / 2, this.Height / 2);
             localPosition = position;
             Reset();

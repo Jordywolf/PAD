@@ -18,6 +18,7 @@ namespace BaseProject
         private float chargingdelay = 500;
         private bool charging = true;
 
+        private bool playsound = true;
         private SoundEffect chargeSound;
 
         private float angleoffset = 0;
@@ -25,7 +26,7 @@ namespace BaseProject
         private int fireTimerMax = 200;
         private float angleincrease = 0;
 
-        private int Segments = 15;
+        private int Segments = 20;
         private float health = 10;
         private SpriteGameObject target;
         private JogonPart jogonBodyPart;
@@ -34,7 +35,8 @@ namespace BaseProject
         public string fireBallTexture;
         public bool reached;
         bool keyPressed;
-
+        private String[] jogonBodyParts = { "Jogon_BodyS", "Jogon_BodyArms", "Jogon_Vleugels" };
+        private SpriteSheet arms = new SpriteSheet("Jogon_ArmsAni",1);
         Player player;
 
         public Jogonhead(Vector2 position, float velocity, String texture, float followDist, string fireballTexture, SpriteGameObject target, SoundEffect aSound, float depth) : base(position, velocity, texture, followDist, target, depth)
@@ -50,8 +52,11 @@ namespace BaseProject
         {
             for (int i = 0; i < Segments; i++)
             {
-                if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, this, 0.9f); }
-                else { jogonBodyPart = new JogonPart(new Vector2(100, 100), 70, "Jogon_BodyS", 10, target, 0.9f); }
+                if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X,this.localPosition.Y), 70, jogonBodyParts[0], 10, this, 0.9f); }
+                else if(i == (int)(Segments/10)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[1], 10, target, 0.9f); }
+                else if (i == (int)(Segments / 2.5)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[2], 10, target, 0.9f); }
+                else if (i == (int)(Segments/1.3)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[1], 10, target, 0.9f); }
+                else  { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[0], 10, target, 0.9f); }
                 Body.AddChild(jogonBodyPart);
                 target = jogonBodyPart;
             }
@@ -60,9 +65,9 @@ namespace BaseProject
         {
             
             base.Update(gameTime);
-            foreach (JogonPart epic in Body.children)
+            foreach (JogonPart jogonpart in Body.children)
             {
-                epic._followSpeed = this._followSpeed * 1.99f;
+                jogonpart._followSpeed = this._followSpeed*1.99f;
             }
             foreach (Fireball ball in fireballs.children)
             {
@@ -83,10 +88,7 @@ namespace BaseProject
                     _followSpeed = 40;
                     if (fireTimer >= fireTimerMax)
                     {
-                        foreach (Fireball ball in fireballs.children)
-                        {
-                            ball.scale = 1;
-                        }
+
                             for (int i = 1; i <= 20+1; i++)
                         {
                             angleincrease += 5f*i;
@@ -95,18 +97,30 @@ namespace BaseProject
                             fireTimer = 0;
                             if (angleincrease > 45) { angleincrease = 0; }
                         }
+                        foreach (Fireball ball in fireballs.children)
+                        {
+                            ball.scale = 2.5f;
+                        }
                     }
                     else { fireTimer++; }
                     break;
                 case 3:
                     chargingdelay--;
+                    if (chargingdelay == 30)
+                    {
+                        if (playsound)
+                        {
+                            chargeSound.Play(volume: 1.0f, pitch: 0.0f, pan: 0.0f);
+                            playsound = false;
+                        }
+                    }
                     if (chargingdelay <= 0)
                     {
                         Charge();
                     }
                     if (fireTimer >= fireTimerMax)
                     {
-                        for (int i = 0; i <= 40; i++)
+                        for (int i = 0; i <= 20; i++)
                         {
                             angleoffset = (MathF.PI / 180) * (MathF.Cos(i)*10);
                             if (angleoffset > 45 || angleoffset < -45) { angleoffset = 0; }
@@ -132,19 +146,23 @@ namespace BaseProject
                 keyPressed = false;
             }
 
-
+            // store current positon and rotation as previous for all following parts
+            /*if (updateDelay <= 0)
+            {
+                (Body.children[Body.children.Count-1] as JogonPart).SetNextpostition(localPosition, new Vector2(0,0));
+                updateDelay = 1;
+            }
+            updateDelay--;
+            */
 
         }
-
         public void Charge()
         {
-
-            chargeSound.Play();
 
             if (chargeTimer < MathF.PI)
             {
                 chargeTimer += 0.02f;
-                _followSpeed += (float)(4 * MathF.Sin(chargeTimer));
+                _followSpeed += (float)(3 * MathF.Sin(chargeTimer));
 
             }
             else if (chargeTimer > MathF.PI)
@@ -152,7 +170,9 @@ namespace BaseProject
                 _followSpeed = 70;
                 chargeTimer = 0;
                 chargingdelay = 500;
+                playsound = true;
             }
+
 
         }
 
@@ -162,6 +182,7 @@ namespace BaseProject
             fireballs.AddChild(new Fireball(this.localPosition, "fireball", this.Angle + angleoffset));
             foreach (Fireball ball in fireballs.children)
             {
+
                 if (ball.IsObjectOffScreen(ball))
                 {
                     ball.Visible = false;
