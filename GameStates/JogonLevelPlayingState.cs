@@ -125,6 +125,7 @@ namespace BaseProject.GameStates
             if (!fightSound.IsLooped)
             {
                 fightSound.IsLooped = true;
+                fightSound.Volume = 0.5f;
                 fightSound.Play();
             }
 

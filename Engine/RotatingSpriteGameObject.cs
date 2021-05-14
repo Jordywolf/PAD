@@ -22,7 +22,7 @@ namespace Engine
             set { origin = value; }
         }*/
 
-        private float radians;
+        private float radians = 0;
         /// <summary>
         /// RotatingSpriteGameObject constructor.
         /// </summary>
@@ -74,12 +74,14 @@ namespace Engine
         /// </summary>
         /// <param name="gameTime"></param>
         /// <param name="spriteBatch"></param>
+        /// 
+        public float scale = 1.0f;
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (!Visible || sprite == null)
                 return;
             
-            spriteBatch.Draw(sprite.GetTexture, GlobalPosition, null, Color.White, radians - MathHelper.ToRadians(offsetDegrees), Origin, 1.0f, SpriteEffects.None, this.depth);
+            spriteBatch.Draw(sprite.GetTexture, GlobalPosition, null, Color.White, radians - MathHelper.ToRadians(offsetDegrees), Origin, scale, SpriteEffects.None, this.depth);
         }
 
         /// <summary>
