@@ -37,6 +37,7 @@ namespace BaseProject.GameStates
         private int deathTimer;
         private SoundEffectInstance fightSound;
         Player player;
+        HealthBar jogonhealth;
         private Texture2D playerTexture;
         Random rnd = new Random();
 
@@ -60,14 +61,12 @@ namespace BaseProject.GameStates
 
             Jogon = new Jogonhead(new Vector2(Game1.width/2, Game1.height/2), 70, "JogonHead", 0.1f, "Fireball", player, aSound, 1);
 
-            gameObjects.AddChild(new SpriteGameObject("JogonHead", 1));
             
             //Do this when jogon dies
             //Game1.ItemPickup = new ItemPickup("De_Rakker", 1);
             //gameObjects.AddChild(Game1.ItemPickup);
 
-            gameObjects.AddChild(new SpriteGameObject("healthBarEnd", 1));
-            gameObjects.AddChild(new SpriteGameObject("healthBarEndL", 1));
+          
             gameObjects.AddChild(Jogon);
             gameObjects.AddChild(Jogon.fireballs);
             gameObjects.AddChild(Jogon.Body);
@@ -79,6 +78,9 @@ namespace BaseProject.GameStates
 
             this.player = Game1.player;
             this.playerTexture = playerTexture;
+            jogonhealth = new HealthBar();
+            gameObjects.AddChild(jogonhealth);
+            jogonhealth.LocalPosition = new Vector2(0,0 );
 
             foreach (GameObject part in JogonDragon) { gameObjects.AddChild(part); }
             this.fightSound = fightSound.CreateInstance();
@@ -228,8 +230,20 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("");
                 //menuChoice = 2;
             }
-            /*
-            if (bossHealthBar.MaxHealthLength <= 0)
+            foreach (ObjectTile o in walls.children)
+            if (OverlapsWith(Jogon, o ))
+            {
+                    jogonhealth.Hit(1);
+            }
+            if(jogonhealth.CurrentHealth == 0)
+            {
+               // Game1.GameStateManager.SwitchTo("safeZoneState2");
+                Game1.ItemPickup = new ItemPickup("Rots", 1);
+                gameObjects.AddChild(Game1.ItemPickup);
+
+            }
+            
+            /*if (bossHealthBar.MaxHealthLength <= 0)
             {
                 if (deathTimer >= 500)
                 {

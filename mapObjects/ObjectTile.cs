@@ -19,6 +19,7 @@ namespace BaseProject
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
         }
     }
 }

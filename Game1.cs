@@ -70,7 +70,7 @@ namespace BaseProject
         public Texture2D MenuNewGameSelected;
         public Texture2D MenuContinue;
         public Texture2D MenuContinueSelected;
-        public SpriteFont font;
+        public SpriteFont font,font2;
         public static int menuchoice;
         public static int framecount;
         public static int startframe;
@@ -188,6 +188,7 @@ namespace BaseProject
             MenuBMI = MenuBM.CreateInstance();
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
 
+            font2 = Content.Load<SpriteFont>("Eightbit");
             font = Content.Load<SpriteFont>("Credit");
             player = new Player();
             playerShadow = new SpriteGameObject("PlayerShadow", 0.9f);

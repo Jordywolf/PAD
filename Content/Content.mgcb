@@ -171,6 +171,20 @@
 /processorParam:TextureFormat=Color
 /build:Deur.png
 
+#begin Eightbit.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Eightbit.spritefont
+
+#begin Eightbit.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Eightbit.spritefont
+
 #begin Fireball.png
 /importer:TextureImporter
 /processor:TextureProcessor

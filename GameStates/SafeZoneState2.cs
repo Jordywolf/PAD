@@ -18,62 +18,34 @@ namespace BaseProject.GameStates
         public Vector2 TileSz2Pos = new Vector2(0, 0);
         public int LowerPosY = 570;
         public int PlatformPosY;
+        Player player1;
 
 
         public SafeZoneState2() : base()
         {
             PlatformPosY = 380;
             //Upper Row
+            //Lower Row
             for (int i = 0; i < 16; i++)
             {
-                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(80*i, 0));
+                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(80 * i, 0));
+                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(80 * i, LowerPosY));
             }
             //PlatForm
+            for(int i = 0; i < 5; i++)
+            {
+                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400 + (80 * i), PlatformPosY));
+                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400 + (80 * i), PlatformPosY - 70));
+                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400 + (80 * i), PlatformPosY - 140));
+                LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400 + (80 * i), PlatformPosY - 210));
 
-            ///First Row 
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400, PlatformPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(480, PlatformPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(560, PlatformPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(640, PlatformPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(720, PlatformPosY));
-            //Third Row
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400, PlatformPosY - 70));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(480, PlatformPosY - 70));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(560, PlatformPosY - 70));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(640, PlatformPosY - 70));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(720, PlatformPosY - 70));
-            //Second Row
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400, PlatformPosY - 140));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(480, PlatformPosY - 140));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(560, PlatformPosY - 140));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(640, PlatformPosY - 140));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(720, PlatformPosY - 140));
-            //First row
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400, PlatformPosY - 210));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(480, PlatformPosY - 210));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(560, PlatformPosY - 210));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(640, PlatformPosY - 210));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(720, PlatformPosY - 210));
+            }
 
 
-            //Lower Row
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(0, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(80, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(160, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(240, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(320, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(400, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(480, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(560, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(640, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(720, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(800, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(880, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(960, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(1040, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(1120, LowerPosY));
-            LoadSquareFloor("TileSz2", TileSz2Pos.Y, TileSz2Pos.X, new Vector2(1200, LowerPosY));
 
+            player1 = new Player();
+            gameObjects.AddChild(player1);
+            player1.LocalPosition = new Vector2(0, 0);
             deur2 = new SpriteGameObject("Deur", 1);
             gameObjects.AddChild(deur2);
             deur2.LocalPosition = deurPos;
@@ -93,7 +65,14 @@ namespace BaseProject.GameStates
 
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (OverlapsWith(player1, deur2) && Keyboard.GetState().IsKeyDown(Keys.Space)) {
+                Game1.GameStateManager.SwitchTo("selinLevelPlayingState");
 
+            }
+        }
     }
 
 }
