@@ -38,6 +38,8 @@ namespace BaseProject
                 Game1.playerShadow.LocalPosition = new Vector2(LocalPosition.X + sprite.Width / 2 - Game1.playerShadow.Width / 1.5f, localPosition.Y + sprite.Height - Game1.playerShadow.Height / 1.5f);
             }
 
+            Game1.playerHealth1.LocalPosition = Game1.playerHealth2.LocalPosition = Game1.playerHealth3.LocalPosition = new Vector2(-300, 0);
+
             if (health >= 1)
             {
                 Game1.playerHealth1.LocalPosition = new Vector2(Game1.playerHealth1.Width * 0.5f, Game1.playerHealth1.Height / 2);

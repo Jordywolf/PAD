@@ -25,6 +25,7 @@ namespace BaseProject
             {
                 Game1.player.actionHandeler.actionId = actionId;
                 LocalPosition = new Vector2(-300, 0);
+                Game1.GameStateManager.SwitchTo("safeZoneState2");
             }
             base.Update(gameTime);
         }

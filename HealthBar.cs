@@ -12,6 +12,7 @@ namespace BaseProject
     {
 
         public static int MaxHealthLength = 30;
+        public int maxHealth = MaxHealthLength;
         public static int MaxBarLength = 29;
         public int CurrentHealth = MaxHealthLength;
 
