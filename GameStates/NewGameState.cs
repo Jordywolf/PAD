@@ -53,7 +53,7 @@ namespace BaseProject.GameStates
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
-                Game1.GameStateManager.SwitchTo("selinLevelPlayingState");
+                Game1.GameStateManager.SwitchTo("safeZoneState");
                 Game1.framecount = Game1.startframe;
             }
         }
