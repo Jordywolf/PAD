@@ -40,6 +40,8 @@ namespace BaseProject.GameStates
         private Texture2D playerTexture;
         Random rnd = new Random();
 
+        ObjectTile test;
+
         List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
@@ -133,6 +135,7 @@ namespace BaseProject.GameStates
                 fightSound.Play();
             }
 
+            CollisionUpdate(player);
 
             //CollisionDetection.ShapesIntersect(epicDeur, player);
 
