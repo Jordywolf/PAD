@@ -55,13 +55,13 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Game1.playerHealth1);
             gameObjects.AddChild(Game1.playerHealth2);
             gameObjects.AddChild(Game1.playerHealth3);
+            gameObjects.AddChild(player);
+            player.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+
             Jogon = new Jogonhead(new Vector2(Game1.width/2, Game1.height/2), 70, "JogonHead", 0.1f, "Fireball", player, aSound, 1);
 
             gameObjects.AddChild(new SpriteGameObject("JogonHead", 1));
             
-            gameObjects.AddChild(player);
-            player.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
-
             //Do this when jogon dies
             //Game1.ItemPickup = new ItemPickup("De_Rakker", 1);
             //gameObjects.AddChild(Game1.ItemPickup);
