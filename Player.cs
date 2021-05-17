@@ -28,6 +28,7 @@ namespace BaseProject
             collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
 
             actionHandeler.Update();
+            collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
             if (actionHandeler.actionId == 1)
             {
                 Game1.playerShadow.LocalPosition = new Vector2(ActionJump.jumpLocation.X + sprite.Width / 2 - Game1.playerShadow.Width / 1.5f, ActionJump.jumpLocation.Y + sprite.Height - Game1.playerShadow.Height / 1.5f);

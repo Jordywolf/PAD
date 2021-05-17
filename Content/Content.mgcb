@@ -171,6 +171,20 @@
 /processorParam:TextureFormat=Color
 /build:Deur.png
 
+#begin Eightbit.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Eightbit.spritefont
+
+#begin Eightbit.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Eightbit.spritefont
+
 #begin Fireball.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1647,7 +1661,7 @@
 /processorParam:TextureFormat=Color
 /build:steen.png
 
-#begin SteenVert.png
+#begin Steenvert.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1657,7 +1671,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:SteenVert.png
+/build:Steenvert.png
 
 #begin SteenVert.png
 /importer:TextureImporter
