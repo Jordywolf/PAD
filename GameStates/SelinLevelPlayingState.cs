@@ -13,7 +13,7 @@ namespace BaseProject.GameStates
     class SelinLevelPlayingState : Engine.LevelPlayingState
     {
         Selin selinBoss;
-        Player playerTest;
+        Player player;
         SpriteGameObject platform;
         SpriteGameObject background;
         GameObjectList pillars;
@@ -60,9 +60,15 @@ namespace BaseProject.GameStates
             selinBoss = new Selin();
             gameObjects.AddChild(selinBoss);
 
-            playerTest = Game1.player;
-            gameObjects.AddChild(playerTest);
-            playerTest.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            //player objects
+            player = Game1.player;
+            gameObjects.AddChild(Game1.playerShadow);
+            Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
+            gameObjects.AddChild(Game1.playerHealth1);
+            gameObjects.AddChild(Game1.playerHealth2);
+            gameObjects.AddChild(Game1.playerHealth3);
+            gameObjects.AddChild(player);
+            player.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
             selinsHealth = new HealthBar();
             gameObjects.AddChild(selinsHealth);
@@ -90,7 +96,7 @@ namespace BaseProject.GameStates
 
             //selinBoss.CollShockPlayer(playerTest);
 
-            if (!OverlapsWith(platform, playerTest))
+            if (!OverlapsWith(platform, player))
             {
                 Game1.GameStateManager.SwitchTo("deathState");
             }
@@ -131,7 +137,7 @@ namespace BaseProject.GameStates
         {
             base.HandleInput(inputHelper);
 
-            selinBoss.Targeting(playerTest.LocalPosition);
+            selinBoss.Targeting(player.LocalPosition);
 
         }
     }
