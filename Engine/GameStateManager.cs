@@ -56,6 +56,13 @@ namespace Engine
             if (gameStates.ContainsKey(name))
                 currentGameState = gameStates[name];
         }
+        public void SwitchTo(string name, string currentGameStateName, GameState resetGameState)
+        {
+            if (gameStates.ContainsKey(name))
+                currentGameState = gameStates[name];
+
+            AddGameState(currentGameStateName, resetGameState);
+        }
 
         /// <summary>
         /// Makes sure that the currently active game state calls HandleInput.

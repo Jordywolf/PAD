@@ -15,7 +15,7 @@ namespace BaseProject.GameStates
     {
 
 
-        ObjectTile testpillar;
+        mapObjects.PillarTile testpillar;
 
         MapConstruction mapConstruction;
         private Jogonhead Jogon;
@@ -23,6 +23,7 @@ namespace BaseProject.GameStates
         private JogonPart parentSegment;
         public HealthBar bossHealthBar;
         public HealthBar playerHealthBar;
+        mapObjects.GateTile jogonGate;
         //private Decoy playerTest;
 
         private SpriteGameObject target;
@@ -33,6 +34,7 @@ namespace BaseProject.GameStates
         private bool PhitJ;
         private bool FhitJ;
         private bool itemSpawned;
+        private bool gateSpawned;
         private bool jogonHit;
         private bool playerhit;
         private bool playerhitf;
@@ -50,7 +52,7 @@ namespace BaseProject.GameStates
         List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
-        public JogonLevelPlayingState(Texture2D aPillarTile, SoundEffect aSound, Texture2D HBmiddleTexture, Texture2D HBhealthTexture, Texture2D HBedgeRTexture, Texture2D HBedgeLTexture, Texture2D playerTexture, SoundEffect fightSound) : base()
+        public JogonLevelPlayingState(SoundEffect aSound, Texture2D playerTexture, SoundEffect fightSound) : base()
         {
             LoadFullFloor("PAD_Jg_Floortile1");
             LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
@@ -64,6 +66,7 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Game1.playerHealth3);
             Jogon = new Jogonhead(new Vector2(Game1.width / 4, Game1.height / 4), 70, "JogonHead", 0.1f, "Fireball", player, aSound, 1);
 
+            jogonGate = new mapObjects.GateTile("PAD_Jg_walltileGate", new Vector2(Game1.width / 2, 32));
 
 
             gameObjects.AddChild(player);
@@ -78,7 +81,7 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Jogon.fireballs);
             gameObjects.AddChild(Jogon.Body);
 
-            testpillar = new ObjectTile("PAD_Jg_PillarV2_standard", new Vector2(Game1.width / 2, Game1.height / 2));
+            testpillar = new mapObjects.PillarTile("PAD_Jg_Pillar", new Vector2(Game1.width / 2, Game1.height / 2));
             walls.AddChild(testpillar);
 
             target = Jogon;
@@ -240,10 +243,12 @@ namespace BaseProject.GameStates
             }
 
 
-            if (OverlapsWith(Jogon, testpillar) && !jogonHit)
+            if (OverlapsWith(Jogon, testpillar) && !jogonHit && !testpillar.hit)
             {
-                jogonhealth.Hit(11);
+                jogonhealth.Hit(30);
                 jogonHit = true;
+
+                testpillar.invisTimer = 600;
             }
             else if (!OverlapsWith(Jogon, testpillar))
             {
@@ -255,20 +260,23 @@ namespace BaseProject.GameStates
 
             if (jogonhealth.CurrentHealth <= 0 && !itemSpawned)
             {
-                // Game1.GameStateManager.SwitchTo("safeZoneState2");
                 Game1.ItemPickup = new ItemPickup("Rots", 1);
                 gameObjects.AddChild(Game1.ItemPickup);
                 foreach (JogonPart j in Jogon.Body.children)
                 {
-                    Jogon.target = new ObjectTile("Deur", new Vector2(-9999, -9000));
+                    Jogon.target = new ObjectTile("Deur", new Vector2(-9999, -9000), 1);
                 }
-                itemSpawned = true;
+                
 
-                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, Game1.player.BoundingBox))
+                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, player.BoundingBox))
                 {
-                    Game1.GameStateManager.SwitchTo("safeZoneState2");
+                    itemSpawned = true;
+                    gameObjects.AddChild(jogonGate);
+                    gateSpawned = true;
                 }
             }
+
+            if (gateSpawned) { jogonGate.WarpCheck("safeZoneState2", player); }
 
             foreach (JogonPart j in Jogon.Body.children)
             {
@@ -297,9 +305,9 @@ namespace BaseProject.GameStates
             }
 
 
-            if (jogonhealth.CurrentHealth <= 10) { Jogon.Attackstate = 3; }
-            else if (jogonhealth.CurrentHealth > 10 && jogonhealth.CurrentHealth < 20) { Jogon.Attackstate = 2; }
-            else if (jogonhealth.CurrentHealth >= 20) { Jogon.Attackstate = 1; }
+            if (jogonhealth.CurrentHealth < 10) { Jogon.Attackstate = 3; }
+            else if (jogonhealth.CurrentHealth >= 10 && jogonhealth.CurrentHealth <= 20) { Jogon.Attackstate = 2; }
+            else if (jogonhealth.CurrentHealth > 20) { Jogon.Attackstate = 1; }
 
             /*if (bossHealthBar.MaxHealthLength <= 0)
             {

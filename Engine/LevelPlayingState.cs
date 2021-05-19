@@ -58,22 +58,22 @@ namespace BaseProject.Engine
             {
                 if (iWalltile <= 0)
                 {
-                    walls.AddChild(new ObjectTile(ctl, new Vector2(grid * iWalltile + grid / 2, grid / 2)));
-                    walls.AddChild(new ObjectTile(cdl, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2)));
+                    walls.AddChild(new ObjectTile(ctl, new Vector2(grid * iWalltile + grid / 2, grid / 2), 0.6f));
+                    walls.AddChild(new ObjectTile(cdl, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2), 0.6f));
                 }
 
                 else if (iWalltile >= (Game1.width / grid) - 1)
                 {
-                    walls.AddChild(new ObjectTile(ctr, new Vector2(grid * iWalltile + grid / 2, 0 + grid / 2)));
-                    walls.AddChild(new ObjectTile(cdr, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2)));
+                    walls.AddChild(new ObjectTile(ctr, new Vector2(grid * iWalltile + grid / 2, 0 + grid / 2), 0.6f));
+                    walls.AddChild(new ObjectTile(cdr, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2), 0.6f));
                 }
 
                 else
                 {
-                    walls.AddChild(new ObjectTile(t, new Vector2(grid * iWalltile + grid / 2, 0 + grid / 2)));
-                    walls.AddChild(new ObjectTile(d, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2)));
-                    walls.AddChild(new ObjectTile(l, new Vector2(0 + grid / 2, grid * iWalltile + grid / 2)));
-                    walls.AddChild(new ObjectTile(r, new Vector2(Game1.width - grid + grid / 2, grid * iWalltile + grid / 2)));
+                    walls.AddChild(new ObjectTile(t, new Vector2(grid * iWalltile + grid / 2, 0 + grid / 2), 0.6f));
+                    walls.AddChild(new ObjectTile(d, new Vector2(grid * iWalltile + grid / 2, Game1.height - grid + grid / 2), 0.6f));
+                    walls.AddChild(new ObjectTile(l, new Vector2(0 + grid / 2, grid * iWalltile + grid / 2), 0.6f));
+                    walls.AddChild(new ObjectTile(r, new Vector2(Game1.width - grid + grid / 2, grid * iWalltile + grid / 2), 0.6f));
                 }
             }
         }
@@ -88,33 +88,46 @@ namespace BaseProject.Engine
 
         public void CollisionUpdate(SpriteGameObject p)
         {
+            //oude manier om de collision te berekenen
+            //adjRec = Rectangle.Union(adjRec, CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec));
+
+            /*p.LocalPosition = new Vector2(p.LocalPosition.X - CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width,
+                p.LocalPosition.Y);*/
+
             foreach (ObjectTile o in walls.children)
             {
+                Rectangle adjRec = new Rectangle();
+
+                //links naar rechts
                 if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.X + p.Width / 2
                     > o.LocalPosition.X - o.Width / 2 && p.LocalPosition.X + p.Width / 2 < o.LocalPosition.X)
                 {
-                    p.LocalPosition = new Vector2(p.LocalPosition.X - CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width,
-                        p.LocalPosition.Y);
+                    adjRec.Width -= CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width;
                 }
 
+                //rechts naar links
                 if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.X - p.Width / 2
                     < o.LocalPosition.X + o.Width / 2 && p.LocalPosition.X - p.Width / 2 > o.LocalPosition.X)
                 {
-                    p.LocalPosition = new Vector2(p.LocalPosition.X + CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width,
-                        p.LocalPosition.Y);
+                    adjRec.Width += CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Width;
                 }
 
+                //boven naar beneden lopen
                 if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.Y + p.Height / 2
                     > o.LocalPosition.Y - o.Height / 2 && p.LocalPosition.Y + p.Height / 2 < o.LocalPosition.Y)
                 {
-                    p.LocalPosition = new Vector2(p.LocalPosition.X, p.LocalPosition.Y - CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height);
+                    adjRec.Height -= CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height; 
                 }
 
+                //onder naar boven
                 if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.Y - p.Height / 2
                     < o.LocalPosition.Y + o.Height / 2 && p.LocalPosition.Y - p.Height / 2 > o.LocalPosition.Y)
                 {
-                    p.LocalPosition = new Vector2(p.LocalPosition.X, p.LocalPosition.Y + CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height);
+                    adjRec.Height += CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height;
                 }
+                
+
+                p.LocalPosition = new Vector2(p.LocalPosition.X + adjRec.Width, p.LocalPosition.Y + adjRec.Height);
             }
         }
     }
