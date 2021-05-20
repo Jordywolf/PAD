@@ -260,7 +260,7 @@ namespace BaseProject.GameStates
 
             if (jogonhealth.CurrentHealth <= 0 && !itemSpawned)
             {
-                Game1.ItemPickup = new ItemPickup("Rots", 1);
+                Game1.ItemPickup = new ItemPickup("Vleugels_Item", 1);
                 gameObjects.AddChild(Game1.ItemPickup);
                 foreach (JogonPart j in Jogon.Body.children)
                 {
