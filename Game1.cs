@@ -76,8 +76,8 @@ namespace BaseProject
         public static int startframe;
 
         // Sounds
-        public SoundEffect jogonSound;
-        public SoundEffect jogonFightSound;
+        public static SoundEffect jogonSound;
+        public static SoundEffect jogonFightSound;
         public SoundEffect MenuBM;
         public SoundEffect ButtonSound;
         public SoundEffectInstance MenuBMI;
@@ -256,10 +256,10 @@ namespace BaseProject
             deathState = new GameStates.DeathState();
             GameStateManager.AddGameState("deathState", deathState);
 
-            safeZoneState = new GameStates.SafeZoneState(spriteBatch, ZandTile, Sleutel, SteenTile, SteenVert);
+            safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(PillarTile, jogonSound, HBmiddleTexture, HBhealthTexture, HBedgeRTexture, HBedgeLTexture, Player, jogonFightSound);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(jogonSound, Player, jogonFightSound);
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
             safeZoneState2 = new GameStates.SafeZoneState2();
@@ -268,7 +268,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("jogonLevelPlayingState");
         }
 
 

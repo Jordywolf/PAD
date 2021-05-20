@@ -26,7 +26,7 @@ namespace BaseProject.GameStates
         public int LowerPosY = 570;
         public int PlatformPosY;
 
-        public SafeZoneState(SpriteBatch spriteBatch, Texture2D ZandTile, Texture2D Sleutel, Texture2D SteenTile, Texture2D SteenVert) : base()
+        public SafeZoneState() : base()
         {
 
 
@@ -36,13 +36,13 @@ namespace BaseProject.GameStates
    "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
 
 
-            deur = new ObjectTile("Deur", new Vector2(0, 0));
-            Fontein = new ObjectTile("Fontein", new Vector2(0, 0));
+            deur = new ObjectTile("Deur", new Vector2(0, 0), 1);
+            Fontein = new ObjectTile("Fontein", new Vector2(0, 0), 1);
             rots = new SpriteGameObject("Rots", 1);
-            boom = new ObjectTile("boom", new Vector2(0,0));
+            boom = new ObjectTile("boom", new Vector2(0,0), 1);
             NotCollected = new TextGameObject("Eightbit", 1, Color.Black);
             Key = new SpriteGameObject("Sleutel", 1);
-            pilaar = new ObjectTile("Pilaar", new Vector2(0,0));
+            pilaar = new ObjectTile("Pilaar", new Vector2(0,0), 1);
             
 
             walls.AddChild(deur);
@@ -154,7 +154,7 @@ namespace BaseProject.GameStates
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && KeyCollected == true && Game1.framecount > Game1.startframe + 10)
             {
-                Game1.GameStateManager.SwitchTo("jogonLevelPlayingState");
+                Game1.GameStateManager.SwitchTo("jogonLevelPlayingState", "safeZoneState", new GameStates.SafeZoneState());
                 Game1.framecount = Game1.startframe;
             }
         }

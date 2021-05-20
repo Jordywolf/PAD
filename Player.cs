@@ -25,6 +25,8 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
+            collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
+
             actionHandeler.Update();
             collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
             if (actionHandeler.actionId == 1)
@@ -35,6 +37,8 @@ namespace BaseProject
             {
                 Game1.playerShadow.LocalPosition = new Vector2(LocalPosition.X + sprite.Width / 2 - Game1.playerShadow.Width / 1.5f, localPosition.Y + sprite.Height - Game1.playerShadow.Height / 1.5f);
             }
+
+            Game1.playerHealth1.LocalPosition = Game1.playerHealth2.LocalPosition = Game1.playerHealth3.LocalPosition = new Vector2(-300, 0);
 
             if (health >= 1)
             {

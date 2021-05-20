@@ -12,7 +12,7 @@ namespace BaseProject
     class Jogonhead : JogonPart
     {
         private Random random = new Random();
-        private int Attackstate = 3;
+        public int Attackstate = 3;
 
         private float chargeTimer = 0;
         private float chargingdelay = 500;

@@ -21,10 +21,11 @@ namespace BaseProject
 
         public override void Update(GameTime gameTime)
         {
-            if (CollisionDetection.ShapesIntersect(BoundingBox, Game1.player.BoundingBox))
+            if (CollisionDetection.ShapesIntersect(collisionRec, Game1.player.collisionRec))
             {
                 Game1.player.actionHandeler.actionId = actionId;
                 LocalPosition = new Vector2(-300, 0);
+                //Game1.GameStateManager.SwitchTo("safeZoneState2");
             }
             base.Update(gameTime);
         }

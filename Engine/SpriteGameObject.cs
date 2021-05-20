@@ -33,8 +33,6 @@ namespace Engine
         /// </summary>
         protected float depth;
 
-
-
         public Rectangle collisionRec;
 
         /// <summary>
