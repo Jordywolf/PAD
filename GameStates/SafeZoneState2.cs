@@ -43,7 +43,7 @@ namespace BaseProject.GameStates
 
 
 
-            player1 = new Player();
+            player1 = Game1.player;
             gameObjects.AddChild(player1);
             player1.LocalPosition = new Vector2(0, 0);
             deur2 = new SpriteGameObject("Deur", 1);
