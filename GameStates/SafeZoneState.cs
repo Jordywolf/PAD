@@ -36,10 +36,10 @@ namespace BaseProject.GameStates
    "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
 
 
-            deur = new ObjectTile("Deur", new Vector2(0, 0));
-            Fontein = new ObjectTile("Fontein", new Vector2(0, 0));
+            deur = new ObjectTile("Deur", new Vector2(0, 0), 1);
+            Fontein = new ObjectTile("Fontein", new Vector2(0, 0), 1);
             rots = new SpriteGameObject("Rots", 1);
-            boom = new ObjectTile("boom", new Vector2(0,0));
+            boom = new ObjectTile("boom", new Vector2(0,0), 1);
             NotCollected = new TextGameObject("Eightbit", 1, Color.Black);
             Key = new SpriteGameObject("Sleutel", 1);
             pilaar = new ObjectTile("Pilaar", new Vector2(0,0), 1);
