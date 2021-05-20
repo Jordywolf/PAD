@@ -32,7 +32,8 @@ namespace BaseProject.GameStates
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
-                Game1.GameStateManager.SwitchTo("menuStartSelectedState");
+                Game1.GameStateManager.SwitchTo("menuStartSelectedState", "jogonLevelPlayingState", new GameStates.JogonLevelPlayingState(Game1.jogonSound, Game1.Player, Game1.jogonFightSound));
+                Game1.GameStateManager.SwitchTo("menuStartSelectedState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
 

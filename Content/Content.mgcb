@@ -821,6 +821,30 @@
 /processorParam:TextureFormat=Color
 /build:PAD_Jg_pillar.png
 
+#begin PAD_Jg_pillar_broken.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PAD_Jg_pillar_broken.png
+
+#begin PAD_Jg_pillar_broken.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PAD_Jg_pillar_broken.png
+
 #begin PAD_Jg_PillarV2_standard.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1252,6 +1276,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PAD_Sn_grass.png
+
+#begin PAD_Sn_groundGate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PAD_Sn_groundGate.png
 
 #begin PAD_Sn_obstacle.png
 /importer:TextureImporter

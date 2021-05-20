@@ -19,6 +19,10 @@ namespace BaseProject.GameStates
         GameObjectList pillars;
         GameObjectList stenen;
         HealthBar selinsHealth;
+        mapObjects.GateTile selinGate;
+
+        private bool itemspawned;
+        private bool gatespawned;
 
         Random rnd = new Random();
 
@@ -42,12 +46,12 @@ namespace BaseProject.GameStates
             platform.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
             pillarPS = new List<Vector2>();
-            pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, 100));     
+            pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, 100));
             pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, 100));
             pillarPS.Add(new Vector2(platform.LocalPosition.X - platform.sprite.Width / 2, Game1.height - 100));
             pillarPS.Add(new Vector2(platform.LocalPosition.X + platform.sprite.Width / 2, Game1.height - 100));
 
-            LoadSquareFloor("PAD_Sn_stone_small", 10, 10, new Vector2 (Game1.width/2 - 32, Game1.height/2-32));
+            LoadSquareFloor("PAD_Sn_stone_small", 10, 10, new Vector2(Game1.width / 2 - 32, Game1.height / 2 - 32));
 
             PillarsDown = new List<string>();
 
@@ -86,6 +90,8 @@ namespace BaseProject.GameStates
                     rnd.Next(0, Game1.height - steen.sprite.Height));
                 //stenen.AddChild(steen);
             }
+
+            selinGate = new mapObjects.GateTile("PAD_Sn_groundGate", new Vector2(Game1.width / 2, Game1.height / 5));
         }
 
         public override void Update(GameTime gameTime)
@@ -98,7 +104,7 @@ namespace BaseProject.GameStates
 
             if (!OverlapsWith(platform, player))
             {
-                Game1.GameStateManager.SwitchTo("deathState");
+                Game1.GameStateManager.SwitchTo("deathState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
             }
 
             foreach (Pillar p in pillars.children)
@@ -123,14 +129,32 @@ namespace BaseProject.GameStates
                     p.Visible = true;
                 }
 
-                selinsHealth.Hit(5);
+                selinsHealth.Hit(30);
                 selinBoss.hammers.AddChild(new Selin_Hammer("Selin_HmrL"));
             }
 
-            if (selinsHealth.CurrentHealth <= 0)
+            if (selinsHealth.CurrentHealth <= 0 && !itemspawned)
             {
-                selinBoss.Visible = false;
+ 
+                Game1.ItemPickup = new ItemPickup("Deur", 1);
+                gameObjects.AddChild(Game1.ItemPickup);
+
+                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, playerTest.BoundingBox))
+                {
+                    itemspawned = true;
+                    gameObjects.AddChild(selinGate);
+                    gatespawned = true;
+                }
             }
+
+            if (gatespawned) { selinGate.WarpCheck("menuStartSelectedState", playerTest); }
+
+
+
+            //if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.collisionRec, Game1.player.collisionRec) && itemspawned)
+            //{
+
+            //}
         }
 
         public override void HandleInput(InputHelper inputHelper)
