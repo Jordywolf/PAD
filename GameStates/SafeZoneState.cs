@@ -56,11 +56,11 @@ namespace BaseProject.GameStates
 
             deur.LocalPosition = new Vector2(600, 110);
             deur.scale = 0.7f;
-           
-            
-            
+
+
+            Fontein.Origin = new Vector2(Fontein.sprite.Width / 2, Fontein.Height / 2);
             Fontein.scale = 0.6f;
-            Fontein.Origin = new Vector2(Fontein.sprite.Width , Fontein.Height /4);
+           
             Fontein.LocalPosition = new Vector2(300, 110);
            
             
