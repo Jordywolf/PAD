@@ -88,7 +88,7 @@ namespace BaseProject
                     _followSpeed = 40;
                     if (fireTimer >= fireTimerMax)
                     {
-
+                        Game1.Fireball.Play(volume: 1, pitch: random.Next(0, 10), pan: 0);
                             for (int i = 1; i <= 20+1; i++)
                         {
                             angleincrease += 5f*i;

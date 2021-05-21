@@ -109,20 +109,19 @@ namespace BaseProject.GameStates
                 PushDir.Normalize();
 
                 rots.LocalPosition = new Vector2(rots.LocalPosition.X + PushDir.X * 20, rots.LocalPosition.Y + PushDir.Y * 20);
+                Game1.BoulderShove.Play(1, Game1.Random.Next(-1, 2), 0);
             }
             if(OverlapsWith(pilaar,rots) == true)
             {
                 Vector2 PushRots = new Vector2(pilaar.LocalPosition.X - rots.LocalPosition.X, pilaar.LocalPosition.Y - rots.LocalPosition.Y);
                 PushRots.Normalize();
                 pilaar.LocalPosition = new Vector2(pilaar.LocalPosition.X + PushRots.X * 20, pilaar.LocalPosition.Y + PushRots.Y * 20);
-
             }
             if(OverlapsWith(Key,player1)== true)
             {
                 KeyCollected = true;
                 Key.LocalPosition = new Vector2(-100, -100);
             }
-
 
             CollisionUpdate(player1); CollisionUpdate(pilaar); CollisionUpdate(rots);
 

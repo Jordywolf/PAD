@@ -12,6 +12,8 @@ class Selin : Engine.GameObjectList
     Selin_Hammer selin_HammerL;
     Selin_Hammer selin_HammerR;
 
+    Random Random = new Random();
+
     public Engine.GameObjectList hammers;
     public Engine.GameObjectList shocks;
 
@@ -113,6 +115,7 @@ class Selin : Engine.GameObjectList
             {
                 s.shocked = true;
                 shocks.AddChild(new SelinShock(s.LocalPosition));
+                BaseProject.Game1.HammerHit.Play(volume: 1, Random.Next(-1, 2), pan: 0);
             }
             else if (s.atSelin())
             {

@@ -90,7 +90,6 @@ namespace BaseProject.GameStates
                     rnd.Next(0, Game1.height - steen.sprite.Height));
                 //stenen.AddChild(steen);
             }
-
             selinGate = new mapObjects.GateTile("PAD_Sn_groundGate", new Vector2(Game1.width / 2, Game1.height / 5));
         }
 
@@ -104,7 +103,7 @@ namespace BaseProject.GameStates
 
             if (!OverlapsWith(platform, player))
             {
-                Game1.GameStateManager.SwitchTo("deathState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
+                //Game1.GameStateManager.SwitchTo("deathState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
             }
 
             foreach (Pillar p in pillars.children)

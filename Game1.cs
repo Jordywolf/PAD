@@ -80,6 +80,10 @@ namespace BaseProject
         public static SoundEffect jogonFightSound;
         public SoundEffect MenuBM;
         public SoundEffect ButtonSound;
+        public static SoundEffect Fireball;
+        public static SoundEffect HammerHit;
+        public static SoundEffect BoulderShove;
+        public static SoundEffect SelinScream;
         public SoundEffectInstance MenuBMI;
 
         public Texture2D HBedgeLTexture;
@@ -187,6 +191,10 @@ namespace BaseProject
             MenuBM = Content.Load<SoundEffect>("BeginBM");
             MenuBMI = MenuBM.CreateInstance();
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
+            Fireball = Content.Load<SoundEffect>("SoundEffect_Fireball");
+            HammerHit = Content.Load<SoundEffect>("SoundEffect_Hammer");
+            BoulderShove = Content.Load<SoundEffect>("SoundEffect_Boulder");
+            SelinScream = Content.Load<SoundEffect>("SoundEffect_Selin");
 
             font2 = Content.Load<SpriteFont>("Eightbit");
             font = Content.Load<SpriteFont>("Credit");
