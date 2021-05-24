@@ -76,13 +76,13 @@ class Selin : Engine.GameObjectList
         {
             if (OverlapsWith(sk, p) && sk.Visible)
             {
-                BaseProject.Game1.GameStateManager.SwitchTo("deathState");
+                BaseProject.Game1.player.Hit();
             }
         }
 
         if (OverlapsWith(selinBody, p))
         {
-            BaseProject.Game1.GameStateManager.SwitchTo("deathState");
+            BaseProject.Game1.player.Hit();
         }
     }
 

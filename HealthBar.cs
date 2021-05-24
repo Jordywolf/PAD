@@ -24,13 +24,22 @@ namespace BaseProject
         GameObjectList healthBarStructure;
         GameObjectList health;
 
-        public HealthBar() : base()
+        TextGameObject test;
+
+        public HealthBar(String bossName) : base()
         {
             healthBarStructure = new GameObjectList();
             children.Add(healthBarStructure);
 
             health = new GameObjectList();
             children.Add(health);
+
+            test = new TextGameObject("Eightbit", 1, Color.Black);
+            children.Add(test);
+
+            test.scale = 2;
+            test.Text = bossName;
+            test.LocalPosition = new Vector2(Game1.width / 2 - 200, Game1.height / 15);
 
             for (int i = 0; i <= MaxBarLength; i++)
             {
@@ -57,7 +66,7 @@ namespace BaseProject
 
             for (int q = 0; q < MaxHealthLength; q++)
             {
-                HBhealth = new SpriteGameObject("healthBarMiddle", 0.9f);
+                HBhealth = new SpriteGameObject("healthBarMiddle", 0.95f);
                 health.AddChild(HBhealth);
                 health.children[q].LocalPosition = new Vector2(q * 32, this.localPosition.Y);
             }

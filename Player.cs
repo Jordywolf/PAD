@@ -125,6 +125,21 @@ namespace BaseProject
             }
             localPosition += velocity;
             velocity = Vector2.Zero;
+
+            if (inputHelper.KeyDown(Keys.H))
+            {
+                localPosition = new Vector2(Game1.width / 2, Game1.height / 4);
+            }
+        }
+
+        public void SpawnLocationDefault()
+        {
+            localPosition = new Vector2(Game1.width / 2, Game1.height/5*4);
+        }
+
+        public void SpawnLocationDown()
+        {
+            localPosition = new Vector2(Game1.width / 2, Game1.height - Game1.player.Height);
         }
 
         public void Hit()

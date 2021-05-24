@@ -18,13 +18,15 @@ namespace BaseProject.GameStates
         Player player1;
         private Vector2 steenSize = new Vector2(0, 0);
         private Vector2 steenPos = new Vector2(8, 8);
-        SpriteGameObject Fontein, Key, rots, boom, deur;
+        SpriteGameObject Fontein, rots, boom, deur;
+        mapObjects.Item Key;
         ObjectTile pilaar;
         TextGameObject NotCollected, Collected, PillarText;
         Boolean KeyCollected = false;
         public Vector2 TileSz2Pos = new Vector2(0, 0);
         public int LowerPosY = 570;
         public int PlatformPosY;
+        private bool playerSpawned;
 
         public SafeZoneState() : base()
         {
@@ -41,7 +43,7 @@ namespace BaseProject.GameStates
             rots = new SpriteGameObject("Rots", 1);
             boom = new ObjectTile("boom", new Vector2(0,0), 1);
             NotCollected = new TextGameObject("Eightbit", 1, Color.Black);
-            Key = new SpriteGameObject("Sleutel", 1);
+            Key = new mapObjects.Item("Sleutel", new Vector2(1000, 100));
             pilaar = new ObjectTile("Pilaar", new Vector2(0,0), 1);
             
 
@@ -87,22 +89,32 @@ namespace BaseProject.GameStates
            
             
             
-            Key.LocalPosition = new Vector2(980, 100);
+            pilaar.Origin = new Vector2(Key.sprite.Width / 2, Key.sprite.Height / 2);
             Key.scale = 0.5f;
  
 
-            player1 = new Player();
+            player1 = Game1.player;
             gameObjects.AddChild(player1);
-            player1.Origin = new Vector2(player1.sprite.Width / 2, player1.sprite.Height / 2);
-            player1.LocalPosition = new Vector2(Game1.width/2, Game1.height/2 );
-
-
+            player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            gameObjects.AddChild(Game1.playerShadow);
+            Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
+            gameObjects.AddChild(Game1.playerHealth1);
+            gameObjects.AddChild(Game1.playerHealth2);
+            gameObjects.AddChild(Game1.playerHealth3);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if(OverlapsWith(rots, player1) == true)
+
+            if (!playerSpawned)
+            {
+                Game1.player.SpawnLocationDefault();
+                Game1.player.actionHandeler.actionId = 0;
+                playerSpawned = true;
+            }
+
+            if (OverlapsWith(rots, player1) == true)
             {
                 Vector2 PushDir = new Vector2(rots.LocalPosition.X - player1.LocalPosition.X, rots.LocalPosition.Y - player1.LocalPosition.Y);
                 

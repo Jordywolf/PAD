@@ -21,6 +21,8 @@ namespace BaseProject.GameStates
 
         Player player1;
 
+        private bool playerSpawned;
+
         public SafeZoneState2() : base()
         {
             
@@ -42,6 +44,12 @@ namespace BaseProject.GameStates
 
             }
 
+            gameObjects.AddChild(Game1.player);
+            gameObjects.AddChild(Game1.playerShadow);
+            Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
+            gameObjects.AddChild(Game1.playerHealth1);
+            gameObjects.AddChild(Game1.playerHealth2);
+            gameObjects.AddChild(Game1.playerHealth3);
 
 
             FonteinCenter = new ObjectTile("Blok3", new Vector2(0, 0), 1);
@@ -87,9 +95,17 @@ namespace BaseProject.GameStates
                 gameObjects.AddChild(Game1.playerHealth2);
                 gameObjects.AddChild(Game1.playerHealth3);
                 player1.health = 3;
-                
+
             }
-            if (OverlapsWith(player1, deur2) && Keyboard.GetState().IsKeyDown(Keys.Space)) {
+
+            if (!playerSpawned)
+            {
+                Game1.player.SpawnLocationDown();
+                playerSpawned = true;
+            }
+
+            if (OverlapsWith(Game1.player, deur2) && Keyboard.GetState().IsKeyDown(Keys.Space)) {
+                Game1.GameStateManager.SwitchTo("safeZoneState2", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
                 Game1.GameStateManager.SwitchTo("selinLevelPlayingState", "safeZoneState2", new GameStates.SafeZoneState2());
                 Game1.SelinScream.Play();
             }

@@ -34,6 +34,8 @@ namespace BaseProject.GameStates
             {
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState", "jogonLevelPlayingState", new GameStates.JogonLevelPlayingState(Game1.jogonSound, Game1.Player, Game1.jogonFightSound));
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
+                Game1.GameStateManager.SwitchTo("menuStartSelectedState", "safeZoneState", new GameStates.SafeZoneState());
+                Game1.GameStateManager.SwitchTo("menuStartSelectedState", "safeZoneState2", new GameStates.SafeZoneState2());
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
 

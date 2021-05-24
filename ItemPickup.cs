@@ -9,14 +9,13 @@ using Engine;
 
 namespace BaseProject
 {
-    public class ItemPickup : SpriteGameObject
+    public class ItemPickup : mapObjects.Item
     {
         int actionId;
-        public ItemPickup(string spriteName, int pActionId) : base(spriteName, 1)
+        public ItemPickup(string spriteName, int pActionId) : base(spriteName, new Vector2(Game1.width / 2 + 200, Game1.height / 2))
         {
             Origin = sprite.Center;
             actionId = pActionId;
-            LocalPosition = new Vector2(Game1.width / 2 + 200, Game1.height / 2);
         }
 
         public override void Update(GameTime gameTime)
@@ -24,7 +23,6 @@ namespace BaseProject
             if (CollisionDetection.ShapesIntersect(collisionRec, Game1.player.collisionRec))
             {
                 Game1.player.actionHandeler.actionId = actionId;
-                LocalPosition = new Vector2(-300, 0);
                 //Game1.GameStateManager.SwitchTo("safeZoneState2");
             }
             base.Update(gameTime);
