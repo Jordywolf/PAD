@@ -100,7 +100,7 @@ namespace BaseProject
                     if (fireTimer >= fireTimerMax)
                     {
 
-                            for (int i = 1; i <= random.Next(15,20)+1; i++)
+                            for (int i = 1; i <= random.Next(16,20)+1; i++)
                         {
                             angleincrease += 5f*i;
                             angleoffset =  (MathF.PI/180) * (360/MathF.Cos(i));
