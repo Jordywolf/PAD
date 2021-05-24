@@ -130,14 +130,15 @@ namespace BaseProject.GameStates
                 }
 
                 selinsHealth.Hit(30);
-                selinBoss.hammers.AddChild(new Selin_Hammer("Selin_HmrL"));
+                selinBoss.hammers.AddChild(new Selin_Hammer("Hamer 1"));
             }
 
             if (selinsHealth.CurrentHealth <= 0 && !itemspawned)
             {
  
-                Game1.ItemPickup = new ItemPickup("Deur", 1);
+                Game1.ItemPickup = new ItemPickup("Hamer 2", 1);
                 gameObjects.AddChild(Game1.ItemPickup);
+                 
 
                 if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, player.BoundingBox))
                 {
@@ -149,7 +150,7 @@ namespace BaseProject.GameStates
 
             if (gatespawned) { selinGate.WarpCheck("menuStartSelectedState", player); }
 
-
+            
 
             //if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.collisionRec, Game1.player.collisionRec) && itemspawned)
             //{
@@ -162,6 +163,9 @@ namespace BaseProject.GameStates
             base.HandleInput(inputHelper);
 
             selinBoss.Targeting(player.LocalPosition);
+
+          
+
 
         }
     }
