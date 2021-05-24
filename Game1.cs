@@ -309,7 +309,6 @@ namespace BaseProject
                 GameStateManager.SwitchTo("deathState");
                 framecount = startframe;
                 MenuBMI.Stop();
-                
             }
 
           

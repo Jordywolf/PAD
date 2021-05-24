@@ -70,7 +70,7 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
             if (OverlapsWith(player1, deur2) && Keyboard.GetState().IsKeyDown(Keys.Space)) {
                 Game1.GameStateManager.SwitchTo("selinLevelPlayingState", "safeZoneState2", new GameStates.SafeZoneState2());
-                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+
             }
         }
     }

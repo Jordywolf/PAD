@@ -27,11 +27,10 @@ class Selin : Engine.GameObjectList
         shocks = new Engine.GameObjectList();
         AddChild(shocks);
 
-        selin_HammerL = new Selin_Hammer("Hamer 1");
+        selin_HammerL = new Selin_Hammer("Selin_HmrL");
         hammers.AddChild(selin_HammerL);
-        
 
-        selin_HammerR = new Selin_Hammer("Hamer 2");
+        selin_HammerR = new Selin_Hammer("Selin_HmrR");
         hammers.AddChild(selin_HammerR);
 
         selin_HammerL.LocalPosition = new Vector2(selinBody.LocalPosition.X - selinBody.sprite.Width / 2, selinBody.LocalPosition.Y);
@@ -75,14 +74,13 @@ class Selin : Engine.GameObjectList
         {
             if (OverlapsWith(sk, p) && sk.Visible)
             {
-                BaseProject.Game1.player.Hit();
-                
+                BaseProject.Game1.GameStateManager.SwitchTo("deathState");
             }
         }
 
         if (OverlapsWith(selinBody, p))
         {
-            BaseProject.Game1.player.Hit();
+            BaseProject.Game1.GameStateManager.SwitchTo("deathState");
         }
     }
 
