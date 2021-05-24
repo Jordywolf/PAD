@@ -21,7 +21,7 @@ namespace BaseProject.mapObjects
         {
             base.Update(gameTime);
 
-            localPosition = new Vector2(localPosition.X, localPosition.Y + MathF.Sin(Game1.framecount/10)*2);
+            localPosition = new Vector2(localPosition.X, localPosition.Y + MathF.Sin(Game1.framecount/10)*1.5f);
         }
     }
 }
