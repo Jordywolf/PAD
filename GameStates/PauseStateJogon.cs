@@ -10,13 +10,13 @@ using Engine;
 
 namespace BaseProject.GameStates
 {
-    class PauseState : GameState
+    class PauseStateJogon : GameState
     {
         SpriteGameObject background;
         SpriteGameObject back;
         TextGameObject pause;
 
-        public PauseState() : base()
+        public PauseStateJogon() : base()
         {
             background = new SpriteGameObject("CreditScreen", 1);
             gameObjects.AddChild(background);
@@ -37,11 +37,11 @@ namespace BaseProject.GameStates
         {
             base.Update(gameTime);
 
-          
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) &&  Game1.framecount > Game1.startframe + 10)
             {
-                Game1.GameStateManager.SwitchTo("menuStartSelectedState");
+                Game1.GameStateManager.SwitchTo("jogonLevelPlayingState");
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
             }

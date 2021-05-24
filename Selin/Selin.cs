@@ -84,9 +84,28 @@ class Selin : Engine.GameObjectList
         }
     }
 
+    public void HammerPush()
+    {
+        for (int i = 0; i < hammers.children.Count - 1; i++)
+        {
+            if (OverlapsWith((Engine.SpriteGameObject)hammers.children[i], (Engine.SpriteGameObject)hammers.children[i + 1]))
+            {
+                Vector2 aimDir = new Vector2(hammers.children[i].LocalPosition.X - hammers.children[i + 1].LocalPosition.X,
+                    hammers.children[i].LocalPosition.Y - hammers.children[i + 1].LocalPosition.Y);
+
+                aimDir.Normalize();
+
+                hammers.children[i].LocalPosition = new Vector2(hammers.children[i].LocalPosition.X + aimDir.X * 10, 
+                    hammers.children[i].LocalPosition.Y + aimDir.Y * 10);
+            }
+        }
+    }
+
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+
+        HammerPush();
 
         foreach (Selin_Hammer s in hammers.children)
         {

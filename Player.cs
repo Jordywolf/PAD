@@ -10,19 +10,49 @@ namespace BaseProject
 {
     public class Player : SpriteGameObject
     {
-        public float moveSpeed = 15f;
+        public float moveSpeed = 10f;
         public int health;
         private int IframesCounter = 0;
         private int Iframes = 120;
+        public ActionHandeler actionHandeler;
 
         public Player()
-            : base("De_Rakker",1)
+            : base("De_Rakker", 1)
         {
             health = 3;
             Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            actionHandeler = new ActionHandeler();
         }
         public override void Update(GameTime gameTime)
         {
+            collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
+
+            actionHandeler.Update();
+            collisionRec = new Rectangle((int)localPosition.X - sprite.Width / 2, (int)localPosition.Y - sprite.Height / 2, sprite.Width, sprite.Height);
+            if (actionHandeler.actionId == 1)
+            {
+                Game1.playerShadow.LocalPosition = new Vector2(ActionJump.jumpLocation.X + sprite.Width / 2 - Game1.playerShadow.Width / 1.5f, ActionJump.jumpLocation.Y + sprite.Height - Game1.playerShadow.Height / 1.5f);
+            }
+            else
+            {
+                Game1.playerShadow.LocalPosition = new Vector2(LocalPosition.X + sprite.Width / 2 - Game1.playerShadow.Width / 1.5f, localPosition.Y + sprite.Height - Game1.playerShadow.Height / 1.5f);
+            }
+
+            Game1.playerHealth1.LocalPosition = Game1.playerHealth2.LocalPosition = Game1.playerHealth3.LocalPosition = new Vector2(-300, 0);
+
+            if (health >= 1)
+            {
+                Game1.playerHealth1.LocalPosition = new Vector2(Game1.playerHealth1.Width * 0.5f, Game1.playerHealth1.Height / 2);
+            }
+            if (health >= 2)
+            {
+                Game1.playerHealth2.LocalPosition = new Vector2(Game1.playerHealth2.Width * 1.75f, Game1.playerHealth2.Height / 2);
+            }
+            if (health >= 3)
+            {
+                Game1.playerHealth3.LocalPosition = new Vector2(Game1.playerHealth3.Width * 3f, Game1.playerHealth3.Height / 2);
+            }
+
             /*foreach (var targetSprite in sprites)
             {
                 if (targetSprite == this)
@@ -99,9 +129,9 @@ namespace BaseProject
 
         public void Hit()
         {
-            if(IframesCounter == 0)
+            if (IframesCounter == 0)
             {
-                if (health > 0)
+                if (health > 1)
                 {
                     health--;
                 }
@@ -111,33 +141,6 @@ namespace BaseProject
                     health = 3;
                 }
                 IframesCounter = Iframes;
-            }
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (IframesCounter == 0)
-            {
-                base.Draw(gameTime, spriteBatch);
-            }
-            else
-            {
-                spriteBatch.Draw(Game1.Player, GlobalPosition, new Color(Color.White, 200));
-            }
-
-            spriteBatch.Draw(Game1.PlayerShadow, new Vector2(ActionJump.jumpLocation.X + sprite.Width / 2 - Game1.PlayerShadow.Width / 2, ActionJump.jumpLocation.Y + sprite.Height - Game1.PlayerShadow.Height / 2), new Color(Color.White, 100));
-            
-            if (health >= 1)
-            {
-                spriteBatch.Draw(Game1.PlayerHealth, new Vector2(Game1.PlayerHealth.Width / 2, Game1.PlayerHealth.Height / 2), Color.White);
-            }
-            if (health >= 2)
-            {
-                spriteBatch.Draw(Game1.PlayerHealth, new Vector2(Game1.PlayerHealth.Width * 1.75f, Game1.PlayerHealth.Height / 2), Color.White);
-            }
-            if (health >= 3)
-            {
-                spriteBatch.Draw(Game1.PlayerHealth, new Vector2(Game1.PlayerHealth.Width * 2f + Game1.PlayerHealth.Width, Game1.PlayerHealth.Height / 2), Color.White);
             }
         }
     }

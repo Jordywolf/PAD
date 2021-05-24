@@ -9,7 +9,7 @@ namespace BaseProject
 {
     public class ActionHandeler // action handler class
     {
-        int actionId = 1;
+        public int actionId;
         public ActionJump Jump = new ActionJump();
         bool keyPressed;
 

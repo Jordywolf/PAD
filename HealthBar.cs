@@ -8,35 +8,91 @@ using Engine;
 
 namespace BaseProject
 {
-    class HealthBar : SpriteGameObject
+    class HealthBar : GameObjectList
     {
-        public Vector2 HBposition;
-        public Texture2D HBbeginRTexture;
-        public Texture2D HBbeginLTexture;
-        public Texture2D HBmiddleTexture;
-        public Texture2D HBhealthTexture;
 
-        public float MaxHealthLength = 1;
-        public float MaxBarLength;
+        public static int MaxHealthLength = 30;
+        public int maxHealth = MaxHealthLength;
+        public static int MaxBarLength = 29;
+        public int CurrentHealth = MaxHealthLength;
 
-        public HealthBar(Vector2 position, Texture2D HBbeginRTexture, Texture2D HBbeginLTexture, Texture2D HBmiddleTexture, Texture2D HBhealthTexture) : base("healthBarMiddle", 0, 0)
+        SpriteGameObject HBbegin;
+        SpriteGameObject HBend;
+        SpriteGameObject HBmid;
+        SpriteGameObject HBhealth;
+
+        GameObjectList healthBarStructure;
+        GameObjectList health;
+
+        public HealthBar() : base()
         {
-            this.HBposition = position;
-            this.HBbeginRTexture = HBbeginRTexture;
-            this.HBbeginLTexture = HBbeginLTexture;
-            this.HBmiddleTexture = HBmiddleTexture;
-            this.HBhealthTexture = HBhealthTexture;
-            MaxBarLength = MaxHealthLength;
+            healthBarStructure = new GameObjectList();
+            children.Add(healthBarStructure);
+
+            health = new GameObjectList();
+            children.Add(health);
+
+            for (int i = 0; i <= MaxBarLength; i++)
+            {
+                if (i == 0)
+                {
+                    HBbegin = new SpriteGameObject("healthBarEndL", 1);
+                    healthBarStructure.AddChild(HBbegin);
+                }
+
+                else if (i > 0 && i < MaxBarLength)
+                {
+                    HBmid = new SpriteGameObject("healthBarMiddleBorder", 1);
+                    healthBarStructure.AddChild(HBmid);
+                }
+
+                else if (i == MaxBarLength)
+                {
+                    HBend = new SpriteGameObject("healthBarEnd", 1);
+                    healthBarStructure.AddChild(HBend);
+                }
+
+                healthBarStructure.children[i].LocalPosition = new Vector2(i * 32, this.localPosition.Y);
+            }
+
+            for (int q = 0; q < MaxHealthLength; q++)
+            {
+                HBhealth = new SpriteGameObject("healthBarMiddle", 0.9f);
+                health.AddChild(HBhealth);
+                health.children[q].LocalPosition = new Vector2(q * 32, this.localPosition.Y);
+            }
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Hit(int damage)
         {
-            float healthbarWidth = 20;
-            spriteBatch.Draw(HBhealthTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * ((healthbarWidth + 1) / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2((healthbarWidth + 1) * MaxHealthLength, 1), SpriteEffects.None, 0f);
-            spriteBatch.Draw(HBbeginLTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * (healthbarWidth / 2) - HBbeginLTexture.Width, 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
-            spriteBatch.Draw(HBbeginRTexture, new Vector2(Game1.width / 2 + HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
-            spriteBatch.Draw(HBmiddleTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2(healthbarWidth, 1), SpriteEffects.None, 0f);
+            CurrentHealth -= damage;
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            for (int q = 0; q < MaxHealthLength; q++)
+            {
+                if (q < CurrentHealth)
+                {
+                    health.children[q].LocalPosition = new Vector2(q * 32, this.localPosition.Y);
+                }
+                else
+                {
+                    health.children[q].Visible = false;
+                }
+            }
+        }
+
+        /* public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+         {
+             float healthbarWidth = 20;
+             spriteBatch.Draw(HBhealthTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * ((healthbarWidth + 1) / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2((healthbarWidth + 1) * MaxHealthLength, 1), SpriteEffects.None, 0f);
+             spriteBatch.Draw(HBbeginLTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * (healthbarWidth / 2) - HBbeginLTexture.Width, 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+             spriteBatch.Draw(HBbeginRTexture, new Vector2(Game1.width / 2 + HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
+             spriteBatch.Draw(HBmiddleTexture, new Vector2(Game1.width / 2 - HBhealthTexture.Width * (healthbarWidth / 2), 30), null, Color.White, 0f, Vector2.Zero, new Vector2(healthbarWidth, 1), SpriteEffects.None, 0f);
+         }*/
     }
 }
 

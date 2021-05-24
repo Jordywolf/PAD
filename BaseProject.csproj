@@ -18,6 +18,8 @@
     <None Remove="Content\Test map\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Content\Minecraft.ttf" />
+    <None Remove="Content\Stick.ttf" />
     <None Remove="Content\Zand.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />

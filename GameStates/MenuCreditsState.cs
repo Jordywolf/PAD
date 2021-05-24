@@ -29,7 +29,7 @@ namespace BaseProject.GameStates
 
             creditNames = new TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(creditNames);
-            creditNames.Text = "Nick Baptist\nNidal Toufik\nOlivier Molenaar\nJordy Wolf\nJordi van der Lem\nJort Keppel";
+            creditNames.Text = "Nick Baptist\nNidal Toufik\nJordy Wolf\nJordi van der Lem\nJort Keppel";
             creditNames.LocalPosition = new Vector2(60, 60);
         }
 
