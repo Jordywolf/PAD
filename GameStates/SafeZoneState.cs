@@ -54,25 +54,26 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Key);
             walls.AddChild(pilaar);
 
-            deur.LocalPosition = new Vector2(600, 110);
-            deur.scale = 0.7f;
+            deur.Origin = new Vector2(deur.sprite.Width / 2, deur.sprite.Height / 2 -30);
+            deur.LocalPosition = new Vector2(600, 80);
+            deur.scale = 1.2f;
+
+
+            Fontein.Origin = new Vector2(Fontein.sprite.Width / 2, Fontein.Height / 2 - 30);
+            Fontein.scale = 1f;
            
-            
-            
-            Fontein.scale = 0.6f;
-            Fontein.Origin = new Vector2(Fontein.sprite.Width , Fontein.Height /4);
-            Fontein.LocalPosition = new Vector2(300, 110);
+            Fontein.LocalPosition = new Vector2(250, 80);
            
             
             
             rots.Origin = new Vector2(rots.sprite.Width / 2, rots.Height / 2);
-            rots.scale = 0.9f;
+            rots.scale = 1f;
             rots.LocalPosition = new Vector2(300, 300);
 
             
-            boom.LocalPosition = new Vector2(300, 530);
-            boom.Origin = new Vector2(boom.sprite.Width / 2, boom.Height / 2);
-            boom.scale = 0.8f;
+            boom.LocalPosition = new Vector2(300, 470);
+            boom.Origin = new Vector2(boom.sprite.Width / 2, boom.Height / 2 );
+            boom.scale = 1.5f;
             
 
             
@@ -80,21 +81,20 @@ namespace BaseProject.GameStates
             NotCollected.LocalPosition = new Vector2(deur.LocalPosition.X - 150, 110);
 
             
-            pilaar.LocalPosition = new Vector2(1000, 140);
+            pilaar.LocalPosition = new Vector2(980, 110);
             pilaar.Origin = new Vector2(pilaar.sprite.Width / 2, pilaar.sprite.Height / 2);
-            pilaar.scale = 0.9f;
+            pilaar.scale = 1f;
            
             
             
-            Key.LocalPosition = new Vector2(1000, 100);
-            pilaar.Origin = new Vector2(Key.sprite.Width / 2, Key.sprite.Height / 2);
+            Key.LocalPosition = new Vector2(980, 100);
             Key.scale = 0.5f;
  
 
             player1 = new Player();
             gameObjects.AddChild(player1);
             player1.Origin = new Vector2(player1.sprite.Width / 2, player1.sprite.Height / 2);
-            player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            player1.LocalPosition = new Vector2(Game1.width/2, Game1.height/2 );
 
 
         }
@@ -116,6 +116,8 @@ namespace BaseProject.GameStates
                 Vector2 PushRots = new Vector2(pilaar.LocalPosition.X - rots.LocalPosition.X, pilaar.LocalPosition.Y - rots.LocalPosition.Y);
                 PushRots.Normalize();
                 pilaar.LocalPosition = new Vector2(pilaar.LocalPosition.X + PushRots.X * 20, pilaar.LocalPosition.Y + PushRots.Y * 20);
+                pilaar.LocalPosition = new Vector2(-100, -100);
+                rots.LocalPosition = new Vector2(-100, -100);
             }
             if(OverlapsWith(Key,player1)== true)
             {
@@ -123,13 +125,22 @@ namespace BaseProject.GameStates
                 Key.LocalPosition = new Vector2(-100, -100);
             }
 
-            CollisionUpdate(player1); CollisionUpdate(pilaar); CollisionUpdate(rots);
+           
+            CollisionUpdate(player1);  CollisionUpdate(rots);
 
-            if (OverlapsWith(player1, deur) && KeyCollected == false)
+            if (OverlapsWith(player1, deur) && KeyCollected == false )
             {
                 NotCollected.Color = Color.Red;
                 NotCollected.LocalPosition = new Vector2(deur.LocalPosition.X - 150, 160);
                 NotCollected.Text = "Oh, Seems i have to collect some sort of key first!";
+            }
+            
+           
+            if (OverlapsWith(player1, pilaar) && KeyCollected == false)
+            {
+                NotCollected.Color = Color.Red;
+                NotCollected.LocalPosition = new Vector2(pilaar.LocalPosition.X - 170, pilaar.LocalPosition.Y + 100);
+                NotCollected.Text = "There seems to be some sort of key behind this pillar \nbut i cant push it!";
             }
             if (OverlapsWith(player1, deur) && KeyCollected == true)
             {
@@ -144,12 +155,16 @@ namespace BaseProject.GameStates
                 NotCollected.LocalPosition = new Vector2(boom.LocalPosition.X, boom.LocalPosition.Y - 100);
                 NotCollected.Text = "This tree seems pretty useless.....";
             }
-            if (OverlapsWith(player1, Fontein))
+            if (OverlapsWith(player1,Fontein))
             {
 
                 NotCollected.Color = Color.Blue;
-                NotCollected.LocalPosition = new Vector2(Fontein.LocalPosition.X, Fontein.LocalPosition.Y + 150);
-                NotCollected.Text = "This fontain's water looks strange....";
+                NotCollected.LocalPosition = new Vector2(Fontein.LocalPosition.X, Fontein.LocalPosition.Y + 100);
+                NotCollected.Text = "This fontain's water restored my health!";
+                player1.health = 3;
+                gameObjects.AddChild(Game1.playerHealth1);
+                gameObjects.AddChild(Game1.playerHealth2);
+                gameObjects.AddChild(Game1.playerHealth3);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && KeyCollected == true && Game1.framecount > Game1.startframe + 10)
             {

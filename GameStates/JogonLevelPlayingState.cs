@@ -151,7 +151,9 @@ namespace BaseProject.GameStates
                 }
             }
 
-            if (gateSpawned) { jogonGate.WarpCheck("safeZoneState2", player); }
+            if (gateSpawned) { jogonGate.WarpCheck("safeZoneState2", player);
+                
+            }
 
             foreach (JogonPart j in Jogon.Body.children)
             {
