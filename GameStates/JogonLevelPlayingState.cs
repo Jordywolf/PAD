@@ -80,7 +80,7 @@ namespace BaseProject.GameStates
 
             target = Jogon;
 
-            jogonhealth = new HealthBar("Kloppertje the Devourer");
+            jogonhealth = new HealthBar("Jogon the Devourer");
             gameObjects.AddChild(jogonhealth);
             jogonhealth.LocalPosition = new Vector2(0, 0);
 
