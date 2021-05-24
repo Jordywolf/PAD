@@ -30,6 +30,7 @@ namespace BaseProject
         public Texture2D WalltileL;
         public Texture2D WalltileR;
         public Texture2D PillarTile;
+        public Texture2D BlackTile;
         GameStates.MenuStartSelectedState menuStartSelectedState;
         GameStates.MenuCreditsSelectedState menuCreditsSelectedState;
         GameStates.MenuCreditsState menuCreditsState;
@@ -188,6 +189,7 @@ namespace BaseProject
             MenuBMI = MenuBM.CreateInstance();
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
 
+            BlackTile = Content.Load<Texture2D>("Black Tile");
             font2 = Content.Load<SpriteFont>("Eightbit");
             font = Content.Load<SpriteFont>("Credit");
             player = new Player();
@@ -268,7 +270,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("jogonLevelPlayingState");
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
@@ -295,7 +297,7 @@ namespace BaseProject
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
 
             base.Draw(gameTime);
 
