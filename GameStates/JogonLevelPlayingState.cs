@@ -84,7 +84,7 @@ namespace BaseProject.GameStates
 
             target = Jogon;
 
-            jogonhealth = new HealthBar();
+            jogonhealth = new HealthBar("Kloppertje the Devourer");
             gameObjects.AddChild(jogonhealth);
             jogonhealth.LocalPosition = new Vector2(0, 0);
 
@@ -248,7 +248,7 @@ namespace BaseProject.GameStates
 
             if (OverlapsWith(Jogon, testpillar) && !jogonHit && !testpillar.hit)
             {
-                jogonhealth.Hit(30);
+                jogonhealth.Hit(25);
                 jogonHit = true;
 
                 testpillar.invisTimer = 600;

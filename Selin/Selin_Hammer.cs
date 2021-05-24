@@ -22,7 +22,7 @@ class Selin_Hammer : Engine.SpriteGameObject
     public bool shocked;
 
 
-    public Selin_Hammer(String HmrName) : base(HmrName, 1)
+    public Selin_Hammer(String HmrName) : base(HmrName, 0.9f)
     {
         returnPos = new Vector2(0, 300);
         targetPos = new Vector2(1000, 300);

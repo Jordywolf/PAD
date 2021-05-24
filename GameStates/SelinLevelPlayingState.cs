@@ -72,7 +72,7 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Game1.playerHealth2);
             gameObjects.AddChild(Game1.playerHealth3);
             ActionJump.playerOnGround = true;
-            selinsHealth = new HealthBar();
+            selinsHealth = new HealthBar("Selin the hammer wielder");
             gameObjects.AddChild(selinsHealth);
 
             for (int iPillar = 0; iPillar < maxPillars; iPillar++)
@@ -135,7 +135,7 @@ namespace BaseProject.GameStates
                     p.Visible = true;
                 }
 
-                selinsHealth.Hit(30);
+                selinsHealth.Hit(5);
                 selinBoss.hammers.AddChild(new Selin_Hammer("Selin_HmrL"));
             }
 

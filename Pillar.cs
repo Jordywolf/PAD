@@ -10,7 +10,7 @@ public class Pillar : SpriteGameObject
 {
     public int Pillartimer;
 
-    public Pillar(Vector2 pillarPosition, String pillarTexture) : base(pillarTexture, 1)
+    public Pillar(Vector2 pillarPosition, String pillarTexture) : base(pillarTexture, 0.8f)
     {
         this.localPosition = pillarPosition;
         Origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
