@@ -135,14 +135,16 @@ namespace BaseProject.GameStates
                 }
 
                 selinsHealth.Hit(5);
-                selinBoss.hammers.AddChild(new Selin_Hammer("Selin_HmrL"));
+                selinBoss.hammers.AddChild(new Selin_Hammer("Hamer 1"));
             }
+
+
 
             if (selinsHealth.CurrentHealth <= 0)
             {
                 if (!itemspawned)
                 {
-                    Game1.ItemPickup = new ItemPickup("Deur", 1);
+                    Game1.ItemPickup = new ItemPickup("Hamer 2", 1);
                     gameObjects.AddChild(Game1.ItemPickup);
                     itemspawned = true;
                 }

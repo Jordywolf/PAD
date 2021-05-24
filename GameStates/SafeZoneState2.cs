@@ -108,6 +108,8 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("safeZoneState2", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
                 Game1.GameStateManager.SwitchTo("selinLevelPlayingState", "safeZoneState2", new GameStates.SafeZoneState2());
                 Game1.SelinScream.Play();
+                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+
             }
             if (OverlapsWith(player1, dropZone1) && ActionJump.playerOnGround == true)
             {
