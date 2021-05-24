@@ -16,9 +16,8 @@ namespace BaseProject
         public float _followSpeed = 70;
         protected float _followRange = 100f;
         protected bool segment = true;
-        public int updateDelay;
 
-        public JogonPart(Vector2 position, float velocity, string texture, float followDist, SpriteGameObject Target, float depth) : base(texture, depth)
+        public JogonPart(Vector2 position, float velocity, string texture, float followDist, SpriteGameObject Target, float depth) : base(texture, depth,100)
         {
             scale = 1.5f;
             _followRange = followDist;
@@ -36,11 +35,6 @@ namespace BaseProject
             {
                 LookAt(target, offsetDegrees);
                 velocity = AngularDirection * _followSpeed;
-            }
-
-            else if (isInRange(this.localPosition, target.LocalPosition, _followRange))
-            {
-                //StopLookingAtTarget();
             }
             offsetDegrees = 90;
         }

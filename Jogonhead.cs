@@ -26,7 +26,7 @@ namespace BaseProject
         private int fireTimerMax = 200;
         private float angleincrease = 0;
 
-        private int Segments = 20;
+        private int Segments = 25;
         private float health = 10;
         private SpriteGameObject target;
         private JogonPart jogonBodyPart;
@@ -53,9 +53,9 @@ namespace BaseProject
             for (int i = 0; i < Segments; i++)
             {
                 if (i == 0) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X,this.localPosition.Y), 70, jogonBodyParts[0], 10, this, 0.9f); }
-                else if(i == (int)(Segments/10)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[1], 10, target, 0.9f); }
-                else if (i == (int)(Segments / 2.5)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[2], 10, target, 0.9f); }
-                else if (i == (int)(Segments/1.3)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[1], 10, target, 0.9f); }
+                else if(i == (int)(Segments/10)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[1], 10, target, 0.9f); jogonBodyPart.scale = 2f; }
+                else if (i == (int)(Segments / 2.5)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[2], 10, target, 0.9f); jogonBodyPart.scale = 1.5f; }
+                else if (i == (int)(Segments/1.5)) { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[1], 10, target, 0.9f); jogonBodyPart.scale = 2f; }
                 else  { jogonBodyPart = new JogonPart(new Vector2(this.localPosition.X, this.localPosition.Y), 70, jogonBodyParts[0], 10, target, 0.9f); }
                 Body.AddChild(jogonBodyPart);
                 target = jogonBodyPart;
@@ -85,11 +85,12 @@ namespace BaseProject
                     }
                     break;
                 case 2:
+                    fireTimerMax = 150;
                     _followSpeed = 40;
                     if (fireTimer >= fireTimerMax)
                     {
                         Game1.Fireball.Play(volume: 1, pitch: random.Next(0, 10), pan: 0);
-                            for (int i = 1; i <= 20+1; i++)
+                        for (int i = 1; i <= 20+1; i++)
                         {
                             angleincrease += 5f*i;
                             angleoffset =  (MathF.PI/180) * (360/MathF.Cos(i));
@@ -120,7 +121,7 @@ namespace BaseProject
                     }
                     if (fireTimer >= fireTimerMax)
                     {
-                        for (int i = 0; i <= 20; i++)
+                        for (int i = 0; i <= random.Next(15,25); i++)
                         {
                             angleoffset = (MathF.PI / 180) * (MathF.Cos(i)*10);
                             if (angleoffset > 45 || angleoffset < -45) { angleoffset = 0; }
@@ -130,7 +131,8 @@ namespace BaseProject
                         }
                         foreach (Fireball ball in fireballs.children)
                         {
-                            ball.scale = 3;
+                            ball.scale = 2.5f;
+                            ball.Speed = 650;
                         }
                     }
                     else { fireTimer++; }
@@ -169,7 +171,7 @@ namespace BaseProject
             {
                 _followSpeed = 70;
                 chargeTimer = 0;
-                chargingdelay = 500;
+                chargingdelay = random.Next(450,560);
                 playsound = true;
             }
 
