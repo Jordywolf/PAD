@@ -109,7 +109,8 @@ namespace BaseProject.GameStates
 
             if (!OverlapsWith(platform, Game1.player) && ActionJump.playerOnGround)
             {
-                //Game1.GameStateManager.SwitchTo("deathState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
+                Game1.player.Hit();
+                Game1.player.SpawnLocationDefault();
             }
 
             foreach (Pillar p in pillars.children)

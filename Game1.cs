@@ -274,7 +274,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("menuStartSelectedState");
+            GameStateManager.SwitchTo("jogonLevelPlayingState");
         }
 
 

@@ -19,8 +19,6 @@ namespace BaseProject.GameStates
         public int LowerPosY = 570;
         public int PlatformPosY;
 
-        Player player1;
-
         private bool playerSpawned;
 
         public SafeZoneState2() : base()
@@ -51,13 +49,8 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Game1.playerHealth2);
             gameObjects.AddChild(Game1.playerHealth3);
 
-
             FonteinCenter = new ObjectTile("Blok3", new Vector2(0, 0), 1);
-            player1 = new Player();
 
-            
-            gameObjects.AddChild(player1);
-            player1.LocalPosition = new Vector2(Game1.width/2 , Game1.height - 50);
             deur2 = new SpriteGameObject("Deur", 1);
             gameObjects.AddChild(deur2);
             deur2.LocalPosition = deurPos;
@@ -88,13 +81,13 @@ namespace BaseProject.GameStates
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            CollisionUpdate(player1);
-            if (OverlapsWith(player1, Fontein2))
+            CollisionUpdate(Game1.player);
+            if (OverlapsWith(Game1.player, Fontein2))
             {
                 gameObjects.AddChild(Game1.playerHealth1);
                 gameObjects.AddChild(Game1.playerHealth2);
                 gameObjects.AddChild(Game1.playerHealth3);
-                player1.health = 3;
+                Game1.player.health = 3;
 
             }
 
@@ -108,28 +101,28 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("safeZoneState2", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
                 Game1.GameStateManager.SwitchTo("selinLevelPlayingState", "safeZoneState2", new GameStates.SafeZoneState2());
                 Game1.SelinScream.Play();
-                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+                Game1.player.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
             }
-            if (OverlapsWith(player1, dropZone1) && ActionJump.playerOnGround == true)
+            if (OverlapsWith(Game1.player, dropZone1) && ActionJump.playerOnGround == true)
             {
                 //Game1.GameStateManager.SwitchTo("deathState", "safeZoneState", new GameStates.SafeZoneState());
-                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
+                Game1.player.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
             }
-            if (OverlapsWith(player1, dropZone2) && ActionJump.playerOnGround == true)
+            if (OverlapsWith(Game1.player, dropZone2) && ActionJump.playerOnGround == true)
             {
                 //Game1.GameStateManager.SwitchTo("deathState", "safeZoneState", new GameStates.SafeZoneState());
-                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
+                Game1.player.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
             }
-            if (OverlapsWith(player1, dropZone3) && ActionJump.playerOnGround == true)
+            if (OverlapsWith(Game1.player, dropZone3) && ActionJump.playerOnGround == true)
             {
-               // Game1.GameStateManager.SwitchTo("deathState", "safeZoneState", new GameStates.SafeZoneState());
-                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
+                // Game1.GameStateManager.SwitchTo("deathState", "safeZoneState", new GameStates.SafeZoneState());
+                Game1.player.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
             }
-            if (OverlapsWith(player1, dropZone4) && ActionJump.playerOnGround == true)
+            if (OverlapsWith(Game1.player, dropZone4) && ActionJump.playerOnGround == true)
             {
-               // Game1.GameStateManager.SwitchTo("deathState", "safeZoneState", new GameStates.SafeZoneState());
-                player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
+                // Game1.GameStateManager.SwitchTo("deathState", "safeZoneState", new GameStates.SafeZoneState());
+                Game1.player.LocalPosition = new Vector2(Game1.width / 2, Game1.height - 20);
             }
         }
     }
