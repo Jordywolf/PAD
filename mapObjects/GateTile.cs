@@ -19,6 +19,7 @@ namespace BaseProject.mapObjects
         {
             if (CollisionDetection.ShapesIntersect(this.collisionRec, p.collisionRec))
             {
+                Game1.player.LocalPosition = new Vector2(Game1.width / 2, Game1.height - Game1.player.Height);
                 Game1.GameStateManager.SwitchTo(targetGameState);
             }
         }

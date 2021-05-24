@@ -49,8 +49,6 @@ namespace BaseProject
         public static int width = 1280;
         public static int height = 640;
 
-        public Vector2 playerPos;
-
         //Textures
         public Texture2D jogonHeadTexture;
         public Texture2D jogonHSTexture;
@@ -103,9 +101,7 @@ namespace BaseProject
 
         public Boolean KeyCollected;
         public Vector2 SteenPosition, SteenVertPosition = new Vector2(0, 0);
-        public Vector2 PlayerPosition = new Vector2(1920 / 2, 1080);
         public Vector2 RotsPosition = new Vector2(1920 / 3, 1080 / 2.5f);
-        public Vector2 position = new Vector2(0, 0);
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public static Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel, TileSz2, TileSz3;
@@ -268,7 +264,7 @@ namespace BaseProject
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
 
-            GameStateManager.SwitchTo("jogonLevelPlayingState");
+            GameStateManager.SwitchTo("selinLevelPlayingState");
         }
 
 

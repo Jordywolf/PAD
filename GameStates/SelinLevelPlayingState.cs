@@ -13,7 +13,6 @@ namespace BaseProject.GameStates
     class SelinLevelPlayingState : Engine.LevelPlayingState
     {
         Selin selinBoss;
-        Player player;
         SpriteGameObject platform;
         SpriteGameObject background;
         GameObjectList pillars;
@@ -23,6 +22,7 @@ namespace BaseProject.GameStates
 
         private bool itemspawned;
         private bool gatespawned;
+        private bool playerSpawned;
 
         Random rnd = new Random();
 
@@ -65,15 +65,13 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(selinBoss);
 
             //player objects
-            player = Game1.player;
+            gameObjects.AddChild(Game1.player);
             gameObjects.AddChild(Game1.playerShadow);
             Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
             gameObjects.AddChild(Game1.playerHealth1);
             gameObjects.AddChild(Game1.playerHealth2);
             gameObjects.AddChild(Game1.playerHealth3);
-            gameObjects.AddChild(player);
             ActionJump.playerOnGround = true;
-            ActionJump.jumpLocation = player.LocalPosition = new Vector2(Game1.width / 2, Game1.height - player.Height * 2);
             selinsHealth = new HealthBar();
             gameObjects.AddChild(selinsHealth);
 
@@ -98,11 +96,19 @@ namespace BaseProject.GameStates
         {
             base.Update(gameTime);
 
-            //CollisionUpdate(playerTest);
+            if (!playerSpawned)
+            {
+                Game1.player.SpawnLocationDefault();
+                playerSpawned = true;
+            }
 
-            //selinBoss.CollShockPlayer(playerTest);
+            if (ActionJump.playerOnGround)
+            {
+                CollisionUpdate(Game1.player);
+                selinBoss.CollShockPlayer(Game1.player);
+            }
 
-            if (!OverlapsWith(platform, player))
+            if (!OverlapsWith(platform, Game1.player) && ActionJump.playerOnGround)
             {
                 Game1.GameStateManager.SwitchTo("deathState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
             }
@@ -133,21 +139,24 @@ namespace BaseProject.GameStates
                 selinBoss.hammers.AddChild(new Selin_Hammer("Selin_HmrL"));
             }
 
-            if (selinsHealth.CurrentHealth <= 0 && !itemspawned)
+            if (selinsHealth.CurrentHealth <= 0)
             {
- 
-                Game1.ItemPickup = new ItemPickup("Deur", 1);
-                gameObjects.AddChild(Game1.ItemPickup);
-
-                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, player.BoundingBox))
+                if (!itemspawned)
                 {
+                    Game1.ItemPickup = new ItemPickup("Deur", 1);
+                    gameObjects.AddChild(Game1.ItemPickup);
                     itemspawned = true;
+                }
+
+                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, Game1.player.BoundingBox) && !gatespawned)
+                {
                     gameObjects.AddChild(selinGate);
                     gatespawned = true;
+                    Game1.ItemPickup.LocalPosition = new Vector2(-300, 0);
                 }
             }
 
-            if (gatespawned) { selinGate.WarpCheck("menuStartSelectedState", player); }
+            if (gatespawned) { selinGate.WarpCheck("menuStartSelectedState", Game1.player); }
 
 
 
@@ -161,7 +170,7 @@ namespace BaseProject.GameStates
         {
             base.HandleInput(inputHelper);
 
-            selinBoss.Targeting(player.LocalPosition);
+            selinBoss.Targeting(Game1.player.LocalPosition);
 
         }
     }

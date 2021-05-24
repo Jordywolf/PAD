@@ -12,14 +12,13 @@ namespace BaseProject.GameStates
 {
     class SafeZoneState2 : Engine.LevelPlayingState
     {
-
         SpriteGameObject Fontein2, rots2, deur2;
         public Vector2 deurPos = new Vector2(600, -10);
         public Vector2 TileSz2Pos = new Vector2(0, 0);
         public int LowerPosY = 570;
         public int PlatformPosY;
-        Player player1;
 
+        private bool playerSpawned;
 
         public SafeZoneState2() : base()
         {
@@ -41,11 +40,14 @@ namespace BaseProject.GameStates
 
             }
 
+            gameObjects.AddChild(Game1.player);
+            gameObjects.AddChild(Game1.playerShadow);
+            Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
+            gameObjects.AddChild(Game1.playerHealth1);
+            gameObjects.AddChild(Game1.playerHealth2);
+            gameObjects.AddChild(Game1.playerHealth3);
 
 
-            player1 = Game1.player;
-            gameObjects.AddChild(player1);
-            player1.LocalPosition = new Vector2(0, 0);
             deur2 = new SpriteGameObject("Deur", 1);
             gameObjects.AddChild(deur2);
             deur2.LocalPosition = deurPos;
@@ -58,19 +60,21 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(rots2);
             rots2.scale = 0.3f;
             rots2.LocalPosition = new Vector2(Game1.width / 2 + 100, 300);
-
-
-
-
-
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (OverlapsWith(player1, deur2) && Keyboard.GetState().IsKeyDown(Keys.Space)) {
-                Game1.GameStateManager.SwitchTo("selinLevelPlayingState", "safeZoneState2", new GameStates.SafeZoneState2());
 
+            if (!playerSpawned)
+            {
+                Game1.player.SpawnLocationDown();
+                playerSpawned = true;
+            }
+
+            if (OverlapsWith(Game1.player, deur2) && Keyboard.GetState().IsKeyDown(Keys.Space)) {
+                Game1.GameStateManager.SwitchTo("safeZoneState2", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
+                Game1.GameStateManager.SwitchTo("selinLevelPlayingState", "safeZoneState2", new GameStates.SafeZoneState2());
             }
         }
     }

@@ -47,7 +47,7 @@ namespace BaseProject.GameStates
         private Texture2D playerTexture;
         Random rnd = new Random();
 
-        ObjectTile test;
+        private bool playerSpawned;
 
         List<JogonPart> JogonDragon = new List<JogonPart>();
 
@@ -57,7 +57,7 @@ namespace BaseProject.GameStates
             LoadFullFloor("PAD_Jg_Floortile1");
             LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
     "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
-
+            
             player = Game1.player;
             gameObjects.AddChild(Game1.playerShadow);
             Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;
@@ -68,9 +68,7 @@ namespace BaseProject.GameStates
 
             jogonGate = new mapObjects.GateTile("PAD_Jg_walltileGate", new Vector2(Game1.width / 2, 32));
 
-
             gameObjects.AddChild(player);
-            player.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
 
             //Do this when jogon dies
             //Game1.ItemPickup = new ItemPickup("De_Rakker", 1);
@@ -86,8 +84,6 @@ namespace BaseProject.GameStates
 
             target = Jogon;
 
-            this.player = Game1.player;
-            this.playerTexture = playerTexture;
             jogonhealth = new HealthBar();
             gameObjects.AddChild(jogonhealth);
             jogonhealth.LocalPosition = new Vector2(0, 0);
@@ -137,6 +133,13 @@ namespace BaseProject.GameStates
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (!playerSpawned)
+            {
+                Game1.player.SpawnLocationDefault();
+                Game1.player.actionHandeler.actionId = 0;
+                playerSpawned = true;
+            }
 
             if (!fightSound.IsLooped)
             {
@@ -258,25 +261,31 @@ namespace BaseProject.GameStates
 
 
 
-            if (jogonhealth.CurrentHealth <= 0 && !itemSpawned)
+            if (jogonhealth.CurrentHealth <= 0)
             {
-                Game1.ItemPickup = new ItemPickup("Vleugels_Item", 1);
-                gameObjects.AddChild(Game1.ItemPickup);
-                foreach (JogonPart j in Jogon.Body.children)
+                if (!itemSpawned)
                 {
-                    Jogon.target = new ObjectTile("Deur", new Vector2(-9999, -9000), 1);
-                }
-                
-
-                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, player.BoundingBox))
-                {
+                    Game1.ItemPickup = new ItemPickup("Vleugels_Item", 1);
+                    gameObjects.AddChild(Game1.ItemPickup);
+                    foreach (JogonPart j in Jogon.Body.children)
+                    {
+                        Jogon.target = new ObjectTile("Deur", new Vector2(-9999, -9000), 1);
+                    }
                     itemSpawned = true;
+                }
+
+                if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.BoundingBox, player.BoundingBox) && !gateSpawned)
+                {
                     gameObjects.AddChild(jogonGate);
                     gateSpawned = true;
+                    Game1.ItemPickup.LocalPosition = new Vector2(-300, 0);
                 }
             }
 
-            if (gateSpawned) { jogonGate.WarpCheck("safeZoneState2", player); }
+            if (gateSpawned)
+            {
+                jogonGate.WarpCheck("safeZoneState2", player);
+            }
 
             foreach (JogonPart j in Jogon.Body.children)
             {
