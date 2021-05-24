@@ -14,7 +14,6 @@ namespace BaseProject
         private Random random = new Random();
         public int Attackstate = 3;
 
-        public bool vaunerable = false;
         private float chargeTimer = 0;
         private float chargingdelay = 500;
         private bool charging = true;
@@ -80,27 +79,18 @@ namespace BaseProject
             {
                 case 1:
                     chargingdelay--;
-                    if (chargingdelay == 30)
-                    {
-                        if (playsound)
-                        {
-                            chargeSound.Play(volume: 1.0f, pitch: 0.0f, pan: 0.0f);
-                            playsound = false;
-                        }
-                    }
                     if (chargingdelay <= 0)
                     {
                         Charge();
                     }
                     break;
                 case 2:
-                    vaunerable = true;
-                    fireTimerMax = random.Next(200,300);
+                    fireTimerMax = 150;
                     _followSpeed = 40;
                     if (fireTimer >= fireTimerMax)
                     {
 
-                            for (int i = 1; i <= random.Next(15,20)+1; i++)
+                            for (int i = 1; i <= random.Next(15,25)+1; i++)
                         {
                             angleincrease += 5f*i;
                             angleoffset =  (MathF.PI/180) * (360/MathF.Cos(i));
@@ -175,12 +165,10 @@ namespace BaseProject
             {
                 chargeTimer += 0.02f;
                 _followSpeed += (float)(3 * MathF.Sin(chargeTimer));
-                vaunerable = true;
 
             }
             else if (chargeTimer > MathF.PI)
             {
-                vaunerable = false;
                 _followSpeed = 70;
                 chargeTimer = 0;
                 chargingdelay = random.Next(450,560);
