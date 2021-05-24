@@ -87,7 +87,6 @@ namespace BaseProject.GameStates
             foreach (GameObject part in JogonDragon) { gameObjects.AddChild(part); }
 
             this.fightSound = fightSound.CreateInstance();
-
         }
 
         public override void Update(GameTime gameTime)
