@@ -82,8 +82,15 @@ namespace BaseProject.Engine
         {
             return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width * thisOne.scale / 2
                 && thisOne.LocalPosition.X - thisOne.sprite.Width * thisOne.scale / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width * thisOne.scale / 2
+                && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 2 > thatOne.LocalPosition.Y - thatOne.sprite.Height * thisOne.scale / 2
+                && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height * thisOne.scale / 2);
+        }
+        public bool InAura(SpriteGameObject thisOne, SpriteGameObject thatOne)
+        {
+            return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width - 50 * thisOne.scale / 2
+                && thisOne.LocalPosition.X - thisOne.sprite.Width * thisOne.scale / 2 < thatOne.LocalPosition.X + thatOne.sprite.Width + 50 * thisOne.scale / 2
                 && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 2 > thatOne.LocalPosition.Y - thatOne.sprite.Height - 50 * thisOne.scale / 2
-                && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height -50 * thisOne.scale / 2);
+                && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height + 50 * thisOne.scale / 2);
         }
 
         public void CollisionUpdate(SpriteGameObject p)
@@ -116,7 +123,7 @@ namespace BaseProject.Engine
                 if (CollisionDetection.ShapesIntersect(p.collisionRec, o.collisionRec) && p.LocalPosition.Y + p.Height / 2
                     > o.LocalPosition.Y - o.Height / 2 && p.LocalPosition.Y + p.Height / 2 < o.LocalPosition.Y)
                 {
-                    adjRec.Height -= CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height; 
+                    adjRec.Height -= CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height;
                 }
 
                 //onder naar boven
@@ -125,7 +132,7 @@ namespace BaseProject.Engine
                 {
                     adjRec.Height += CollisionDetection.CalculateIntersection(p.collisionRec, o.collisionRec).Height;
                 }
-                
+
 
                 p.LocalPosition = new Vector2(p.LocalPosition.X + adjRec.Width, p.LocalPosition.Y + adjRec.Height);
             }

@@ -158,7 +158,7 @@ namespace BaseProject.GameStates
 
             CollisionUpdate(player1); CollisionUpdate(rots);
 
-            if (OverlapsWith(player1, deur) && KeyCollected == false)
+            if (InAura(player1, deur) && KeyCollected == false)
             {
                 NotCollected.Color = Color.Red;
                 NotCollected.LocalPosition = new Vector2(deur.LocalPosition.X - 150, 160);
@@ -166,26 +166,26 @@ namespace BaseProject.GameStates
             }
 
 
-            if (OverlapsWith(player1, pilaar) && KeyCollected == false)
+            if (InAura(player1, pilaar) && KeyCollected == false)
             {
                 NotCollected.Color = Color.Red;
                 NotCollected.LocalPosition = new Vector2(pilaar.LocalPosition.X - 190, pilaar.LocalPosition.Y + 120);
                 NotCollected.Text = "There seems to be some sort of key behind this pillar \nbut i cant push it!";
             }
-            if (OverlapsWith(player1, deur) && KeyCollected == true)
+            if (InAura(player1, deur) && KeyCollected == true)
             {
                 NotCollected.Color = Color.Green;
                 NotCollected.LocalPosition = new Vector2(deur.LocalPosition.X - 150, 160);
                 NotCollected.Text = "Press Space to  enter Jogon's Lair";
             }
-            if (OverlapsWith(player1, boom))
+            if (InAura(player1, boom))
             {
 
                 NotCollected.Color = Color.Red;
                 NotCollected.LocalPosition = new Vector2(boom.LocalPosition.X, boom.LocalPosition.Y - 100);
                 NotCollected.Text = "This tree seems pretty useless.....";
             }
-            if (OverlapsWith(player1, Fontein))
+            if (InAura(player1, Fontein))
             {
 
                 NotCollected.Color = Color.Blue;
@@ -196,12 +196,12 @@ namespace BaseProject.GameStates
                 gameObjects.AddChild(Game1.playerHealth2);
                 gameObjects.AddChild(Game1.playerHealth3);
             }
-            if (OverlapsWith(player1,deur) && Keyboard.GetState().IsKeyDown(Keys.Space) && KeyCollected == true && Game1.framecount > Game1.startframe + 10)
+            if (InAura(player1,deur) && Keyboard.GetState().IsKeyDown(Keys.Space) && KeyCollected == true && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("jogonLevelPlayingState", "safeZoneState", new GameStates.SafeZoneState());
                 Game1.framecount = Game1.startframe;
             }
-            if (OverlapsWith(player1, Helper))
+            if (InAura(player1, Helper))
             {
                 gameObjects.AddChild(Bubble);
                 
@@ -213,7 +213,7 @@ namespace BaseProject.GameStates
                 ComeText.LocalPosition = new Vector2(-500, -500);
 
             }
-            if (!OverlapsWith(player1, Helper))
+            if (!InAura(player1, Helper))
             {
                 Bubble.LocalPosition = new Vector2(-100, 100l);
                 HelperText.LocalPosition = new Vector2(-500, -500);

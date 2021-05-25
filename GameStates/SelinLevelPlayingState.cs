@@ -145,7 +145,8 @@ namespace BaseProject.GameStates
             {
                 if (!itemspawned)
                 {
-                    Game1.ItemPickup = new ItemPickup("Hamer 2", 1);
+                    Game1.ItemPickup = new ItemPickup("Hamer_2_small", 1);
+
                     gameObjects.AddChild(Game1.ItemPickup);
                     itemspawned = true;
                 }

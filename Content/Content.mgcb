@@ -157,6 +157,18 @@
 /processorParam:TextureFormat=Color
 /build:Bubble.png
 
+#begin Bubble.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Bubble.png
+
 #begin ButtonClick.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -388,6 +400,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Hamer 2.png
+
+#begin Hamer_2_small.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Hamer_2_small.png
 
 #begin healthBarEnd.png
 /importer:TextureImporter

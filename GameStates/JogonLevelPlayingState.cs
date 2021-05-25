@@ -134,7 +134,7 @@ namespace BaseProject.GameStates
 
             if (OverlapsWith(Jogon, testpillar) && !jogonHit && !testpillar.hit && Jogon.vaunerable)
             {
-                jogonhealth.Hit(30);
+                jogonhealth.Hit(5);
                 jogonHit = true;
 
                 testpillar.invisTimer = 600;
