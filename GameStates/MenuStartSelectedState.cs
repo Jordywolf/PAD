@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using Engine;
 
 namespace BaseProject.GameStates
@@ -19,6 +21,7 @@ namespace BaseProject.GameStates
 
         public MenuStartSelectedState() : base()
         {
+
             background = new SpriteGameObject("HomeScreen", 0.1f);
             gameObjects.AddChild(background);
 
@@ -55,6 +58,12 @@ namespace BaseProject.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            if (Game1.MenuBMInctance.State != SoundState.Playing && Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("menuStartSelectedState"))
+            {
+                Game1.MenuBMInctance.IsLooped = true;
+                Game1.MenuBMInctance.Volume = 1;
+                Game1.MenuBMInctance.Play();
+            }
             base.Update(gameTime);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Down) && Game1.framecount > Game1.startframe + 10)
