@@ -13,8 +13,8 @@ namespace BaseProject.GameStates
     class SafeZoneState2 : Engine.LevelPlayingState
     {
 
-        SpriteGameObject Fontein2, deur2, dropZone1,dropZone2,dropZone3,dropZone4, FonteinCenter;
-        public Vector2 deurPos = new Vector2(600, -10);
+        SpriteGameObject Fontein2, deur2, dropZone1,dropZone2,dropZone3,dropZone4;
+        public Vector2 deurPos = new Vector2(1000, 0);
         public Vector2 TileSz2Pos = new Vector2(0, 0);
         public int LowerPosY = 570;
         public int PlatformPosY;
@@ -52,23 +52,21 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(Game1.playerHealth3);
 
 
-            FonteinCenter = new ObjectTile("Blok3", new Vector2(0, 0), 1);
-            player1 = new Player();
+            player1 = Game1.player;
 
             
             gameObjects.AddChild(player1);
             player1.LocalPosition = new Vector2(Game1.width/2 , Game1.height - 50);
-            deur2 = new SpriteGameObject("Deur", 1);
-            gameObjects.AddChild(deur2);
+            deur2 = new ObjectTile("Deur", new Vector2(0,0),1);
+            walls.AddChild(deur2);
             deur2.LocalPosition = deurPos;
-            deur2.scale = 0.58f;
+            deur2.scale = 0.9f;
             Fontein2 = new SpriteGameObject("Fontein", 1);
             gameObjects.AddChild(Fontein2);
-            FonteinCenter.scale = 0.5f;
-            walls.AddChild(FonteinCenter);
+            
             Fontein2.scale = 0.6f;
             Fontein2.LocalPosition = new Vector2(Game1.width / 2 - 200, 200);
-            FonteinCenter.LocalPosition = new Vector2(Fontein2.LocalPosition.X + 60, Fontein2.LocalPosition.Y + 40);
+            
 
             dropZone1 = new SpriteGameObject("Blok", 1);
             dropZone2 = new SpriteGameObject("Blok", 1);
@@ -82,7 +80,6 @@ namespace BaseProject.GameStates
             dropZone2.LocalPosition = new Vector2(Game1.width  -700, Game1.height - 520);
             dropZone3.LocalPosition = new Vector2(Game1.width  - 1050, Game1.height - 250);
             dropZone4.LocalPosition = new Vector2(Game1.width - 280, Game1.height - 250);
-
         }
 
         public override void Update(GameTime gameTime)
