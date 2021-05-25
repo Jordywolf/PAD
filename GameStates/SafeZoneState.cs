@@ -16,12 +16,10 @@ namespace BaseProject.GameStates
         public int height = 1080;
         public int width = 1920;
         Player player1;
-        private Vector2 steenSize = new Vector2(0, 0);
-        private Vector2 steenPos = new Vector2(8, 8);
-        SpriteGameObject Fontein, rots, boom, deur;
+        SpriteGameObject Fontein, rots, boom, deur, Helper, Bubble;
         mapObjects.Item Key;
         ObjectTile pilaar;
-        TextGameObject NotCollected, Collected, PillarText;
+        TextGameObject NotCollected,HelperText,ComeText;
         Boolean KeyCollected = false;
         public Vector2 TileSz2Pos = new Vector2(0, 0);
         public int LowerPosY = 570;
@@ -39,22 +37,26 @@ namespace BaseProject.GameStates
             LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
    "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
 
-
+            Helper = new ObjectTile("Player", new Vector2(0, 0), 1);
             deur = new ObjectTile("Deur", new Vector2(0, 0), 1);
             Fontein = new ObjectTile("Fontein", new Vector2(0, 0), 1);
             rots = new SpriteGameObject("Rots", 1);
             boom = new ObjectTile("boom", new Vector2(0, 0), 1);
             NotCollected = new TextGameObject("Eightbit", 1, Color.Black);
+            HelperText = new TextGameObject("Eightbit", 1, Color.Black);
+            ComeText = new TextGameObject("Eightbit", 1, Color.Black);
             Key = new mapObjects.Item("Sleutel", new Vector2(1000, 100));
-            pilaar = new ObjectTile("Pilaar", new Vector2(0, 0), 1);
+            pilaar = new ObjectTile("Pilaar", new Vector2(0,0), 1);
+            Bubble = new SpriteGameObject("Bubble", 1);
             transition = new RotatingSpriteGameObject("JogonHead", 1);
-
+            walls.AddChild(Helper);
             walls.AddChild(deur);
             walls.AddChild(Fontein);
             gameObjects.AddChild(rots);
             walls.AddChild(boom);
             gameObjects.AddChild(NotCollected);
-
+            gameObjects.AddChild(HelperText);
+            gameObjects.AddChild(ComeText);
             gameObjects.AddChild(Key);
             walls.AddChild(pilaar);
 
@@ -73,7 +75,7 @@ namespace BaseProject.GameStates
             transition.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
             transition.Origin = transition.sprite.Center;
             transition.scale = 60;
-
+            Helper.LocalPosition = new Vector2(Game1.width - 100, Game1.height - 100);
             rots.Origin = new Vector2(rots.sprite.Width / 2, rots.Height / 2);
             rots.scale = 1f;
             rots.LocalPosition = new Vector2(300, 300);
@@ -82,7 +84,8 @@ namespace BaseProject.GameStates
             boom.LocalPosition = new Vector2(300, 470);
             boom.Origin = new Vector2(boom.sprite.Width / 2, boom.Height / 2);
             boom.scale = 1.5f;
-
+            Helper.Origin = new Vector2(Helper.sprite.Width / 2, Helper.sprite.Height / 2);
+            
 
 
 
@@ -92,13 +95,16 @@ namespace BaseProject.GameStates
             pilaar.LocalPosition = new Vector2(980, 110);
             pilaar.Origin = new Vector2(pilaar.sprite.Width / 2, pilaar.sprite.Height / 2);
             pilaar.scale = 1f;
-
-
-
+            HelperText.scale = 0.8f;
+            ComeText.scale = 0.8f;
+            
+            
             pilaar.Origin = new Vector2(Key.sprite.Width / 2, Key.sprite.Height / 2);
             Key.scale = 0.5f;
+            Helper.scale = 1.5f;
 
-
+            ComeText.Text = "Psstt, come here";
+            ComeText.LocalPosition = new Vector2(Helper.LocalPosition.X - 80, Helper.LocalPosition.Y - 50);
             player1 = Game1.player;
             gameObjects.AddChild(player1);
 
@@ -163,7 +169,7 @@ namespace BaseProject.GameStates
             if (OverlapsWith(player1, pilaar) && KeyCollected == false)
             {
                 NotCollected.Color = Color.Red;
-                NotCollected.LocalPosition = new Vector2(pilaar.LocalPosition.X - 170, pilaar.LocalPosition.Y + 100);
+                NotCollected.LocalPosition = new Vector2(pilaar.LocalPosition.X - 190, pilaar.LocalPosition.Y + 120);
                 NotCollected.Text = "There seems to be some sort of key behind this pillar \nbut i cant push it!";
             }
             if (OverlapsWith(player1, deur) && KeyCollected == true)
@@ -190,10 +196,28 @@ namespace BaseProject.GameStates
                 gameObjects.AddChild(Game1.playerHealth2);
                 gameObjects.AddChild(Game1.playerHealth3);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && KeyCollected == true && Game1.framecount > Game1.startframe + 10)
+            if (OverlapsWith(player1,deur) && Keyboard.GetState().IsKeyDown(Keys.Space) && KeyCollected == true && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("jogonLevelPlayingState", "safeZoneState", new GameStates.SafeZoneState());
                 Game1.framecount = Game1.startframe;
+            }
+            if (OverlapsWith(player1, Helper))
+            {
+                gameObjects.AddChild(Bubble);
+                
+                Bubble.LocalPosition = new Vector2(Helper.LocalPosition.X - 130, Helper.LocalPosition.Y - 80);
+                
+                HelperText.LocalPosition = new Vector2(Bubble.LocalPosition.X + 10, Bubble.LocalPosition.Y + 5);
+                HelperText.Color = Color.DarkBlue;
+                HelperText.Text = "Controls!: \nArrow Keys\nSpace ";
+                ComeText.LocalPosition = new Vector2(-500, -500);
+
+            }
+            if (!OverlapsWith(player1, Helper))
+            {
+                Bubble.LocalPosition = new Vector2(-100, 100l);
+                HelperText.LocalPosition = new Vector2(-500, -500);
+
             }
         }
     }
