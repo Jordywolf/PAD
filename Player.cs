@@ -90,7 +90,7 @@ namespace BaseProject
         {
             base.HandleInput(inputHelper);
 
-            if (inputHelper.KeyDown(Keys.Left))
+            if (inputHelper.KeyDown(Keys.Left) || inputHelper.KeyDown(Keys.A))
             {
                 velocity.X = -moveSpeed;
                 if (ActionJump.playerOnGround == false)
@@ -98,7 +98,7 @@ namespace BaseProject
                     ActionJump.jumpLocation.X -= moveSpeed;
                 }
             }
-            else if (inputHelper.KeyDown(Keys.Right))
+            else if (inputHelper.KeyDown(Keys.Right) || inputHelper.KeyDown(Keys.D))
             {
                 velocity.X = moveSpeed;
                 if (ActionJump.playerOnGround == false)
@@ -107,7 +107,7 @@ namespace BaseProject
                 }
             }
 
-            if (inputHelper.KeyDown(Keys.Up))
+            if (inputHelper.KeyDown(Keys.Up) || inputHelper.KeyDown(Keys.W))
             {
                 velocity.Y = -moveSpeed;
                 if (ActionJump.playerOnGround == false)
@@ -115,7 +115,7 @@ namespace BaseProject
                     ActionJump.jumpLocation.Y -= moveSpeed;
                 }
             }
-            else if (inputHelper.KeyDown(Keys.Down))
+            else if (inputHelper.KeyDown(Keys.Down) || inputHelper.KeyDown(Keys.S))
             {
                 velocity.Y = moveSpeed;
                 if (ActionJump.playerOnGround == false)

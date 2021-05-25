@@ -31,7 +31,7 @@ namespace BaseProject.GameStates
             instructions = new TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(instructions);
 
-            instructions.Text = "Press \nPrrow Keys \nPress \nSpace";
+            instructions.Text = "Press \nArrow Keys \nPress \nSpace";
             instructions.LocalPosition = new Vector2(0, 450);
 
             menuStart.LocalPosition = new Vector2(1280 / 2 - menuStart.sprite.Width * 2.7f / 2, 270);
