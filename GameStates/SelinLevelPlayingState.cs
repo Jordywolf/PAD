@@ -158,14 +158,7 @@ namespace BaseProject.GameStates
                 }
             }
 
-            if (gatespawned) { selinGate.WarpCheck("menuStartSelectedState", Game1.player); }
-
-
-
-            //if (CollisionDetection.ShapesIntersect(Game1.ItemPickup.collisionRec, Game1.player.collisionRec) && itemspawned)
-            //{
-
-            //}
+            if (gatespawned) { selinGate.WarpCheck("menuVictoryScreen", Game1.player); }
         }
 
         public override void HandleInput(InputHelper inputHelper)
