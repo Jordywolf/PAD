@@ -21,6 +21,8 @@ namespace BaseProject.GameStates
 
         private bool playerSpawned;
 
+        RotatingSpriteGameObject transition;
+
         public SafeZoneState2() : base()
         {
             
@@ -63,6 +65,13 @@ namespace BaseProject.GameStates
             Fontein2.LocalPosition = new Vector2(Game1.width / 2 - 200, 200);
             FonteinCenter.LocalPosition = new Vector2(Fontein2.LocalPosition.X + 60, Fontein2.LocalPosition.Y + 40);
 
+            transition = new RotatingSpriteGameObject("Selin_small", 1);
+            transition.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
+            transition.Origin = transition.sprite.Center;
+            transition.scale = 60;
+
+            gameObjects.AddChild(transition);
+
             dropZone1 = new SpriteGameObject("Blok", 1);
             dropZone2 = new SpriteGameObject("Blok", 1);
             dropZone3 = new SpriteGameObject("Blok2", 1);
@@ -81,6 +90,12 @@ namespace BaseProject.GameStates
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            transition.scale -= 1;
+            transition.Angle += 5;
+
+            if (transition.scale <= 0) { transition.Visible = false; transition.scale = 1; }
+
             CollisionUpdate(Game1.player);
             if (OverlapsWith(Game1.player, Fontein2))
             {
