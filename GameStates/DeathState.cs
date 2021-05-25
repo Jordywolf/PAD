@@ -38,8 +38,8 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState", "safeZoneState2", new GameStates.SafeZoneState2());
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
 
-                
             }
         }
     }

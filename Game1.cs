@@ -78,7 +78,7 @@ namespace BaseProject
         public static SoundEffect jogonSound;
         public static SoundEffect jogonFightSound;
         public SoundEffect MenuBM;
-        public SoundEffect ButtonSound;
+        public static SoundEffect ButtonSound;
         public static SoundEffect Fireball;
         public static SoundEffect HammerHit;
         public static SoundEffect BoulderShove;
@@ -235,7 +235,6 @@ namespace BaseProject
 
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
-
 
 
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();

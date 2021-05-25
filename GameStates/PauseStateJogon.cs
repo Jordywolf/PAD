@@ -44,6 +44,7 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("jogonLevelPlayingState");
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
         }
     }

@@ -49,6 +49,7 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("continueState");
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
@@ -56,6 +57,7 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("safeZoneState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
                 Game1.GameStateManager.SwitchTo("safeZoneState", "jogonLevelPlayingState", new GameStates.JogonLevelPlayingState(Game1.jogonSound, Game1.Player, Game1.jogonFightSound));
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
         }
 
