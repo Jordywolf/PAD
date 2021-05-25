@@ -101,6 +101,7 @@ namespace BaseProject.GameStates
 
             player1 = Game1.player;
             gameObjects.AddChild(player1);
+
             player1.LocalPosition = new Vector2(Game1.width / 2, Game1.height / 2);
             gameObjects.AddChild(Game1.playerShadow);
             Game1.playerShadow.Origin = Game1.playerShadow.sprite.Center;

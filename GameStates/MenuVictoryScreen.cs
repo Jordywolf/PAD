@@ -24,7 +24,6 @@ namespace BaseProject.GameStates
             gameObjects.AddChild(texten);
 
             gameObjects.AddChild(Game1.player);
-            Game1.player.sprite = new SpriteSheet("Player", 1);
             gameObjects.AddChild(Game1.playerShadow);
 
             texten.AddChild(new mapObjects.IntroText("Made by\n\nJordi van der Lem\nJordy Wolf\nNidal Toufik\nNick Baptist\nOlivier Molenaar\nJort Keppel", "Eightbit", Color.White, new Vector2(Game1.width / 5 * 4, Game1.height + 200)));
