@@ -288,7 +288,7 @@ namespace BaseProject
                 Game1.jogonFightSoundInstance.Stop();
             }
             for(int i = 0; i <= GameStateManager.gameStates.Count-4; i++)
-            if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState")|| Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState2"))
+            if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState")|| Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState2") || Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("selinLevelPlayingState") || Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("jogonLevelPlayingState"))
             {
                     MenuBMInctance.Stop();
             }
