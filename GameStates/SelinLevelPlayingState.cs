@@ -143,6 +143,7 @@ namespace BaseProject.GameStates
 
             {
                 selinsHealth.Hit(30);
+                
             }
  
 

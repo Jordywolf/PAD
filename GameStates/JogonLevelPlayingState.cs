@@ -148,15 +148,12 @@ namespace BaseProject.GameStates
             if (Keyboard.GetState().IsKeyDown(Keys.K))
             
                 {
-                    jogonhealth.Hit(30);
+                    jogonhealth.Hit(1);
                     jogonHit = true;
 
                     testpillar.invisTimer = 600;
                 }
-            else if (!OverlapsWith(Jogon, testpillar))
-                {
-                    jogonHit = false;
-                }
+
 
             
 
