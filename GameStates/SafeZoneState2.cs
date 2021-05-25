@@ -13,7 +13,7 @@ namespace BaseProject.GameStates
     class SafeZoneState2 : Engine.LevelPlayingState
     {
 
-        SpriteGameObject Fontein2, deur2, dropZone1,dropZone2,dropZone3,dropZone4;
+        SpriteGameObject Fontein2, deur2, dropZone1,dropZone2,dropZone3,dropZone4,fonteinCenter;
         public Vector2 deurPos = new Vector2(1000, 0);
         public Vector2 TileSz2Pos = new Vector2(0, 0);
         public int LowerPosY = 570;
@@ -57,17 +57,20 @@ namespace BaseProject.GameStates
             
             gameObjects.AddChild(player1);
             player1.LocalPosition = new Vector2(Game1.width/2 , Game1.height - 50);
+            fonteinCenter = new ObjectTile("Blok3", new Vector2(0, 0),1);
             deur2 = new ObjectTile("Deur", new Vector2(0,0),1);
             walls.AddChild(deur2);
             deur2.LocalPosition = deurPos;
             deur2.scale = 0.9f;
             Fontein2 = new SpriteGameObject("Fontein", 1);
             gameObjects.AddChild(Fontein2);
+            walls.AddChild(fonteinCenter);
             
             Fontein2.scale = 0.6f;
             Fontein2.LocalPosition = new Vector2(Game1.width / 2 - 200, 200);
-            
-
+            fonteinCenter.LocalPosition = new Vector2(Fontein2.LocalPosition.X + 55 , Fontein2.LocalPosition.Y + 40);
+            fonteinCenter.scale = 0.5f;
+            fonteinCenter.Visible = false;
             dropZone1 = new SpriteGameObject("Blok", 1);
             dropZone2 = new SpriteGameObject("Blok", 1);
             dropZone3 = new SpriteGameObject("Blok2", 1);
