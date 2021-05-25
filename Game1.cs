@@ -77,13 +77,14 @@ namespace BaseProject
         // Sounds
         public static SoundEffect jogonSound;
         public static SoundEffect jogonFightSound;
-        public SoundEffect MenuBM;
+        public static SoundEffectInstance jogonFightSoundInstance;
         public static SoundEffect ButtonSound;
         public static SoundEffect Fireball;
         public static SoundEffect HammerHit;
         public static SoundEffect BoulderShove;
         public static SoundEffect SelinScream;
-        public SoundEffectInstance MenuBMI;
+        public static SoundEffect MenuBM;
+        public static SoundEffectInstance MenuBMInctance;
 
         public Texture2D HBedgeLTexture;
         public Texture2D HBedgeRTexture;
@@ -110,7 +111,6 @@ namespace BaseProject
         public Vector2 PilaarPosition = new Vector2(1590, 200);
         public Vector2 DoorPosition = new Vector2(1920 / 2, 1080 / 100);
         public static Texture2D FonteinTexture, Pilaar, SteenTile, ZandTile, SteenVert, Boom, Rots, Deur, Player, Sleutel, TileSz2, TileSz3;
-
         SafeZone1 safeZone = new SafeZone1();
         SafeZone2 safeZone2 = new SafeZone2();
 
@@ -153,6 +153,8 @@ namespace BaseProject
             jogonHeadTexture = Content.Load<Texture2D>("JogonHead");
             jogonSound = Content.Load<SoundEffect>("JogonRoar");
             jogonFightSound = Content.Load<SoundEffect>("JogonBattelMusic");
+            jogonFightSoundInstance = jogonFightSound.CreateInstance();
+
             //JogonLevel
             PillarV2_Torch = Content.Load<Texture2D>("PAD_Jg_PillarV2_Torch");
             Floortile = Content.Load<Texture2D>("PAD_Jg_Floortile1");
@@ -186,7 +188,7 @@ namespace BaseProject
             HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
             MenuBM = Content.Load<SoundEffect>("BeginBM");
-            MenuBMI = MenuBM.CreateInstance();
+            MenuBMInctance = MenuBM.CreateInstance();
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
             Fireball = Content.Load<SoundEffect>("SoundEffect_Fireball");
             HammerHit = Content.Load<SoundEffect>("SoundEffect_Hammer");
@@ -201,6 +203,7 @@ namespace BaseProject
             playerHealth1 = new SpriteGameObject("Heart", 1);
             playerHealth2 = new SpriteGameObject("Heart", 1);
             playerHealth3 = new SpriteGameObject("Heart", 1);
+
 
             noSprite = new List<Sprite>();
             _sprites = new List<Sprite>()
@@ -264,7 +267,7 @@ namespace BaseProject
             safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
-            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(jogonSound, Player, jogonFightSound);
+            jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(jogonSound, Player);
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
             safeZoneState2 = new GameStates.SafeZoneState2();
@@ -279,7 +282,16 @@ namespace BaseProject
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Game1.GameStateManager.currentGameState != Game1.GameStateManager.GetGameState("jogonLevelPlayingState"))
+            {
+                Game1.jogonFightSoundInstance.Stop();
+            }
+            for(int i = 0; i <= GameStateManager.gameStates.Count-4; i++)
+            if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState")|| Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState2") || Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("selinLevelPlayingState") || Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("jogonLevelPlayingState"))
+            {
+                    MenuBMInctance.Stop();
+            }
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             if (menuchoice == 7)
@@ -313,10 +325,7 @@ namespace BaseProject
             {
                 GameStateManager.SwitchTo("deathState");
                 framecount = startframe;
-                MenuBMI.Stop();
             }
-
-          
 
                 if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
                 {

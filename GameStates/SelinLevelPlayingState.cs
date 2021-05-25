@@ -109,7 +109,8 @@ namespace BaseProject.GameStates
 
             if (!OverlapsWith(platform, Game1.player) && ActionJump.playerOnGround)
             {
-                //Game1.GameStateManager.SwitchTo("deathState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
+                Game1.player.Hit();
+                Game1.player.SpawnLocationDefault();
             }
 
             foreach (Pillar p in pillars.children)
@@ -135,14 +136,16 @@ namespace BaseProject.GameStates
                 }
 
                 selinsHealth.Hit(5);
-                selinBoss.hammers.AddChild(new Selin_Hammer("Selin_HmrL"));
+                selinBoss.hammers.AddChild(new Selin_Hammer("Hamer 1"));
             }
+
+
 
             if (selinsHealth.CurrentHealth <= 0)
             {
                 if (!itemspawned)
                 {
-                    Game1.ItemPickup = new ItemPickup("Deur", 1);
+                    Game1.ItemPickup = new ItemPickup("Hamer 2", 1);
                     gameObjects.AddChild(Game1.ItemPickup);
                     itemspawned = true;
                 }

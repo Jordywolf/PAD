@@ -52,7 +52,7 @@ namespace BaseProject.GameStates
         List<JogonPart> JogonDragon = new List<JogonPart>();
 
 
-        public JogonLevelPlayingState(SoundEffect aSound, Texture2D playerTexture, SoundEffect fightSound) : base()
+        public JogonLevelPlayingState(SoundEffect aSound, Texture2D playerTexture) : base()
         {
 
             LoadFullFloor("PAD_Jg_Floortile1");
@@ -80,13 +80,12 @@ namespace BaseProject.GameStates
 
             target = Jogon;
 
-            jogonhealth = new HealthBar("Kloppertje the Devourer");
+            jogonhealth = new HealthBar("Jogon the Devourer");
             gameObjects.AddChild(jogonhealth);
             jogonhealth.LocalPosition = new Vector2(0, 0);
 
             foreach (GameObject part in JogonDragon) { gameObjects.AddChild(part); }
 
-            this.fightSound = fightSound.CreateInstance();
 
         }
 
@@ -101,12 +100,23 @@ namespace BaseProject.GameStates
                 playerSpawned = true;
             }
 
-            if (!fightSound.IsLooped)
+            if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("jogonLevelPlayingState"))
             {
-                fightSound.IsLooped = true;
-                fightSound.Volume = 0.4f;
-                fightSound.Play();
+                if (Game1.jogonFightSoundInstance.State != SoundState.Playing)
+                {
+                    Game1.jogonFightSoundInstance.IsLooped = true;
+                    Game1.jogonFightSoundInstance.Volume = 0.4f;
+                    Game1.jogonFightSoundInstance.Play();
+                }
             }
+            else
+            {
+                if (Game1.jogonFightSoundInstance.State == SoundState.Playing)
+                {
+                    Game1.jogonFightSoundInstance.Stop();
+                }
+            }
+
 
             CollisionUpdate(player);
 
