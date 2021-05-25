@@ -36,7 +36,7 @@ namespace BaseProject.GameStates
             LoadSquareWalls("PAD_Jg_walltileCornerDL", "PAD_Jg_walltileStraightD", "PAD_Jg_walltileCornerDR", "PAD_Jg_walltileR",
    "PAD_Jg_walltileCornerR", "PAD_Jg_walltileStraight", "PAD_Jg_walltileCornerL", "PAD_Jg_walltileL");
 
-            Helper = new ObjectTile("De_Rakker", new Vector2(0, 0), 1);
+            Helper = new ObjectTile("Player", new Vector2(0, 0), 1);
             deur = new ObjectTile("Deur", new Vector2(0, 0), 1);
             Fontein = new ObjectTile("Fontein", new Vector2(0, 0), 1);
             rots = new SpriteGameObject("Rots", 1);
@@ -95,6 +95,7 @@ namespace BaseProject.GameStates
             
             pilaar.Origin = new Vector2(Key.sprite.Width / 2, Key.sprite.Height / 2);
             Key.scale = 0.5f;
+            Helper.scale = 1.5f;
 
             ComeText.Text = "Psstt, come here";
             ComeText.LocalPosition = new Vector2(Helper.LocalPosition.X - 80, Helper.LocalPosition.Y - 50);
