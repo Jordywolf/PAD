@@ -139,7 +139,12 @@ namespace BaseProject.GameStates
                 selinBoss.hammers.AddChild(new Selin_Hammer("Hamer 1"));
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.K))
 
+            {
+                selinsHealth.Hit(30);
+            }
+ 
 
             if (selinsHealth.CurrentHealth <= 0)
             {
