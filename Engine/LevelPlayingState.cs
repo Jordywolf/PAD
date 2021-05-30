@@ -26,6 +26,10 @@ namespace BaseProject.Engine
             gameObjects.AddChild(walls);
         }
 
+        /// <summary>
+        /// deze funcite zorgt ervoor dat het hele scherm wordt bezaaid met vloer onderdelen
+        /// </summary>
+        /// <param name="floorTexture"></param>
         public void LoadFullFloor(String floorTexture)
         {
             for (int iXFloor = 0; iXFloor < Game1.width / grid; iXFloor++)
@@ -37,6 +41,13 @@ namespace BaseProject.Engine
             }
         }
 
+        /// <summary>
+        /// met deze functie kan er een vloer worden gemaatk op een bepaalde plek met een gekozen hoogte en breedte
+        /// </summary>
+        /// <param name="floorTexture"></param>
+        /// <param name="Ysize"></param>
+        /// <param name="Xsize"></param>
+        /// <param name="midPos"></param>
         public void LoadSquareFloor(String floorTexture, float Ysize, float Xsize, Vector2 midPos)
         {
             for (int iXFloor = 0; iXFloor < Game1.width / grid; iXFloor++)
@@ -52,6 +63,18 @@ namespace BaseProject.Engine
             }
         }
 
+        /// <summary>
+        /// deze functie zorgt ervoor dat de er een muur wordt gezet om het hele scherm
+        /// deze onderdelen worden ook in een apparte list gezet zodat hier makkelijk een collision mee kan worden gemaakt
+        /// </summary>
+        /// <param name="cdl"></param>
+        /// <param name="d"></param>
+        /// <param name="cdr"></param>
+        /// <param name="r"></param>
+        /// <param name="ctr"></param>
+        /// <param name="t"></param>
+        /// <param name="ctl"></param>
+        /// <param name="l"></param>
         public void LoadSquareWalls(String cdl, String d, String cdr, String r, String ctr, String t, String ctl, String l)
         {
             for (int iWalltile = 0; iWalltile < Game1.width / grid; iWalltile++)
@@ -78,6 +101,7 @@ namespace BaseProject.Engine
             }
         }
 
+        //een overlaps functie
         public bool OverlapsWith(SpriteGameObject thisOne, SpriteGameObject thatOne)
         {
             return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width * thisOne.scale / 2
@@ -85,6 +109,8 @@ namespace BaseProject.Engine
                 && thisOne.LocalPosition.Y + thisOne.sprite.Height * thisOne.scale / 2 > thatOne.LocalPosition.Y - thatOne.sprite.Height * thisOne.scale / 2
                 && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height * thisOne.scale / 2);
         }
+
+        //een functie die checked of iets in een 50 pixel range zit van een opbject
         public bool InAura(SpriteGameObject thisOne, SpriteGameObject thatOne)
         {
             return (thisOne.LocalPosition.X + thisOne.sprite.Width * thisOne.scale / 2 > thatOne.LocalPosition.X - thatOne.sprite.Width - 50 * thisOne.scale / 2
@@ -93,6 +119,8 @@ namespace BaseProject.Engine
                 && thisOne.LocalPosition.Y - thisOne.sprite.Height * thisOne.scale / 2 < thatOne.LocalPosition.Y + thatOne.sprite.Height + 50 * thisOne.scale / 2);
         }
 
+        //de collisioin functie die werkt vool alle objecttiles die zijn toegevoegd aan de 'walls' class
+        //als deze functie wordt geactiveerd dan kan het gekozen object hier niet doorheen bewegen
         public void CollisionUpdate(SpriteGameObject p)
         {
             //oude manier om de collision te berekenen

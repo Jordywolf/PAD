@@ -12,6 +12,13 @@ namespace BaseProject.mapObjects
     {
         public bool hit = false;
 
+        /// <summary>
+        /// deze class is een objectile class met een timer zodat dit object 'stuk' kan gaan waarbij hij switched tussen 2 plaatjes met een
+        /// timer die er aan gebonden zit
+        /// </summary>
+        /// <param name="assetname"></param>
+        /// <param name="position"></param>
+        
         public PillarTile(String assetname, Vector2 position) : base(assetname, position, 0.8f)
         {
 

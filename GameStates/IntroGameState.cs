@@ -16,10 +16,19 @@ namespace BaseProject.GameStates
 
         List<string> zinnen = new List<string>();
 
+        //een transitie die wordt aangemaakt
         RotatingSpriteGameObject transition;
 
+        //deze boolean geeft aan of het scherm is gestart of niet, hierdoor heeft het ene scherm geen interactie met het 2e introscherm
         private bool started;
 
+        /// <summary>
+        /// er kunnen 4 introtext onderdelen per introscherm worden aangemaakt, 
+        /// </summary>
+        /// <param name="Text1"></param>
+        /// <param name="Text2"></param>
+        /// <param name="Text3"></param>
+        /// <param name="Text4"></param>
         public IntroGameState(String Text1, String Text2, String Text3, String Text4) : base()
         {
             Game1.framecount = 0;
@@ -50,12 +59,14 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
             Game1.framecount++;
 
+            //als de 'started' op true staat gaat de framecounter lopen
             if (!started)
             {
                 Game1.framecount = 0;
                 started = true;
             }
 
+            //als de framecounter op ~11.5 seconden staat dan schakelt het scherm de transitie in
             if (Game1.framecount >= 690)
             {
                 gameObjects.AddChild(transition);
@@ -63,6 +74,7 @@ namespace BaseProject.GameStates
                 transition.Angle += 5;
             }
 
+            //hier schakelt het scherm naar de volgende gamestate
             if (Game1.framecount >= 750)
             {
                 Game1.GameStateManager.SwitchTo("safeZoneState", "introGameState", new IntroGameState("Out there in the desert he lays", "His riddle is yours to solve", "He charges with some delays", "In his fire you will dissolve"));

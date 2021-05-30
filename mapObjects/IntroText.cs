@@ -12,6 +12,13 @@ namespace BaseProject.mapObjects
 {
     class IntroText : TextGameObject
     {
+        /// <summary>
+        /// deze class is een iets handigere class van een textgameobject waarbij je gelijk de text kan aanpassen en de positie
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="font"></param>
+        /// <param name="color"></param>
+        /// <param name="position"></param>
         public IntroText(String text, String font, Color color, Vector2 position) : base(font, 1, color)
         {
             Text = text;

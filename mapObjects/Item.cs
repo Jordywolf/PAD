@@ -10,7 +10,12 @@ namespace BaseProject.mapObjects
 {
     public class Item : SpriteGameObject
     {
-
+        /// <summary>
+        /// deze class zorgt ervoor dat de sprite van een obeject op en neer beweegt
+        /// </summary>
+        /// <param name="assetName"></param>
+        /// <param name="position"></param>
+        /// <param name="depth"></param>
         public Item(String assetName, Vector2 position , float depth = 1) : base(assetName, depth)
         {
             localPosition = position;

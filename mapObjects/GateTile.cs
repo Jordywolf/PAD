@@ -10,6 +10,11 @@ namespace BaseProject.mapObjects
 {
     class GateTile : ObjectTile
     {
+        /// <summary>
+        /// deze tile zorgt ervoor dat de speler naar een andere gamestate kan worden gezet, hiervoor is wel een andere overlaps functe
+        /// </summary>
+        /// <param name="assetname"></param>
+        /// <param name="position"></param>
 
         public GateTile(String assetname, Vector2 position) : base(assetname, position, 0.8f)
         {
