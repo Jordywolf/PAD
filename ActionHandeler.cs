@@ -7,15 +7,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BaseProject
 {
-    public class ActionHandeler // action handler class
+    public class ActionHandeler //Action handler class
     {
         public int actionId;
         public ActionJump Jump = new ActionJump();
-        bool keyPressed;
+        private bool keyPressed;
 
         public void Update()
         {
-            if (actionId == 1) // actions die maar 1 keer moeten gebeuren als je op spatie drukt
+            if (actionId == 1) //Actions die maar 1 keer moeten gebeuren als je op spatie drukt
             {
                 Jump.Update();
                 if (keyPressed == false)
@@ -31,7 +31,7 @@ namespace BaseProject
                     keyPressed = false;
                 }
             }
-            if (actionId == 2) // actions die elk frame moeten gebeuren als je op spatie drukt
+            if (actionId == 2) //Actions die elk frame moeten gebeuren als je op spatie drukt
             {
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
@@ -40,6 +40,7 @@ namespace BaseProject
             }
         }
 
+        //Activeer de actie die actie staat
         public void UseAction()
         {
             if (actionId == 0)
