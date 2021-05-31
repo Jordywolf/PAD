@@ -139,13 +139,20 @@ namespace BaseProject.GameStates
                 selinBoss.hammers.AddChild(new Selin_Hammer("Hamer 1"));
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.K))
 
+            {
+                selinsHealth.Hit(30);
+                
+            }
+ 
 
             if (selinsHealth.CurrentHealth <= 0)
             {
                 if (!itemspawned)
                 {
-                    Game1.ItemPickup = new ItemPickup("Hamer 2", 1);
+                    Game1.ItemPickup = new ItemPickup("Hamer_2_small", 1);
+
                     gameObjects.AddChild(Game1.ItemPickup);
                     itemspawned = true;
                 }

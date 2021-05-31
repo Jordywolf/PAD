@@ -18,6 +18,8 @@ namespace BaseProject.GameStates
 
         RotatingSpriteGameObject transition;
 
+        private bool started;
+
         public IntroGameState(String Text1, String Text2, String Text3, String Text4) : base()
         {
             Game1.framecount = 0;
@@ -48,6 +50,12 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
             Game1.framecount++;
 
+            if (!started)
+            {
+                Game1.framecount = 0;
+                started = true;
+            }
+
             if (Game1.framecount >= 690)
             {
                 gameObjects.AddChild(transition);
@@ -58,6 +66,7 @@ namespace BaseProject.GameStates
             if (Game1.framecount >= 750)
             {
                 Game1.GameStateManager.SwitchTo("safeZoneState", "introGameState", new IntroGameState("Out there in the desert he lays", "His riddle is yours to solve", "He charges with some delays", "In his fire you will dissolve"));
+                Game1.framecount = 0;
             }
         }
     }

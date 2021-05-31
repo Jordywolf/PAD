@@ -134,7 +134,7 @@ namespace BaseProject.GameStates
 
             if (OverlapsWith(Jogon, testpillar) && !jogonHit && !testpillar.hit && Jogon.vaunerable)
             {
-                jogonhealth.Hit(30);
+                jogonhealth.Hit(5);
                 jogonHit = true;
 
                 testpillar.invisTimer = 600;
@@ -145,7 +145,17 @@ namespace BaseProject.GameStates
             }
 
 
+            if (Keyboard.GetState().IsKeyDown(Keys.K))
+            
+                {
+                    jogonhealth.Hit(1);
+                    jogonHit = true;
 
+                    testpillar.invisTimer = 600;
+                }
+
+
+            
 
             if (jogonhealth.CurrentHealth <= 0)
             {
@@ -202,7 +212,7 @@ namespace BaseProject.GameStates
 
             if (jogonhealth.CurrentHealth < 10) { Jogon.Attackstate = 2; }
             else if (jogonhealth.CurrentHealth >= 10 && jogonhealth.CurrentHealth <= 20) { Jogon.Attackstate = 3; }
-            else if (jogonhealth.CurrentHealth > 20) { Jogon.Attackstate = 1; }
+            else if (jogonhealth.CurrentHealth > 20) { Jogon.Attackstate = 2; }
         }
     }
 }

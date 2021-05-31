@@ -18,6 +18,8 @@ namespace BaseProject.GameStates
 
         RotatingSpriteGameObject transition;
 
+        private bool started;
+
         public IntroGameState2(String Text1, String Text2, String Text3, String Text4) : base()
         {
             Game1.framecount = 0;
@@ -46,6 +48,13 @@ namespace BaseProject.GameStates
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (!started)
+            {
+                Game1.framecount = 0;
+                started = true;
+            }
+
             Game1.framecount++;
 
             if (Game1.framecount >= 690)
@@ -58,6 +67,7 @@ namespace BaseProject.GameStates
             if (Game1.framecount >= 750)
             {
                 Game1.GameStateManager.SwitchTo("safeZoneState2", "introGameState2", new IntroGameState2("With lots of glamour and much delight", "he trains his 10-pack on repeat", "he does not back out from a fight", "but the pillars will bring his defeat"));
+                Game1.framecount = 0;
             }
         }
     }

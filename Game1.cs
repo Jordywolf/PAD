@@ -288,7 +288,7 @@ namespace BaseProject
             menuVictoryScreen = new GameStates.MenuVictoryScreen();
             GameStateManager.AddGameState("menuVictoryScreen", menuVictoryScreen);
 
-            GameStateManager.SwitchTo("menuVictoryScreen");
+            GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
