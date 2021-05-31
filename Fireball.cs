@@ -29,18 +29,12 @@ namespace BaseProject
         {
             Timer = 0;
             SpawnPosition = localPosition;// hier komt de target te staat wss dus de player
-            //totalangle = (float)Math.Atan2(TargetPosition.Y - SpawnPosition.Y, TargetPosition.X - SpawnPosition.X);
         }
 
         override public void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             velocity = AngularDirection * Speed;
-            /*
-            float distance = Vector2.Distance(SpawnPosition, TargetPosition);
-            Timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            localPosition = Vector2.Lerp(SpawnPosition, TargetPosition, Timer * Speed / distance);
-            */
         }
 
         public bool IsObjectOffScreen(SpriteGameObject gameObject)

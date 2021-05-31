@@ -10,13 +10,12 @@ namespace BaseProject
 {
     class JogonPart : RotatingSpriteGameObject
     {
-        public Vector2 previousPosition;
-        public Vector2 previousRotation;
         public GameObject target;
         public float _followSpeed = 70;
         protected float _followRange = 100f;
         protected bool segment = true;
 
+        // constructor met de nodige informatie om jogonpart te laten functioneren
         public JogonPart(Vector2 position, float velocity, string texture, float followDist, SpriteGameObject Target, float depth) : base(texture, depth,100)
         {
             scale = 1.5f;
@@ -27,6 +26,7 @@ namespace BaseProject
             target = Target;
         }
 
+        //Als jogonpart nog niet bij zijn doel is blijft hij bewegen en zijn sprite word 90 graden gedraaid
         public override void Update(GameTime gameTime)
         {
 
@@ -38,6 +38,8 @@ namespace BaseProject
             }
             offsetDegrees = 90;
         }
+
+        //hier kijkt een jogonpart of hij al bij zijn doel is aangekomen
         protected bool isInRange(Vector2 V1, Vector2 V2, float range)
         {
             float dx = V2.X - V1.X;

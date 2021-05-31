@@ -9,6 +9,7 @@ using Engine;
 
 namespace BaseProject
 {
+    //jogonhead overerft van jogonpart
     class Jogonhead : JogonPart
     {
         private Random random = new Random();
@@ -48,7 +49,7 @@ namespace BaseProject
             Constructbody();
         }
 
-
+        //hier word het lichaam gemaakt door middel va een for loop.
         public void Constructbody()
         {
             for (int i = 0; i < Segments; i++)
@@ -64,20 +65,25 @@ namespace BaseProject
         }
         public override void Update(GameTime gameTime)
         {
-
+            
             base.Update(gameTime);
+            //in dit stukje word de snelheid van alle lichaams gelijk gezet aan die van het hoofd
             foreach (JogonPart jogonpart in Body.children)
             {
                 jogonpart._followSpeed = this._followSpeed * 1.99f;
             }
+            // Hier worden fireballs kleiner gemaakt. Als ze kleiner zijn dan een bepaald getal dan worden ze ontzichtbaar gezet
             foreach (Fireball ball in fireballs.children)
             {
                 ball.scale -= 0.01f;
                 if (ball.scale < 0.1f) { ball.Visible = false; }
                 if (ball.scale > 0.1f) { ball.Visible = true; }
             }
+
+            //Dit is het stuk waar jogon zijn aanvallen bepaald
             switch (Attackstate)
             {
+                //case 1 is een charge state hij voert dan een charge uit als de charging delay 0 is.
                 case 1:
                     chargingdelay--;
                     if (chargingdelay == 30)
@@ -93,6 +99,7 @@ namespace BaseProject
                         Charge();
                     }
                     break;
+                    //case 2 is een state waar bij hij vuurballen in een rondje schiet
                 case 2:
                     vaunerable = true;
                     fireTimerMax = random.Next(200, 300);
@@ -115,6 +122,7 @@ namespace BaseProject
                     }
                     else { fireTimer++; }
                     break;
+                    //case 3 is een state waarbij hij charged en vuurballen schiet in een bepaalde richting
                 case 3:
                     chargingdelay--;
                     if (chargingdelay == 30)
@@ -158,16 +166,9 @@ namespace BaseProject
                 keyPressed = false;
             }
 
-            // store current positon and rotation as previous for all following parts
-            /*if (updateDelay <= 0)
-            {
-                (Body.children[Body.children.Count-1] as JogonPart).SetNextpostition(localPosition, new Vector2(0,0));
-                updateDelay = 1;
-            }
-            updateDelay--;
-            */
-
         }
+
+        //hier word de snelheid van jogon geregeld als hij charged
         public void Charge()
         {
 
@@ -190,9 +191,9 @@ namespace BaseProject
 
         }
 
+        // deze fuctie word aangeroepen als jogon een vuurbal schiet
         public void Fireball()
         {
-            //fireballOffset = new Vector2(-this.sprite.Width / 2, this.sprite.Height / 2);
             fireballs.AddChild(new Fireball(this.localPosition, "fireball", this.Angle + angleoffset));
             foreach (Fireball ball in fireballs.children)
             {
