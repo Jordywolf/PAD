@@ -202,7 +202,7 @@ namespace BaseProject.GameStates
 
             if (jogonhealth.CurrentHealth < 10) { Jogon.Attackstate = 2; }
             else if (jogonhealth.CurrentHealth >= 10 && jogonhealth.CurrentHealth <= 20) { Jogon.Attackstate = 3; }
-            else if (jogonhealth.CurrentHealth > 20) { Jogon.Attackstate = 1; }
+            else if (jogonhealth.CurrentHealth > 20) { Jogon.Attackstate = 2; }
         }
     }
 }
