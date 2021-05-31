@@ -31,7 +31,7 @@ namespace BaseProject.GameStates
             instructions = new TextGameObject("Credit", 1, Color.Beige);
             gameObjects.AddChild(instructions);
 
-            instructions.Text = "Press \nPrrow Keys \nPress \nSpace";
+            instructions.Text = "Press \nArrow Keys \nPress \nSpace";
             instructions.LocalPosition = new Vector2(0, 450);
 
             menuStart.LocalPosition = new Vector2(1280 / 2 - menuStart.sprite.Width * 2.7f / 2, 270);
@@ -54,12 +54,14 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState");
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("menuCreditsState");
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
         }
 

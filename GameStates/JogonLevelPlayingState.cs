@@ -145,7 +145,17 @@ namespace BaseProject.GameStates
             }
 
 
+            if (Keyboard.GetState().IsKeyDown(Keys.K))
+            
+                {
+                    jogonhealth.Hit(1);
+                    jogonHit = true;
 
+                    testpillar.invisTimer = 600;
+                }
+
+
+            
 
             if (jogonhealth.CurrentHealth <= 0)
             {
@@ -170,7 +180,7 @@ namespace BaseProject.GameStates
 
             if (gateSpawned)
             {
-                jogonGate.WarpCheck("safeZoneState2", player);
+                jogonGate.WarpCheck("introGameState2", player);
             }
 
             foreach (JogonPart j in Jogon.Body.children)

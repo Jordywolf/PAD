@@ -44,6 +44,9 @@ namespace BaseProject
         GameStates.SafeZoneState2 safeZoneState2;
         GameStates.JogonLevelPlayingState jogonLevelPlayingState;
         GameStates.SelinLevelPlayingState selinLevelPlayingState;
+        GameStates.IntroGameState introGameState;
+        GameStates.IntroGameState2 introGameState2;
+        GameStates.MenuVictoryScreen menuVictoryScreen;
 
         //GameStates.JogonSafeZoneState jogonSafeZoneState;
 
@@ -78,7 +81,7 @@ namespace BaseProject
         public static SoundEffect jogonSound;
         public static SoundEffect jogonFightSound;
         public static SoundEffectInstance jogonFightSoundInstance;
-        public SoundEffect ButtonSound;
+        public static SoundEffect ButtonSound;
         public static SoundEffect Fireball;
         public static SoundEffect HammerHit;
         public static SoundEffect BoulderShove;
@@ -240,7 +243,6 @@ namespace BaseProject
             GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
 
 
-
             menuCreditsSelectedState = new GameStates.MenuCreditsSelectedState();
             GameStateManager.AddGameState("menuCreditsSelectedState", menuCreditsSelectedState);
 
@@ -265,17 +267,26 @@ namespace BaseProject
             deathState = new GameStates.DeathState();
             GameStateManager.AddGameState("deathState", deathState);
 
+            introGameState = new GameStates.IntroGameState("Out there in the desert he lays", "His riddle is yours to solve", "He charges with some delays", "In his fire you will dissolve");
+            GameStateManager.AddGameState("introGameState", introGameState);
+
             safeZoneState = new GameStates.SafeZoneState();
             GameStateManager.AddGameState("safeZoneState", safeZoneState);
 
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(jogonSound, Player);
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
+            introGameState2 = new GameStates.IntroGameState2("With lots of glamour and much delight", "he trains his 10-pack on repeat", "he does not back out from a fight", "but the pillars will bring his defeat");
+            GameStateManager.AddGameState("introGameState2", introGameState2);
+
             safeZoneState2 = new GameStates.SafeZoneState2();
             GameStateManager.AddGameState("safeZoneState2", safeZoneState2);
 
             selinLevelPlayingState = new GameStates.SelinLevelPlayingState();
             GameStateManager.AddGameState("selinLevelPlayingState", selinLevelPlayingState);
+
+            menuVictoryScreen = new GameStates.MenuVictoryScreen();
+            GameStateManager.AddGameState("menuVictoryScreen", menuVictoryScreen);
 
             GameStateManager.SwitchTo("menuStartSelectedState");
         }

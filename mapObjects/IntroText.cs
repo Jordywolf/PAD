@@ -12,7 +12,6 @@ namespace BaseProject.mapObjects
 {
     class IntroText : TextGameObject
     {
-
         public IntroText(String text, String font, Color color, Vector2 position) : base(font, 1, color)
         {
             Text = text;

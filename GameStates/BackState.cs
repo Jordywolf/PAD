@@ -50,6 +50,7 @@ namespace BaseProject.GameStates
                 Game1.GameStateManager.SwitchTo("continueState");
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
 
             else { Game1.buttonPressed = false; }
@@ -58,6 +59,7 @@ namespace BaseProject.GameStates
             {
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState");
                 Game1.framecount = Game1.startframe;
+                Game1.ButtonSound.Play();
             }
         }
 
