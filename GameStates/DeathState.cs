@@ -16,6 +16,7 @@ namespace BaseProject.GameStates
 
         public DeathState() : base()
         {
+            //objects worden toegevoegd aan de list en worden toegepast
             deathground = new SpriteGameObject("DeathScreen", 1);
             gameObjects.AddChild(deathground);
             deathground.scale = 1.3f;
@@ -29,13 +30,11 @@ namespace BaseProject.GameStates
             base.Update(gameTime);
 
 
-
+            //Als je op spatie drukt ga je terug naar het hoofdmenu
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState", "jogonLevelPlayingState", new GameStates.JogonLevelPlayingState(Game1.jogonSound, Game1.Player));
                 Game1.GameStateManager.SwitchTo("menuStartSelectedState", "selinLevelPlayingState", new GameStates.SelinLevelPlayingState());
-                Game1.GameStateManager.SwitchTo("menuStartSelectedState", "safeZoneState", new GameStates.SafeZoneState());
-                Game1.GameStateManager.SwitchTo("menuStartSelectedState", "safeZoneState2", new GameStates.SafeZoneState2());
                 Game1.buttonPressed = true;
                 Game1.framecount = Game1.startframe;
                 Game1.ButtonSound.Play();
