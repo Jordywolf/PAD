@@ -56,7 +56,7 @@ class Selin_Hammer : Engine.SpriteGameObject
         return (Vector2.Distance(localPosition, returnPos) < 30);
     }
 
-    //in de updat wordt de movement van de hamer gemaakt
+    //in de update wordt de movement van de hamer gemaakt
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -95,7 +95,6 @@ class Selin_Hammer : Engine.SpriteGameObject
             attack = false;
             m2 = false;
         }
-
     }
 }
 

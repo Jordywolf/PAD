@@ -45,7 +45,7 @@ namespace BaseProject.GameStates
 
             texten.AddChild(new mapObjects.IntroText("Jackstraw 2: Revenge of Olivier\n\nComming soon...", "Eightbit", Color.White, new Vector2(Game1.width / 5 * 4, Game1.height + 4000)));
 
-
+            //maakt een jogon draak die tussen de test en het eindscherm staat
             for (int q = 0; q <= jogon; q++)
             {
                 if (q == 0)
@@ -64,11 +64,13 @@ namespace BaseProject.GameStates
         {
             base.Update(gameTime);
 
+            //zorgt ervoor dat de positie van de tekst steeds een stukje omhoog loopt
             foreach (mapObjects.IntroText i in texten.children)
             {
                 i.LocalPosition = new Vector2(i.LocalPosition.X, i.LocalPosition.Y - 1);
             }
 
+            //zorgt ervoor dat de positie van de jogon draak steeds een stukje omhoog loopt
             foreach (SpriteGameObject o in jogons.children)
             {
                 o.scale = 1.5f;
