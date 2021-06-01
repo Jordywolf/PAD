@@ -56,6 +56,7 @@ namespace BaseProject.GameStates
                 started = true;
             }
 
+            //Als de framecount groter of gelijk is dan 690, dan wordt de transition getekent en geüpdated.
             if (Game1.framecount >= 690)
             {
                 gameObjects.AddChild(transition);
@@ -63,6 +64,7 @@ namespace BaseProject.GameStates
                 transition.Angle += 5;
             }
 
+            //Als de framecount groter is of gelijk is dan 750,
             if (Game1.framecount >= 750)
             {
                 Game1.GameStateManager.SwitchTo("safeZoneState", "introGameState", new IntroGameState("Out there in the desert he lays", "His riddle is yours to solve", "He charges with some delays", "In his fire you will dissolve"));

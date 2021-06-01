@@ -16,8 +16,7 @@ namespace BaseProject
         public static bool buttonPressed;
         //-----------------------------------------------------------------------------------
 
-        //private GraphicsDeviceManager _graphics;
-        //private SpriteBatch _spriteBatch;
+
 
         public Texture2D PillarV2_Torch;
         public Texture2D Floortile;
@@ -187,9 +186,13 @@ namespace BaseProject
             MenuContinue = Content.Load<Texture2D>("MenuContinue");
             MenuContinueSelected = Content.Load<Texture2D>("MenuContinueSelected");
             HBhealthTexture = Content.Load<Texture2D>("healthBarMiddle");
+
+            //UI
             HBmiddleTexture = Content.Load<Texture2D>("healthBarMiddleborder");
             HBedgeRTexture = Content.Load<Texture2D>("healthBarEnd");
             HBedgeLTexture = Content.Load<Texture2D>("healthBarEndL");
+
+            //Sound Effects
             MenuBM = Content.Load<SoundEffect>("BeginBM");
             MenuBMInctance = MenuBM.CreateInstance();
             ButtonSound = Content.Load<SoundEffect>("ButtonClick");
@@ -198,6 +201,7 @@ namespace BaseProject
             BoulderShove = Content.Load<SoundEffect>("SoundEffect_Boulder");
             SelinScream = Content.Load<SoundEffect>("SoundEffect_Selin");
 
+            //Layering
             BlackTile = Content.Load<Texture2D>("Black Tile");
             font2 = Content.Load<SpriteFont>("Eightbit");
             font = Content.Load<SpriteFont>("Credit");
@@ -208,37 +212,10 @@ namespace BaseProject
             playerHealth3 = new SpriteGameObject("Heart", 1);
 
 
-            noSprite = new List<Sprite>();
-            _sprites = new List<Sprite>()
-            {
-
-                new Sprite(Rots){
-                Position = RotsPosition,
-                },
-                new Sprite(Deur)
-                {
-                    Position = new Vector2(width/2, height/ 100)
-                },
-                new Sprite(Boom)
-                {
-                    Position = new Vector2(width/4, height/1.5f)
-                },
-                new Sprite(Pilaar)
-                {
-                    Position = PilaarPosition
-                },
-                new Sprite(FonteinTexture)
-                {
-                    Position = new Vector2(200,75)
-                }
-            };
+  
 
 
-
-            menuchoice = 1;
-            framecount = 0;
-            startframe = -100;
-
+            //Hier worden de gamestates toegevoegd aan de manager
             menuStartSelectedState = new GameStates.MenuStartSelectedState();
             GameStateManager.AddGameState("menuStartSelectedState", menuStartSelectedState);
 
@@ -267,6 +244,7 @@ namespace BaseProject
             deathState = new GameStates.DeathState();
             GameStateManager.AddGameState("deathState", deathState);
 
+            //Gamestate met ekst erin
             introGameState = new GameStates.IntroGameState("Out there in the desert he lays", "His riddle is yours to solve", "He charges with some delays", "In his fire you will dissolve");
             GameStateManager.AddGameState("introGameState", introGameState);
 
@@ -276,6 +254,7 @@ namespace BaseProject
             jogonLevelPlayingState = new GameStates.JogonLevelPlayingState(jogonSound, Player);
             GameStateManager.AddGameState("jogonLevelPlayingState", jogonLevelPlayingState);
 
+            //gamestate met tekst erin
             introGameState2 = new GameStates.IntroGameState2("With lots of glamour and much delight", "he trains his 10-pack on repeat", "he does not back out from a fight", "but the pillars will bring his defeat");
             GameStateManager.AddGameState("introGameState2", introGameState2);
 
@@ -288,37 +267,28 @@ namespace BaseProject
             menuVictoryScreen = new GameStates.MenuVictoryScreen();
             GameStateManager.AddGameState("menuVictoryScreen", menuVictoryScreen);
 
+            //Begin met "menuStartSelectedState", ofwel het hoofdmenu
             GameStateManager.SwitchTo("menuStartSelectedState");
         }
 
 
         protected override void Update(GameTime gameTime)
         {
+            //Als de state anders is dan het level van jogon, stopt de vecht muziek met spelen
             if (Game1.GameStateManager.currentGameState != Game1.GameStateManager.GetGameState("jogonLevelPlayingState"))
             {
                 Game1.jogonFightSoundInstance.Stop();
             }
-            for(int i = 0; i <= GameStateManager.gameStates.Count-4; i++)
+            //Als de state anders is dan de eerste safe zone, dan stopt de muziek van het menu met spelen
             if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState")|| Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("safeZoneState2") || Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("selinLevelPlayingState") || Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("jogonLevelPlayingState"))
             {
                     MenuBMInctance.Stop();
             }
+            //Als je op escape drukt sluit het spel zich af
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (menuchoice == 7)
-            {
-                foreach (var sprite in _sprites)
-                    sprite.Update(gameTime, _sprites);
-                player.Update(gameTime);
-            }
-            if (menuchoice == 8)
-            {
-                foreach (var sprite in noSprite)
-                    sprite.Update(gameTime, noSprite);
-                player.Update(gameTime);
-            }
-
+ 
             base.Update(gameTime);
         }
 
@@ -331,24 +301,20 @@ namespace BaseProject
             KeyboardState state = Keyboard.GetState();
             Keyboard.GetState();
 
+            //Framecount blijft altijd optellen
             framecount++;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.O) && framecount > startframe + 50)
+
+
+            //Als de state het level van Jogon is, je op P drukt en de framecount is groter dan startframe + 50, dan veranderd de state naar het pauzescherm.
+            if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("jogonLevelPlayingState") && Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
             {
-                GameStateManager.SwitchTo("deathState");
+                GameStateManager.SwitchTo("pauseState");
                 framecount = startframe;
             }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
-                {
-                    GameStateManager.SwitchTo("pauseState");
-                    framecount = startframe;
-                    
-                }
-            
-
-          
-                if (Keyboard.GetState().IsKeyDown(Keys.L) && framecount > startframe + 50)
+            //Als de state het level van Selin is, je op L drukt en de framecount is groter dan startframe + 50, dan veranderd de state naar het pauzescherm.
+            if (Game1.GameStateManager.currentGameState == Game1.GameStateManager.GetGameState("selinLevelPlayingState") && Keyboard.GetState().IsKeyDown(Keys.L) && framecount > startframe + 50)
                 {
                     GameStateManager.SwitchTo("pauseStateSelin");
                     framecount = startframe;
@@ -356,115 +322,7 @@ namespace BaseProject
                 }
             
 
-            /*if (menuchoice == 2 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
-            {
-                ButtonSound.Play();
-                menuchoice = 3;
-                //GameStateManager.SwitchTo("menuCreditsState");
-                framecount = startframe;
-            }
 
-            if (menuchoice == 1 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 10)
-            {
-                ButtonSound.Play();
-                menuchoice = 4;
-                framecount = startframe;
-            }
-
-            if (menuchoice == 3 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
-            {
-                ButtonSound.Play();
-                menuchoice = 2;
-                framecount = startframe;
-            }
-
-            if (menuchoice == 6 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
-            {
-                menuchoice = 1;
-                framecount = startframe;
-            }
-
-            if (menuchoice == 4 && Keyboard.GetState().IsKeyDown(Keys.Space) && framecount > startframe + 50)
-            {
-                ButtonSound.Play();
-                MenuBMI.Stop();
-                menuchoice = 7;
-                framecount = startframe;
-                
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.P) && framecount > startframe + 50)
-            {
-                menuchoice = 11;
-                framecount = startframe;
-            }
-
-            if (menuchoice == 1)
-            {
-                //menuStartSelectedState.Draw(spriteBatch, HomeScreen, MenuCredits, MenuStartGameSelected, font);
-            }
-
-            if (menuchoice == 2)
-            {
-                //menuCreditsSelectedState.Draw(spriteBatch, HomeScreen, MenuStartGame, MenuCreditsSelected, font);
-            }
-
-            if (menuchoice == 3)
-            {
-                //menuCreditsState.Draw(spriteBatch, CreditScreen, MenuBackSelected, font);
-            }
-
-            if (menuchoice == 4)
-            {
-                newGameState.Draw(spriteBatch, SecondStart, MenuNewGameSelected, MenuContinue, MenuBack);
-            }
-
-            if (menuchoice == 5)
-            {
-                continueState.Draw(spriteBatch, SecondStart, MenuNewGame, MenuContinueSelected, MenuBack);
-            }
-
-            if (menuchoice == 6)
-            {
-                backState.Draw(spriteBatch, SecondStart, MenuNewGame, MenuContinue, MenuBackSelected);
-            }
-
-            if (menuchoice == 7)
-            {
-                spriteBatch.Begin();
-                safeZone.SafeZone(ZandTile, Sleutel, spriteBatch);
-                safeZone.SafeZoneStone(SteenTile, spriteBatch);
-                safeZone.SafeZoneStoneVert(SteenVert, spriteBatch);
-                safeZone.NextLevel1();
-                player.Draw(gameTime, spriteBatch);
-                spriteBatch.End();
-                foreach (var sprite in _sprites)
-                    sprite.Draw(spriteBatch);
-            }
-
-            if (menuchoice == 8)
-            {
-                jogonLevelPlayingState.JogonLevelConstruction(player, Floortile, width, height, WalltileStr, WalltileStrD, WalltileL, WalltileR, WalltileCrnL, WalltileCrnR, WalltileCrnDL, WalltileCrnDR, PillarTile, Player, menuchoice);
-                player.Draw(gameTime, spriteBatch);
-
-
-            }
-
-            if (menuchoice == 9)
-            {
-                spriteBatch.Begin();
-                safeZone2.SafeZone(TileSz2, spriteBatch);
-                safeZone2.SafeZonePlatForm(TileSz2, spriteBatch);
-                safeZone2.MovingPlatForm(TileSz3, spriteBatch);
-                spriteBatch.End();
-            }
-
-            if (menuchoice == 10)
-            {
-                spriteBatch.Begin();
-                //selinLevelPlayingState.Draw(spriteBatch);
-                spriteBatch.End();
-            }*/
         }
     }
 }

@@ -20,6 +20,7 @@ namespace BaseProject.GameStates
 
         public ContinueState() : base()
         {
+            //Verschillende objecten die in de state worden gebruikt worden hier toegepast en worden toegevoegd aan de Game object list
             background = new SpriteGameObject("SecondStart", 1);
             gameObjects.AddChild(background);
             background.scale = 2.1f;
@@ -45,6 +46,7 @@ namespace BaseProject.GameStates
         {
             base.Update(gameTime);
 
+            //Als je op pijltje naar beneden drukt ga je op hetzelfde menu naar een andere knop, de back knop
             if (Keyboard.GetState().IsKeyDown(Keys.Down) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("backState");
@@ -53,6 +55,7 @@ namespace BaseProject.GameStates
                 Game1.ButtonSound.Play();
             }
 
+            //Als je op pijltje omhoog drukt ga je op hetzelfde menu naar een andere knop, de new game knop
             if (Keyboard.GetState().IsKeyDown(Keys.Up) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("newGameState");
@@ -61,6 +64,7 @@ namespace BaseProject.GameStates
                 Game1.ButtonSound.Play();
             }
 
+            //Als je op spatie drukt, word je doorgestuurd naar het level van Jogon
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && Game1.framecount > Game1.startframe + 10)
             {
                 Game1.GameStateManager.SwitchTo("jogonLevelPlayingState");
@@ -69,33 +73,6 @@ namespace BaseProject.GameStates
             }
         }
 
-        /*public virtual void Draw(SpriteBatch spriteBatch, Texture2D texture9, Texture2D texture10, Texture2D texture13, Texture2D texture7)
-        {
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(2.1f));
-            spriteBatch.Draw(texture9, new Vector2(0, -50), Color.White);
-            spriteBatch.End();
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,
-Matrix.CreateScale(2.7f));
-            spriteBatch.Draw(texture10, new Vector2(200, 50), Color.White);
-            spriteBatch.Draw(texture13, new Vector2(200, 100), Color.White);
-            spriteBatch.Draw(texture7, new Vector2(350, 180), Color.White);
-            spriteBatch.End();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) && Game1.framecount > Game1.startframe + 10)
-
-            {
-                Game1.menuchoice = 4;
-                Game1.framecount = Game1.startframe;
-
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) && Game1.framecount > Game1.startframe + 10)
-            {
-                Game1.menuchoice = 6;
-                Game1.framecount = Game1.startframe;
-            }
-        }*/
     }
 }
